@@ -1,0 +1,44 @@
+#main-news #header-news {
+	margin-top: 20px;
+}
+
+#main-news #title {
+	text-align: center;	
+	min-height: 30px;
+	max-width: 150px;
+	font-size: 16px;
+	color: #ffffff;
+	background-color: #b9285b;
+	border: 1.5px solid #b9285b;
+	border-bottom: none;
+	border-top-right-radius: 10px;
+}
+#main-news .line {
+	width: 100%;
+	border: 1px solid #b9285b;
+	background-color: #b9285b;
+}
+#main-news #content-news {
+	margin-top: 20px;
+}
+#main-news #content-news .article-title-ctn {
+	height: 70px;
+}
+#main-news #pagination-post {
+	padding-left: 15px;
+}
+#main-news .thumbnail {
+	-webkit-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+	-moz-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+	box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+}
+
+#main-news .thumbnail:hover {
+	cursor: pointer;
+	-webkit-box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
+	-moz-box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
+	box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
+}
+.article-img-ctn {
+	text-align: center;
+}

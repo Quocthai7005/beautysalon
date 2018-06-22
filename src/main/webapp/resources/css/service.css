@@ -1,0 +1,53 @@
+#main-service #title {
+	text-align: center;	
+	min-height: 30px;
+	max-width: 220px;
+	font-size: 16px;
+	color: #ffffff;
+	background-color: #b9285b;
+	border: 1.5px solid #b9285b;
+	border-bottom: none;
+	border-top-right-radius: 10px;
+}
+#main-service .line {
+	width: 100%;
+	border: 1px solid #b9285b;
+	background-color: #b9285b;
+}
+#header-service-ctn,
+#child-service-ctn .service,
+#recommend-service-list .other-services {
+	margin-top: 20px;
+}
+#main-service .thumbnail {
+	border: none;
+}
+#main-service .thumbnail:hover {
+	cursor: pointer;
+}
+#child-service-ctn img {
+	border-radius: 50%;
+	-webkit-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+	-moz-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+	box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+}
+#child-service-ctn img:hover,
+#recommend-service-list .other-services img:hover {
+	cursor: pointer;
+	-webkit-box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
+	-moz-box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
+	box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
+}
+#child-service-ctn .service-text,
+#recommend-service-list .service-text {
+	margin-top: 15px;
+}
+#recommend-service-list .other-services {
+	text-align: center;
+}
+#recommend-service-list .other-services img {
+	border-radius: 10px;
+	-webkit-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+	-moz-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+	box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+}

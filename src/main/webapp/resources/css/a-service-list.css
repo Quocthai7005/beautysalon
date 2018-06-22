@@ -1,0 +1,14 @@
+.dropdown-menu > li > a, .dropdown-menu > li > a {
+	color: #000000 !important;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+	background-color: #eeeeee !important;
+}
+.dropdown-toggle {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+}
+#service-group-selec-label {
+	margin-right: 20px;
+}
