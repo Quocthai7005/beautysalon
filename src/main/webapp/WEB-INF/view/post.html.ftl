@@ -22,11 +22,12 @@
                     	<div class="line"></div>
                     </div>
                 </div>
-                
-                <div class="pull-right" id="search-text" style="margin-top: 10px; margin-bottom: 10px">
-            		<input type="text" data-bind="value: searchText" placeholder="Tìm theo tên">
-            		<i class="fa fa-search" id="search-btn"></i>
-                </div>
+                <div class="row">
+	                <div class="pull-right" id="search-text">
+	            		<input type="text" data-bind="value: searchText" placeholder="Tìm theo tên">
+	            		<i class="fa fa-search" id="search-btn"></i>
+	                </div>
+	            </div>
                 
                 <#-- content -->
                 <div class="row" id="content-news">
@@ -40,7 +41,7 @@
 	                    			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 	                    				<div class="thumbnail new-post" data-bind="click: $parents[0].toPostDetail.bind($data)">	
 	                    					<div class="article-img-ctn">
-	                    						<img width="190" height="190" data-bind="attr: {src: 'data:image/png;base64,' + $data.image}" />
+	                    						<img width="240" height="240" data-bind="attr: {src: 'data:image/png;base64,' + $data.image}" />
 	                    					</div>
 	                    					<div class="article-title-ctn">
 	                    						<strong><span data-bind="text: $data.name"></span></strong>

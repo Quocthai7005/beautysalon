@@ -81,7 +81,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public List<PostDto> getLatestPost(String url) {
-		List<Post> posts = newsRepo.findFirst4ByUrlNotLikeOrderByCreatedDateDesc(url);
+		List<Post> posts = newsRepo.findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
 		List<PostDto> newsDtos = new ArrayList<PostDto>();
 		posts.forEach(post -> {
 			PostDto dto = newMapper.toDto(post);
@@ -167,6 +167,7 @@ public class PostServiceImpl implements PostService {
 		
 		Post news = new Post();
 		news.setName(dto.getName());
+		news.setUrl(dto.getUrl());
 		news.setImage(dto.getImage());
 		news.setContent(dto.getContent());
 		news.setIntro(dto.getIntro());

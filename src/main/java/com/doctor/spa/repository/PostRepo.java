@@ -44,6 +44,7 @@ public interface PostRepo extends PagingAndSortingRepository<Post, Long> {
 	
 	Post findById(Long id);
 	
+	@Query(value = "SELECT * FROM Post p WHERE p.url LIKE ?1 AND p.is_deleted = 0", nativeQuery = true)
 	Post findByUrl(String url);
 	
 	Page<Post> findAll(Pageable pageable);
@@ -62,6 +63,7 @@ public interface PostRepo extends PagingAndSortingRepository<Post, Long> {
 	
 	List<Post> findByServiceId(Long id);
 	
-	List<Post> findFirst4ByUrlNotLikeOrderByCreatedDateDesc(String url);
+	@Query(value = "SELECT * FROM Post p WHERE p.is_deleted = 0 ORDER BY p.created_date LIMIT 4 ", nativeQuery = true)
+	List<Post> findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
 	
 }

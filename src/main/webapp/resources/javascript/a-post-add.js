@@ -57,7 +57,7 @@ function News() {
 						  id: null,
 						  url: self.url(),
 						  name: self.name(),
-						  image: self.image().slice(22),
+						  image: self.image().slice(23),
 						  parentServiceId: self.groupId(),
 						  parentServiceName: null,
 						  intro: self.intro(),
@@ -113,8 +113,8 @@ function News() {
                             message: 'Vui lòng nhập tên'
                         },
                         stringLength: {
-                            max: 45,
-                            message: 'Tối đa 45 ký tự'
+                        	max: 255,
+                            message: 'Tối đa 255 ký tự'
                         }
                     }
                 },
@@ -198,6 +198,19 @@ function News() {
 	
 	self.initSummernote = function() {
     	$('#news-content-inp').summernote({
+    		toolbar: [
+    		    ['style', ['style']],
+    		    ['fontsize', ['fontsize']],
+    		    ['font', ['bold', 'italic', 'underline', 'clear']],
+    		    ['fontname', ['fontname']],
+    		    ['color', ['color']],
+    		    ['para', ['ul', 'ol', 'paragraph']],
+    		    ['height', ['height']],
+    		    ['insert', ['picture', 'hr']],
+    		    ['table', ['table']]
+    		  ],
+    		  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather', 'Verdana', 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', 'serif'],
+    		fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '24', '36', '48' , '64', '82', '150'],
             tabsize: 2,
             height: 100
     	});

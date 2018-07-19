@@ -61,7 +61,7 @@
 		                                                <td class="text-center" data-bind="text: $index() + 1">1</td>
 		                                                <td class="text-center" data-bind="text: name"></td>
 		                                                <td class="text-center" data-bind="text: parentServiceName"></td>
-		                                                <td class="text-center" data-bind="text: createdDate"></td>
+		                                                <td class="text-center" data-bind="text: $parent.formatDate(createdDate)"></td>
 		                                                <td class="text-center" data-bind="click: $parent.showImage.bind($data)"><i class="fa fa-image"></i></td>
 		                                                <td class="text-center" data-bind="click: $parent.goToEdit.bind($data)"><i class="fa fa-pencil"></i></td>
 		                                                <td class="text-center" data-bind="click: $parent.deletePost.bind($data)"><i class="fa fa-remove"></i></td>

@@ -45,7 +45,7 @@
 
 .other-post img,
 .child-service img {
-	border-radius: 50%;
+	border-radius: 5%;
 	-webkit-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
 	-moz-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
 	box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
@@ -57,11 +57,16 @@
 	-moz-box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
 	box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
 }
-.thumbnail {
+.thumbnail,
+#service-list-ctn {
 	border: none;
+	background-color: inherit;
 }
 .service-name,
 .other-post,
 .service-image {
 	text-align: center;
+}
+#interested {
+	background-color: #fff7f7;
 }

@@ -201,4 +201,9 @@ function News() {
     self.goToCreate = function(data) {
     	window.location.href = goToCreateUrl;
     }
+    
+    self.formatDate = function(date) {
+    	var result = date.replace('T', ' ');
+    	return result;
+    }
 }

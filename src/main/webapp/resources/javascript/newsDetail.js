@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var newsDetailPage = new NewsDetail();
 	newsDetailPage.rootContext = $('#root-context').val();
 	newsDetailPage.initPost();
-	newsDetailPage.initServiceScroll();
+	/*newsDetailPage.initServiceScroll();*/
 	newsDetailPage.initService();
 })
 
