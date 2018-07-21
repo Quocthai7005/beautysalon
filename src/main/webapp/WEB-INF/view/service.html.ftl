@@ -27,18 +27,18 @@
                 <div class="row" id="child-service-ctn">
             
 		            <#-- services loop -->
-		            <div class="col-lg-12 text-center">
+		            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 		                <ul>
 		                    <#list service.childServices as childService>
-		                	<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-		                		<div class="service thumbnail" data-url="${childService.url}" data-parent-url="${service.url}">	
+		                	<li class="col-lg-3 col-md-3 col-sm-6 col-xs-12">		
+	                			<div class="service thumbnail" data-url="${childService.url}" data-parent-url="${service.url}">	
 		                			<div class="service-img-ctn">
-		                				<img src="${'data:image/png;base64,' + childService.image}" alt="${childService.name}">
+		                				<img width="220" height="220" src="${'data:image/png;base64,' + childService.image}" alt="${childService.name}">
 		                			</div>
 		                			<div class="service-text">
 		                				<span>${childService.name}</span>
 		                			</div>	
-		                		</div>
+		                		</div>   		
 		                	</li>
 		                	</#list>
 		            	</ul>        
