@@ -94,7 +94,7 @@ public class PostServiceImpl implements PostService {
 	public List<ChildServiceDto> getChildServices(String url) {
 		Post post = newsRepo.findByUrl(url);
 		List<ChildServiceDto> childServiceDtos = new ArrayList<ChildServiceDto>();
-		List<ChildService> childServices = childServiceRepo.findByServiceGroupIdByDeletedFalse(post.getService().getId());
+		List<ChildService> childServices = childServiceRepo.findFirst4ByServiceGroupIdByDeletedFalse(post.getService().getId());
 		childServices.forEach(childService -> {
 			childService.setUrl(childService.getParentService().getUrl() + "/" + childService.getUrl());
 			ChildServiceDto childServiceDto = childServiceMapper.toDto(childService);

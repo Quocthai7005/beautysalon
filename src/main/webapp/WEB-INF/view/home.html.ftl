@@ -62,13 +62,16 @@
                     <div class="col-lg-12 col-xs-12">
 	                    <ul>
 	                        <#list childServiceDtos as service>
-	                    	<li class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+	                    	<li class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 	                    		<div class="outstand-service thumbnail" data-url="${service.url}">
 	                    			<div class="outstand-service-img-ctn">
-	                    				<img src="${'data:image/png;base64,' + service.image}" width="200" height="200" alt="${service.name}">
+	                    				<img src="${'data:image/png;base64,' + service.image}" width="240" height="240" alt="${service.name}">
 	                    			</div>
 	                    			<div class="outstand-service-intro">
-	                    				<span>${service.intro}</span>
+	                    				<#-- <#if service.intro??>
+										   <span>${service.intro}</span>
+										</#if> -->
+										<span>${service.name}</span>
 	                    			</div>
 	                    		</div>
 	                    	</li>
@@ -77,7 +80,9 @@
                     </div>
 
                     <div class="col-lg-12 col-xs-12" style="margin-bottom: 20px">
-                        <button class="btn btn-default" id="btn-news"><@spring.message "menu.news"/></button>
+                    	<div class="row center-block">
+                    		<button class="btn btn-default" id="btn-news"><@spring.message "menu.news"/></button>
+                    	</div> 
                     </div>
                 </div>
             </div>  

@@ -15,7 +15,7 @@
             <div class="container">
             	<#-- header -->
             	<div class="row" id="header-news">
-                    <div class="col-lg-12" id="header-news-ctn">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="header-news-ctn">
                     	<div id="title">
                     		<span><@spring.message "header.newPost"/></span>
                     	</div>
@@ -38,7 +38,7 @@
                     		</div>
                     		<div data-bind="if: newsPosts().length > 0">
 	                    		<ul data-bind="foreach: newsPosts">
-	                    			<li class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+	                    			<li class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 	                    				<div class="thumbnail new-post" data-bind="click: $parents[0].toPostDetail.bind($data)">	
 	                    					<div class="article-img-ctn">
 	                    						<img width="240" height="240" data-bind="attr: {src: 'data:image/png;base64,' + $data.image}" />

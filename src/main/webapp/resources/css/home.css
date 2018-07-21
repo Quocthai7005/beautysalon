@@ -67,3 +67,11 @@
 #contact-ctn iframe {
 	border-radius: 10px;
 }
+.outstand-service-intro {
+	height: 20px; 
+    overflow: hidden;
+    font-weight: bold;
+}
+.outstand-service-img-ctn img {
+	border-radius: 10px;
+}

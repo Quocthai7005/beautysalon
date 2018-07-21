@@ -7,6 +7,7 @@
 #recommend-service-header #title {
 	text-align: center;	
 	min-height: 30px;
+	max-width: 200px;
 	display: inline-block;
 	padding-left: 20px;
 	padding-right: 20px;
@@ -47,6 +48,8 @@
 	text-align: center;
 }
 #other-child-services-ctn img{
+	max-width: 220px;
+	width: 100%;
 	border-radius: 50%;
 	-webkit-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
 	-moz-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
@@ -67,6 +70,8 @@
 	text-align: center;
 }
 #recommend-service-list .other-services img {
+	max-width: 220px;
+	width: 100%;
 	border-radius: 10px;
 	-webkit-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
 	-moz-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
@@ -78,4 +83,11 @@
 }
 .thumbnail {
 	border: none;
+	background-color: inherit;
+}
+#interested {
+	background-color: #fff7f7;
+}
+#other-child-services-ctn {
+	background-color: inherit;
 }

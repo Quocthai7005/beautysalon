@@ -84,7 +84,7 @@ public class ServiceGroupServiceImpl implements ServiceGroupService{
 		if (id == null) {
 			return false;
 		}
-		List<ChildService> childServices = childServiceRepo.findByServiceGroupIdByDeletedFalse(id);
+		List<ChildService> childServices = childServiceRepo.findFirst4ByServiceGroupIdByDeletedFalse(id);
 		if (childServices.size() > 0) {
 			return false;
 		} else {

@@ -57,7 +57,7 @@ function Service() {
 						id: null,
 						url: self.url(),
 						name: self.name(),
-						image: self.image().slice(22),
+						image: self.image().slice(23),
 						parentServiceId: self.groupId(),
 						isShownHome: self.isShownHome(),
 						intro: self.intro(),
@@ -200,6 +200,19 @@ function Service() {
 	
 	self.initSummernote = function() {
     	$('#service-content-inp').summernote({
+    		toolbar: [
+    		    ['style', ['style']],
+    		    ['fontsize', ['fontsize']],
+    		    ['font', ['bold', 'italic', 'underline', 'clear']],
+    		    ['fontname', ['fontname']],
+    		    ['color', ['color']],
+    		    ['para', ['ul', 'ol', 'paragraph']],
+    		    ['height', ['height']],
+    		    ['insert', ['picture', 'hr']],
+    		    ['table', ['table']]
+    		  ],
+    		  fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Merriweather', 'Verdana', 'Cambria', 'Cochin', 'Georgia', 'Times', 'Times New Roman', 'serif'],
+    		fontSizes: ['8', '9', '10', '11', '12', '14', '16', '18', '24', '36', '48' , '64', '82', '150'],
             tabsize: 2,
             height: 100
     	});

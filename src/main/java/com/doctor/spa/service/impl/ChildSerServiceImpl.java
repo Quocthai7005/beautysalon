@@ -71,7 +71,7 @@ public class ChildSerServiceImpl implements ChildSerService{
 		if (id == 0 || id == null) {
 			services = childServiceRepo.findByDeletedFalse();
 		} else {
-			services = childServiceRepo.findByServiceGroupIdByDeletedFalse(id);
+			services = childServiceRepo.findFirst4ByServiceGroupIdByDeletedFalse(id);
 		}
 		System.out.println(services.size());
 		return services.size();

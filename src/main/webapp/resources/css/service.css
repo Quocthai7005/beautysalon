@@ -20,12 +20,15 @@
 	margin-top: 20px;
 }
 #main-service .thumbnail {
+	background-color: inherit;
 	border: none;
 }
 #main-service .thumbnail:hover {
 	cursor: pointer;
 }
 #child-service-ctn img {
+	width: 100%;
+	max-width: 220px;
 	border-radius: 50%;
 	-webkit-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
 	-moz-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
@@ -46,8 +49,13 @@
 	text-align: center;
 }
 #recommend-service-list .other-services img {
+	width: 100%;
+	max-width: 220px;
 	border-radius: 10px;
 	-webkit-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
 	-moz-box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
 	box-shadow: 11px 14px 33px -14px rgba(0,0,0,0.67);
+}
+.service-img-ctn {
+	background-color: inherit;
 }

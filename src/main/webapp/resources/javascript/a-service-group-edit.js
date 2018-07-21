@@ -96,7 +96,7 @@ function Service() {
     			  cancelButtonText: cancel,
 			}).then((result) => {
 				if (result.value) {
-					var base64Img = self.image().slice(22);
+					var base64Img = self.image().slice(23);
 		        	var data = {
 		        		id: self.id(),
 		        		name: self.name(),

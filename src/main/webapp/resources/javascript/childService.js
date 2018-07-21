@@ -2,7 +2,7 @@ $(document).ready(function() {
 	
 	var childServicePage = new ChildService();
 	childServicePage.rootContext = $('#root-context').val();
-	childServicePage.initServiceScroll();
+	/*childServicePage.initServiceScroll();*/
 	childServicePage.initRelatedChildServices();
 	childServicePage.initService();
 })

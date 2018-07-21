@@ -15,8 +15,8 @@ public interface ChildServiceRepo extends JpaRepository<ChildService, Long>{
 
 	// Admin's query
 	
-	@Query(value = "SELECT * FROM child_service cs WHERE cs.parent_service_id = ?1 AND cs.is_deleted = 0", nativeQuery = true)
-	List<ChildService> findByServiceGroupIdByDeletedFalse(Long id);
+	@Query(value = "SELECT * FROM child_service cs WHERE cs.parent_service_id = ?1 AND cs.is_deleted = 0 LIMIT 4", nativeQuery = true)
+	List<ChildService> findFirst4ByServiceGroupIdByDeletedFalse(Long id);
 	
 	@Query(value = "SELECT * FROM child_service s WHERE s.url LIKE ?1 AND s.id != ?2 AND s.is_deleted = 0", nativeQuery = true)
 	List<ChildService> findByUrlByIdNotEqualByDeletedFalse(String url, Long id);
