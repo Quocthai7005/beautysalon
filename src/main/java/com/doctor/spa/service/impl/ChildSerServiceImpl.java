@@ -56,7 +56,7 @@ public class ChildSerServiceImpl implements ChildSerService{
 	@Override
 	public List<ChildServiceDto> getChildServiceOtherThan(String serviceUrl, String childServiceUrl) {
 		com.doctor.spa.entity.ServiceGroup service = serviceRepo.findByUrl(serviceUrl);
-		List<ChildService> childServices = service.getChildServices().stream().filter(s -> s.getUrl() != childServiceUrl).collect(Collectors.toList());
+		List<ChildService> childServices = service.getChildServices().stream().filter(s -> (s.getUrl() != childServiceUrl && s.isDeleted() == false)).collect(Collectors.toList());
 		List<ChildServiceDto> serviceDtos = new ArrayList<ChildServiceDto>();
 		childServices.forEach(childService -> {
 			ChildServiceDto serviceDto = childServiceMapper.toDto(childService);
