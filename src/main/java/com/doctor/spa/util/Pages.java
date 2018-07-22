@@ -7,6 +7,7 @@ public final class Pages {
 	public static String SERVICE = "service.html";
 	public static String CONTACT = "contact.html";
 	public static String SERVICE_DETAIL = "serviceDetail.html";
+	public static String A_MESSENGER = "a-messenger.html";
 	public static String A_MAIN = "a-main.html";
 	public static String A_SERVICE_GROUP_LIST = "a-service-group-list.html";	
 	public static String A_SERVICE_GROUP_ADD = "a-service-group-add.html";

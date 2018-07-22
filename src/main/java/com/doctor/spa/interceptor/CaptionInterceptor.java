@@ -19,7 +19,9 @@ public class CaptionInterceptor extends HandlerInterceptorAdapter {
 	
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {		
-	    List<ImageDto> images = pageService.getShownImage();	    
-	    modelAndView.addObject("headerImages", images);
+	    if (modelAndView != null) {
+	    	List<ImageDto> images = pageService.getShownImage();    
+		    modelAndView.addObject("headerImages", images);
+	    }
 	}
 }

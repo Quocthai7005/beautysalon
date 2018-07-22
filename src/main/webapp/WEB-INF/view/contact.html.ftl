@@ -21,7 +21,7 @@
 				        <p><span class="glyphicon glyphicon-home"></span>&nbsp;&nbsp; ${pageTexts[3].content}</p>
 				        <p><span class="glyphicon glyphicon-phone-alt"></span>&nbsp;&nbsp; ${pageTexts[4].content}</p>
 				    </div>
-                    <div class="col-lg-12 col-xs-12">
+                    <div class="col-lg-12 col-xs-12" id="map-ctn">
                         ${pageTexts[6].content}
                     </div>
                 </div>

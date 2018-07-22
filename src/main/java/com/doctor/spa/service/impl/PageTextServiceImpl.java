@@ -1,7 +1,9 @@
 package com.doctor.spa.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -75,5 +77,38 @@ public class PageTextServiceImpl implements PageTextService{
 			imageDtos.add(dto);
 		});
 		return imageDtos;
+	}
+
+
+	@Override
+	public Map<String, String> getContact() {
+		Map<String, String> result = new HashMap<String, String>();
+		List<PageText> contact = pageTextRepo.findBySection("footer");
+		contact.forEach(s -> {
+			result.put(s.getTitle(), s.getContent());
+		});
+		return result;
+	}
+
+
+	@Override
+	public Boolean updateContact(Map<String, String> contact) {
+
+		PageText address = pageTextRepo.findByTitle("address");
+		PageText phone = pageTextRepo.findByTitle("phone");
+		PageText map = pageTextRepo.findByTitle("map");
+		PageText facebook = pageTextRepo.findByTitle("facebook");
+		
+		address.setContent(contact.get("address"));
+		phone.setContent(contact.get("phone"));
+		map.setContent(contact.get("map"));
+		facebook.setContent(contact.get("facebook"));
+		
+		pageTextRepo.save(address);
+		pageTextRepo.save(phone);
+		pageTextRepo.save(map);
+		pageTextRepo.save(facebook);
+		
+		return true;
 	}
 }

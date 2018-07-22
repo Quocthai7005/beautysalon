@@ -75,3 +75,11 @@
 .outstand-service-img-ctn img {
 	border-radius: 10px;
 }
+#map-ctn {
+	text-align: center;
+}
+#map-ctn iframe {
+	display: inline-block
+	width: 100vh;
+	height: 60vh;
+}

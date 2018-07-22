@@ -41,7 +41,7 @@
 												  		<label for="old-password" class="custom-label">
 												  			Mật khẩu cũ *
 												  		</label>
-												  		<input data-bind="value: oldPassword" data-bind="value: url" name="old-password" type="password" class="form-control" id="old-password">
+												  		<input data-bind="value: oldPassword" name="old-password" type="password" class="form-control" id="old-password">
 											  		</div>
 											  	</div>
 											  	

@@ -27,10 +27,10 @@ function News() {
 			totalPages: 1,
 			visiblePages: 3,
 			startPage: 1,
-			first: 'Trang đầu',
-			last: 'Trang cuối',
-			prev: 'Trang trước',
-			next: 'Trang sau',
+			first: '<<',
+			last: '>>',
+			prev: '<',
+			next: '>',
 			onPageClick : function(event, page) {
 				// get group id
 				self.loadNews(page - 1, pageSize, 'asc', self.searchText());

@@ -37,3 +37,4 @@
 <script src="<@spring.url '/resources/javascript/bootstrap-select.min.js'/>"></script>
 <script src="<@spring.url '/resources/javascript/knockout.bs.select.js'/>"></script>
 <script src="<@spring.url '/resources/javascript/a-main.js'/>"></script>
+<script src="<@spring.url '/resources/javascript/a-common.js'/>"></script>

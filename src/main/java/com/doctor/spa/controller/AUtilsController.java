@@ -1,6 +1,7 @@
 package com.doctor.spa.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -73,5 +74,15 @@ public class AUtilsController {
 	@GetMapping(value="/image-list/shown")
 	public ResponseEntity<ResponseBody<List<ImageDto>>> getHeaderImages() {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, pageTextService.getShownImage()));
+	}
+	
+	@GetMapping(value="/contact/info")
+	public ResponseEntity<ResponseBody<Map<String, String>>> getContactInfo() {
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, pageTextService.getContact()));
+	}
+	
+	@PostMapping(value="/contact/update")
+	public ResponseEntity<ResponseBody<Boolean>> updateContace(@RequestBody Map<String, String> contact) {
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, pageTextService.updateContact(contact)));
 	}
 }

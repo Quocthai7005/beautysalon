@@ -42,6 +42,12 @@
                     <p>Quản lý tài khoản</p>
                 </a>
             </li>
+            <li>
+                <a href="<@spring.url '/admin/messenger'/>">
+                    <i class="material-icons">messenger</i>
+                    <p>Quản lý FB Messenger</p>
+                </a>
+            </li>
         </ul>
         <form id="logoutForm" method="GET" action="${rootContext.getContextPath() + '/admin/logout'}">
 			<button type="submit" class="btn btn-info" type="button">Đăng xuất</button>

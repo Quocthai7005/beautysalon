@@ -1,6 +1,7 @@
 package com.doctor.spa.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.doctor.spa.dto.ImageDto;
 import com.doctor.spa.entity.PageText;
@@ -16,4 +17,8 @@ public interface PageTextService {
 	Boolean updateImage(List<ImageDto> images);
 	
 	List<ImageDto> getShownImage();
+	
+	Map<String, String> getContact();
+	
+	Boolean updateContact(Map<String, String> contact);
 }

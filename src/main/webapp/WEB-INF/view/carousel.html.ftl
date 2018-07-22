@@ -11,11 +11,11 @@
     	<#list headerImages as image>
     		<#if image?index == 0>
     			<div class="item active">
-	        		<img src="${'data:image/png;base64' + image.base64Image}">
+	        		<img src="${'data:image/png; base64,' + image.base64Image}">
 	        	</div>
 	        <#else>
 	        	<div class="item">
-	        		<img src="${'data:image/png;base64' + image.base64Image}">
+	        		<img src="${'data:image/png; base64,' + image.base64Image}">
 	        	</div>
     		</#if>
     	</#list>

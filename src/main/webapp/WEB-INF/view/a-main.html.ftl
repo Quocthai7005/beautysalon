@@ -81,6 +81,19 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    
+                    <div class="row">              
+                        <div class="col-lg-12 col-md-12">
+                            <div class="card">
+                                <div class="card-header" data-background-color="green">
+                                    <h4 class="title">Quản lý ứng dụng Messenger</h4>
+                                </div>
+                                <div class="card-content table-responsive">
+                                    
+                                </div>
+                            </div>
+                        </div>
                     </div> 
                 </div>
             </div>

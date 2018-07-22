@@ -19,4 +19,6 @@ public interface PageTextRepo extends JpaRepository<PageText, Long>{
 	List<PageText> findBySectionAndIsShownHomeTrue(String section);
 	
 	PageText findById(Long id);
+	
+	PageText findByTitle(String title);
 }
