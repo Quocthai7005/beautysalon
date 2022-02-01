@@ -8,17 +8,18 @@
 
     <#-- Wrapper for slides -->
     <div class="carousel-inner">
-    	<#list headerImages as image>
-    		<#if image?index == 0>
+
     			<div class="item active">
-	        		<img src="${'data:image/png; base64,' + image.base64Image}">
+	        		<img src="https://dummyimage.com/1200x400/8c0b0b/a60000">
 	        	</div>
-	        <#else>
+
 	        	<div class="item">
-	        		<img src="${'data:image/png; base64,' + image.base64Image}">
+	        		<img src="https://dummyimage.com/1200x400/8c0b0b/a60000">
 	        	</div>
-    		</#if>
-    	</#list>
+	        	
+	        	<div class="item">
+	        		<img src="https://dummyimage.com/1200x400/8c0b0b/a60000">
+	        	</div>
     </div>
 
     <#-- Left and right controls -->

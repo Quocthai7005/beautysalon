@@ -13,7 +13,7 @@ public class PageText extends BaseEntity {
 	@Column(name = "page")
 	private String page;
 	
-	@Column(name="isShownHome")
+	@Column(name="is_shown_home")
 	private Boolean isShownHome;
 	
 	@Column(name = "section")

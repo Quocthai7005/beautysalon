@@ -43,6 +43,7 @@ function Service() {
 	
 	self.save = function() {
 		var validator = $('#create-service-form').data('bootstrapValidator');
+		debugger;
     	validator.validate();
     	if (validator.isValid()) {
     		swal({
@@ -65,7 +66,7 @@ function Service() {
 					}		
 					$.ajax({
 		        		type : "POST",
-		        		url : rootContext,
+		        		url : saveUrl,
 		        		data: JSON.stringify(data),
 		                contentType: "application/json; charset=utf-8",
 		        		success : function(msg) {
@@ -90,6 +91,7 @@ function Service() {
   				}
   			});
     	} else {
+    	console.log('error');
     		swal({
 			  type: 'error',
 			  text: entryRemind,
