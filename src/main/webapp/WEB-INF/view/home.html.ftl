@@ -27,13 +27,13 @@
                                 <div class="col-lg-12 text-center">
 	                                <ul>
 		                                <#list menuServices as service>
-				                    	<li class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+				                    	<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 				                    		<div class="service" data-url="${service.url}">
 				                    			<div class="service-text">
 				                    				<span>${service.name}</span>
 				                    			</div>
 				                    			<div class="service-img-ctn">
-				                    				<img src="https://dummyimage.com/200x200/8c0b0b/a60000" width="200" height="200" alt="${service.name}">
+				                    				<img src="${service.image}" width="200" height="200" alt="${service.name}">
 				                    			</div>	
 				                    		</div>
 				                    	</li>

@@ -26,6 +26,9 @@
 }
 
 /* Service style */
+#services {
+	width: 100%;
+}
 #main #our-service {
 	margin-bottom: 10px;
 }

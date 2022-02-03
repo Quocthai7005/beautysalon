@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	$(document).ajaxError(function (e, xhr, settings) {
+	/*$(document).ajaxError(function (e, xhr, settings) {
 		var rootContext = $('#root-context').val();
 		var login = rootContext + '/admin/login';
 		swal({
@@ -9,5 +9,5 @@ $(document).ready(function() {
 			window.location.href = login;
 		  }
 		});
-    });
+    });*/
 });

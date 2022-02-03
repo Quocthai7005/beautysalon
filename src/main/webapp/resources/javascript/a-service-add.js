@@ -54,21 +54,27 @@ function Service() {
   			  cancelButtonText: cancel,
   			}).then((result) => {
   				if (result.value) {
+  					var imgfile = document.getElementById("image-inp");
   					var data = {
 						id: null,
 						url: self.url(),
 						name: self.name(),
-						image: self.image().slice(23),
+						image: "",
 						parentServiceId: self.groupId(),
 						isShownHome: self.isShownHome(),
 						intro: self.intro(),
 						content: self.content()
-					}		
+					};
+					var formData = new FormData();
+					formData.append("data", data);
+					formData.append("image", document.getElementById('image-inp').files[0]);
 					$.ajax({
 		        		type : "POST",
 		        		url : saveUrl,
-		        		data: JSON.stringify(data),
-		                contentType: "application/json; charset=utf-8",
+		        		data: formData,
+		        		processData: false,
+		                cache: false,
+    					contentType: false,
 		        		success : function(msg) {
 		        			if (msg.data === true) {
 		    	        		swal({
@@ -145,14 +151,14 @@ function Service() {
                             message: 'Vui lòng chọn nhóm dịch vụ'
                         }
                     }
-                },
-                base64Field: {
+                }
+                /*base64Field: {
                 	validators: {
                         notEmpty: {
                             message: 'Vui lòng chọn hình'
                         }
                     }
-                }
+                }*/
             }
         });
 	}

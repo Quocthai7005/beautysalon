@@ -41,7 +41,7 @@
 	                    			<li class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 	                    				<div class="thumbnail new-post" data-bind="click: $parents[0].toPostDetail.bind($data)">	
 	                    					<div class="article-img-ctn">
-	                    						<img width="240" height="240" data-bind="attr: {src: 'data:image/png;base64,' + $data.image}" />
+	                    						<img width="240" height="240" data-bind="attr: {src: $data.image}" />
 	                    					</div>
 	                    					<div class="article-title-ctn">
 	                    						<strong><span data-bind="text: $data.name"></span></strong>

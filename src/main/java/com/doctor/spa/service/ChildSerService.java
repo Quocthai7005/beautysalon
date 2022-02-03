@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.dto.ChildServiceDto;
 
@@ -22,7 +23,7 @@ public interface ChildSerService {
 	
 	Boolean deleteService(Long id);
 	
-	Boolean createService(ChildServiceDto serviceDto);
+	Boolean createService(ChildServiceDto serviceDto, MultipartFile image);
 	
 	Boolean updateService(ChildServiceDto serviceDto);
 	

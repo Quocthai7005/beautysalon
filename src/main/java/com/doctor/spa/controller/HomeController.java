@@ -29,7 +29,7 @@ public class HomeController {
 	@Autowired
 	ChildSerService childSerService;
 	
-	@RequestMapping(value="home", method=RequestMethod.GET)
+	@RequestMapping(value={"home", "/"}, method=RequestMethod.GET)
 	public String goHome(Model model) {
 		List<PageText> pageTexts = pageTextService.findByPage("home");
 		List<ServiceGroupDto> services = serService.getAllServices();

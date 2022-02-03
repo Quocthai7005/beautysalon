@@ -61,7 +61,7 @@
 	                    	<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
 	                    		<div class="thumbnail other-services" data-url="${service.url}">
 	                    			<div class="other-services-img-ctn">
-	                    				<img src="${'data:image/png;base64,' + service.image}" alt="${service.name}">
+	                    				<img src="${service.image}" alt="${service.name}">
 	                    			</div>
 	                    			<div class="service-text">
 	                    				<strong><span>${service.name}</span></strong>

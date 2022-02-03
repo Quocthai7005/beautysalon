@@ -13,6 +13,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.dto.ChildServiceDto;
 import com.doctor.spa.entity.ChildService;
@@ -20,6 +21,7 @@ import com.doctor.spa.mapper.ChildServiceMapper;
 import com.doctor.spa.repository.ChildServiceRepo;
 import com.doctor.spa.repository.ServiceGroupRepo;
 import com.doctor.spa.service.ChildSerService;
+import com.doctor.spa.service.ImageService;
 
 @Service
 @Transactional
@@ -33,6 +35,9 @@ public class ChildSerServiceImpl implements ChildSerService{
 	
 	@Autowired
 	ChildServiceMapper childServiceMapper;
+	
+	@Autowired
+	ImageService imageService;
 
 	@Override
 	public List<ChildServiceDto> getHomeShownChildService() {
@@ -105,7 +110,7 @@ public class ChildSerServiceImpl implements ChildSerService{
 
 	@Override
 	@Transactional
-	public Boolean createService(ChildServiceDto dto) {
+	public Boolean createService(ChildServiceDto dto, MultipartFile image) {
 		if (dto == null) {
 			return false;
 		}
@@ -113,7 +118,7 @@ public class ChildSerServiceImpl implements ChildSerService{
 			ChildService service = new ChildService();
 			com.doctor.spa.entity.ServiceGroup pService = serviceRepo.findById(dto.getParentServiceId());
 			service.setName(dto.getName());
-			service.setImage(dto.getImage());
+			service.setImage(imageService.uploadFile(image));
 			service.setContent(dto.getContent());
 			service.setIntro(dto.getIntro());
 			service.setParentService(pService);
