@@ -11,3 +11,10 @@ $(document).ready(function() {
 		});
     });*/
 });
+
+function errorPopup(errMsg) {
+	swal({
+		type: 'error',
+		text: errMsg
+	});
+}

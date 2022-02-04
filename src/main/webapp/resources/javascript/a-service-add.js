@@ -54,20 +54,22 @@ function Service() {
   			  cancelButtonText: cancel,
   			}).then((result) => {
   				if (result.value) {
-  					var imgfile = document.getElementById("image-inp");
-  					var data = {
-						id: null,
-						url: self.url(),
-						name: self.name(),
-						image: "",
-						parentServiceId: self.groupId(),
-						isShownHome: self.isShownHome(),
-						intro: self.intro(),
-						content: self.content()
-					};
+  					var imgfile = document.getElementById("image-inp").files[0];
+  					var data = new Blob([JSON.stringify({
+							id: null,
+							url: self.url(),
+							name: self.name(),
+							image: null,
+							parentServiceId: self.groupId(),
+							isShownHome: self.isShownHome(),
+							intro: self.intro(),
+							content: self.content()
+						})], {
+	                    type: "application/json"
+	                });
 					var formData = new FormData();
 					formData.append("data", data);
-					formData.append("image", document.getElementById('image-inp').files[0]);
+					formData.append("imgFile", "abc");
 					$.ajax({
 		        		type : "POST",
 		        		url : saveUrl,
@@ -85,35 +87,27 @@ function Service() {
 		            			  }
 		            			});
 		    	        	} else {
-		    	        		swal({
-		    	        			  type: 'error',
-		    	        			  text: savedFail
-		    	        			});
+								errorPopup(savedFail);
 		    	        	}
 		        		}, error: function(e) {
-		        			console.log(e);
+							errorPopup(savedFail);
 		        		}
 		        	});
   				}
   			});
     	} else {
-    	console.log('error');
-    		swal({
-			  type: 'error',
-			  text: entryRemind,
-			});
+			errorPopup(entryRemind);
     	}
-		
-		
 	}
 	
 	self.initValidator = function() {
 		$('#create-service-form').bootstrapValidator({
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
+
                 validating: 'glyphicon glyphicon-refresh'
             },
+			excluded: ':disabled',
             fields: {
                 name: {
                     message: 'Tên không đúng',
@@ -148,17 +142,23 @@ function Service() {
                 groupId: {
                 	validators: {
                 		notEmpty: {
-                            message: 'Vui lòng chọn nhóm dịch vụ'
+                            message: 'Vui lòng chọn dịch vụ'
                         }
                     }
-                }
-                /*base64Field: {
+                },
+                image: {
                 	validators: {
                         notEmpty: {
                             message: 'Vui lòng chọn hình'
-                        }
+                        },
+						file: {
+						      extension: 'png,jpeg',
+						      type: 'image/jpeg,image/png',
+						      maxSize: 5*1024*1024,   // 5 MB
+						      message: 'The selected file is not valid, it should be (doc,docx,pdf,zip,rtf) and 5 MB at maximum.'
+						},
                     }
-                }*/
+                }
             }
         });
 	}

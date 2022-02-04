@@ -1,5 +1,4 @@
 .custom-image-upload {
-  border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 12px;
   width: 135px !important;
@@ -14,6 +13,10 @@
 #preview-image {
 	margin-left: 20px;
 }
+#group-select {
+	width: 135px;
+}
+
 #image-inp {
 	width: 135px;
 	margin-left: -130px;
@@ -39,14 +42,21 @@
 #service-group-selec-label {
 	margin-right: 20px;
 }
-#shown-in-home {
-	width: 20px;
-	height: 20px;
-	margin-top: -10px;
-}
-.form-inline .form-group {
-	margin-top: 8px;
+
+.form-group {
+	margin-top: 0;
 }
 .bootstrap-select {
 	width: 278px !important;	
+}
+small[data-bv-result="INVALID"] {
+	display: block !important;
+	color: red;
+}
+
+.is-fileinput .help-block {
+	margin-right: -150px;
+	position: relative;
+    left: -140px;
+    bottom: -30px;
 }

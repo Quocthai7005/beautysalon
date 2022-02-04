@@ -1,5 +1,7 @@
 package com.doctor.spa.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class ChildServiceDto extends BaseDto{
 	
 	private String name;
@@ -14,9 +16,17 @@ public class ChildServiceDto extends BaseDto{
 	
 	private String image;
 	
+	/* private MultipartFile imgFile; */
+
 	private String url;
 	
 	private Boolean isShownHome;
+
+	/*
+	 * public MultipartFile getImgFile() { return imgFile; }
+	 * 
+	 * public void setImgFile(MultipartFile imgFile) { this.imgFile = imgFile; }
+	 */
 
 	public String getName() {
 		return name;
