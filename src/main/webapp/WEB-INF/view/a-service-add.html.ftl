@@ -78,11 +78,9 @@
 												  			Nhóm dịch vụ *
 												  		</label>
 											  			
-											  			    <select class="form-control" id="group-select" name="groupId" data-bind="options: serviceGroups,
-														                       optionsText: 'name',
-														                       optionsValue: 'id',
-														                       optionsCaption: 'Chọn nhóm dịch vụ'">
-														    </select>
+												  		<select class="selectpicker form-control" required="required" id="group-select" name="groupId" data-bind="selectPicker: groupId, optionsText: 'name', optionsValue: 'id', selectPickerOptions: { optionsArray: serviceGroups }">
+											  				<option value="" disabled>Chọn nhóm dịch vụ</option>
+											  			</select>
 											  		</div>
 											  	</div>
 											  	

@@ -61,7 +61,7 @@ function Service() {
 							name: self.name(),
 							image: null,
 							parentServiceId: self.groupId(),
-							isShownHome: self.isShownHome(),
+							isShownHome: self.isShownHome() ? false : true,
 							intro: self.intro(),
 							content: self.content()
 						})], {
@@ -150,13 +150,7 @@ function Service() {
                 	validators: {
                         notEmpty: {
                             message: 'Vui lòng chọn hình'
-                        },
-						file: {
-						      extension: 'png,jpeg',
-						      type: 'image/jpeg,image/png',
-						      maxSize: 5*1024*1024,   // 5 MB
-						      message: 'The selected file is not valid, it should be (doc,docx,pdf,zip,rtf) and 5 MB at maximum.'
-						},
+                        }
                     }
                 }
             }

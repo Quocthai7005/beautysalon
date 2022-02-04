@@ -23,7 +23,6 @@ import com.zaxxer.hikari.HikariDataSource;
 @Configuration
 @EnableJpaRepositories("com.doctor.spa.repository")
 @ComponentScan({"com.doctor.spa"})
-/*@PropertySource("classpath:database.properties")*/
 @PropertySources({
     @PropertySource("classpath:database.properties"),
     @PropertySource("classpath:application.properties")

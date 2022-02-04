@@ -87,7 +87,7 @@ function Service() {
 			success : function(res) {
 				console.log(res);
 				var totalService = res.data;
-				pageOptions.totalPages = Math.ceil(totalService / pageSize);
+				pageOptions.totalPages = totalService == 0? 1:Math.ceil(totalService / pageSize);
 			}
 		});
 	}
@@ -105,8 +105,11 @@ function Service() {
 			url : getServicesUrl,
 			dataType : 'json',
 			data : pageable,
-			success : function(res) {			
-				self.services(res.data.content);
+			success : function(res) {	
+				if (res.data.content) {
+					self.services(res.data.content);
+				}		
+				
 			}
 		});
 	}
