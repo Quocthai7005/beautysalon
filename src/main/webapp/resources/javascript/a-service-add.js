@@ -69,7 +69,7 @@ function Service() {
 	                });
 					var formData = new FormData();
 					formData.append("data", data);
-					formData.append("imgFile", "abc");
+					formData.append("imgFile", imgfile);
 					$.ajax({
 		        		type : "POST",
 		        		url : saveUrl,
