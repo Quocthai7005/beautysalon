@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import com.amazonaws.services.s3.AmazonS3;
 import com.doctor.spa.dto.ChildServiceDto;
 import com.doctor.spa.dto.PostDto;
 import com.doctor.spa.dto.ServiceGroupDto;
@@ -18,6 +20,12 @@ import com.doctor.spa.repository.PostRepo;
 
 @Service
 public class ServiceMapperImpl implements ServiceGroupMapper {
+	
+	@Autowired
+	private AmazonS3 amazonS3;
+	
+	@Value("${aws.s3.bucket.name}")
+	private String bucketName;
 	
 	@Autowired
 	ChildServiceMapper childServiceMapper;
@@ -36,7 +44,7 @@ public class ServiceMapperImpl implements ServiceGroupMapper {
 			dto.setId(service.getId());
 			dto.setContent(service.getContent());
 			dto.setCreatedDate(service.getCreatedDate().toString());
-			dto.setImage(service.getImage());
+			dto.setImage(amazonS3.getUrl(bucketName, service.getImage()).toString());
 			dto.setIntro(service.getIntro());
 			dto.setName(service.getName());
 			dto.setUpdatedDate(service.getUpdatedDate().toString());

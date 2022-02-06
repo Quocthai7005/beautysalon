@@ -16,8 +16,7 @@
 				<#-- services -->
                 <div class="row" id="service-ctn">
                     <div class="col-lg-12">
-                        <h2 class="text-center" id="title" style="margin-bottom: 10px">Dummy title</h2>
-                        <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+                        <h2 class="text-center" id="title" style="margin-bottom: 10px">DỊCH VỤ</h2>
                     </div>
                     <div id="services">
                         <div class="col-lg-12">
@@ -28,14 +27,14 @@
 	                                <ul>
 		                                <#list menuServices as service>
 				                    	<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-				                    		<div class="service" data-url="${service.url}">
-				                    			<div class="service-text">
-				                    				<span>${service.name}</span>
-				                    			</div>
-				                    			<div class="service-img-ctn">
-				                    				<img src="${service.image}" width="200" height="200" alt="${service.name}">
-				                    			</div>	
-				                    		</div>
+				                    		<div class="card">
+												<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
+											    <div class="card-body">
+											        <h5 class="card-title">${service.name}</h5>
+											        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+											        <a style="font-family: Quicksand-Bold" href="${service.url}">Xem chi tiết →</a>
+											    </div>
+                                            </div>
 				                    	</li>
 				                    	</#list>
 			                    	</ul>        
@@ -45,44 +44,71 @@
                     </div>
                 </div>
                 
+                <div class="row" id="service-ctn" style="padding-top: 50px">
+                    <div class="col-lg-12 col-xs-12" id="what-we-bring" style="margin-bottom: 10px;">
+                        <h2 class="text-center" id="title" style="margin-bottom: 10px">CẢM NHẬN CỦA KHÁCH HÀNG</h2>
+                    </div>
+                    <#include "carousel.html.ftl">
+                </div>
+                
                 <#-- Outstanding services -->
                 <div class="row" id="outstand-service-ctn" style="padding-top: 50px">
-                    <div class="col-lg-2 col-xs-3">
-                        <img src="<@spring.url '/resources/image/other/olivetree.jpg'/>" alt="facility" style="width: 80%">
-                    </div>
-                    <div class="col-lg-8 col-xs-6" id="what-we-bring" style="margin-bottom: 10px;">
-                        <h2 class="text-center" id="title" style="margin-bottom: 10px">Dummy title</h2>
-                        <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-                    </div>
-                    <div class="col-lg-2 col-xs-3">
-                        <img src="<@spring.url '/resources/image/other/olivetree.jpg'/>" alt="facility" style="width: 80%">
+                    <div class="col-lg-12 col-xs-12" id="what-we-bring" style="margin-bottom: 10px;">
+                        <h2 class="text-center" id="title" style="margin-bottom: 10px">TIN TỨC</h2>
                     </div>
                     
                     <#-- outstanding services loop -->
                     <div class="col-lg-12 col-xs-12">
 	                    <ul>
 	                        <#list childServiceDtos as service>
-	                    	<li class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-	                    		<div class="outstand-service thumbnail" data-url="${service.url}">
-	                    			<div class="outstand-service-img-ctn">
-	                    				<img src="${'data:image/png;base64,' + service.image}" width="240" height="240" alt="${service.name}">
-	                    			</div>
-	                    			<div class="outstand-service-intro">
-	                    				<#-- <#if service.intro??>
-										   <span>${service.intro}</span>
-										</#if> -->
-										<span>${service.name}</span>
-	                    			</div>
-	                    		</div>
-	                    	</li>
+				                    	<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+				                    		<div class="card">
+												<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
+											    <div class="card-body">
+											        <h5 class="card-title">${service.name}</h5>
+											        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+											        <a style="font-family: Quicksand-Bold" href="${service.url}">Xem chi tiết →</a>
+											    </div>
+                                            </div>
+				                    	</li>
 	                    	</#list>
 	                	</ul>     
                     </div>
 
-                    <div class="col-lg-12 col-xs-12" style="margin-bottom: 20px">
+                    <div class="col-lg-12 col-xs-12" style="margin-bottom: 20px; margin-top: 30px">
                     	<div class="row center-block">
                     		<button class="btn btn-default" id="btn-news"><@spring.message "menu.news"/></button>
                     	</div> 
+                    </div>
+                </div>
+                
+
+                
+                <div class="row" id="outstand-service-ctn" style="padding-top: 50px">
+                    <div class="col-lg-12 col-xs-12" id="what-we-bring" style="margin-bottom: 10px;">
+                        <h2 class="text-center" id="title" style="margin-bottom: 10px">BẠN CẦN TƯ VẤN</h2>
+                        <h5 class="text-center" id="title" style="margin-bottom: 10px">Vui lòng điền thông tin, chúng tôi sẽ liên hệ quý khách trong ngày</h2>
+                    </div>
+                    
+                    <#-- outstanding services loop -->
+                    <div class="col-lg-12 col-xs-12 text-center" style="align-items:center">
+                    <div style="width:500px">
+						<form>
+						  <div class="form-group">
+						    <label for="exampleFormControlInput1">Địa chỉ email</label>
+						    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleFormControlInput1">Số điện thoại</label>
+						    <input type="email" class="form-control" id="exampleFormControlInput1">
+						  </div>
+						  <div class="form-group">
+						    <label for="exampleFormControlTextarea1">Câu hỏi tư vấn</label>
+						    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+						  </div>
+						  <button type="submit" class="btn btn-primary">Gửi câu hỏi</button>
+						</form>
+					</div>
                     </div>
                 </div>
             </div>  

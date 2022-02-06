@@ -42,7 +42,9 @@ public class ServiceGroupServiceImpl implements ServiceGroupService{
 	@Override
 	public List<ServiceGroupDto> getAllServices() {	
 		List<com.doctor.spa.entity.ServiceGroup> services = this.serviceRepo.findByDeletedFalse();
-		List<ServiceGroupDto> serviceDtos = services.stream().map(service -> serviceMapper.toDto(service)).collect(Collectors.toList());
+		List<ServiceGroupDto> serviceDtos = services
+				.stream()
+				.map(service -> serviceMapper.toDto(service)).collect(Collectors.toList());
 		return serviceDtos;
 	}
 

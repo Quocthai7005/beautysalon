@@ -26,9 +26,37 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
+@font-face {
+    font-family: NotoSans-Regular;
+    src: url('../fonts/NotoSans-Regular.ttf');
+}
+@font-face {
+    font-family: Quicksand-Bold;
+    src: url('../fonts/Quicksand-Bold.ttf');
+}
+@font-face {
+    font-family: Quicksand-Light;
+    src: url('../fonts/Quicksand-Light.ttf');
+}
+@font-face {
+    font-family: Quicksand-Regular;
+    src: url('../fonts/Quicksand-Regular.ttf');
+}
+@font-face {
+    font-family: Quicksand-Light;
+    src: url('../fonts/Quicksand-Light.ttf');
+}
+@font-face {
+    font-family: Quicksand-SemiBold;
+    src: url('../fonts/Quicksand-SemiBold.ttf');
+}
+
 body {
 	line-height: 1.5;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    /* font-family: "Roboto", "Helvetica", "Arial", sans-serif; */
+    font-family: Quicksand-Regular;
+    
 }
 ol, ul {
 	list-style: none;
@@ -46,7 +74,7 @@ table {
 	border-spacing: 0;
 }
 .container {
-	background-color: #fff2f2;
+	background-color: #f2f2e8;
 }
 .row {
   display: -webkit-box;

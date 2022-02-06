@@ -10,15 +10,11 @@
     <div class="carousel-inner">
 
     			<div class="item active">
-	        		<img src="https://dummyimage.com/1200x400/8c0b0b/a60000">
+	        		<img src="https://mypetswebsitebucket.s3.ap-southeast-1.amazonaws.com/1.jpg">
 	        	</div>
 
 	        	<div class="item">
-	        		<img src="https://dummyimage.com/1200x400/8c0b0b/a60000">
-	        	</div>
-	        	
-	        	<div class="item">
-	        		<img src="https://dummyimage.com/1200x400/8c0b0b/a60000">
+	        		<img src="https://mypetswebsitebucket.s3.ap-southeast-1.amazonaws.com/2.jpg">
 	        	</div>
     </div>
 

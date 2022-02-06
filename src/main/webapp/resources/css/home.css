@@ -5,8 +5,7 @@
 	border: none;
 }
 #main #service-ctn {
-    background-color: #fff4ff;
-    padding-bottom: 30px;
+    background-color: #f2f2e8;
     padding-top: 30px;
 }
 #main #spa-map img {
@@ -27,6 +26,7 @@
 
 /* Service style */
 #services {
+	padding-top: 50px;
 	width: 100%;
 }
 #main #our-service {
@@ -85,4 +85,13 @@
 	display: inline-block
 	width: 100vh;
 	height: 60vh;
+}
+.card-body {
+	background-color: #fff;
+}
+.card {
+	width: 19rem;
+	background-color: #fff;
+	padding: 6px 6px;
+	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
