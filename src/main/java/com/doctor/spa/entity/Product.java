@@ -10,7 +10,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "service")
+@Table(name = "product")
 public class Product extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -33,8 +33,8 @@ public class Product extends BaseEntity {
 	@Column(name = "display_order")
 	private Integer displayOrder;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parentService")
-	private List<SubProduct> childServices = new ArrayList<SubProduct>();
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parentProduct")
+	private List<SubProduct> subProducts = new ArrayList<SubProduct>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "service")
 	private List<News> news = new ArrayList<News>();
@@ -87,12 +87,12 @@ public class Product extends BaseEntity {
 		this.image = image;
 	}
 
-	public List<SubProduct> getChildServices() {
-		return childServices;
+	public List<SubProduct> getSubProducts() {
+		return subProducts;
 	}
 
-	public void setChildServices(List<SubProduct> childServices) {
-		this.childServices = childServices;
+	public void setSubProducts(List<SubProduct> subProducts) {
+		this.subProducts = subProducts;
 	}
 
 	public Integer getDisplayOrder() {

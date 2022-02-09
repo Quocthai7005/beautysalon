@@ -7,7 +7,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="post")
+@Table(name="news")
 public class News extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
@@ -28,16 +28,16 @@ public class News extends BaseEntity {
 	private String image;
 	
 	@ManyToOne
-    @JoinColumn(name="service_id", nullable=false)
-	private Product service;
+    @JoinColumn(name="product_id", nullable=false)
+	private Product product;
 
 
-	public Product getService() {
-		return service;
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setService(Product service) {
-		this.service = service;
+	public void setProduct(Product service) {
+		this.product = service;
 	}
 
 	public String getName() {

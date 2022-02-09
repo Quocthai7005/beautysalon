@@ -7,14 +7,14 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "child_service")
+@Table(name = "subproduct")
 public class SubProduct extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	
 	@ManyToOne
-    @JoinColumn(name="parent_service_id", nullable=false)
-	private Product parentService;
+    @JoinColumn(name="parent_product_id", nullable=false)
+	private Product parentProduct;
 	
 	@Column(name = "name")
 	private String name;
@@ -34,12 +34,12 @@ public class SubProduct extends BaseEntity {
 	@Column(name = "url")
 	private String url;
 
-	public Product getParentService() {
-		return parentService;
+	public Product getParentProduct() {
+		return parentProduct;
 	}
 
-	public void setParentService(Product parentService) {
-		this.parentService = parentService;
+	public void setParentProduct(Product parentProduct) {
+		this.parentProduct = parentProduct;
 	}
 
 	public String getName() {

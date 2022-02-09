@@ -33,47 +33,47 @@ public class ProductServiceImpl implements ProductService {
 	private static final Logger LOGGER = LoggerFactory.getLogger(AjaxTimeoutRedirectFilter.class);
 	
 	@Autowired
-	ProductRepo serviceRepo;
+	ProductRepo productRepo;
 	
 	@Autowired
-	SubProductRepo childServiceRepo;
+	SubProductRepo subProductRepo;
 	
 	@Autowired
-	ProductMapper serviceMapper;
+	ProductMapper productMapper;
 
 	@Autowired
 	ImageService imageService;
 
 	@Override
 	public List<ProductDto> getAllServices() {	
-		List<com.doctor.spa.entity.Product> services = this.serviceRepo.findByDeletedFalse();
-		List<ProductDto> serviceDtos = services
+		List<com.doctor.spa.entity.Product> products = this.productRepo.findByDeletedFalse();
+		List<ProductDto> productDtos = products
 				.stream()
-				.map(service -> serviceMapper.toDto(service)).collect(Collectors.toList());
-		return serviceDtos;
+				.map(product -> productMapper.toDto(product)).collect(Collectors.toList());
+		return productDtos;
 	}
 
 	@Override
 	public ProductDto getServiceByUrl(String url) {
-		com.doctor.spa.entity.Product service = serviceRepo.findByUrl(url);
-		ProductDto dto = serviceMapper.toDto(service);
+		com.doctor.spa.entity.Product product = productRepo.findByUrl(url);
+		ProductDto dto = productMapper.toDto(product);
 		return dto;
 	}
 
 	@Override
 	public List<ProductDto> getServiceOtherThan(String url) {
-		List<com.doctor.spa.entity.Product> services = serviceRepo.findByDeletedFalseAndUrlNotLike(url);
-		List<ProductDto> servicesDto = services.stream().map(service -> serviceMapper.toDto(service)).collect(Collectors.toList());
-		return servicesDto;
+		List<com.doctor.spa.entity.Product> products = productRepo.findByDeletedFalseAndUrlNotLike(url);
+		List<ProductDto> productDtos = products.stream().map(service -> productMapper.toDto(service)).collect(Collectors.toList());
+		return productDtos;
 	}
 
 	@Override
 	public Page<ProductDto> getServices(Pageable pageable) {
 		Page<com.doctor.spa.entity.Product> services = new PageImpl<>(Collections.emptyList());
-		services = serviceRepo.findByDeletedFalse(pageable);
+		services = productRepo.findByDeletedFalse(pageable);
 		List<ProductDto> serviceDtos = new ArrayList<ProductDto>();
 		services.getContent().forEach(service -> {
-			ProductDto dto = serviceMapper.toDto(service);
+			ProductDto dto = productMapper.toDto(service);
 			serviceDtos.add(dto);
 		});
 		return new PageImpl<ProductDto>(serviceDtos);
@@ -81,7 +81,7 @@ public class ProductServiceImpl implements ProductService {
 	
 	@Override
 	public Integer getServiceNo() {	
-		Integer serviceNo = serviceRepo.countByDeletedFalse();
+		Integer serviceNo = productRepo.countByDeletedFalse();
 		return serviceNo;	
 	}
 
@@ -91,11 +91,11 @@ public class ProductServiceImpl implements ProductService {
 		if (id == null) {
 			return false;
 		}
-		List<SubProduct> childServices = childServiceRepo.findFirst4BySubProductIdByDeletedFalse(id);
+		List<SubProduct> childServices = subProductRepo.findFirst4BySubProductIdByDeletedFalse(id);
 		if (childServices.size() > 0) {
 			return false;
 		} else {
-			serviceRepo.deleteByIdDeletedFalse(id);
+			productRepo.deleteByIdDeletedFalse(id);
 			LOGGER.info("Service with id: " + id + " deleted");
 			return true;
 		}
@@ -107,17 +107,17 @@ public class ProductServiceImpl implements ProductService {
 		if (dto == null) {
 			return false;
 		}
-		com.doctor.spa.entity.Product service = serviceMapper.toEntity(dto);
+		com.doctor.spa.entity.Product service = productMapper.toEntity(dto);
 		String imageName = imageService.uploadFile(image);
 		service.setImage(imageName);
-		serviceRepo.save(service);
+		productRepo.save(service);
 		return true;
 	}
 
 	@Override
 	public ProductDto getServiceById(long id) {
-		com.doctor.spa.entity.Product service = serviceRepo.findById(id);
-		ProductDto dto = serviceMapper.toDto(service);
+		com.doctor.spa.entity.Product service = productRepo.findById(id);
+		ProductDto dto = productMapper.toDto(service);
 		return dto;
 	}
 
@@ -131,12 +131,12 @@ public class ProductServiceImpl implements ProductService {
 		if (serviceDto.getId() == null) {
 			return false;
 		}
-		com.doctor.spa.entity.Product service = serviceRepo.findById(serviceDto.getId());
+		com.doctor.spa.entity.Product service = productRepo.findById(serviceDto.getId());
 		service.setImage(serviceDto.getImage());
 		service.setName(serviceDto.getName());
 		service.setUrl(serviceDto.getUrl());
 		service.setContent(serviceDto.getContent());
-		serviceRepo.save(service);
+		productRepo.save(service);
 		// Save
 		return true;
 	}
@@ -148,7 +148,7 @@ public class ProductServiceImpl implements ProductService {
 			result.put("valid", false);
 			return result;
 		}
-		List<com.doctor.spa.entity.Product> services = serviceRepo.findByUrlByIdNotEqual(url, id);
+		List<com.doctor.spa.entity.Product> services = productRepo.findByUrlByIdNotEqual(url, id);
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;
@@ -157,7 +157,7 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public Map<String, Boolean> validateUrlNoId(String url) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
-		List<com.doctor.spa.entity.Product> services = serviceRepo.findProductsByUrl(url);
+		List<com.doctor.spa.entity.Product> services = productRepo.findProductsByUrl(url);
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;

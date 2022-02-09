@@ -28,10 +28,10 @@ public class ChildServiceMapperImpl implements SubProductMapper {
 			dto.setImage(amazonS3.getUrl(bucketName, childService.getImage()).toString());
 			dto.setIntro(childService.getIntro());
 			dto.setName(childService.getName());
-			dto.setParentServiceId(childService.getParentService().getId());
+			dto.setParentServiceId(childService.getParentProduct().getId());
 			dto.setUpdatedDate(childService.getUpdatedDate().toString());
 			dto.setUrl(childService.getUrl());
-			dto.setParentServiceName(childService.getParentService().getName());
+			dto.setParentServiceName(childService.getParentProduct().getName());
 			dto.setIsShownHome(childService.isShownHome());
 		} else {
 			dto = null;

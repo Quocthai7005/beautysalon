@@ -31,8 +31,8 @@ public class PostMapperImpl implements NewsMapper {
 			dto.setCreatedDate(news.getCreatedDate().toString());
 			dto.setUpdatedDate(news.getCreatedDate().toString());
 			dto.setUrl(news.getUrl());
-			dto.setParentServiceId(news.getService().getId());
-			dto.setParentServiceName(news.getService().getName());
+			dto.setParentServiceId(news.getProduct().getId());
+			dto.setParentServiceName(news.getProduct().getName());
 		}
 		return dto;
 	}

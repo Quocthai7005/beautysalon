@@ -22,7 +22,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 	
 	@Modifying
 	@Transactional
-	@Query(value = "UPDATE service s SET s.is_deleted=1 WHERE s.id = ?1", nativeQuery = true)
+	@Query(value = "UPDATE product s SET s.is_deleted=1 WHERE s.id = ?1", nativeQuery = true)
 	void deleteByIdDeletedFalse(Long id);
 	
 	// Others' query
@@ -33,9 +33,9 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 	
 	List<Product> findByDeletedFalseAndUrlNotLike(String url);
 	
-	@Query(value = "SELECT * FROM service s WHERE s.url LIKE ?1 AND s.id != ?2 AND s.is_deleted = 0", nativeQuery = true)
+	@Query(value = "SELECT * FROM product s WHERE s.url LIKE ?1 AND s.id != ?2 AND s.is_deleted = 0", nativeQuery = true)
 	List<Product> findByUrlByIdNotEqual(String url, Long id);
 	
-	@Query(value = "SELECT * FROM service s WHERE s.url LIKE ?1 AND s.is_deleted = 0", nativeQuery = true)
+	@Query(value = "SELECT * FROM product s WHERE s.url LIKE ?1 AND s.is_deleted = 0", nativeQuery = true)
 	List<Product> findProductsByUrl(String url);
 }

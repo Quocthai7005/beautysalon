@@ -51,7 +51,7 @@ public class ServiceMapperImpl implements ProductMapper {
 			dto.setUrl(service.getUrl());
 			
 			List<SubProductDto> childServiceDtos = new ArrayList<SubProductDto>();
-			service.getChildServices().forEach(childService -> {
+			service.getSubProducts().forEach(childService -> {
 				if (childService.isDeleted() == false) {
 					SubProductDto childServiceDto = childServiceMapper.toDto(childService);
 					childServiceDtos.add(childServiceDto);
@@ -74,7 +74,7 @@ public class ServiceMapperImpl implements ProductMapper {
 	public com.doctor.spa.entity.Product toEntity(ProductDto dto) {
 		com.doctor.spa.entity.Product service = new com.doctor.spa.entity.Product();
 		service.setContent(dto.getContent());
-		service.setChildServices(new ArrayList<SubProduct>());
+		service.setSubProducts(new ArrayList<SubProduct>());
 		service.setImage(dto.getImage());
 		service.setIntro(dto.getIntro());
 		service.setName(dto.getName());

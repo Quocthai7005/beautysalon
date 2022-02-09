@@ -99,9 +99,9 @@ public class NewsServiceImpl implements NewsService {
 	public List<SubProductDto> getChildServices(String url) {
 		News post = newsRepo.findByUrl(url);
 		List<SubProductDto> childServiceDtos = new ArrayList<SubProductDto>();
-		List<SubProduct> childServices = childServiceRepo.findFirst4BySubProductIdByDeletedFalse(post.getService().getId());
+		List<SubProduct> childServices = childServiceRepo.findFirst4BySubProductIdByDeletedFalse(post.getProduct().getId());
 		childServices.forEach(childService -> {
-			childService.setUrl(childService.getParentService().getUrl() + "/" + childService.getUrl());
+			childService.setUrl(childService.getParentProduct().getUrl() + "/" + childService.getUrl());
 			SubProductDto childServiceDto = childServiceMapper.toDto(childService);
 			childServiceDtos.add(childServiceDto);
 		});
@@ -177,7 +177,7 @@ public class NewsServiceImpl implements NewsService {
 		news.setImage(imageService.uploadFile(image));
 		news.setContent(dto.getContent());
 		news.setIntro(dto.getIntro());
-		news.setService(service);
+		news.setProduct(service);
 		newsRepo.save(news);
 		return true;
 	}
@@ -213,7 +213,7 @@ public class NewsServiceImpl implements NewsService {
 		news.setImage(imageService.uploadFile(image));
 		news.setContent(dto.getContent());
 		news.setIntro(dto.getIntro());
-		news.setService(service);
+		news.setProduct(service);
 		newsRepo.save(news);
 		return true;
 	}
