@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.doctor.spa.dto.ChildServiceDto;
-import com.doctor.spa.entity.ChildService;
-import com.doctor.spa.mapper.ChildServiceMapper;
+import com.doctor.spa.dto.SubProductDto;
+import com.doctor.spa.entity.SubProduct;
+import com.doctor.spa.mapper.SubProductMapper;
 
 @Service
-public class ChildServiceMapperImpl implements ChildServiceMapper {
+public class ChildServiceMapperImpl implements SubProductMapper {
 
 	@Autowired
 	private AmazonS3 amazonS3;
@@ -19,8 +19,8 @@ public class ChildServiceMapperImpl implements ChildServiceMapper {
 	private String bucketName;
 
 	@Override
-	public ChildServiceDto toDto(ChildService childService) {
-		ChildServiceDto dto = new ChildServiceDto();
+	public SubProductDto toDto(SubProduct childService) {
+		SubProductDto dto = new SubProductDto();
 		if (childService != null) {
 			dto.setContent(childService.getContent());
 			dto.setCreatedDate(childService.getCreatedDate().toString());

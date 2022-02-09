@@ -9,14 +9,14 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.doctor.spa.entity.ServiceGroup;
+import com.doctor.spa.entity.Product;
 
-public interface ServiceGroupRepo extends JpaRepository<ServiceGroup, Long> {
+public interface ProductRepo extends JpaRepository<Product, Long> {
 	
 	// Admin's query
-	List<ServiceGroup> findByDeletedFalse();
+	List<Product> findByDeletedFalse();
 	
-	Page<ServiceGroup> findByDeletedFalse(Pageable pageable);
+	Page<Product> findByDeletedFalse(Pageable pageable);
 	
 	Integer countByDeletedFalse();
 	
@@ -27,15 +27,15 @@ public interface ServiceGroupRepo extends JpaRepository<ServiceGroup, Long> {
 	
 	// Others' query
 	
-	ServiceGroup findById(Long id);
+	Product findById(Long id);
 
-	ServiceGroup findByUrl(String url);
+	Product findByUrl(String url);
 	
-	List<ServiceGroup> findByDeletedFalseAndUrlNotLike(String url);
+	List<Product> findByDeletedFalseAndUrlNotLike(String url);
 	
 	@Query(value = "SELECT * FROM service s WHERE s.url LIKE ?1 AND s.id != ?2 AND s.is_deleted = 0", nativeQuery = true)
-	List<ServiceGroup> findByUrlByIdNotEqual(String url, Long id);
+	List<Product> findByUrlByIdNotEqual(String url, Long id);
 	
 	@Query(value = "SELECT * FROM service s WHERE s.url LIKE ?1 AND s.is_deleted = 0", nativeQuery = true)
-	List<ServiceGroup> findServicesByUrl(String url);
+	List<Product> findProductsByUrl(String url);
 }

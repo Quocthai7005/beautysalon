@@ -10,30 +10,30 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.doctor.spa.entity.Post;
+import com.doctor.spa.entity.News;
 
 @Repository
-public interface PostRepo extends PagingAndSortingRepository<Post, Long> {
+public interface NewsRepo extends PagingAndSortingRepository<News, Long> {
 	
 	// Admin's query
 	
-	@Query(value = "SELECT p FROM Post p WHERE p.service.id = ?1 AND p.name LIKE %?2% AND p.deleted = 0")
-	Page<Post> findByServiceGroupIdBySearchTextByDeletedFalse(Long id, String searchText, Pageable pageable);
+	@Query(value = "SELECT p FROM Post p WHERE p.product.id = ?1 AND p.name LIKE %?2% AND p.deleted = 0")
+	Page<News> findByProductIdBySearchTextByDeletedFalse(Long id, String searchText, Pageable pageable);
 
-	@Query(value = "SELECT p FROM Post p WHERE p.service.id = ?1 AND p.name LIKE %?2% AND p.deleted = 0")
-	List<Post> findByServiceGroupIdBySearchTextByDeletedFalse(Long id, String searchText);
+	@Query(value = "SELECT p FROM Post p WHERE p.product.id = ?1 AND p.name LIKE %?2% AND p.deleted = 0")
+	List<News> findByProductIdBySearchTextByDeletedFalse(Long id, String searchText);
 	
-	@Query(value = "SELECT p FROM Post p WHERE p.service.id = ?1 AND p.deleted = 0")
-	Page<Post> findByServiceGroupIdByDeletedFalse(Long id, Pageable pageable);
+	@Query(value = "SELECT p FROM Post p WHERE p.product.id = ?1 AND p.deleted = 0")
+	Page<News> findByProductIdByDeletedFalse(Long id, Pageable pageable);
 	
-	@Query(value = "SELECT p FROM Post p WHERE p.service.id = ?1 AND p.deleted = 0")
-	List<Post> findByServiceGroupIdByDeletedFalse(Long id);
+	@Query(value = "SELECT p FROM Post p WHERE p.product.id = ?1 AND p.deleted = 0")
+	List<News> findByProductIdByDeletedFalse(Long id);
 	
 	@Query(value = "SELECT p FROM Post p WHERE p.name LIKE %?1% AND p.deleted = 0")
-	Page<Post> findBySearchTextByDeletedFalse(String searchText, Pageable pageable);
+	Page<News> findBySearchTextByDeletedFalse(String searchText, Pageable pageable);
 	
 	@Query(value = "SELECT * FROM Post p WHERE p.name LIKE %?1% AND p.is_deleted = 0", nativeQuery = true)
-	List<Post> findBySearchTextByDeletedFalse(String searchText);
+	List<News> findBySearchTextByDeletedFalse(String searchText);
 	
 	@Modifying
 	@Transactional
@@ -42,28 +42,28 @@ public interface PostRepo extends PagingAndSortingRepository<Post, Long> {
 	
 	// Others' query
 	
-	Post findById(Long id);
+	News findById(Long id);
 	
 	@Query(value = "SELECT * FROM Post p WHERE p.url LIKE ?1 AND p.is_deleted = 0", nativeQuery = true)
-	Post findByUrl(String url);
+	News findByUrl(String url);
 	
-	Page<Post> findAll(Pageable pageable);
+	Page<News> findAll(Pageable pageable);
 	
 	Integer countByDeletedFalse();
 	
-	Page<Post> findByDeletedFalse(Pageable pageable);
+	Page<News> findByDeletedFalse(Pageable pageable);
 
-	List<Post> findByDeletedFalse();
+	List<News> findByDeletedFalse();
 	
 	@Query(value = "SELECT * FROM Post p WHERE p.url LIKE ?2 AND p.id != ?1 AND p.is_deleted = 0", nativeQuery = true)
-	List<Post> findByUrlByIdNotEqual(Long id, String url);
+	List<News> findByUrlByIdNotEqual(Long id, String url);
 	
 	@Query(value = "SELECT * FROM Post p WHERE p.url LIKE ?1 AND p.is_deleted = 0", nativeQuery = true)
-	List<Post> findByUrlByDeletedFalse(String url);
+	List<News> findByUrlByDeletedFalse(String url);
 	
-	List<Post> findByServiceId(Long id);
+	List<News> findByServiceId(Long id);
 	
 	@Query(value = "SELECT * FROM Post p WHERE p.is_deleted = 0 ORDER BY p.created_date LIMIT 4 ", nativeQuery = true)
-	List<Post> findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
+	List<News> findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
 	
 }

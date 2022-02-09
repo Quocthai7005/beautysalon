@@ -1,6 +1,6 @@
 package com.doctor.spa.dto;
 
-public class PostDto extends BaseDto {
+public class NewsDto extends BaseDto {
 	
 	private String name;
 	private String url;
@@ -9,7 +9,7 @@ public class PostDto extends BaseDto {
 	private String image;
 	private String parentServiceName;
 	private Long parentServiceId;
-	private ServiceGroupDto service;
+	private ProductDto service;
 	
 	public String getName() {
 		return name;
@@ -41,10 +41,10 @@ public class PostDto extends BaseDto {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public ServiceGroupDto getService() {
+	public ProductDto getService() {
 		return service;
 	}
-	public void setService(ServiceGroupDto service) {
+	public void setService(ProductDto service) {
 		this.service = service;
 	}
 	public String getParentServiceName() {

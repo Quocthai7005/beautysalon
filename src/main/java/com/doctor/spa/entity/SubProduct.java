@@ -7,16 +7,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="post")
-public class Post extends BaseEntity {
+@Table(name = "child_service")
+public class SubProduct extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	
+	@ManyToOne
+    @JoinColumn(name="parent_service_id", nullable=false)
+	private Product parentService;
+	
 	@Column(name = "name")
 	private String name;
-	
-	@Column(name = "url")
-	private String url;
 	
 	@Column(name = "intro")
 	private String intro;
@@ -27,17 +28,18 @@ public class Post extends BaseEntity {
 	@Column(name = "image")
 	private String image;
 	
-	@ManyToOne
-    @JoinColumn(name="service_id", nullable=false)
-	private ServiceGroup service;
+	@Column(name = "is_shown_home")
+	private boolean isShownHome;
+	
+	@Column(name = "url")
+	private String url;
 
-
-	public ServiceGroup getService() {
-		return service;
+	public Product getParentService() {
+		return parentService;
 	}
 
-	public void setService(ServiceGroup service) {
-		this.service = service;
+	public void setParentService(Product parentService) {
+		this.parentService = parentService;
 	}
 
 	public String getName() {
@@ -46,14 +48,6 @@ public class Post extends BaseEntity {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 
 	public String getIntro() {
@@ -72,11 +66,32 @@ public class Post extends BaseEntity {
 		this.content = content;
 	}
 
-	public String getImage() {
+	public String isImage() {
 		return image;
 	}
 
 	public void setImage(String image) {
 		this.image = image;
 	}
+	
+	public String getImage() {
+		return this.image;
+	}
+
+	public boolean isShownHome() {
+		return isShownHome;
+	}
+
+	public void setShownHome(boolean isShownHome) {
+		this.isShownHome = isShownHome;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
 }

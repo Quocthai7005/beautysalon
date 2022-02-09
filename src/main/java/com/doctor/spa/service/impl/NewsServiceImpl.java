@@ -14,64 +14,64 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.doctor.spa.dto.ChildServiceDto;
-import com.doctor.spa.dto.PostDto;
-import com.doctor.spa.entity.ChildService;
-import com.doctor.spa.entity.Post;
-import com.doctor.spa.mapper.ChildServiceMapper;
-import com.doctor.spa.mapper.PostMapper;
-import com.doctor.spa.repository.ChildServiceRepo;
-import com.doctor.spa.repository.PostRepo;
-import com.doctor.spa.repository.ServiceGroupRepo;
+import com.doctor.spa.dto.SubProductDto;
+import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.entity.SubProduct;
+import com.doctor.spa.entity.News;
+import com.doctor.spa.mapper.SubProductMapper;
+import com.doctor.spa.mapper.NewsMapper;
+import com.doctor.spa.repository.SubProductRepo;
+import com.doctor.spa.repository.NewsRepo;
+import com.doctor.spa.repository.ProductRepo;
 import com.doctor.spa.service.ImageService;
-import com.doctor.spa.service.PostService;
+import com.doctor.spa.service.NewsService;
 
 @Service
 @Transactional
-public class PostServiceImpl implements PostService {
+public class NewsServiceImpl implements NewsService {
 	
 	@Autowired
-	PostRepo newsRepo;
+	NewsRepo newsRepo;
 	
 	@Autowired
-	ChildServiceRepo childServiceRepo;
+	SubProductRepo childServiceRepo;
 	
 	@Autowired
-	ServiceGroupRepo serviceRepo;
+	ProductRepo serviceRepo;
 	
 	@Autowired
-	ChildServiceMapper childServiceMapper;
+	SubProductMapper childServiceMapper;
 	
 	@Autowired
-	PostMapper newMapper;
+	NewsMapper newMapper;
 
 	@Autowired
 	ImageService imageService;
 
 	@Override
-	public Page<PostDto> getPosts(Pageable pageable) {
-		Page<Post> newsPosts = new PageImpl<>(Collections.emptyList());
+	public Page<NewsDto> getPosts(Pageable pageable) {
+		Page<News> newsPosts = new PageImpl<>(Collections.emptyList());
 		newsPosts = newsRepo.findByDeletedFalse(pageable);
-		List<PostDto> newsDtos = new ArrayList<PostDto>();
+		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
 		newsPosts.getContent().forEach(post -> {
-			PostDto dto = newMapper.toDto(post);
+			NewsDto dto = newMapper.toDto(post);
 			newsDtos.add(dto);
 		});
-		return new PageImpl<PostDto>(newsDtos);
+		return new PageImpl<NewsDto>(newsDtos);
 	}
 
 	@Override
 	public Integer getPostsNo(Long id, String searchText) {
-		List<Post> result = new ArrayList<Post>();
+		List<News> result = new ArrayList<News>();
 		if (id != null && searchText != null) {
 			if (id == 0 && searchText.equals("")) {
 				result = newsRepo.findByDeletedFalse();
 			} else if (id == 0 && !searchText.equals("")) {
 				result = newsRepo.findBySearchTextByDeletedFalse(searchText);
 			} else if (id != 0 && searchText.equals("")) {
-				result = newsRepo.findByServiceGroupIdByDeletedFalse(id);
+				result = newsRepo.findByProductIdByDeletedFalse(id);
 			} else {
-				result = newsRepo.findByServiceGroupIdBySearchTextByDeletedFalse(id, searchText);
+				result = newsRepo.findByProductIdBySearchTextByDeletedFalse(id, searchText);
 			}
 		}
 		Integer postNo = result.size();
@@ -79,30 +79,30 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Post getSinglePost(String url) {
-		Post post = newsRepo.findByUrl(url);
+	public News getSinglePost(String url) {
+		News post = newsRepo.findByUrl(url);
 		return post;
 	}
 
 	@Override
-	public List<PostDto> getLatestPost() {
-		List<Post> posts = newsRepo.findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
-		List<PostDto> newsDtos = new ArrayList<PostDto>();
+	public List<NewsDto> getLatestPost() {
+		List<News> posts = newsRepo.findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
+		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
 		posts.forEach(post -> {
-			PostDto dto = newMapper.toDto(post);
+			NewsDto dto = newMapper.toDto(post);
 			newsDtos.add(dto);
 		});
 		return newsDtos;
 	}
 
 	@Override
-	public List<ChildServiceDto> getChildServices(String url) {
-		Post post = newsRepo.findByUrl(url);
-		List<ChildServiceDto> childServiceDtos = new ArrayList<ChildServiceDto>();
-		List<ChildService> childServices = childServiceRepo.findFirst4ByServiceGroupIdByDeletedFalse(post.getService().getId());
+	public List<SubProductDto> getChildServices(String url) {
+		News post = newsRepo.findByUrl(url);
+		List<SubProductDto> childServiceDtos = new ArrayList<SubProductDto>();
+		List<SubProduct> childServices = childServiceRepo.findFirst4BySubProductIdByDeletedFalse(post.getService().getId());
 		childServices.forEach(childService -> {
 			childService.setUrl(childService.getParentService().getUrl() + "/" + childService.getUrl());
-			ChildServiceDto childServiceDto = childServiceMapper.toDto(childService);
+			SubProductDto childServiceDto = childServiceMapper.toDto(childService);
 			childServiceDtos.add(childServiceDto);
 		});
 		return childServiceDtos;
@@ -115,9 +115,9 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public Page<PostDto> getPostsWithConditions(Long id, String searchText, Pageable pageable) {
+	public Page<NewsDto> getPostsWithConditions(Long id, String searchText, Pageable pageable) {
 		
-		Page<Post> newsPosts = new PageImpl<>(Collections.emptyList());
+		Page<News> newsPosts = new PageImpl<>(Collections.emptyList());
 		if (id != null && searchText != null) {
 			System.out.println(id + " " + searchText);
 			if (id == 0 && searchText.equals("")) {
@@ -125,24 +125,24 @@ public class PostServiceImpl implements PostService {
 			} else if (id == 0 && !searchText.equals("")) {
 				newsPosts = newsRepo.findBySearchTextByDeletedFalse(searchText, pageable);
 			} else if (id != 0 && searchText.equals("")) {
-				newsPosts = newsRepo.findByServiceGroupIdByDeletedFalse(id, pageable);
+				newsPosts = newsRepo.findByProductIdByDeletedFalse(id, pageable);
 			} else {
-				newsPosts = newsRepo.findByServiceGroupIdBySearchTextByDeletedFalse(id, searchText, pageable);
+				newsPosts = newsRepo.findByProductIdBySearchTextByDeletedFalse(id, searchText, pageable);
 			}
 		}
 		
-		List<PostDto> newsDtos = new ArrayList<PostDto>();
+		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
 		newsPosts.getContent().forEach(post -> {
-			PostDto dto = newMapper.toDto(post);
+			NewsDto dto = newMapper.toDto(post);
 			newsDtos.add(dto);
 		});
-		return new PageImpl<PostDto>(newsDtos);
+		return new PageImpl<NewsDto>(newsDtos);
 	}
 
 	@Override
 	public Map<String, Boolean> validateUrlNoId(String url) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
-		List<Post> news = newsRepo.findByUrlByDeletedFalse(url);
+		List<News> news = newsRepo.findByUrlByDeletedFalse(url);
 		Boolean isValid = news.isEmpty();	
 		result.put("valid", isValid);
 		return result;
@@ -155,7 +155,7 @@ public class PostServiceImpl implements PostService {
 			result.put("valid", false);
 			return result;
 		}
-		List<Post> services = newsRepo.findByUrlByIdNotEqual(id, url);
+		List<News> services = newsRepo.findByUrlByIdNotEqual(id, url);
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;
@@ -163,15 +163,15 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Transactional
-	public Boolean createPost(PostDto dto, MultipartFile image) {
+	public Boolean createPost(NewsDto dto, MultipartFile image) {
 		if (dto == null) {
 			return false;
 		}
 		// change to entity
-		com.doctor.spa.entity.ServiceGroup service = new com.doctor.spa.entity.ServiceGroup();
+		com.doctor.spa.entity.Product service = new com.doctor.spa.entity.Product();
 		service = serviceRepo.findById(dto.getParentServiceId());
 		
-		Post news = new Post();
+		News news = new News();
 		news.setName(dto.getName());
 		news.setUrl(dto.getUrl());
 		news.setImage(imageService.uploadFile(image));
@@ -192,23 +192,23 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public PostDto getPost(long id) {
-		Post news = newsRepo.findById(id);
-		PostDto dto = newMapper.toDto(news);
+	public NewsDto getPost(long id) {
+		News news = newsRepo.findById(id);
+		NewsDto dto = newMapper.toDto(news);
 		return dto;
 	}
 
 	@Override
 	@Transactional
-	public Boolean updatePost(PostDto dto, MultipartFile image) {
+	public Boolean updatePost(NewsDto dto, MultipartFile image) {
 		if (dto == null) {
 			return false;
 		}
 		// change to entity
-		com.doctor.spa.entity.ServiceGroup service = new com.doctor.spa.entity.ServiceGroup();
+		com.doctor.spa.entity.Product service = new com.doctor.spa.entity.Product();
 		service = serviceRepo.findById(dto.getParentServiceId());
 		
-		Post news = newsRepo.findById(dto.getId());
+		News news = newsRepo.findById(dto.getId());
 		news.setName(dto.getName());
 		news.setImage(imageService.uploadFile(image));
 		news.setContent(dto.getContent());

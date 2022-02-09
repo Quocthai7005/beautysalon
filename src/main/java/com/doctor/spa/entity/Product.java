@@ -11,7 +11,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "service")
-public class ServiceGroup extends BaseEntity {
+public class Product extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 
@@ -34,16 +34,16 @@ public class ServiceGroup extends BaseEntity {
 	private Integer displayOrder;
 
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parentService")
-	private List<ChildService> childServices = new ArrayList<ChildService>();
+	private List<SubProduct> childServices = new ArrayList<SubProduct>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "service")
-	private List<Post> news = new ArrayList<Post>();
+	private List<News> news = new ArrayList<News>();
 
-	public List<Post> getNews() {
+	public List<News> getNews() {
 		return news;
 	}
 
-	public void setNews(List<Post> news) {
+	public void setNews(List<News> news) {
 		this.news = news;
 	}
 
@@ -87,11 +87,11 @@ public class ServiceGroup extends BaseEntity {
 		this.image = image;
 	}
 
-	public List<ChildService> getChildServices() {
+	public List<SubProduct> getChildServices() {
 		return childServices;
 	}
 
-	public void setChildServices(List<ChildService> childServices) {
+	public void setChildServices(List<SubProduct> childServices) {
 		this.childServices = childServices;
 	}
 

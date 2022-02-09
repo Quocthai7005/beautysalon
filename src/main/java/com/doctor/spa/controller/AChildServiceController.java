@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.common.response.ResponseBody;
-import com.doctor.spa.dto.ChildServiceDto;
-import com.doctor.spa.service.ChildSerService;
-import com.doctor.spa.service.ServiceGroupService;
+import com.doctor.spa.dto.SubProductDto;
+import com.doctor.spa.service.SubProductService;
+import com.doctor.spa.service.ProductService;
 import com.doctor.spa.util.Pages;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -33,10 +33,10 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 public class AChildServiceController {
 	
 	@Autowired
-	ServiceGroupService serService;
+	ProductService serService;
 	
 	@Autowired
-	ChildSerService childService;
+	SubProductService childService;
 
 	@RequestMapping(value="/service-list", method=RequestMethod.GET)
 	public String goToList() {	
@@ -54,7 +54,7 @@ public class AChildServiceController {
 	}
 	
 	@GetMapping(value="/service-list/all")
-	public ResponseEntity<ResponseBody<Page<ChildServiceDto>>> getChildServices(@RequestParam Long groupId, Pageable pageable) {
+	public ResponseEntity<ResponseBody<Page<SubProductDto>>> getChildServices(@RequestParam Long groupId, Pageable pageable) {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, childService.getChildServiceByGroupId(groupId, pageable)));
 	}
 	
@@ -71,7 +71,7 @@ public class AChildServiceController {
 	@PostMapping(value = "/service-create")
 	public ResponseEntity<ResponseBody<Boolean>> createService(
 			@RequestPart MultipartFile imgFile,
-			@RequestPart ChildServiceDto data) throws JsonParseException, JsonMappingException, IOException {
+			@RequestPart SubProductDto data) throws JsonParseException, JsonMappingException, IOException {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, childService.createService(data, imgFile)));
 	}
 	
@@ -86,12 +86,12 @@ public class AChildServiceController {
 	}
 	
 	@GetMapping(value = "/service/child/{id}")
-	public ResponseEntity<ResponseBody<ChildServiceDto>> getChildService(@PathVariable long id) {
+	public ResponseEntity<ResponseBody<SubProductDto>> getChildService(@PathVariable long id) {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, childService.getChildServiceById(id)));
 	}
 	
 	@PostMapping(value = "/service-update")
-	public ResponseEntity<ResponseBody<Boolean>> updateService(@RequestBody ChildServiceDto dto) {	
+	public ResponseEntity<ResponseBody<Boolean>> updateService(@RequestBody SubProductDto dto) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, childService.updateService(dto)));
 	}
 }

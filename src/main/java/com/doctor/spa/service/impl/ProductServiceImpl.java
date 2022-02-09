@@ -18,65 +18,65 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.configuration.AjaxTimeoutRedirectFilter;
-import com.doctor.spa.dto.ServiceGroupDto;
-import com.doctor.spa.entity.ChildService;
-import com.doctor.spa.mapper.ServiceGroupMapper;
-import com.doctor.spa.repository.ChildServiceRepo;
-import com.doctor.spa.repository.ServiceGroupRepo;
+import com.doctor.spa.dto.ProductDto;
+import com.doctor.spa.entity.SubProduct;
+import com.doctor.spa.mapper.ProductMapper;
+import com.doctor.spa.repository.SubProductRepo;
+import com.doctor.spa.repository.ProductRepo;
 import com.doctor.spa.service.ImageService;
-import com.doctor.spa.service.ServiceGroupService;
+import com.doctor.spa.service.ProductService;
 
 @Service
 @Transactional(readOnly = true)
-public class ServiceGroupServiceImpl implements ServiceGroupService {
+public class ProductServiceImpl implements ProductService {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AjaxTimeoutRedirectFilter.class);
 	
 	@Autowired
-	ServiceGroupRepo serviceRepo;
+	ProductRepo serviceRepo;
 	
 	@Autowired
-	ChildServiceRepo childServiceRepo;
+	SubProductRepo childServiceRepo;
 	
 	@Autowired
-	ServiceGroupMapper serviceMapper;
+	ProductMapper serviceMapper;
 
 	@Autowired
 	ImageService imageService;
 
 	@Override
-	public List<ServiceGroupDto> getAllServices() {	
-		List<com.doctor.spa.entity.ServiceGroup> services = this.serviceRepo.findByDeletedFalse();
-		List<ServiceGroupDto> serviceDtos = services
+	public List<ProductDto> getAllServices() {	
+		List<com.doctor.spa.entity.Product> services = this.serviceRepo.findByDeletedFalse();
+		List<ProductDto> serviceDtos = services
 				.stream()
 				.map(service -> serviceMapper.toDto(service)).collect(Collectors.toList());
 		return serviceDtos;
 	}
 
 	@Override
-	public ServiceGroupDto getServiceByUrl(String url) {
-		com.doctor.spa.entity.ServiceGroup service = serviceRepo.findByUrl(url);
-		ServiceGroupDto dto = serviceMapper.toDto(service);
+	public ProductDto getServiceByUrl(String url) {
+		com.doctor.spa.entity.Product service = serviceRepo.findByUrl(url);
+		ProductDto dto = serviceMapper.toDto(service);
 		return dto;
 	}
 
 	@Override
-	public List<ServiceGroupDto> getServiceOtherThan(String url) {
-		List<com.doctor.spa.entity.ServiceGroup> services = serviceRepo.findByDeletedFalseAndUrlNotLike(url);
-		List<ServiceGroupDto> servicesDto = services.stream().map(service -> serviceMapper.toDto(service)).collect(Collectors.toList());
+	public List<ProductDto> getServiceOtherThan(String url) {
+		List<com.doctor.spa.entity.Product> services = serviceRepo.findByDeletedFalseAndUrlNotLike(url);
+		List<ProductDto> servicesDto = services.stream().map(service -> serviceMapper.toDto(service)).collect(Collectors.toList());
 		return servicesDto;
 	}
 
 	@Override
-	public Page<ServiceGroupDto> getServices(Pageable pageable) {
-		Page<com.doctor.spa.entity.ServiceGroup> services = new PageImpl<>(Collections.emptyList());
+	public Page<ProductDto> getServices(Pageable pageable) {
+		Page<com.doctor.spa.entity.Product> services = new PageImpl<>(Collections.emptyList());
 		services = serviceRepo.findByDeletedFalse(pageable);
-		List<ServiceGroupDto> serviceDtos = new ArrayList<ServiceGroupDto>();
+		List<ProductDto> serviceDtos = new ArrayList<ProductDto>();
 		services.getContent().forEach(service -> {
-			ServiceGroupDto dto = serviceMapper.toDto(service);
+			ProductDto dto = serviceMapper.toDto(service);
 			serviceDtos.add(dto);
 		});
-		return new PageImpl<ServiceGroupDto>(serviceDtos);
+		return new PageImpl<ProductDto>(serviceDtos);
 	}
 	
 	@Override
@@ -91,7 +91,7 @@ public class ServiceGroupServiceImpl implements ServiceGroupService {
 		if (id == null) {
 			return false;
 		}
-		List<ChildService> childServices = childServiceRepo.findFirst4ByServiceGroupIdByDeletedFalse(id);
+		List<SubProduct> childServices = childServiceRepo.findFirst4BySubProductIdByDeletedFalse(id);
 		if (childServices.size() > 0) {
 			return false;
 		} else {
@@ -103,11 +103,11 @@ public class ServiceGroupServiceImpl implements ServiceGroupService {
 
 	@Override
 	@Transactional
-	public Boolean createService(ServiceGroupDto dto, MultipartFile image) {
+	public Boolean createService(ProductDto dto, MultipartFile image) {
 		if (dto == null) {
 			return false;
 		}
-		com.doctor.spa.entity.ServiceGroup service = serviceMapper.toEntity(dto);
+		com.doctor.spa.entity.Product service = serviceMapper.toEntity(dto);
 		String imageName = imageService.uploadFile(image);
 		service.setImage(imageName);
 		serviceRepo.save(service);
@@ -115,15 +115,15 @@ public class ServiceGroupServiceImpl implements ServiceGroupService {
 	}
 
 	@Override
-	public ServiceGroupDto getServiceById(long id) {
-		com.doctor.spa.entity.ServiceGroup service = serviceRepo.findById(id);
-		ServiceGroupDto dto = serviceMapper.toDto(service);
+	public ProductDto getServiceById(long id) {
+		com.doctor.spa.entity.Product service = serviceRepo.findById(id);
+		ProductDto dto = serviceMapper.toDto(service);
 		return dto;
 	}
 
 	@Override
 	@Transactional
-	public Boolean updateService(ServiceGroupDto serviceDto) {
+	public Boolean updateService(ProductDto serviceDto) {
 		// Get service
 		if (serviceDto == null) {
 			return false;
@@ -131,7 +131,7 @@ public class ServiceGroupServiceImpl implements ServiceGroupService {
 		if (serviceDto.getId() == null) {
 			return false;
 		}
-		com.doctor.spa.entity.ServiceGroup service = serviceRepo.findById(serviceDto.getId());
+		com.doctor.spa.entity.Product service = serviceRepo.findById(serviceDto.getId());
 		service.setImage(serviceDto.getImage());
 		service.setName(serviceDto.getName());
 		service.setUrl(serviceDto.getUrl());
@@ -148,7 +148,7 @@ public class ServiceGroupServiceImpl implements ServiceGroupService {
 			result.put("valid", false);
 			return result;
 		}
-		List<com.doctor.spa.entity.ServiceGroup> services = serviceRepo.findByUrlByIdNotEqual(url, id);
+		List<com.doctor.spa.entity.Product> services = serviceRepo.findByUrlByIdNotEqual(url, id);
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;
@@ -157,7 +157,7 @@ public class ServiceGroupServiceImpl implements ServiceGroupService {
 	@Override
 	public Map<String, Boolean> validateUrlNoId(String url) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
-		List<com.doctor.spa.entity.ServiceGroup> services = serviceRepo.findServicesByUrl(url);
+		List<com.doctor.spa.entity.Product> services = serviceRepo.findProductsByUrl(url);
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;

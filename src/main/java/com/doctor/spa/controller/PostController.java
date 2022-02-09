@@ -15,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.doctor.spa.common.response.ResponseBody;
-import com.doctor.spa.dto.ChildServiceDto;
-import com.doctor.spa.dto.PostDto;
-import com.doctor.spa.dto.ServiceGroupDto;
-import com.doctor.spa.entity.Post;
+import com.doctor.spa.dto.SubProductDto;
+import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.dto.ProductDto;
+import com.doctor.spa.entity.News;
 import com.doctor.spa.entity.PageText;
-import com.doctor.spa.mapper.ServiceGroupMapper;
-import com.doctor.spa.service.PostService;
+import com.doctor.spa.mapper.ProductMapper;
+import com.doctor.spa.service.NewsService;
 import com.doctor.spa.service.PageTextService;
-import com.doctor.spa.service.ServiceGroupService;
+import com.doctor.spa.service.ProductService;
 import com.doctor.spa.util.ConstUtil;
 import com.doctor.spa.util.Pages;
 
@@ -32,20 +32,20 @@ import com.doctor.spa.util.Pages;
 public class PostController {
 
 	@Autowired
-	PostService newsService;
+	NewsService newsService;
 	
 	@Autowired
-	ServiceGroupService serService;
+	ProductService serService;
 	
 	@Autowired
-	ServiceGroupMapper serviceMapper;
+	ProductMapper serviceMapper;
 	
 	@Autowired
 	PageTextService pageTextService;
 
 	@GetMapping
 	public String goToService(Model model) {
-		List<ServiceGroupDto> menuServices = serService.getAllServices();
+		List<ProductDto> menuServices = serService.getAllServices();
 		List<PageText> pageTexts = pageTextService.findByPage("home");
 		model.addAttribute("pageTexts", pageTexts);
 		model.addAttribute("menu", ConstUtil.menuNews);
@@ -54,7 +54,7 @@ public class PostController {
 	}
 
 	@GetMapping(value = "/page")
-	public ResponseEntity<ResponseBody<Page<PostDto>>> getChildServices(@RequestParam String searchText, @RequestParam Long groupId, Pageable pageable) {
+	public ResponseEntity<ResponseBody<Page<NewsDto>>> getChildServices(@RequestParam String searchText, @RequestParam Long groupId, Pageable pageable) {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.getPostsWithConditions(groupId, searchText, pageable)));
 	}
 
@@ -65,10 +65,10 @@ public class PostController {
 
 	@GetMapping(value = "/post/{url}")
 	public String goToPost(@PathVariable String url, Model model) {
-		Post post = newsService.getSinglePost(url);
-		List<PostDto> latestPosts =  newsService.getLatestPost();
-		List<ChildServiceDto> childServices = newsService.getChildServices(url);
-		List<ServiceGroupDto> menuServices = serService.getAllServices();
+		News post = newsService.getSinglePost(url);
+		List<NewsDto> latestPosts =  newsService.getLatestPost();
+		List<SubProductDto> childServices = newsService.getChildServices(url);
+		List<ProductDto> menuServices = serService.getAllServices();
 		List<PageText> pageTexts = pageTextService.findByPage("home");
 		model.addAttribute("pageTexts", pageTexts);
 		model.addAttribute("childServices", childServices);

@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.common.response.ResponseBody;
-import com.doctor.spa.dto.ChildServiceDto;
-import com.doctor.spa.dto.ServiceGroupDto;
-import com.doctor.spa.service.ServiceGroupService;
+import com.doctor.spa.dto.SubProductDto;
+import com.doctor.spa.dto.ProductDto;
+import com.doctor.spa.service.ProductService;
 import com.doctor.spa.util.Pages;
 
 @Controller
@@ -31,7 +31,7 @@ import com.doctor.spa.util.Pages;
 public class AServiceGroupController {
 	
 	@Autowired
-	ServiceGroupService serService;
+	ProductService serService;
 	
 	@RequestMapping(value="/service-group-list", method=RequestMethod.GET)
 	public String goMain() {	
@@ -49,12 +49,12 @@ public class AServiceGroupController {
 	}
 	
 	@GetMapping(value="/service-group-list/search")
-	public ResponseEntity<ResponseBody<Page<ServiceGroupDto>>> getServiceGroups(Pageable pageable) {	
+	public ResponseEntity<ResponseBody<Page<ProductDto>>> getServiceGroups(Pageable pageable) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.getServices(pageable)));
 	}
 	
 	@GetMapping(value="/service-group-list/all")
-	public ResponseEntity<ResponseBody<List<ServiceGroupDto>>> getAllServiceGroups() {	
+	public ResponseEntity<ResponseBody<List<ProductDto>>> getAllServiceGroups() {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.getAllServices()));
 	}
 	
@@ -66,12 +66,12 @@ public class AServiceGroupController {
 	@PostMapping(value = "/service-group-create")
 	public ResponseEntity<ResponseBody<Boolean>> createService(
 			@RequestPart MultipartFile imgFile,
-			@RequestPart ServiceGroupDto data) {	
+			@RequestPart ProductDto data) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.createService(data, imgFile)));
 	}
 	
 	@PostMapping(value = "/service-group-update")
-	public ResponseEntity<ResponseBody<Boolean>> updateService(@RequestBody ServiceGroupDto dto) {	
+	public ResponseEntity<ResponseBody<Boolean>> updateService(@RequestBody ProductDto dto) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.updateService(dto)));
 	}
 	
@@ -91,7 +91,7 @@ public class AServiceGroupController {
 	}
 	
 	@RequestMapping(value="/service/all", method=RequestMethod.GET)
-	public ResponseEntity<ResponseBody<Page<ServiceGroupDto>>> getAllServices(Pageable pageable) {	
+	public ResponseEntity<ResponseBody<Page<ProductDto>>> getAllServices(Pageable pageable) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.getServices(pageable)));
 	}
 	
@@ -101,7 +101,7 @@ public class AServiceGroupController {
 	}
 	
 	@GetMapping(value = "/service/{id}")
-	public ResponseEntity<ResponseBody<ServiceGroupDto>> getService(@PathVariable long id) {	
+	public ResponseEntity<ResponseBody<ProductDto>> getService(@PathVariable long id) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.getServiceById(id)));
 	}
 }

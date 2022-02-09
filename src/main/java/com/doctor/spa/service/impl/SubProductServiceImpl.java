@@ -15,56 +15,56 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.doctor.spa.dto.ChildServiceDto;
-import com.doctor.spa.entity.ChildService;
-import com.doctor.spa.mapper.ChildServiceMapper;
-import com.doctor.spa.repository.ChildServiceRepo;
-import com.doctor.spa.repository.ServiceGroupRepo;
-import com.doctor.spa.service.ChildSerService;
+import com.doctor.spa.dto.SubProductDto;
+import com.doctor.spa.entity.SubProduct;
+import com.doctor.spa.mapper.SubProductMapper;
+import com.doctor.spa.repository.SubProductRepo;
+import com.doctor.spa.repository.ProductRepo;
+import com.doctor.spa.service.SubProductService;
 import com.doctor.spa.service.ImageService;
 
 @Service
 @Transactional
-public class ChildSerServiceImpl implements ChildSerService{
+public class SubProductServiceImpl implements SubProductService{
 	
 	@Autowired
-	ChildServiceRepo childServiceRepo;
+	SubProductRepo childServiceRepo;
 	
 	@Autowired
-	ServiceGroupRepo serviceRepo;
+	ProductRepo serviceRepo;
 	
 	@Autowired
-	ChildServiceMapper childServiceMapper;
+	SubProductMapper childServiceMapper;
 	
 	@Autowired
 	ImageService imageService;
 
 	@Override
-	public List<ChildServiceDto> getHomeShownChildService() {
-		List<ChildService> services = childServiceRepo.getByIsShownHomeTrue();
-		List<ChildServiceDto> serviceDtos = new ArrayList<ChildServiceDto>();
+	public List<SubProductDto> getHomeShownChildService() {
+		List<SubProduct> services = childServiceRepo.getByIsShownHomeTrue();
+		List<SubProductDto> serviceDtos = new ArrayList<SubProductDto>();
 		services.forEach(service -> {
 			service.setUrl(service.getParentService().getUrl() + "/" + service.getUrl());
-			ChildServiceDto serviceDto = childServiceMapper.toDto(service);
+			SubProductDto serviceDto = childServiceMapper.toDto(service);
 			serviceDtos.add(serviceDto);
 		});
 		return serviceDtos;
 	}
 
 	@Override
-	public ChildServiceDto getChildServiceByUrl(String url) {
-		ChildService childService = childServiceRepo.findByUrl(url);
-		ChildServiceDto childServiceDto = childServiceMapper.toDto(childService);
+	public SubProductDto getChildServiceByUrl(String url) {
+		SubProduct childService = childServiceRepo.findByUrl(url);
+		SubProductDto childServiceDto = childServiceMapper.toDto(childService);
 		return childServiceDto;
 	}
 
 	@Override
-	public List<ChildServiceDto> getChildServiceOtherThan(String serviceUrl, String childServiceUrl) {
-		com.doctor.spa.entity.ServiceGroup service = serviceRepo.findByUrl(serviceUrl);
-		List<ChildService> childServices = service.getChildServices().stream().filter(s -> (s.getUrl() != childServiceUrl && s.isDeleted() == false)).collect(Collectors.toList());
-		List<ChildServiceDto> serviceDtos = new ArrayList<ChildServiceDto>();
+	public List<SubProductDto> getChildServiceOtherThan(String serviceUrl, String childServiceUrl) {
+		com.doctor.spa.entity.Product service = serviceRepo.findByUrl(serviceUrl);
+		List<SubProduct> childServices = service.getChildServices().stream().filter(s -> (s.getUrl() != childServiceUrl && s.isDeleted() == false)).collect(Collectors.toList());
+		List<SubProductDto> serviceDtos = new ArrayList<SubProductDto>();
 		childServices.forEach(childService -> {
-			ChildServiceDto serviceDto = childServiceMapper.toDto(childService);
+			SubProductDto serviceDto = childServiceMapper.toDto(childService);
 			serviceDtos.add(serviceDto);
 		});
 		return serviceDtos;
@@ -72,30 +72,30 @@ public class ChildSerServiceImpl implements ChildSerService{
 
 	@Override
 	public Integer getServiceNo(Long id) {
-		List<ChildService> services = new ArrayList<ChildService>();
+		List<SubProduct> services = new ArrayList<SubProduct>();
 		if (id == 0 || id == null) {
 			services = childServiceRepo.findByDeletedFalse();
 		} else {
-			services = childServiceRepo.findFirst4ByServiceGroupIdByDeletedFalse(id);
+			services = childServiceRepo.findFirst4BySubProductIdByDeletedFalse(id);
 		}
 		System.out.println(services.size());
 		return services.size();
 	}
 
 	@Override
-	public Page<ChildServiceDto> getChildServiceByGroupId(Long id, Pageable pageable) {
-		Page<ChildService> services = new PageImpl<>(Collections.emptyList());
+	public Page<SubProductDto> getChildServiceByGroupId(Long id, Pageable pageable) {
+		Page<SubProduct> services = new PageImpl<>(Collections.emptyList());
 		if (id == 0 || id == null) {
 			services = childServiceRepo.findByDeletedFalse(pageable);
 		} else {
-			services = childServiceRepo.findByServiceGroupIdByDeletedFalse(id, pageable);
+			services = childServiceRepo.findBySubProductIdByDeletedFalse(id, pageable);
 		}
-		List<ChildServiceDto> serviceDtos = new ArrayList<ChildServiceDto>();
+		List<SubProductDto> serviceDtos = new ArrayList<SubProductDto>();
 		services.getContent().forEach(service -> {
-			ChildServiceDto dto = childServiceMapper.toDto(service);
+			SubProductDto dto = childServiceMapper.toDto(service);
 			serviceDtos.add(dto);
 		});
-		return new PageImpl<ChildServiceDto>(serviceDtos);
+		return new PageImpl<SubProductDto>(serviceDtos);
 	}
 
 	@Override
@@ -110,13 +110,13 @@ public class ChildSerServiceImpl implements ChildSerService{
 
 	@Override
 	@Transactional
-	public Boolean createService(ChildServiceDto dto, MultipartFile image) {
+	public Boolean createService(SubProductDto dto, MultipartFile image) {
 		if (dto == null) {
 			return false;
 		}
 		try {
-			ChildService service = new ChildService();
-			com.doctor.spa.entity.ServiceGroup pService = serviceRepo.findById(dto.getParentServiceId());
+			SubProduct service = new SubProduct();
+			com.doctor.spa.entity.Product pService = serviceRepo.findById(dto.getParentServiceId());
 			service.setName(dto.getName());
 			service.setImage(imageService.uploadFile(image));
 			service.setContent(dto.getContent());
@@ -132,14 +132,14 @@ public class ChildSerServiceImpl implements ChildSerService{
 
 	@Override
 	@Transactional
-	public Boolean updateService(ChildServiceDto dto) {
+	public Boolean updateService(SubProductDto dto) {
 		if (dto == null) {
 			return false;
 		}
 		try {
-			ChildService service = childServiceRepo.findById(dto.getId());
+			SubProduct service = childServiceRepo.findById(dto.getId());
 			if (service != null) {
-				com.doctor.spa.entity.ServiceGroup pService = serviceRepo.findById(dto.getParentServiceId());
+				com.doctor.spa.entity.Product pService = serviceRepo.findById(dto.getParentServiceId());
 				service.setName(dto.getName());
 				service.setImage(dto.getImage());
 				service.setContent(dto.getContent());
@@ -157,16 +157,16 @@ public class ChildSerServiceImpl implements ChildSerService{
 	@Override
 	public Map<String, Boolean> validateUrlNoId(String url) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
-		List<ChildService> services = childServiceRepo.findByUrlByDeletedFalse(url);
+		List<SubProduct> services = childServiceRepo.findByUrlByDeletedFalse(url);
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;
 	}
 
 	@Override
-	public ChildServiceDto getChildServiceById(long id) {
-		ChildService service = childServiceRepo.findById(id);
-		ChildServiceDto serviceDto = new ChildServiceDto(); 
+	public SubProductDto getChildServiceById(long id) {
+		SubProduct service = childServiceRepo.findById(id);
+		SubProductDto serviceDto = new SubProductDto(); 
 		if (service != null) {
 			serviceDto = childServiceMapper.toDto(service);
 		}
@@ -180,7 +180,7 @@ public class ChildSerServiceImpl implements ChildSerService{
 			result.put("valid", false);
 			return result;
 		}
-		List<ChildService> services = childServiceRepo.findByUrlByIdNotEqualByDeletedFalse(url, id);
+		List<SubProduct> services = childServiceRepo.findByUrlByIdNotEqualByDeletedFalse(url, id);
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;

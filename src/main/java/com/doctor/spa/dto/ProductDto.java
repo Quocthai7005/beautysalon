@@ -2,7 +2,7 @@ package com.doctor.spa.dto;
 
 import java.util.List;
 
-public class ServiceGroupDto extends BaseDto {
+public class ProductDto extends BaseDto {
 	
 	private String name;
 	private String intro;	
@@ -17,18 +17,18 @@ public class ServiceGroupDto extends BaseDto {
 	public void setDisplayOrder(Integer displayOrder) {
 		this.displayOrder = displayOrder;
 	}
-	private List<ChildServiceDto> childServices;
-	private List<PostDto> news;
+	private List<SubProductDto> childServices;
+	private List<NewsDto> news;
 	public String getUrl() {
 		return url;
 	}
 	public void setUrl(String url) {
 		this.url = url;
 	}
-	public List<ChildServiceDto> getChildServices() {
+	public List<SubProductDto> getChildServices() {
 		return childServices;
 	}
-	public void setChildServices(List<ChildServiceDto> childServices) {
+	public void setChildServices(List<SubProductDto> childServices) {
 		this.childServices = childServices;
 	}
 	public String getName() {
@@ -55,10 +55,10 @@ public class ServiceGroupDto extends BaseDto {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	public List<PostDto> getNews() {
+	public List<NewsDto> getNews() {
 		return news;
 	}
-	public void setNews(List<PostDto> news) {
+	public void setNews(List<NewsDto> news) {
 		this.news = news;
 	}
 

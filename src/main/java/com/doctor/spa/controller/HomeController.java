@@ -8,14 +8,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.doctor.spa.dto.ChildServiceDto;
-import com.doctor.spa.dto.PostDto;
-import com.doctor.spa.dto.ServiceGroupDto;
+import com.doctor.spa.dto.SubProductDto;
+import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.entity.PageText;
-import com.doctor.spa.service.ChildSerService;
+import com.doctor.spa.service.SubProductService;
 import com.doctor.spa.service.PageTextService;
-import com.doctor.spa.service.PostService;
-import com.doctor.spa.service.ServiceGroupService;
+import com.doctor.spa.service.NewsService;
+import com.doctor.spa.service.ProductService;
 import com.doctor.spa.util.ConstUtil;
 import com.doctor.spa.util.Pages;
 
@@ -26,19 +26,19 @@ public class HomeController {
 	PageTextService pageTextService;
 	
 	@Autowired
-	ServiceGroupService serService;
+	ProductService serService;
 	
 	@Autowired
-	PostService postService;
+	NewsService postService;
 	
 	@Autowired
-	ChildSerService childSerService;
+	SubProductService childSerService;
 	
 	@RequestMapping(value={"home", "/"}, method=RequestMethod.GET)
 	public String goHome(Model model) {
 		List<PageText> pageTexts = pageTextService.findByPage("home");
-		List<ServiceGroupDto> services = serService.getAllServices();
-		List<PostDto> postDtos = postService.getLatestPost();
+		List<ProductDto> services = serService.getAllServices();
+		List<NewsDto> postDtos = postService.getLatestPost();
 		model.addAttribute("postDtos", postDtos);
 		model.addAttribute("pageTexts", pageTexts);
 		model.addAttribute("menuServices", services);
@@ -49,8 +49,8 @@ public class HomeController {
 	@RequestMapping(value="contact", method=RequestMethod.GET)
 	public String goContact(Model model) {
 		List<PageText> pageTexts = pageTextService.findByPage("home");
-		List<ServiceGroupDto> services = serService.getAllServices();
-		List<ChildServiceDto> childServiceDtos = childSerService.getHomeShownChildService();
+		List<ProductDto> services = serService.getAllServices();
+		List<SubProductDto> childServiceDtos = childSerService.getHomeShownChildService();
 		model.addAttribute("childServiceDtos", childServiceDtos);
 		model.addAttribute("pageTexts", pageTexts);
 		model.addAttribute("menuServices", services);
@@ -60,7 +60,7 @@ public class HomeController {
 	
 	@RequestMapping(value="booking", method=RequestMethod.GET)
 	public String goBooking(Model model) {
-		List<ServiceGroupDto> services = serService.getAllServices();
+		List<ProductDto> services = serService.getAllServices();
 		model.addAttribute("menuServices", services);
 		model.addAttribute("menu", ConstUtil.menuBooking);
 		return Pages.BOOKING;

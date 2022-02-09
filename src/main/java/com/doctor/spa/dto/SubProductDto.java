@@ -1,6 +1,6 @@
 package com.doctor.spa.dto;
 
-public class ChildServiceDto extends BaseDto{
+public class SubProductDto extends BaseDto{
 	
 	private String name;
 	

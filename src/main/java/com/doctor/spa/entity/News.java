@@ -7,17 +7,16 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "child_service")
-public class ChildService extends BaseEntity {
+@Table(name="post")
+public class News extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
 	
-	@ManyToOne
-    @JoinColumn(name="parent_service_id", nullable=false)
-	private ServiceGroup parentService;
-	
 	@Column(name = "name")
 	private String name;
+	
+	@Column(name = "url")
+	private String url;
 	
 	@Column(name = "intro")
 	private String intro;
@@ -28,18 +27,17 @@ public class ChildService extends BaseEntity {
 	@Column(name = "image")
 	private String image;
 	
-	@Column(name = "is_shown_home")
-	private boolean isShownHome;
-	
-	@Column(name = "url")
-	private String url;
+	@ManyToOne
+    @JoinColumn(name="service_id", nullable=false)
+	private Product service;
 
-	public ServiceGroup getParentService() {
-		return parentService;
+
+	public Product getService() {
+		return service;
 	}
 
-	public void setParentService(ServiceGroup parentService) {
-		this.parentService = parentService;
+	public void setService(Product service) {
+		this.service = service;
 	}
 
 	public String getName() {
@@ -48,6 +46,14 @@ public class ChildService extends BaseEntity {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
 	}
 
 	public String getIntro() {
@@ -66,32 +72,11 @@ public class ChildService extends BaseEntity {
 		this.content = content;
 	}
 
-	public String isImage() {
+	public String getImage() {
 		return image;
 	}
 
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
-	public String getImage() {
-		return this.image;
-	}
-
-	public boolean isShownHome() {
-		return isShownHome;
-	}
-
-	public void setShownHome(boolean isShownHome) {
-		this.isShownHome = isShownHome;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
 }

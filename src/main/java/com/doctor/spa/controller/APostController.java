@@ -20,9 +20,9 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.common.response.ResponseBody;
-import com.doctor.spa.dto.ChildServiceDto;
-import com.doctor.spa.dto.PostDto;
-import com.doctor.spa.service.PostService;
+import com.doctor.spa.dto.SubProductDto;
+import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.service.NewsService;
 import com.doctor.spa.util.Pages;
 
 @Controller
@@ -30,7 +30,7 @@ import com.doctor.spa.util.Pages;
 public class APostController {
 	
 	@Autowired
-	PostService newsService;
+	NewsService newsService;
 
 	@RequestMapping(value="/news-list", method=RequestMethod.GET)
 	public String goToList() {	
@@ -43,12 +43,12 @@ public class APostController {
 	}
 	
 	@GetMapping(value="/news-list/all")
-	public ResponseEntity<ResponseBody<Page<PostDto>>> getChildServices(@RequestParam String searchText, @RequestParam Long groupId, Pageable pageable) {
+	public ResponseEntity<ResponseBody<Page<NewsDto>>> getChildServices(@RequestParam String searchText, @RequestParam Long groupId, Pageable pageable) {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.getPostsWithConditions(groupId, searchText, pageable)));
 	}
 	
 	@GetMapping(value="/news/{id}")
-	public ResponseEntity<ResponseBody<PostDto>> getNews(@PathVariable long id) {
+	public ResponseEntity<ResponseBody<NewsDto>> getNews(@PathVariable long id) {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.getPost(id)));
 	}
 	
@@ -65,14 +65,14 @@ public class APostController {
 	@PostMapping(value = "/news-create")
 	public ResponseEntity<ResponseBody<Boolean>> createPost(
 			@RequestPart MultipartFile imgFile,
-			@RequestPart PostDto data) {	
+			@RequestPart NewsDto data) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.createPost(data, imgFile)));
 	}
 	
 	@PostMapping(value = "/news-update")
 	public ResponseEntity<ResponseBody<Boolean>> updatePost(
 			@RequestPart MultipartFile imgFile,
-			@RequestPart PostDto dto) {	
+			@RequestPart NewsDto dto) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.updatePost(dto, imgFile)));
 	}
 	

@@ -8,18 +8,18 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.doctor.spa.dto.ChildServiceDto;
-import com.doctor.spa.dto.PostDto;
-import com.doctor.spa.dto.ServiceGroupDto;
-import com.doctor.spa.entity.ChildService;
-import com.doctor.spa.entity.Post;
-import com.doctor.spa.mapper.ChildServiceMapper;
-import com.doctor.spa.mapper.PostMapper;
-import com.doctor.spa.mapper.ServiceGroupMapper;
-import com.doctor.spa.repository.PostRepo;
+import com.doctor.spa.dto.SubProductDto;
+import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.dto.ProductDto;
+import com.doctor.spa.entity.SubProduct;
+import com.doctor.spa.entity.News;
+import com.doctor.spa.mapper.SubProductMapper;
+import com.doctor.spa.mapper.NewsMapper;
+import com.doctor.spa.mapper.ProductMapper;
+import com.doctor.spa.repository.NewsRepo;
 
 @Service
-public class ServiceMapperImpl implements ServiceGroupMapper {
+public class ServiceMapperImpl implements ProductMapper {
 	
 	@Autowired
 	private AmazonS3 amazonS3;
@@ -28,19 +28,19 @@ public class ServiceMapperImpl implements ServiceGroupMapper {
 	private String bucketName;
 	
 	@Autowired
-	ChildServiceMapper childServiceMapper;
+	SubProductMapper childServiceMapper;
 	
 	@Autowired
-	PostRepo newsRepo;
+	NewsRepo newsRepo;
 	
 	@Autowired
-	PostMapper newsMapper;
+	NewsMapper newsMapper;
 
 	@Override
-	public ServiceGroupDto toDto(com.doctor.spa.entity.ServiceGroup service) {
-		ServiceGroupDto dto = null;
+	public ProductDto toDto(com.doctor.spa.entity.Product service) {
+		ProductDto dto = null;
 		if (service != null) {
-			dto = new ServiceGroupDto();
+			dto = new ProductDto();
 			dto.setId(service.getId());
 			dto.setContent(service.getContent());
 			dto.setCreatedDate(service.getCreatedDate().toString());
@@ -50,19 +50,19 @@ public class ServiceMapperImpl implements ServiceGroupMapper {
 			dto.setUpdatedDate(service.getUpdatedDate().toString());
 			dto.setUrl(service.getUrl());
 			
-			List<ChildServiceDto> childServiceDtos = new ArrayList<ChildServiceDto>();
+			List<SubProductDto> childServiceDtos = new ArrayList<SubProductDto>();
 			service.getChildServices().forEach(childService -> {
 				if (childService.isDeleted() == false) {
-					ChildServiceDto childServiceDto = childServiceMapper.toDto(childService);
+					SubProductDto childServiceDto = childServiceMapper.toDto(childService);
 					childServiceDtos.add(childServiceDto);
 				}
 			});
 			dto.setChildServices(childServiceDtos);
 			
-			List<Post> news = newsRepo.findByServiceId(service.getId());
-			List<PostDto> newsPosts = new ArrayList<PostDto>();
+			List<News> news = newsRepo.findByServiceId(service.getId());
+			List<NewsDto> newsPosts = new ArrayList<NewsDto>();
 			news.forEach(newsPost -> {
-				PostDto newsDto = newsMapper.toDto(newsPost);
+				NewsDto newsDto = newsMapper.toDto(newsPost);
 				newsPosts.add(newsDto);
 			});
 			dto.setNews(newsPosts);
@@ -71,14 +71,14 @@ public class ServiceMapperImpl implements ServiceGroupMapper {
 	}
 
 	@Override
-	public com.doctor.spa.entity.ServiceGroup toEntity(ServiceGroupDto dto) {
-		com.doctor.spa.entity.ServiceGroup service = new com.doctor.spa.entity.ServiceGroup();
+	public com.doctor.spa.entity.Product toEntity(ProductDto dto) {
+		com.doctor.spa.entity.Product service = new com.doctor.spa.entity.Product();
 		service.setContent(dto.getContent());
-		service.setChildServices(new ArrayList<ChildService>());
+		service.setChildServices(new ArrayList<SubProduct>());
 		service.setImage(dto.getImage());
 		service.setIntro(dto.getIntro());
 		service.setName(dto.getName());
-		service.setNews(new ArrayList<Post>());
+		service.setNews(new ArrayList<News>());
 		service.setUrl(dto.getUrl());
 		return service;
 	}

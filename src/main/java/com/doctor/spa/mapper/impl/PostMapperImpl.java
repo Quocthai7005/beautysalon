@@ -5,12 +5,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
-import com.doctor.spa.dto.PostDto;
-import com.doctor.spa.entity.Post;
-import com.doctor.spa.mapper.PostMapper;
+import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.entity.News;
+import com.doctor.spa.mapper.NewsMapper;
 
 @Service
-public class PostMapperImpl implements PostMapper {
+public class PostMapperImpl implements NewsMapper {
 
 	@Autowired
 	private AmazonS3 amazonS3;
@@ -19,10 +19,10 @@ public class PostMapperImpl implements PostMapper {
 	private String bucketName;
 
 	@Override
-	public PostDto toDto(Post news) {
-		PostDto dto = null;
+	public NewsDto toDto(News news) {
+		NewsDto dto = null;
 		if (news != null) {
-			dto = new PostDto();
+			dto = new NewsDto();
 			dto.setId(news.getId());
 			dto.setImage(amazonS3.getUrl(bucketName, news.getImage()).toString());
 			dto.setContent(news.getContent());
