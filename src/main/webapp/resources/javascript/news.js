@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 function News() {
 	var self = this;
-	var pageSize = 8;
+	var pageSize = 4;
 	
 	// Url
 	var rootContext = $('#root-context').val();

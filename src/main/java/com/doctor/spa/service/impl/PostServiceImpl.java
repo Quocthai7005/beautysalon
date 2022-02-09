@@ -80,7 +80,7 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<PostDto> getLatestPost(String url) {
+	public List<PostDto> getLatestPost() {
 		List<Post> posts = newsRepo.findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
 		List<PostDto> newsDtos = new ArrayList<PostDto>();
 		posts.forEach(post -> {
@@ -114,6 +114,7 @@ public class PostServiceImpl implements PostService {
 		
 		Page<Post> newsPosts = new PageImpl<>(Collections.emptyList());
 		if (id != null && searchText != null) {
+			System.out.println(id + " " + searchText);
 			if (id == 0 && searchText.equals("")) {
 				newsPosts = newsRepo.findByDeletedFalse(pageable);
 			} else if (id == 0 && !searchText.equals("")) {

@@ -6,6 +6,7 @@ public final class Pages {
 	public static String POST_DETAIL = "postDetail.html";
 	public static String SERVICE = "service.html";
 	public static String CONTACT = "contact.html";
+	public static String BOOKING = "booking.html";
 	public static String SERVICE_DETAIL = "serviceDetail.html";
 	public static String A_MESSENGER = "a-messenger.html";
 	public static String A_MAIN = "a-main.html";

@@ -60,14 +60,15 @@ function Service() {
   			  	confirmButtonText: agree,
   			  	cancelButtonText: cancel,
   			}).then((result) => {
-  			  if (result.value) {
-  				  var base64Img = self.image().slice(23);
+				if (result.value) {
+					var imgfile = document.getElementById("image-inp").files[0];
   				  var data = {
   						  id: self.id(),
   						  name: self.name(),
   						  url: self.url(),
-  						  image: base64Img,
-  						  content: $('#service-content-inp').summernote('code')
+  						  image: null,
+  						intro: self.intro(),
+						content: self.content()
   				  }    	
   				  $.ajax({
   					  type : "POST",
@@ -169,7 +170,7 @@ function Service() {
                         }
                     }
                 },
-                base64Field: {
+                image: {
                 	validators: {
                         notEmpty: {
                             message: 'Vui lòng chọn hình'

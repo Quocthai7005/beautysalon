@@ -84,3 +84,9 @@
 	width: 100%;
 	max-width: 220px;
 }
+.card {
+    width: 19rem;
+    background-color: #fff;
+    padding: 6px 6px;
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}

@@ -14,59 +14,53 @@
             <#include "carousel.html.ftl">
 
             <div class="container">
-            	<div class="row">
+            	<div class="row" style="margin-bottom: 30px">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="header-service-ctn">
-                    	<div id="title">
-                    		<span>${service.name}</span>
-                    	</div>
-                    	<div class="line"></div>
+                    	<h2>${service.name}</h2>
                     </div>
                 </div>
                 
             	<#-- services -->
-                <div class="row" id="child-service-ctn">
-            
-		            <#-- services loop -->
+                <div class="row" style="margin-bottom: 30px">
 		            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 		                <ul>
 		                    <#list service.childServices as childService>
-		                	<li class="col-lg-3 col-md-3 col-sm-6 col-xs-12">		
-	                			<div class="service thumbnail" data-url="${childService.url}" data-parent-url="${service.url}">	
-		                			<div class="service-img-ctn">
-		                				<img width="220" height="220" src="${'data:image/png;base64,' + childService.image}" alt="${childService.name}">
-		                			</div>
-		                			<div class="service-text">
-		                				<span>${childService.name}</span>
-		                			</div>	
-		                		</div>   		
-		                	</li>
+		                    	<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+		                    		<div class="card">
+										<img src="${childService.image}" width=180 height=180 class="card-img-top" alt="${childService.name}">
+									    <div class="card-body">
+									        <h5 class="card-title">${childService.name}</h5>
+									        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+									        <a style="font-family: Quicksand-Bold" href="${service.url}/${childService.url}">Xem chi tiết →</a>
+									    </div>
+                                    </div>
+		                    	</li>
 		                	</#list>
 		            	</ul>        
 		            </div>
             	</div>
             	
-            	<div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="header-other-services-ctn">
-                    	<div id="title">
-                    		<span><@spring.message "menu.other.interest"/></span>
+            	<div class="row" style="padding-bottom: 30px; padding-top: 30px; background-color: #fff">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    	<div>
+                    		<h2><@spring.message "menu.other.interest"/></h2>
                     	</div>
-                    	<div class="line"></div>
                     </div>
                 </div>
                 
-                <div class="row" id="recommend-service-list">
+                <div class="row" id="recommend-service-list" style="padding-bottom: 30px; background-color: #fff">
                 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 		<ul>
 	                        <#list otherServices as service>
 	                    	<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-	                    		<div class="thumbnail other-services" data-url="${service.url}">
-	                    			<div class="other-services-img-ctn">
-	                    				<img src="${service.image}" alt="${service.name}">
-	                    			</div>
-	                    			<div class="service-text">
-	                    				<strong><span>${service.name}</span></strong>
-	                    			</div>
-	                    		</div>
+	                    		<div class="card">
+									<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
+								    <div class="card-body">
+								        <h5 class="card-title">${service.name}</h5>
+								        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+								        <a style="font-family: Quicksand-Bold" href="${service.url}">Xem chi tiết →</a>
+								    </div>
+                                </div>
 	                    	</li>
 	                    	</#list>
 	                	</ul>   

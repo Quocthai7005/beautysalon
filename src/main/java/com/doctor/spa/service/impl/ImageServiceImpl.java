@@ -55,12 +55,11 @@ public class ImageServiceImpl implements ImageService {
     }
  
     private String uploadFileToS3Bucket(final String bucketName, final File file) {
-        final String uniqueFileName = LocalDateTime.now() + "_" + file.getName();
-        System.out.println("Uploading file with name= " + uniqueFileName);
+        System.out.println("Uploading file with name= " + file.getName());
         
         final PutObjectRequest putObjectRequest = new PutObjectRequest(
-        		bucketName, uniqueFileName, file).withCannedAcl(CannedAccessControlList.PublicRead);
+        		bucketName, file.getName(), file).withCannedAcl(CannedAccessControlList.PublicRead);
         amazonS3.putObject(putObjectRequest);
-        return amazonS3.getUrl("mypetswebsitebucket", uniqueFileName).getPath();
+        return amazonS3.getUrl("mypetswebsitebucket", file.getName()).getPath();
     }
 }

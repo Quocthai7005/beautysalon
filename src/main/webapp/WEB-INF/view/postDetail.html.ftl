@@ -14,82 +14,44 @@
             <#include "carousel.html.ftl">
             <div class="container">
                 <#-- content -->
-                <div class="row row-eq-height" id="post-detail">
-                    <div class="col-lg-9 col-md-9 col-sm-9 col-xs-12">
-	                    <div class="row">
-		                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="header-news-detail-ctn">
-		                    	<div id="title">
-		                    		<span><@spring.message "header.newsDetail"/></span>
-		                    	</div>
-		                    	<div class="line"></div>
+                <div class="row row-eq-height" style="padding-top: 30px; padding-bottom: 30px">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    	<div class="row">
+		                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="header-service-ctn">
+		                    	<h2>${post.name}</h2>
 		                    </div>
 		                </div>
-	                    <div class="row">
+	                    <div class="row" style="padding-top: 30px">
 		                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-		                    	<#-- <div id="post-title">
-		                    		<h3>${post.name}</h3>
-		                    	</div> -->
-		                    	<div id="post-content">
+		                    	<div>
 		                    		<span>${post.content}</span>
 		                    	</div>
 	                    	</div>
 	                    </div>
                     </div>
-                    
-	                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" id="interested">
-                    	<div class="row">
-                    		<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-	                    		<div class="" id="other-post-header-ctn">
-	                    			<h4><@spring.message "menu.other.interest"/></h4>
-	                    		</div>
-	                    	</div>
-	                    </div>
-	                   	<div class="row">
-	                   	
-		                   	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="service-list-wrapper">
-	                    		<div class="panel" id="service-list-ctn">
-		                    		<ul>
-				                        <#list childServices as service>
-				                    	<li>
-				                    		<div class="thumbnail child-service" data-url="${service.url}">
-				                    			<div class="service-image">
-				                    				<img src="${'data:image/png;base64,' + service.image}" alt="${service.name}">
-				                    			</div>
-				                    			<div class="service-name">
-				                    				<span>${service.name}</span>
-				                    			</div>
-				                    		</div>
-				                    	</li>
-				                    	</#list>
-				                	</ul>
-				                </div> 
-				            </div>
-			                  	  	
-                    	</div>
-                    </div>
                 </div>
                 
-                <div class="row">
+                <div class="row" style="padding-top: 30px; padding-bottom: 30px; background-color: #fff">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="recommend-post-header">
-                    	<div id="title">
-                    		<span><@spring.message "menu.other.interest"/></span>
-                    	</div>
-                    	<div class="line"></div>
+                    	<div class="row">
+		                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="header-service-ctn">
+		                    	<h2><@spring.message "menu.other.interest"/></h2>
+		                    </div>
+		                </div>
                     </div>
                 
                 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="recommend-post-list">
                 		<ul>
-	                        <#list latestPosts as post>
-	                    	<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12">
-	                    		<div class="thumbnail other-post" data-url="${post.url}">
-	                    			<div class="outstand-service-img-ctn">
-	                    				<img src="${'data:image/png;base64,' + post.image}" alt="${post.name}">
-	                    			</div>
-	                    			<div class="">
-	                    				<strong><span>${post.name}</span></strong>
-	                    			</div>
-	                    		</div>
-	                    	</li>
+	                        <#list latestPosts as post>                    	
+            					<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+		                    		<div class="card">
+										<img src="${post.image}" width=180 height=180 class="card-img-top" alt="${post.name}">
+									    <div class="card-body">
+									        <h5 class="card-title">${post.name}</h5>
+									        <a style="font-family: Quicksand-Bold" href="${post.url}">Xem chi tiết →</a>
+									    </div>
+                                    </div>
+		                    	</li>
 	                    	</#list>
 	                	</ul>   
                 	</div>

@@ -15,19 +15,16 @@
             <div class="container">
             	<#-- header -->
             	<div class="row" id="header-news">
-                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="header-news-ctn">
-                    	<div id="title">
-                    		<span><@spring.message "header.newPost"/></span>
-                    	</div>
-                    	<div class="line"></div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                    	<h2><@spring.message "header.newPost"/></h2>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+	                     <div class="pull-right" id="search-text">
+		            		<input type="text" data-bind="value: searchText" placeholder="Tìm theo tên">
+		            		<i class="fa fa-search" id="search-btn"></i>
+		                </div>
                     </div>
                 </div>
-                <div class="row">
-	                <div class="pull-right" id="search-text">
-	            		<input type="text" data-bind="value: searchText" placeholder="Tìm theo tên">
-	            		<i class="fa fa-search" id="search-btn"></i>
-	                </div>
-	            </div>
                 
                 <#-- content -->
                 <div class="row" id="content-news">
@@ -39,13 +36,12 @@
                     		<div data-bind="if: newsPosts().length > 0">
 	                    		<ul data-bind="foreach: newsPosts">
 	                    			<li class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-	                    				<div class="thumbnail new-post" data-bind="click: $parents[0].toPostDetail.bind($data)">	
-	                    					<div class="article-img-ctn">
-	                    						<img width="240" height="240" data-bind="attr: {src: $data.image}" />
-	                    					</div>
-	                    					<div class="article-title-ctn">
-	                    						<strong><span data-bind="text: $data.name"></span></strong>
-	                    					</div>
+	                    				<div class="card">	                    					
+	                    					<img data-bind="attr: {src: $data.image}" width=180 height=180 class="card-img-top">
+										    <div class="card-body">
+										        <h5 class="card-title"><span data-bind="text: $data.name"></h5>
+										        <a data-bind="attr: {href: 'news/post/' + $data.url}" style="font-family: Quicksand-Bold">Xem chi tiết →</a>
+										    </div>
 	                    				<div>            			
 	                    			</li>
 	                    		</ul>

@@ -23,7 +23,7 @@
             </li>
             <li class="${(menu=='news')?then('active','')}"><a href="<@spring.url '/news'/>"><@spring.message "menu.news"/></a></li>
             <li class="${(menu=='contact')?then('active','')}"><a href="<@spring.url '/contact'/>"><@spring.message "menu.contact"/></a></li>
-     		<li class="${(menu=='contact')?then('active','')}"><a href="<@spring.url '/contact'/>"><@spring.message "menu.booking"/></a></li>  
+     		<li class="${(menu=='booking')?then('active','')}"><a href="<@spring.url '/booking'/>"><@spring.message "menu.booking"/></a></li>  
         </ul>
         </div>
     </div>

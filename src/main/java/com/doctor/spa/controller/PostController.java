@@ -66,7 +66,7 @@ public class PostController {
 	@GetMapping(value = "/post/{url}")
 	public String goToPost(@PathVariable String url, Model model) {
 		Post post = newsService.getSinglePost(url);
-		List<PostDto> latestPosts =  newsService.getLatestPost(url);
+		List<PostDto> latestPosts =  newsService.getLatestPost();
 		List<ChildServiceDto> childServices = newsService.getChildServices(url);
 		List<ServiceGroupDto> menuServices = serService.getAllServices();
 		List<PageText> pageTexts = pageTextService.findByPage("home");
@@ -78,5 +78,4 @@ public class PostController {
 		model.addAttribute("latestPosts", latestPosts);
 		return Pages.POST_DETAIL;
 	}
-
 }

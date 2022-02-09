@@ -20,7 +20,7 @@ public interface PostService {
 	
 	Post getSinglePost(String url);
 	
-	List<PostDto> getLatestPost(String url);
+	List<PostDto> getLatestPost();
 	
 	List<ChildServiceDto> getChildServices(String url);
 	
