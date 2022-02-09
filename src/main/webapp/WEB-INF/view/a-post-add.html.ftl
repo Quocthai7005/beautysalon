@@ -63,19 +63,21 @@
 												    	<label class="custom-image-upload form-control">
 														    <i class="fa fa-cloud-upload"></i> Upload hình
 														</label>
+														<input type="hidden" class="form-control" name="base64Field" data-bind="value: image"/>
 														<input name="image" type="file" class="form-control" id="image-inp" accept="image/*">
-														<input required type="hidden" name="base64Field" data-bind="value: image"/>							
-											  			<button data-bind="click: showImage" class="btn btn-info" id="preview-image">Xem hình</button>
+											  			<span data-bind="if: image">
+											  				<button data-bind="click: showImage" class="btn btn-info" id="preview-image">Xem hình</button>
+											  			</span>
 											  		</div>
 											  	</div>
 											  	
 											  	<#-- service group -->
 											  	<div class="col-lg-12 col-md-12" id="select-ctn">
-											  		<div>
+											  		<div class="form-inline form-group-ctn">
 												  		<label for="serviceGroupId" class="custom-label" style="width: 100%">
 												  			Nhóm dịch vụ *
 												  		</label>
-												  		<select class="selectpicker" required="required" id="group-select" name="groupId" data-bind="selectPicker: groupId, optionsText: 'name', optionsValue: 'id', selectPickerOptions: { optionsArray: serviceGroups }">
+												  		<select class="selectpicker form-control" required="required" id="group-select" name="groupId" data-bind="selectPicker: groupId, optionsText: 'name', optionsValue: 'id', selectPickerOptions: { optionsArray: serviceGroups }">
 											  				<option value="" disabled>Chọn nhóm dịch vụ</option>
 											  			</select>
 											  		</div>

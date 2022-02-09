@@ -24,20 +24,24 @@
                             
                             	<#-- services loop -->
                                 <div class="col-lg-12 text-center">
-	                                <ul>
 		                                <#list menuServices as service>
-				                    	<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-				                    		<div class="card" style="display:inline-block">
-												<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
-											    <div class="card-body">
-											        <h5 class="card-title">${service.name}</h5>
-											        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-											        <a style="font-family: Quicksand-Bold" href="service/${service.url}">Xem chi tiết →</a>
-											    </div>
-                                            </div>
-				                    	</li>
-				                    	</#list>
-			                    	</ul>        
+			                                <#if service?index % 4 = 0>
+			                                	<ul style="padding-top: 10px">
+			                                </#if>
+					                    	<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+					                    		<div class="card" style="display:inline-block">
+													<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
+												    <div class="card-body">
+												        <h5 class="card-title">${service.name}</h5>
+												        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+												        <a style="font-family: Quicksand-Bold" href="service/${service.url}">Xem chi tiết →</a>
+												    </div>
+	                                            </div>
+					                    	</li>
+					                    	<#if (service?index + 1) % 4 = 0>
+			                                	</ul>
+			                                </#if>
+				                    	</#list>    
                                 </div>
                             </div>
                         </div>
@@ -100,8 +104,10 @@
                     
                     <#-- outstanding services loop -->
                     <div class="col-lg-12 col-xs-12">
-	                    <ul>
 	                        <#list postDtos as service>
+	                        	<#if service?index % 4 = 0>
+			                        <ul style="padding-top: 10px">
+			                    </#if>
 		                    	<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 		                    		<div class="card" style="display:inline-block">
 										<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
@@ -111,8 +117,10 @@
 									    </div>
                                     </div>
 		                    	</li>
-	                    	</#list>
-	                	</ul>     
+		                    	<#if (service?index + 1) % 4 = 0>
+			                         </ul>
+			                    </#if>
+	                    	</#list>    
                     </div>
 
                     <div class="col-lg-12 col-xs-12" style="margin-bottom: 20px; margin-top: 30px">

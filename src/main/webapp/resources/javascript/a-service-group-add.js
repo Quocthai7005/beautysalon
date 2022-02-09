@@ -61,20 +61,26 @@ function Service() {
   			  	cancelButtonText: cancel,
   			}).then((result) => {
 				if (result.value) {
-					var imgfile = document.getElementById("image-inp").files[0];
-  				  var data = {
+				  var imgfile = document.getElementById("image-inp").files[0];
+  				  var data = new Blob([JSON.stringify({
   						  id: self.id(),
   						  name: self.name(),
   						  url: self.url(),
   						  image: null,
-  						intro: self.intro(),
 						content: self.content()
-  				  }    	
+						})], {
+	                    type: "application/json"
+	                });
+					var formData = new FormData();
+					formData.append("data", data);
+					formData.append("imgFile", imgfile);
   				  $.ajax({
   					  type : "POST",
   					  url : saveUrl,
-  					  data: JSON.stringify(data),
-  					  contentType: "application/json; charset=utf-8",
+		        		data: formData,
+		        		processData: false,
+		                cache: false,
+    					contentType: false,
   					  success : function(msg) {
   						  if (msg.data === true) {
   							  swal({
@@ -136,7 +142,6 @@ function Service() {
     	$('#create-service-form').bootstrapValidator({
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
-                invalid: 'glyphicon glyphicon-remove',
                 validating: 'glyphicon glyphicon-refresh'
             },
             fields: {

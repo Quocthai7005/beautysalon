@@ -12,6 +12,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.dto.ChildServiceDto;
 import com.doctor.spa.dto.PostDto;
@@ -22,6 +23,7 @@ import com.doctor.spa.mapper.PostMapper;
 import com.doctor.spa.repository.ChildServiceRepo;
 import com.doctor.spa.repository.PostRepo;
 import com.doctor.spa.repository.ServiceGroupRepo;
+import com.doctor.spa.service.ImageService;
 import com.doctor.spa.service.PostService;
 
 @Service
@@ -42,6 +44,9 @@ public class PostServiceImpl implements PostService {
 	
 	@Autowired
 	PostMapper newMapper;
+
+	@Autowired
+	ImageService imageService;
 
 	@Override
 	public Page<PostDto> getPosts(Pageable pageable) {
@@ -158,7 +163,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Transactional
-	public Boolean createPost(PostDto dto) {
+	public Boolean createPost(PostDto dto, MultipartFile image) {
 		if (dto == null) {
 			return false;
 		}
@@ -169,7 +174,7 @@ public class PostServiceImpl implements PostService {
 		Post news = new Post();
 		news.setName(dto.getName());
 		news.setUrl(dto.getUrl());
-		news.setImage(dto.getImage());
+		news.setImage(imageService.uploadFile(image));
 		news.setContent(dto.getContent());
 		news.setIntro(dto.getIntro());
 		news.setService(service);
@@ -195,7 +200,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	@Transactional
-	public Boolean updatePost(PostDto dto) {
+	public Boolean updatePost(PostDto dto, MultipartFile image) {
 		if (dto == null) {
 			return false;
 		}
@@ -205,7 +210,7 @@ public class PostServiceImpl implements PostService {
 		
 		Post news = newsRepo.findById(dto.getId());
 		news.setName(dto.getName());
-		news.setImage(dto.getImage());
+		news.setImage(imageService.uploadFile(image));
 		news.setContent(dto.getContent());
 		news.setIntro(dto.getIntro());
 		news.setService(service);

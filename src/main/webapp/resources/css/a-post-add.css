@@ -1,12 +1,7 @@
 .custom-image-upload {
-  border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 12px;
   width: 135px !important;
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
 }
 .custom-label {
 	width: 150px !important;
@@ -44,9 +39,6 @@
 	height: 20px;
 	margin-top: -10px;
 }
-.form-inline .form-group {
-	margin-top: 8px;
-}
-.bootstrap-select {
-	width: 278px !important;	
+.form-group {
+	margin-top: 0;
 }

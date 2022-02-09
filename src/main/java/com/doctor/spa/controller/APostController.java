@@ -16,8 +16,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.common.response.ResponseBody;
+import com.doctor.spa.dto.ChildServiceDto;
 import com.doctor.spa.dto.PostDto;
 import com.doctor.spa.service.PostService;
 import com.doctor.spa.util.Pages;
@@ -60,13 +63,17 @@ public class APostController {
 	}
 	
 	@PostMapping(value = "/news-create")
-	public ResponseEntity<ResponseBody<Boolean>> createPost(@RequestBody PostDto dto) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.createPost(dto)));
+	public ResponseEntity<ResponseBody<Boolean>> createPost(
+			@RequestPart MultipartFile imgFile,
+			@RequestPart PostDto data) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.createPost(data, imgFile)));
 	}
 	
 	@PostMapping(value = "/news-update")
-	public ResponseEntity<ResponseBody<Boolean>> updatePost(@RequestBody PostDto dto) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.updatePost(dto)));
+	public ResponseEntity<ResponseBody<Boolean>> updatePost(
+			@RequestPart MultipartFile imgFile,
+			@RequestPart PostDto dto) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.updatePost(dto, imgFile)));
 	}
 	
 	@DeleteMapping(value = "/news-delete/{id}")

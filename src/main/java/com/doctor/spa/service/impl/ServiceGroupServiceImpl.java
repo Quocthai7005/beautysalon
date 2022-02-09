@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.configuration.AjaxTimeoutRedirectFilter;
 import com.doctor.spa.dto.ServiceGroupDto;
@@ -22,11 +23,12 @@ import com.doctor.spa.entity.ChildService;
 import com.doctor.spa.mapper.ServiceGroupMapper;
 import com.doctor.spa.repository.ChildServiceRepo;
 import com.doctor.spa.repository.ServiceGroupRepo;
+import com.doctor.spa.service.ImageService;
 import com.doctor.spa.service.ServiceGroupService;
 
 @Service
 @Transactional(readOnly = true)
-public class ServiceGroupServiceImpl implements ServiceGroupService{
+public class ServiceGroupServiceImpl implements ServiceGroupService {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(AjaxTimeoutRedirectFilter.class);
 	
@@ -38,6 +40,9 @@ public class ServiceGroupServiceImpl implements ServiceGroupService{
 	
 	@Autowired
 	ServiceGroupMapper serviceMapper;
+
+	@Autowired
+	ImageService imageService;
 
 	@Override
 	public List<ServiceGroupDto> getAllServices() {	
@@ -98,11 +103,13 @@ public class ServiceGroupServiceImpl implements ServiceGroupService{
 
 	@Override
 	@Transactional
-	public Boolean createService(ServiceGroupDto dto) {
+	public Boolean createService(ServiceGroupDto dto, MultipartFile image) {
 		if (dto == null) {
 			return false;
 		}
 		com.doctor.spa.entity.ServiceGroup service = serviceMapper.toEntity(dto);
+		String imageName = imageService.uploadFile(image);
+		service.setImage(imageName);
 		serviceRepo.save(service);
 		return true;
 	}

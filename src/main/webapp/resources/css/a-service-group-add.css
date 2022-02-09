@@ -1,16 +1,7 @@
 .custom-image-upload {
-  border: 1px solid #ccc;
   display: inline-block;
   padding: 6px 12px;
   width: 135px !important;
-  white-space: nowrap; 
-  overflow: hidden;
-  text-overflow: ellipsis;
-  cursor: pointer;
-  text-align: center;
-}
-.custom-label {
-	width: 150px !important;
 }
 #preview-image {
 	margin-left: 20px;
@@ -26,6 +17,6 @@
 #url-inp {
 	width: 278px;
 }
-.form-inline .form-group {
-	margin-top: 8px;
+.form-group {
+	margin-top: 0;
 }

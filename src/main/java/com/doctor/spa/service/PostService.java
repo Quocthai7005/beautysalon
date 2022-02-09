@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.dto.ChildServiceDto;
 import com.doctor.spa.dto.PostDto;
@@ -30,9 +31,9 @@ public interface PostService {
 	
 	Map<String, Boolean> validateUrl(Long id, String url);
 	
-	Boolean createPost(PostDto dto);
+	Boolean createPost(PostDto dto, MultipartFile image);
 	
-	Boolean updatePost(PostDto dto);
+	Boolean updatePost(PostDto dto, MultipartFile image);
 	
 	Boolean deletePost(Long id);
 	

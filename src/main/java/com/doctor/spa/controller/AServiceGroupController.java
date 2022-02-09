@@ -17,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.common.response.ResponseBody;
+import com.doctor.spa.dto.ChildServiceDto;
 import com.doctor.spa.dto.ServiceGroupDto;
 import com.doctor.spa.service.ServiceGroupService;
 import com.doctor.spa.util.Pages;
@@ -61,8 +64,10 @@ public class AServiceGroupController {
 	}
 	
 	@PostMapping(value = "/service-group-create")
-	public ResponseEntity<ResponseBody<Boolean>> createService(@RequestBody ServiceGroupDto dto) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.createService(dto)));
+	public ResponseEntity<ResponseBody<Boolean>> createService(
+			@RequestPart MultipartFile imgFile,
+			@RequestPart ServiceGroupDto data) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.createService(data, imgFile)));
 	}
 	
 	@PostMapping(value = "/service-group-update")

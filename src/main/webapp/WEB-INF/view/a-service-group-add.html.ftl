@@ -60,8 +60,10 @@
 														    <i class="fa fa-cloud-upload"></i> Upload hình
 														</label>
 														<input name="image" type="file" class="form-control" id="image-inp" accept="image/*">
-														<input required type="hidden" name="base64Field" data-bind="value: image"/>							
-											  			<button data-bind="click: showImage" class="btn btn-info" id="preview-image">Xem hình</button>
+														<input class="form-control" type="hidden" name="base64Field" data-bind="value: image"/>							
+											  			<span data-bind="if: image">
+											  				<button data-bind="click: showImage" class="btn btn-info" id="preview-image">Xem hình</button>
+											  			</span>
 											  		</div>
 											  	</div>
 											  	

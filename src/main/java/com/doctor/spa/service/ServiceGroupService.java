@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.dto.ServiceGroupDto;
 
@@ -24,7 +25,7 @@ public interface ServiceGroupService {
 	
 	Boolean deleteService(Long id);
 	
-	Boolean createService(ServiceGroupDto serviceDto);
+	Boolean createService(ServiceGroupDto dto, MultipartFile image);
 	
 	Boolean updateService(ServiceGroupDto serviceDto);
 	

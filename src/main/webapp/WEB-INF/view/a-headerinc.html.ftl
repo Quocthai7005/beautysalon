@@ -15,6 +15,7 @@
 <link rel="stylesheet" type="text/css" href="<@spring.url '/resources/css/font-awesome.min.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/resources/css/summernote.css'/>"/>
 <link rel="stylesheet" type="text/css" href="<@spring.url '/resources/css/bootstrapValidator.min.css'/>"/>
+<link rel="stylesheet" type="text/css" href="<@spring.url '/resources/css/a-common.css'/>"/>
 <link href="https://fonts.googleapis.com/css?family=Roboto:400,700,300|Material+Icons" rel='stylesheet'>
 
 <#--   Core JS Files   -->

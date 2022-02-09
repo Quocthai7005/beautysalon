@@ -104,7 +104,6 @@ function Service() {
 		$('#create-service-form').bootstrapValidator({
             feedbackIcons: {
                 valid: 'glyphicon glyphicon-ok',
-
                 validating: 'glyphicon glyphicon-refresh'
             },
 			excluded: ':disabled',
