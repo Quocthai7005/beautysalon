@@ -10,7 +10,7 @@ import com.doctor.spa.entity.News;
 import com.doctor.spa.mapper.NewsMapper;
 
 @Service
-public class PostMapperImpl implements NewsMapper {
+public class NewsMapperImpl implements NewsMapper {
 
 	@Autowired
 	private AmazonS3 amazonS3;

@@ -10,7 +10,7 @@ import com.doctor.spa.entity.SubProduct;
 import com.doctor.spa.mapper.SubProductMapper;
 
 @Service
-public class ChildServiceMapperImpl implements SubProductMapper {
+public class SubProductMapperImpl implements SubProductMapper {
 
 	@Autowired
 	private AmazonS3 amazonS3;

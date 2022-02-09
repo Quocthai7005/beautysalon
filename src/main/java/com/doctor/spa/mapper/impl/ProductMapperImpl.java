@@ -19,7 +19,7 @@ import com.doctor.spa.mapper.ProductMapper;
 import com.doctor.spa.repository.NewsRepo;
 
 @Service
-public class ServiceMapperImpl implements ProductMapper {
+public class ProductMapperImpl implements ProductMapper {
 	
 	@Autowired
 	private AmazonS3 amazonS3;
