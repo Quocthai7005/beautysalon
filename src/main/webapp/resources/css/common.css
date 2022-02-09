@@ -88,3 +88,6 @@ table {
   display: flex;
   flex-direction: column;
 }
+.card {
+	display: inline-block;
+}

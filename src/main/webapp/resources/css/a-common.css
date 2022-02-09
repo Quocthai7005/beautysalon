@@ -1,0 +1,29 @@
+.custom-label {
+	width: 150px !important;
+}
+.bootstrap-select {
+	width: 278px !important;	
+}
+small[data-bv-result="INVALID"] {
+	display: block !important;
+	color: red;
+}
+
+.is-fileinput .help-block {
+	margin-right: -150px;
+	position: relative;
+    left: -140px;
+    bottom: -30px;
+}
+
+.is-fileinput .help-block {
+	margin-right: -150px;
+	position: relative;
+    left: -140px;
+    bottom: -30px;
+}
+
+.bootstrap-select .help-block {
+	position: relative;
+    bottom: -5px;
+}
