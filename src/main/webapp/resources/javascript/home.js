@@ -14,6 +14,21 @@ $( document ).ready(function() {
           buttonText: "Select date",
           autoclose: true
 	});
+	
+	$("#question-form").submit(function(event) {
+		event.preventDefault();
+		var actionurl = event.currentTarget.action;
+		var formData = $("#question-form").serialize();
+		$.ajax({
+			url: actionurl,
+			type: 'post',
+			contentType: 'application/json;charset=UTF-8',
+			data: formData,
+			success: function(data) {
+	
+			}
+		});
+	});
 });
 function Home() {
 	var rootContext = '';
