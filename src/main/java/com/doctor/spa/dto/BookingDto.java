@@ -1,7 +1,5 @@
 package com.doctor.spa.dto;
 
-import java.time.LocalDateTime;
-
 public class BookingDto {
 
 	private static final long serialVersionUID = 1L;

@@ -143,7 +143,7 @@
 							<input name="id" type="hidden">
 							<div class="form-group">
 								<label for="name">Họ tên</label>
-								<input name="name" type="text" class="form-control" id="name">
+								<input required name="name" type="text" class="form-control" id="name">
 							</div>
 							<div class="form-group">
 								<label for="email">Địa chỉ email</label>
@@ -151,12 +151,12 @@
 							</div>
 							<div class="form-group">
 								<label for="phone">Số điện thoại</label>
-								<input name="phone" type="number" class="form-control" id="phone">
+								<input required name="phone" type="number" class="form-control" id="phone">
 							</div>
 							<div class="form-group">
 								<label for="datepicker">Ngày hẹn</label>
 								<div class='input-group date' id='datepicker'>
-									<input type="text" id="processdate" class="form-control" placeholder="Processing Date..." name="consultDate" /> <span class="input-group-addon btn"><i class="glyphicon glyphicon-calendar"></i> </span>
+									<input required type="text" id="processdate" class="form-control" placeholder="2022-03-02" name="consultDate" /> <span class="input-group-addon btn"><i class="glyphicon glyphicon-calendar"></i> </span>
 								</div>
 							</div>
 							<div class="form-group">
