@@ -28,7 +28,7 @@ import com.doctor.spa.util.Pages;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class AServiceGroupController {
+public class AProductController {
 	
 	@Autowired
 	ProductService serService;

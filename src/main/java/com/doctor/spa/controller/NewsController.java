@@ -29,7 +29,7 @@ import com.doctor.spa.util.Pages;
 
 @Controller
 @RequestMapping(value = "/news")
-public class PostController {
+public class NewsController {
 
 	@Autowired
 	NewsService newsService;

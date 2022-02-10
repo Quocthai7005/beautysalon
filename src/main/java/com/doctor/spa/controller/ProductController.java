@@ -20,7 +20,7 @@ import com.doctor.spa.util.Pages;
 
 @Controller
 @RequestMapping(value = "/service")
-public class ServiceController {
+public class ProductController {
 	
 	@Autowired
 	ProductService serService;

@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class AChildServiceController {
+public class ASubProductController {
 	
 	@Autowired
 	ProductService serService;

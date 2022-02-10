@@ -7,9 +7,14 @@ $( document ).ready(function() {
     home.initOutstandService();
     home.initNewsBtn();
 
-	$('#datepicker').datepicker();
+	$('#datepicker').datepicker({
+          showOn: "button",
+          buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+          buttonImageOnly: true,
+          buttonText: "Select date",
+          autoclose: true
+	});
 });
-
 function Home() {
 	var rootContext = '';
 }

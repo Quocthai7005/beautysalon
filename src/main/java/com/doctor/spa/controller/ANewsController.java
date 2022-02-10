@@ -27,7 +27,7 @@ import com.doctor.spa.util.Pages;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class APostController {
+public class ANewsController {
 	
 	@Autowired
 	NewsService newsService;

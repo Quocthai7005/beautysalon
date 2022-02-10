@@ -91,3 +91,7 @@ table {
 .card {
 	display: inline-block;
 }
+.question-form {
+	margin: 0 auto;
+	width: 30%;
+}
