@@ -21,7 +21,7 @@
                     <div class="row">              
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
-                                <div class="card-header" data-background-color="green">
+                                <div class="card-header" data-background-color="dark-red">
                                     <h4 class="title">Nhóm dịch vụ</h4>
                                 </div>
                                 <div class="card-content table-responsive">
@@ -34,7 +34,7 @@
                     <div class="row">              
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
-                                <div class="card-header" data-background-color="green">
+                                <div class="card-header" data-background-color="dark-red">
                                     <h4 class="title">Dịch vụ</h4>
                                 </div>
                                 <div class="card-content table-responsive">
@@ -47,7 +47,7 @@
                     <div class="row">              
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
-                                <div class="card-header" data-background-color="green">
+                                <div class="card-header" data-background-color="dark-red">
                                     <h4 class="title">Trang tin</h4>
                                 </div>
                                 <div class="card-content table-responsive">
@@ -60,7 +60,7 @@
                     <div class="row">              
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
-                                <div class="card-header" data-background-color="green">
+                                <div class="card-header" data-background-color="dark-red">
                                     <h4 class="title">Giao diện</h4>
                                 </div>
                                 <div class="card-content table-responsive">
@@ -73,7 +73,7 @@
                     <div class="row">              
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
-                                <div class="card-header" data-background-color="green">
+                                <div class="card-header" data-background-color="dark-red">
                                     <h4 class="title">Quản lý tài khoản</h4>
                                 </div>
                                 <div class="card-content table-responsive">
@@ -86,7 +86,7 @@
                     <div class="row">              
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
-                                <div class="card-header" data-background-color="green">
+                                <div class="card-header" data-background-color="dark-red">
                                     <h4 class="title">Quản lý ứng dụng Messenger</h4>
                                 </div>
                                 <div class="card-content table-responsive">

@@ -20,19 +20,19 @@ import com.doctor.spa.repository.NewsRepo;
 
 @Service
 public class ProductMapperImpl implements ProductMapper {
-	
+
 	@Autowired
 	private AmazonS3 amazonS3;
-	
+
 	@Value("${aws.s3.bucket.name}")
 	private String bucketName;
-	
+
 	@Autowired
 	SubProductMapper childServiceMapper;
-	
+
 	@Autowired
 	NewsRepo newsRepo;
-	
+
 	@Autowired
 	NewsMapper newsMapper;
 
@@ -49,7 +49,7 @@ public class ProductMapperImpl implements ProductMapper {
 			dto.setName(service.getName());
 			dto.setUpdatedDate(service.getUpdatedDate().toString());
 			dto.setUrl(service.getUrl());
-			
+
 			List<SubProductDto> childServiceDtos = new ArrayList<SubProductDto>();
 			service.getSubProducts().forEach(childService -> {
 				if (childService.isDeleted() == false) {
@@ -58,8 +58,8 @@ public class ProductMapperImpl implements ProductMapper {
 				}
 			});
 			dto.setChildServices(childServiceDtos);
-			
-			List<News> news = newsRepo.findByServiceId(service.getId());
+
+			List<News> news = newsRepo.findByProductId(service.getId());
 			List<NewsDto> newsPosts = new ArrayList<NewsDto>();
 			news.forEach(newsPost -> {
 				NewsDto newsDto = newsMapper.toDto(newsPost);

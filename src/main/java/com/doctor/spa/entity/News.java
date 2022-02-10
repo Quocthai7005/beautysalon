@@ -7,30 +7,29 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="news")
+@Table(name = "news")
 public class News extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "url")
 	private String url;
-	
+
 	@Column(name = "intro")
 	private String intro;
-	
+
 	@Column(name = "content")
 	private String content;
-	
+
 	@Column(name = "image")
 	private String image;
-	
-	@ManyToOne
-    @JoinColumn(name="product_id", nullable=false)
-	private Product product;
 
+	@ManyToOne
+	@JoinColumn(name = "product_id", nullable = false)
+	private Product product;
 
 	public Product getProduct() {
 		return product;

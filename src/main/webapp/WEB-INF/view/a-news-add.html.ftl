@@ -26,7 +26,7 @@
                     <div class="row">              
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
-                                <div class="card-header" data-background-color="green">
+                                <div class="card-header" data-background-color="dark-red">
                                     <h4 class="title">Tạo tin mới</h4>
                                 </div>
                                 <div class="card-content table-responsive">

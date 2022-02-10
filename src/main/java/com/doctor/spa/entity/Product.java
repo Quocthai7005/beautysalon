@@ -36,7 +36,7 @@ public class Product extends BaseEntity {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parentProduct")
 	private List<SubProduct> subProducts = new ArrayList<SubProduct>();
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "service")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	private List<News> news = new ArrayList<News>();
 
 	public List<News> getNews() {

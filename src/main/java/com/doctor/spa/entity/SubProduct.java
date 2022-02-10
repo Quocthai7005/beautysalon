@@ -11,26 +11,26 @@ import javax.persistence.Table;
 public class SubProduct extends BaseEntity {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@ManyToOne
-    @JoinColumn(name="parent_product_id", nullable=false)
+	@JoinColumn(name="parent_product_id", nullable=false)
 	private Product parentProduct;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "intro")
 	private String intro;
-	
+
 	@Column(name = "content")
 	private String content;
-	
+
 	@Column(name = "image")
 	private String image;
-	
+
 	@Column(name = "is_shown_home")
 	private boolean isShownHome;
-	
+
 	@Column(name = "url")
 	private String url;
 
@@ -73,7 +73,7 @@ public class SubProduct extends BaseEntity {
 	public void setImage(String image) {
 		this.image = image;
 	}
-	
+
 	public String getImage() {
 		return this.image;
 	}
@@ -93,5 +93,4 @@ public class SubProduct extends BaseEntity {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-
 }

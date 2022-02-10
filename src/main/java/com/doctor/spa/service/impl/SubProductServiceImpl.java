@@ -88,7 +88,7 @@ public class SubProductServiceImpl implements SubProductService{
 		if (id == 0 || id == null) {
 			services = subProductRepo.findByDeletedFalse(pageable);
 		} else {
-			services = subProductRepo.findBySubProductIdByDeletedFalse(id, pageable);
+			services = subProductRepo.findByParentProductIdAndDeleted(id, false, pageable);
 		}
 		List<SubProductDto> serviceDtos = new ArrayList<SubProductDto>();
 		services.getContent().forEach(service -> {
