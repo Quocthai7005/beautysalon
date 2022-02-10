@@ -6,6 +6,8 @@ $( document ).ready(function() {
     home.initService();
     home.initOutstandService();
     home.initNewsBtn();
+
+	$('#datepicker').datepicker();
 });
 
 function Home() {

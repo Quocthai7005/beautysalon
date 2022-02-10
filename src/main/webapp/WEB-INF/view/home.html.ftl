@@ -15,7 +15,7 @@
 			<div class="container">
 				<#-- services -->
 				<div class="row" id="service-ctn">
-					<div class="col-lg-12">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<h2 class="text-center" id="title" style="margin-bottom: 10px">DỊCH VỤ</h2>
 					</div>
 					<div id="services">
@@ -23,12 +23,12 @@
 							<div class="row">
 							
 								<#-- services loop -->
-								<div class="col-lg-12 text-center">
+								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 										<#list menuServices as service>
 											<#if service?index % 4 = 0>
-												<ul style="padding-top: 10px">
+												<ul>
 											</#if>
-											<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+											<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="padding-top: 10px">
 												<div class="card" style="display:inline-block">
 													<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
 													<div class="card-body">
@@ -105,9 +105,9 @@
 					<div class="col-lg-12 col-xs-12">
 							<#list postDtos as service>
 								<#if service?index % 4 = 0>
-									<ul style="padding-top: 10px">
+									<ul>
 								</#if>
-								<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+								<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="padding-top: 10px">
 									<div class="card" style="display:inline-block">
 										<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
 										<div class="card-body">
@@ -136,30 +136,31 @@
 						<h2 class="text-center" id="title" style="margin-bottom: 10px">BẠN CẦN TƯ VẤN</h2>
 						<h5 class="text-center" id="title" style="margin-bottom: 10px">Vui lòng điền thông tin, chúng tôi sẽ liên hệ quý khách trong ngày</h2>
 					</div>
-					
+
 					<#-- outstanding services loop -->
-					<div class="col-lg-12 col-xs-12 text-center" style="align-items:center">
-					<div style="width:500px">
-						<form>
-							<div class="form-group">
-								<label for="exampleFormControlInput1">Họ tên</label>
-								<input type="email" class="form-control" id="exampleFormControlInput1">
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlInput1">Địa chỉ email</label>
-								<input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlInput1">Số điện thoại</label>
-								<input type="email" class="form-control" id="exampleFormControlInput1">
-							</div>
-							<div class="form-group">
-								<label for="exampleFormControlTextarea1">Câu hỏi tư vấn</label>
-								<textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-							</div>
-							<button type="submit" class="btn btn-primary">Gửi câu hỏi</button>
-						</form>
-					</div>
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" style="align-items:center">
+						<div style="min-width: 200px; max-width: 500px">
+							<form>
+								<div class="form-group">
+									<label for="name">Họ tên</label>
+									<input type="email" class="form-control" id="name">
+								</div>
+								<div class="form-group">
+									<label for="email">Địa chỉ email</label>
+									<input type="email" class="form-control" id="email" placeholder="name@example.com">
+								</div>
+								<div class="form-group">
+									<label for="phone">Số điện thoại</label>
+									<input type="email" class="form-control" id="phone">
+								</div>
+								<input type="text" id="datepicker" class="form-control">
+								<div class="form-group">
+									<label for="question">Câu hỏi tư vấn</label>
+									<textarea class="form-control" id="question" rows="3"></textarea>
+								</div>
+								<button type="submit" class="btn btn-primary">Gửi câu hỏi</button>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>  

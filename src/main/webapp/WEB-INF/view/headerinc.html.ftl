@@ -13,3 +13,5 @@
 <script src="<@spring.url '/resources/javascript/nav.js'/>"></script>
 <script src="<@spring.url '/resources/javascript/jquery.slimscroll.js'/>"></script>
 <script src="<@spring.url '/resources/javascript/jquery.twbsPagination.js'/>"></script>
+<script src="<@spring.url '/resources/javascript/nav.js'/>"></script>
+<script src="<@spring.url '/resources/javascript/bootstrap-datepicker.min.js'/>"></script>

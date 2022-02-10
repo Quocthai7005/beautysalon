@@ -15,7 +15,7 @@
 
 			<div class="container">
 				<div class="row" style="margin-bottom: 30px">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" id="header-service-ctn">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center" id="header-service-ctn">
 						<h2>${service.name}</h2>
 					</div>
 				</div>
@@ -25,9 +25,9 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 							<#list service.childServices as childService>
 								<#if childService?index % 4 = 0>
-									<ul style="padding-top: 10px">
+									<ul>
 								</#if>
-								<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
+								<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="padding-top: 10px">
 									<div class="card">
 										<img src="${childService.image}" width=180 height=180 class="card-img-top" alt="${childService.name}">
 										<div class="card-body">
@@ -44,7 +44,7 @@
 				</div>
 				
 				<div class="row" style="padding-bottom: 30px; padding-top: 30px; background-color: #fff">
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 						<div>
 							<h2><@spring.message "menu.other.interest"/></h2>
 						</div>
@@ -55,9 +55,9 @@
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 						<#list otherServices as service>
 							<#if service?index % 4 = 0>
-								<ul style="padding-top: 10px">
+								<ul>
 							</#if>
-							<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center">
+							<li class="col-lg-3 col-md-3 col-sm-3 col-xs-12 text-center" style="padding-top: 10px">
 								<div class="card">
 									<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
 									<div class="card-body">

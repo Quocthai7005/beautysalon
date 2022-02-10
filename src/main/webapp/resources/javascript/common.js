@@ -1,4 +1,4 @@
-$(document).ready(function() {
+/*$(document).ready(function() {
 	
 	var contextPath = $('#root-context').val();
 	var messengerUrl = contextPath + '/messenger/info';
@@ -30,5 +30,5 @@ $(document).ready(function() {
 			console.log(e);
 		}
 	});
-})
+})*/
 
