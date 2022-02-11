@@ -31,6 +31,12 @@
                 </a>
             </li>
             <li>
+                <a href="<@spring.url '/admin/bookings'/>">
+                    <i class="material-icons">face</i>
+                    <p>Đặt lịch hẹn</p>
+                </a>
+            </li>
+            <li>
                 <a href="<@spring.url '/admin/utils'/>">
                     <i class="material-icons">bubble_chart</i>
                     <p>Giao diện</p>

@@ -137,73 +137,73 @@ function News() {
 	}
 	
 	self.showImage = function(data) {
-    	swal({
+		swal({
 		  imageUrl: 'data:image/png;base64,' + data.image,
 		  imageHeight: 250,
 		  imageAlt: 'service name'
 		});
-    }
-    
-    self.deletePost = function(data) {
-    	var url = deleteUrl + data.id;
-    	swal({
-    		  	text: "Bạn muốn xoá tin này?",
-    		  	type: 'warning',
-    		  	showCancelButton: true,
-    		  	confirmButtonText: agree,
-    		  	cancelButtonText: cancel,
-    		}).then((result) => {
-    			if (result.value) {
-    				$.ajax({
-    		    	    type: 'DELETE',
-    		    	    url: url,
-    		    	    success: function(msg) {
-    		    	        if (msg.code === 200) {
-    		    	        	if (msg.data === true) {
-    		    	        		swal({
-    			        			  type: 'success',
-    			        			  text: deleteSuccess,
-    			        			  onClose: function() {
-    			        				  window.location.href = returnNewsList;
-    			        			  }
-    			        			});
-    		    	        	} else {
-    		    	        		swal({
-    		  	        			  type: 'error',
-    		  	        			  text: deleteFail,
-    		  	        			  footer: deleteRemind,
-    		  	        			});
-    		    	        	}
-    		    	        }
-    		    	    },
-    		    	    error: function(e) {
-    		    	    	console.log(e);
-    		    	    	if (e.status === 901) {
-    		    	    		swal({
-    			        			  type: 'info',
-    			        			  text: 'Hết phiên làm việc, vui lòng đăng nhập lại',
-    			        			  onClose: function() {
-    			        				  window.location.href = 'admin/login';
-    			        			  }
-    			        		});
-    		    	    	}
-    		    	    }
-    		    	});
-    			}
-    		});
-    };
-    
-    self.goToEdit = function(data) {
-    	var getUrl = goToEditUrl + data.id;
-    	window.location.href = getUrl;
-    }
-    
-    self.goToCreate = function(data) {
-    	window.location.href = goToCreateUrl;
-    }
-    
-    self.formatDate = function(date) {
-    	var result = date.replace('T', ' ');
-    	return result;
-    }
+	}
+	
+	self.deletePost = function(data) {
+		var url = deleteUrl + data.id;
+		swal({
+			  	text: "Bạn muốn xoá tin này?",
+			  	type: 'warning',
+			  	showCancelButton: true,
+			  	confirmButtonText: agree,
+			  	cancelButtonText: cancel,
+			}).then((result) => {
+				if (result.value) {
+					$.ajax({
+						type: 'DELETE',
+						url: url,
+						success: function(msg) {
+							if (msg.code === 200) {
+								if (msg.data === true) {
+									swal({
+									  type: 'success',
+									  text: deleteSuccess,
+									  onClose: function() {
+										  window.location.href = returnNewsList;
+									  }
+									});
+								} else {
+									swal({
+									  type: 'error',
+									  text: deleteFail,
+									  footer: deleteRemind,
+									});
+								}
+							}
+						},
+						error: function(e) {
+							console.log(e);
+							if (e.status === 901) {
+								swal({
+									  type: 'info',
+									  text: 'Hết phiên làm việc, vui lòng đăng nhập lại',
+									  onClose: function() {
+										  window.location.href = 'admin/login';
+									  }
+								});
+							}
+						}
+					});
+				}
+			});
+	};
+	
+	self.goToEdit = function(data) {
+		var getUrl = goToEditUrl + data.id;
+		window.location.href = getUrl;
+	}
+	
+	self.goToCreate = function(data) {
+		window.location.href = goToCreateUrl;
+	}
+	
+	self.formatDate = function(date) {
+		var result = date.replace('T', ' ');
+		return result;
+	}
 }

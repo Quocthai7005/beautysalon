@@ -1,5 +1,7 @@
 package com.doctor.spa.mapper.impl;
 
+import java.time.format.DateTimeFormatter;
+
 import org.springframework.stereotype.Service;
 
 import com.doctor.spa.dto.BookingDto;
@@ -19,7 +21,7 @@ public class BookingMapperImpl implements BookingMapper {
 			dto.setPhone(booking.getPhone());
 			dto.setQuestion(booking.getQuestion());
 			dto.setStatus(booking.getStatus());
-			dto.setConsultDate(booking.getConsultDate());
+			dto.setConsultDate(booking.getConsultDate().format(DateTimeFormatter.ISO_DATE));
 		}
 		return dto;
 	}
