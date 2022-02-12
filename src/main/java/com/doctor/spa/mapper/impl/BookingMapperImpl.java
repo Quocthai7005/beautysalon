@@ -16,6 +16,7 @@ public class BookingMapperImpl implements BookingMapper {
 		BookingDto dto = null;
 		if (booking != null) {
 			dto = new BookingDto();
+			dto.setId(booking.getId());
 			dto.setName(booking.getName());
 			dto.setEmail(booking.getEmail());
 			dto.setPhone(booking.getPhone());

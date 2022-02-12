@@ -9,20 +9,14 @@
     <div class="wrapper">
         <#include "a-nav-left.html.ftl">
         <div class="main-panel">
-            <nav class="navbar navbar-transparent navbar-absolute">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <p class="navbar-brand" href="#"> Trang chủ </p>
-                    </div>
-                </div>
-            </nav>
+        	<#include "a-nav-top.html.ftl">
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">              
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="dark-red">
-                                    <h4 class="title">Nhóm dịch vụ</h4>
+                                    <h4 class="title">NỘI DUNG</h4>
                                 </div>
                                 <div class="card-content table-responsive">
                                     
@@ -35,7 +29,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="dark-red">
-                                    <h4 class="title">Dịch vụ</h4>
+                                    <h4 class="title">KHÁCH HÀNG</h4>
                                 </div>
                                 <div class="card-content table-responsive">
                                     
@@ -48,7 +42,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="dark-red">
-                                    <h4 class="title">Trang tin</h4>
+                                    <h4 class="title">TÀI KHOẢN</h4>
                                 </div>
                                 <div class="card-content table-responsive">
                                     
@@ -56,45 +50,6 @@
                             </div>
                         </div>
                     </div>
-                    
-                    <div class="row">              
-                        <div class="col-lg-12 col-md-12">
-                            <div class="card">
-                                <div class="card-header" data-background-color="dark-red">
-                                    <h4 class="title">Giao diện</h4>
-                                </div>
-                                <div class="card-content table-responsive">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">              
-                        <div class="col-lg-12 col-md-12">
-                            <div class="card">
-                                <div class="card-header" data-background-color="dark-red">
-                                    <h4 class="title">Quản lý tài khoản</h4>
-                                </div>
-                                <div class="card-content table-responsive">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row">              
-                        <div class="col-lg-12 col-md-12">
-                            <div class="card">
-                                <div class="card-header" data-background-color="dark-red">
-                                    <h4 class="title">Quản lý ứng dụng Messenger</h4>
-                                </div>
-                                <div class="card-content table-responsive">
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </div> 
                 </div>
             </div>
         </div>

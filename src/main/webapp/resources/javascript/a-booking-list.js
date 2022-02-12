@@ -3,11 +3,11 @@ $(document).ready(function() {
 	var bookingModel = new Booking();
 	ko.applyBindings(bookingModel);
 	bookingModel.getStatuses();
-	bookingModel.getPageNo('P').done(function (res) {	
+	bookingModel.getPageNo('').done(function (res) {	
 		// Initialize pagination
+		console.log("sdfsdf");
 		bookingModel.initPagination();
 	});
-	//bookingModel.initSearch();
 })
 
 function Booking() {
@@ -16,15 +16,15 @@ function Booking() {
 
 	// Url
 	var rootContext = $('#root-context').val();
-	var getPageNoUrl = rootContext + '/admin/bookings/all';
-
+	var getbookingsUrl = rootContext + '/admin/bookings/all';
+	var getPageNoUrl = rootContext + '/admin/bookings/no';
+	var goToDetailUrl = rootContext + '/admin/bookings/detail';
 	// Message
 	var agree = 'Đồng ý';
 	var cancel = 'Không';
 
 	// Observable
-
-	self.status = ko.observable('');
+	self.status = ko.observable();
 	self.bookings = ko.observableArray([]);
 	self.statuses = ko.observableArray([]);
 
@@ -58,10 +58,13 @@ function Booking() {
 	self.getStatuses = function() {
 		self.statuses([{
 			'status': 'P',
-			'name': 'Pending'
+			'name': 'CHỜ TRẢ LỜI'
+		}, {
+			'status': 'O',
+			'name': 'ĐANG XỬ LÝ'
 		}, {
 			'status': 'C',
-			'name': 'Completed'
+			'name': 'HOÀN TẤT'
 		}]);
 	}
 
@@ -76,12 +79,12 @@ function Booking() {
 			success : function(res) {
 				console.log(res);
 				var totalService = res.data;
-				pageOptions.totalPages = Math.ceil(totalService / pageSize);
+				pageOptions.totalPages = totalService == 0 ? 1 : Math.ceil(totalService / pageSize);
 			}
 		});
 	}
 
-	self.loadBooking = function(pageNo, pageSize, pageSort, status) {
+	self.loadBookings = function(pageNo, pageSize, pageSort, status) {
 		var pageable = {
 			page : pageNo,
 			size : pageSize,
@@ -90,7 +93,7 @@ function Booking() {
 		}
 		$.ajax({
 			type : "GET",
-			url : getPageNoUrl,
+			url : getbookingsUrl,
 			dataType : 'json',
 			data : pageable,
 			success : function(res) {		
@@ -102,8 +105,26 @@ function Booking() {
 	
 	self.initPagination = function() {
 		if (pageOptions.totalPages > 0) {
-			$('#pagination-post').twbsPagination(pageOptions);
+			$('#pagination-booking').twbsPagination(pageOptions);
 		}
+	}
+
+	self.initSearch = function() {
+		$('#search-btn').on('click', function() {
+			$('#pagination-booking').twbsPagination('destroy');
+			self.bookings([]);
+			
+			// get service group quantity
+			self.getPageNo(self.status()).done(function (res) {
+				// Initialize pagination
+				self.initPagination();
+			});
+		});
+	}
+
+	self.goToDetail = function(data) {
+		var getUrl = goToDetailUrl + '?id=' + data.id;
+		window.location.href = getUrl;
 	}
 
     self.formatDate = function(date) {

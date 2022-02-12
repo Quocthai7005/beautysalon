@@ -41,4 +41,16 @@ public class UserRole {
     public void setUserRole(String userRole) {
         this.userRole = userRole;
     }
+    
+    public enum Role {
+    	MIRACLE_ADMIN("MA"),
+    	NEWS_ADMIN("NA"),
+    	PRODUCT_ADMIN("PA"),
+    	CLIENT_ADMIN("CA");
+    	
+
+		private Role(String string) {
+		
+		}
+    }
 }

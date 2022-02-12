@@ -12,4 +12,10 @@ public interface BookingService {
 	Page<BookingDto> getBookings(Pageable pageable);
 
 	Page<BookingDto> getBookingsWithStatus(Pageable pageable, String status);
+
+	Integer getBookingsNo(String status);
+	
+	BookingDto getBookingDetail(long id);
+	
+	Boolean updateStatus(long id, String status);
 }

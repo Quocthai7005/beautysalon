@@ -58,15 +58,42 @@ public class BookingServiceImpl implements BookingService {
 
 	@Override
 	public Page<BookingDto> getBookingsWithStatus(Pageable pageable, String status) {
-		if (status == null) {
-			status = "P";
-		}
+
 		Page<Booking> bookings = new PageImpl<>(Collections.emptyList());
-		bookings = bookingRepo.findByStatus(pageable, status);
+		if (status == null || "".equals(status)) {
+			bookings = bookingRepo.findAll(pageable);
+		} else {
+			bookings = bookingRepo.findByStatus(pageable, status);
+		}
 		List<BookingDto> bookingDtos = new ArrayList<>();
 		for (Booking booking: bookings) {
 			bookingDtos.add(bookingMapper.toDto(booking));
 		}
 		return new PageImpl<BookingDto>(bookingDtos);
+	}
+
+	@Override
+	public Integer getBookingsNo(String status) {
+		List<Booking> bookings;
+		if (status == null || "".equals(status)) {
+			bookings = bookingRepo.findAll();
+		} else {
+			bookings = bookingRepo.findByStatus(status);
+		}
+		return bookings.size();
+	}
+
+	@Override
+	public BookingDto getBookingDetail(long id) {
+		Booking booking = bookingRepo.findById(id);
+		return bookingMapper.toDto(booking);
+	}
+
+	@Override
+	public Boolean updateStatus(long id, String status) {
+		Booking booking = bookingRepo.findById(id);
+		booking.setStatus(status);
+		bookingRepo.save(booking);
+		return null;
 	}
 }

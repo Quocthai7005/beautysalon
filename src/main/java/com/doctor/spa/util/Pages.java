@@ -23,4 +23,5 @@ public final class Pages {
 	public static String A_ACCOUNT = "a-account.html";
 	public static String A_LOGIN = "a-login.html";
 	public static String A_BOOKING_LIST = "a-booking-list.html";
+	public static String A_BOOKING_DETAIL = "a-booking-detail.html";
 }

@@ -12,19 +12,13 @@
     <div class="wrapper">
         <#include "a-nav-left.html.ftl">
         <div class="main-panel">
-            <nav class="navbar navbar-transparent navbar-absolute">
-                <div class="container-fluid">
-                    <div class="navbar-header">
-                        <p class="navbar-brand" href="#"> Nhóm dịch vụ </p>
-                    </div>
-                </div>
-            </nav>
+        	<#include "a-nav-top.html.ftl">
             <div class="content">
                 <div class="container-fluid">
                     <div class="row">              
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
-                                <div class="card-header" data-background-color="green">
+                                <div class="card-header" data-background-color="dark-red">
                                     <h4 class="title">Danh sách</h4>
                                 </div>
                                 <div class="card-content table-responsive">
