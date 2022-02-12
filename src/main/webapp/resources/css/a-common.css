@@ -54,3 +54,6 @@ small[data-bv-result="INVALID"] {
 .nav-item .nav-item > .nav-link p {
 	font-size: 14px !important;
 }
+.logo img {
+    filter: brightness(10);
+}

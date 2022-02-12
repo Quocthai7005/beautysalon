@@ -48,7 +48,7 @@
 						</li>
 						<li class="nav-item ">
 							<a class="nav-link" href="<@spring.url '/admin/utils'/>">
-								<i class="material-icons">bubble_chart</i>
+								<i class="material-icons">cloud_queue</i>
 								<p>AWS S3</p>
 							</a>
 						</li>
@@ -67,13 +67,13 @@
 					<ul class="nav">
 						<li class="nav-item ">
 							<a class="nav-link" href="<@spring.url '/admin/bookings'/>">
-								<i class="material-icons">face</i>
+								<i class="material-icons">watch_later</i>
 								<p>LỊCH HẸN</p>
 							</a>
 						</li>
 						<li class="nav-item ">
 							<a class="nav-link" href="<@spring.url '/admin/bookings'/>">
-								<i class="material-icons">face</i>
+								<i class="material-icons">bookmark_border</i>
 								<p>SUBSCRIPTION</p>
 							</a>
 						</li>
@@ -98,7 +98,7 @@
 						</li>
 						<li class="nav-item ">
 							<a class="nav-link" href="<@spring.url '/admin/messenger'/>">
-								<i class="material-icons">messenger</i>
+								<i class="material-icons">share</i>
 								<p>FACEBOOK</p>
 							</a>
 						</li>
