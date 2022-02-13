@@ -23,7 +23,7 @@ import com.doctor.spa.mapper.NewsMapper;
 import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.repository.NewsRepo;
 import com.doctor.spa.repository.ProductRepo;
-import com.doctor.spa.service.ImageService;
+import com.doctor.spa.service.AwsS3Service;
 import com.doctor.spa.service.NewsService;
 
 @Service
@@ -46,7 +46,7 @@ public class NewsServiceImpl implements NewsService {
 	NewsMapper newMapper;
 
 	@Autowired
-	ImageService imageService;
+	AwsS3Service imageService;
 
 	@Override
 	public Page<NewsDto> getPosts(Pageable pageable) {

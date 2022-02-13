@@ -23,7 +23,7 @@ import com.doctor.spa.entity.SubProduct;
 import com.doctor.spa.mapper.ProductMapper;
 import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.repository.ProductRepo;
-import com.doctor.spa.service.ImageService;
+import com.doctor.spa.service.AwsS3Service;
 import com.doctor.spa.service.ProductService;
 
 @Service
@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
 	ProductMapper productMapper;
 
 	@Autowired
-	ImageService imageService;
+	AwsS3Service imageService;
 
 	@Override
 	public List<ProductDto> getAllServices() {	

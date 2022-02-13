@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.common.response.ResponseBody;
-import com.doctor.spa.dto.SubProductDto;
 import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.service.ProductService;
 import com.doctor.spa.util.Pages;

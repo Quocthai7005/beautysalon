@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -31,7 +32,8 @@ public class AAccountController {
 	}
 	
 	@PostMapping(value = "/account/update")
-	public ResponseEntity<ResponseBody<Boolean>> updatePost(@RequestBody PasswordChange dto) {	
+	public ResponseEntity<ResponseBody<Boolean>> updatePassword(@RequestBody PasswordChange dto) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, accountService.updatePassword(dto)));
 	}
+
 }

@@ -21,7 +21,7 @@ import com.doctor.spa.mapper.SubProductMapper;
 import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.repository.ProductRepo;
 import com.doctor.spa.service.SubProductService;
-import com.doctor.spa.service.ImageService;
+import com.doctor.spa.service.AwsS3Service;
 
 @Service
 @Transactional
@@ -37,7 +37,7 @@ public class SubProductServiceImpl implements SubProductService{
 	SubProductMapper subProductMapper;
 	
 	@Autowired
-	ImageService imageService;
+	AwsS3Service imageService;
 
 	@Override
 	public List<SubProductDto> getHomeShownChildService() {
