@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -14,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ListObjectsV2Request;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
@@ -80,16 +84,23 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	}
 
 	@Override
-	public List<S3ObjectSummary> getNewsImage() {
-		ListObjectsV2Result listObjectsV2Result = amazonS3.listObjectsV2(bucketName, newsPrefix);
-		List<S3ObjectSummary> S3ObjectSummaryList = listObjectsV2Result.getObjectSummaries();
-		return S3ObjectSummaryList;
+	public Page<S3ObjectSummary> getNewsImages(Pageable pageable, String lastKey) {
+		return getImageWithPrefix(pageable, lastKey, newsPrefix);
 	}
 
 	@Override
-	public List<S3ObjectSummary> getProductImage() {
-		ListObjectsV2Result listObjectsV2Result = amazonS3.listObjectsV2(bucketName, productPrefix);
-		List<S3ObjectSummary> S3ObjectSummaryList = listObjectsV2Result.getObjectSummaries();
-		return S3ObjectSummaryList;
+	public Page<S3ObjectSummary> getProductImages(Pageable pageable, String lastKey) {
+		return getImageWithPrefix(pageable, lastKey, productPrefix);
+	}
+
+	private Page<S3ObjectSummary> getImageWithPrefix(Pageable pageable, String lastKey, String prefix) {
+		ListObjectsV2Request req = new ListObjectsV2Request();
+		req.setMaxKeys(pageable.getPageSize());
+		req.setStartAfter(lastKey);
+		req.setBucketName(bucketName);
+		req.setPrefix(prefix);
+		ListObjectsV2Result listObjectsV2Result = amazonS3.listObjectsV2(req);
+		List<S3ObjectSummary> s3ObjectSummaryList = listObjectsV2Result.getObjectSummaries();
+		return new PageImpl<S3ObjectSummary>(s3ObjectSummaryList);
 	}
 }

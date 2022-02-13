@@ -2,6 +2,8 @@ package com.doctor.spa.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.services.s3.model.S3ObjectSummary;
@@ -12,7 +14,7 @@ public interface AwsS3Service {
 
 	List<S3ObjectSummary> getAllItems();
 
-	List<S3ObjectSummary> getNewsImage();
+	Page<S3ObjectSummary> getNewsImages(Pageable pageable, String lastKey);
 
-	List<S3ObjectSummary> getProductImage();
+	Page<S3ObjectSummary> getProductImages(Pageable pageable, String lastKey);
 }
