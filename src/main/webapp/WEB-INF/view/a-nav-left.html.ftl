@@ -47,7 +47,7 @@
 							</a>
 						</li>
 						<li class="nav-item ">
-							<a class="nav-link" href="<@spring.url '/admin/utils'/>">
+							<a class="nav-link" href="<@spring.url '/admin/bucket'/>">
 								<i class="material-icons">cloud_queue</i>
 								<p>AWS S3</p>
 							</a>
