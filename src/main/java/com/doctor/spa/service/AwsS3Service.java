@@ -12,7 +12,7 @@ public interface AwsS3Service {
 
 	List<S3ObjectSummary> getAllItems();
 
-	List<S3ObjectSummary> getNewsImage()
+	List<S3ObjectSummary> getNewsImage();
 
 	List<S3ObjectSummary> getProductImage();
 }
