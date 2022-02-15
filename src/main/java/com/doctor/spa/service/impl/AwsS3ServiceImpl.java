@@ -17,9 +17,11 @@ import org.springframework.web.multipart.MultipartFile;
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.GetObjectRequest;
 import com.amazonaws.services.s3.model.ListObjectsV2Request;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.doctor.spa.service.AwsS3Service;
 
@@ -90,42 +92,32 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	}
 
 	@Override
-	public Page<S3ObjectSummary> getNewsImages(Pageable pageable, String lastKey) {
-		return getImageWithPrefix(pageable, lastKey, newsPrefix);
-	}
-
-	@Override
-	public Page<S3ObjectSummary> getProductImages(Pageable pageable, String lastKey) {
-		return getImageWithPrefix(pageable, lastKey, productPrefix);
-	}
-
-	private Page<S3ObjectSummary> getImageWithPrefix(Pageable pageable, String lastKey, String prefix) {
+	public Page<S3ObjectSummary> getFiles(Pageable pageable, String directory) {
 		ListObjectsV2Request req = new ListObjectsV2Request();
-		req.setMaxKeys(pageable.getPageSize());
-		req.setStartAfter(lastKey);
 		req.setBucketName(bucketName);
-		req.setPrefix(prefix);
+		req.setPrefix(directory);
 		ListObjectsV2Result listObjectsV2Result = amazonS3.listObjectsV2(req);
 		List<S3ObjectSummary> s3ObjectSummaryList = listObjectsV2Result.getObjectSummaries();
-		return new PageImpl<S3ObjectSummary>(s3ObjectSummaryList);
+		int from = pageable.getPageNumber() * pageable.getPageSize();
+		int to = (from + pageable.getPageSize()) > (s3ObjectSummaryList.size() - 1) ? (s3ObjectSummaryList.size() - 1)
+				: (from + pageable.getPageSize());
+		List<S3ObjectSummary> sublist = s3ObjectSummaryList.subList(from, to);
+		return new PageImpl<S3ObjectSummary>(sublist);
 	}
 
 	@Override
-	public int getNewsImagesNo() {
-		return getImageWithPrefix(newsPrefix);
-	}
-
-	@Override
-	public int getProductImagesNo() {
-		return getImageWithPrefix(productPrefix);
-	}
-
-	private int getImageWithPrefix(String prefix) {
+	public int getFilesNo(String prefix) {
 		ListObjectsV2Request req = new ListObjectsV2Request();
 		req.setBucketName(bucketName);
 		req.setPrefix(prefix);
 		ListObjectsV2Result listObjectsV2Result = amazonS3.listObjectsV2(req);
 		List<S3ObjectSummary> s3ObjectSummaryList = listObjectsV2Result.getObjectSummaries();
 		return s3ObjectSummaryList.size();
+	}
+
+	public S3Object getFile(String key) {
+		GetObjectRequest req = new GetObjectRequest(bucketName, key);
+		S3Object s3Object = amazonS3.getObject(req);
+		return s3Object;
 	}
 }

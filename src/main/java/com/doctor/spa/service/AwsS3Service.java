@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 
 public interface AwsS3Service {
@@ -14,11 +15,9 @@ public interface AwsS3Service {
 
 	List<S3ObjectSummary> getAllItems();
 
-	Page<S3ObjectSummary> getNewsImages(Pageable pageable, String lastKey);
+	Page<S3ObjectSummary> getFiles(Pageable pageable, String Directory);
 
-	Page<S3ObjectSummary> getProductImages(Pageable pageable, String lastKey);
+	int getFilesNo(String Directory);
 
-	int getNewsImagesNo();
-
-	int getProductImagesNo();
+	S3Object getFile(String key);
 }

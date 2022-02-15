@@ -46,12 +46,6 @@
 								<p>GIAO DIỆN</p>
 							</a>
 						</li>
-						<li class="nav-item ">
-							<a class="nav-link" href="<@spring.url '/admin/bucket'/>">
-								<i class="material-icons">cloud_queue</i>
-								<p>AWS S3</p>
-							</a>
-						</li>
 					</ul>
 				</div>
 			</li>
@@ -75,6 +69,43 @@
 							<a class="nav-link" href="<@spring.url '/admin/bookings'/>">
 								<i class="material-icons">bookmark_border</i>
 								<p>SUBSCRIPTION</p>
+							</a>
+						</li>
+					</ul>
+				</div>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link collapsed" data-toggle="collapse" href="#awscloud" aria-expanded="false">
+					<i class="material-icons">content_paste</i>
+					<p>
+						AWS CLOUD
+						<b class="caret"></b>
+					</p>
+				</a>
+				<div class="collapse" id="awscloud" style="">
+					<ul class="nav">
+						<li class="nav-item ">
+							<a class="nav-link" href="<@spring.url '/admin/bucket'/>">
+								<i class="material-icons">cloud_queue</i>
+								<p>AWS EC2</p>
+							</a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="<@spring.url '/admin/bucket?directory=news'/>">
+								<i class="material-icons">cloud_queue</i>
+								<p>AWS S3 - NEWS</p>
+							</a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="<@spring.url '/admin/bucket?directory=product'/>">
+								<i class="material-icons">cloud_queue</i>
+								<p>AWS S3 - PRODUCT</p>
+							</a>
+						</li>
+						<li class="nav-item ">
+							<a class="nav-link" href="<@spring.url '/admin/bucket?directory=others'/>">
+								<i class="material-icons">cloud_queue</i>
+								<p>AWS S3 - OTHERS</p>
 							</a>
 						</li>
 					</ul>

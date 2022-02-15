@@ -1,5 +1,4 @@
 $(document).ready(function() {
-	//KoSelectHandler();
 	var bucketModel = new Bucket();
 	ko.applyBindings(bucketModel);
 	bucketModel.getPageNo(null).done(function (res) {	
@@ -10,15 +9,33 @@ $(document).ready(function() {
 function Bucket() {
 	var self = this;
 	var pageSize = 10;
+	
+	self.getUrlParameter = function getUrlParameter(sParam) {
+	    var sPageURL = window.location.search.substring(1),
+	        sURLVariables = sPageURL.split('&'),
+	        sParameterName,
+	        i;
+	
+	    for (i = 0; i < sURLVariables.length; i++) {
+	        sParameterName = sURLVariables[i].split('=');
+	
+	        if (sParameterName[0] === sParam) {
+	            return sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+	        }
+	    }
+	    return false;
+	};
+
+	var dir = self.getUrlParameter('directory');
 
 	// Url
 	var rootContext = $('#root-context').val();
-	var getFilesUrl = rootContext + '/admin/bucket/news';
-	var getPageNoUrl = rootContext + '/admin/bucket/news/no';
+	var getFilesUrl = rootContext + '/admin/bucket/files';
+	var getPageNoUrl = rootContext + '/admin/bucket/files/no?directory=' + dir;
+	var fileDetailLink = rootContext + '/admin/bucket/file?key=';
 
 	// Observable
 	self.files = ko.observableArray([]);
-	self.lastKey = ko.observableArray();
 
 	var pageOptions = {
 		totalPages: 1,
@@ -29,7 +46,7 @@ function Bucket() {
 		prev: 'Trang trước',
 		next: 'Trang sau',
 		onPageClick : function(event, page) {
-			self.loadBucket(page - 1, pageSize, 'asc', self.lastKey());
+			self.loadBucket(page - 1, pageSize, 'asc', dir);
 		}
 	}
 
@@ -49,28 +66,21 @@ function Bucket() {
 		});
 	}
 
-	self.loadBucket = function(pageNo, pageSize, pageSort, Lkey) {
+	self.loadBucket = function(pageNo, pageSize, pageSort, dir) {
 		var pageable = {
 			page : pageNo,
 			size : pageSize,
 			sort : pageSort,
-			lastKey: Lkey
+			directory: dir
 		}
 		$.ajax({
 			type : "GET",
 			url : getFilesUrl,
 			dataType : 'json',
 			data : pageable,
-			success : function(res) {		
+			success : function(res) {
 				console.log(res);
 				self.files(res.data.content);
-				var lastKey = null;
-				var length = self.files().length;
-				if (length > 0) {
-					lastKey = self.files()[length - 1].key;
-				}
-				self.lastKey(lastKey);
-				console.log(lastKey);
 			}
 		});
 	}
@@ -81,8 +91,16 @@ function Bucket() {
 		}
 	}
 
-    self.formatDate = function(date) {
-    	var result = date.replace('T', ' ');
-    	return result;
+    self.formatDate = function(timestamp) {
+	    var date = new Date(timestamp);
+		return date.toISOString().split('T')[0];
     }
+
+	self.formatSize = function(sizeInByte) {
+		return Math.round(sizeInByte / 1024);
+	}
+
+	self.getFileDetailLink = function(key) {
+		return fileDetailLink + key;
+	}
 }

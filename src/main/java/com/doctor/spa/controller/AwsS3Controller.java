@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.doctor.spa.common.response.ResponseBody;
 import com.doctor.spa.service.AwsS3Service;
@@ -23,33 +24,31 @@ public class AwsS3Controller {
 	AwsS3Service awsS3Service;
 
 	@GetMapping(value = "/bucket")
-	public String editService() {	
+	public String toBucketList() {	
 		return Pages.A_BUCKET_LIST;
 	}
 
-	@GetMapping(value="/bucket/news")
-	public ResponseEntity<ResponseBody<Page<S3ObjectSummary>>> getNewsImages(
+	@GetMapping(value = "/bucket/file")
+	public String toFileDetail() {	
+		return Pages.A_FILE_DETAIL;
+	}
+
+	@GetMapping(value="/bucket/files")
+	public ResponseEntity<ResponseBody<Page<S3ObjectSummary>>> getFiles(
 			Pageable pageable,
-			@RequestParam(required = false) String lastKey) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getNewsImages(pageable, lastKey)));
+			@RequestParam(required = true) String directory) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getFiles(pageable, directory)));
 	}
 
-	@GetMapping(value="/bucket/news/no")
-	public ResponseEntity<ResponseBody<Integer>> getNewsImagesNo(
-			Pageable pageable) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getNewsImagesNo()));
+	@GetMapping(value="/bucket/files/no")
+	public ResponseEntity<ResponseBody<Integer>> getFilesNo(
+			@RequestParam(required = true) String directory) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getFilesNo(directory)));
 	}
-
-	@GetMapping(value="/bucket/product/no")
-	public ResponseEntity<ResponseBody<Integer>> getProductImagesNo(
-			Pageable pageable) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getProductImagesNo()));
-	}
-
-	@GetMapping(value="/bucket/product")
-	public ResponseEntity<ResponseBody<Page<S3ObjectSummary>>> getProductImage(
-			Pageable pageable,
-			@RequestParam(required = false) String lastKey) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getProductImages(pageable, lastKey)));
+	
+	@GetMapping(value="/bucket/file/detail")
+	public ResponseEntity<ResponseBody<S3Object>> getFile(
+			@RequestParam(required = true) String key) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getFile(key)));
 	}
 }
