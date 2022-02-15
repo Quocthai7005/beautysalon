@@ -7,8 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.doctor.spa.common.response.ResponseBody;
@@ -16,7 +16,7 @@ import com.doctor.spa.service.AwsS3Service;
 import com.doctor.spa.util.Pages;
 
 @Controller
-//@RequestMapping(value = "admin")
+@RequestMapping(value = "admin")
 public class AwsS3Controller {
 
 	@Autowired
@@ -27,9 +27,29 @@ public class AwsS3Controller {
 		return Pages.A_BUCKET_LIST;
 	}
 
-	@GetMapping(value="/bucket/all")
-	public ResponseEntity<ResponseBody<Page<S3ObjectSummary>>> getServiceGroups(Pageable pageable) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getNewsImages(pageable, "news/4.jpg")));
+	@GetMapping(value="/bucket/news")
+	public ResponseEntity<ResponseBody<Page<S3ObjectSummary>>> getNewsImages(
+			Pageable pageable,
+			@RequestParam(required = false) String lastKey) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getNewsImages(pageable, lastKey)));
 	}
 
+	@GetMapping(value="/bucket/news/no")
+	public ResponseEntity<ResponseBody<Integer>> getNewsImagesNo(
+			Pageable pageable) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getNewsImagesNo()));
+	}
+
+	@GetMapping(value="/bucket/product/no")
+	public ResponseEntity<ResponseBody<Integer>> getProductImagesNo(
+			Pageable pageable) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getProductImagesNo()));
+	}
+
+	@GetMapping(value="/bucket/product")
+	public ResponseEntity<ResponseBody<Page<S3ObjectSummary>>> getProductImage(
+			Pageable pageable,
+			@RequestParam(required = false) String lastKey) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getProductImages(pageable, lastKey)));
+	}
 }

@@ -103,4 +103,9 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
 	}
+
+	@Bean
+	public PageableHandlerMethodArgumentResolver pageableResolver() {
+	    return new PageableHandlerMethodArgumentResolver();
+	}
 }

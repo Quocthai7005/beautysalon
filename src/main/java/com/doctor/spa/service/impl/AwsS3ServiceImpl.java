@@ -38,6 +38,12 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	@Value("${aws.s3.bucket.product}")
 	private String productPrefix;
 
+	@Value("${aws.iam.accessKey}")
+	private String accessKey;
+
+	@Value("${aws.iam.secretKey}")
+	private String secretKey;
+
 	@Override
 	// @Async annotation ensures that the method is executed in a different
 	// background thread
@@ -102,5 +108,24 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		ListObjectsV2Result listObjectsV2Result = amazonS3.listObjectsV2(req);
 		List<S3ObjectSummary> s3ObjectSummaryList = listObjectsV2Result.getObjectSummaries();
 		return new PageImpl<S3ObjectSummary>(s3ObjectSummaryList);
+	}
+
+	@Override
+	public int getNewsImagesNo() {
+		return getImageWithPrefix(newsPrefix);
+	}
+
+	@Override
+	public int getProductImagesNo() {
+		return getImageWithPrefix(productPrefix);
+	}
+
+	private int getImageWithPrefix(String prefix) {
+		ListObjectsV2Request req = new ListObjectsV2Request();
+		req.setBucketName(bucketName);
+		req.setPrefix(prefix);
+		ListObjectsV2Result listObjectsV2Result = amazonS3.listObjectsV2(req);
+		List<S3ObjectSummary> s3ObjectSummaryList = listObjectsV2Result.getObjectSummaries();
+		return s3ObjectSummaryList.size();
 	}
 }

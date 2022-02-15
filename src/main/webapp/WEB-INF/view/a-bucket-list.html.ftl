@@ -27,11 +27,32 @@
 								</div>
 								<div class="card-content table-responsive">
 									<div class="row">			  
-
+										<div class="col-lg-12 col-md-12">
+											<table class="table table-hover">
+												<thead>
+													<th class="text-center">No.</th>
+													<th class="text-center">Tên file</th>
+													<th class="text-center">Kích thước (bytes)</th>
+													<th class="text-center">Ngày upload</th>
+													<th class="text-center">Người upload</th>
+													<th class="text-center">storage class</th>
+												</thead>
+												<tbody data-bind="foreach: files">
+													<tr>
+														<td class="text-center" data-bind="text: $index() + 1">1</td>
+														<td class="text-left" data-bind="text: key"></td>
+														<td class="text-center" data-bind="text: size"></td>
+														<td class="text-center" data-bind="text: lastModified"></td>
+														<td class="text-center" data-bind="text: owner"></td>
+														<td class="text-center" data-bind="text: storageClass"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
 									<div class="row">
 										<div class="col-lg-12 col-md-12 col-xs-12">
-											<ul id="pagination-booking" class="pagination-sm pull-right"></ul>
+											<ul id="pagination-bucket" class="pagination-sm pull-right"></ul>
 										</div>
 									</div>
 								</div>

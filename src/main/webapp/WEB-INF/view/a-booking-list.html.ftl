@@ -32,13 +32,13 @@
 										</div>
 									</div>
 								</div>
-								<div class="card-content table-responsive">
-									<div class="row">			  
+																<div class="card-content table-responsive">
+									<div class="row">
 										<div class="col-lg-12 col-md-12">
 											<table class="table table-hover">
 												<thead>
 													<th class="text-center">Số thứ tự</th>
-													<th class="text-center">Họ tên</th>
+													<th class="text-center">tên file</th>
 													<th class="text-center">Email</th>
 													<th class="text-center">Số điện thoại</th>
 													<th class="text-center">Ngày hẹn</th>

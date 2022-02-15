@@ -17,4 +17,8 @@ public interface AwsS3Service {
 	Page<S3ObjectSummary> getNewsImages(Pageable pageable, String lastKey);
 
 	Page<S3ObjectSummary> getProductImages(Pageable pageable, String lastKey);
+
+	int getNewsImagesNo();
+
+	int getProductImagesNo();
 }

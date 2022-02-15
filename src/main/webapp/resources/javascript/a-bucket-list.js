@@ -2,31 +2,23 @@ $(document).ready(function() {
 	//KoSelectHandler();
 	var bucketModel = new Bucket();
 	ko.applyBindings(bucketModel);
-	bucketModel.getStatuses();
-	bucketModel.getPageNo('').done(function (res) {	
-		// Initialize pagination
-		console.log("sdfsdf");
+	bucketModel.getPageNo(null).done(function (res) {	
 		bucketModel.initPagination();
 	});
 })
 
 function Bucket() {
 	var self = this;
-	var pageSize = 5;
+	var pageSize = 10;
 
 	// Url
 	var rootContext = $('#root-context').val();
-	var getFilesUrl = rootContext + '/admin/bucket/all';
-	var getPageNoUrl = rootContext + '/admin/bucket/no';
-	var goToFileDetailUrl = rootContext + '/admin/bucket/detail';
-	// Message
-	var agree = 'Đồng ý';
-	var cancel = 'Không';
+	var getFilesUrl = rootContext + '/admin/bucket/news';
+	var getPageNoUrl = rootContext + '/admin/bucket/news/no';
 
 	// Observable
-	self.status = ko.observable();
-	self.bookings = ko.observableArray([]);
-	self.statuses = ko.observableArray([]);
+	self.files = ko.observableArray([]);
+	self.lastKey = ko.observableArray();
 
 	var pageOptions = {
 		totalPages: 1,
@@ -37,35 +29,8 @@ function Bucket() {
 		prev: 'Trang trước',
 		next: 'Trang sau',
 		onPageClick : function(event, page) {
-			// get group id
-			self.loadBookings(page - 1, pageSize, 'asc', self.status());
+			self.loadBucket(page - 1, pageSize, 'asc', self.lastKey());
 		}
-	}
-	
-	self.status.subscribe(function() {
-		
-		// Destroy old pagination
-		$('#pagination-booking').twbsPagination('destroy');
-		self.bookings([]);
-		
-		// get service group quantity
-		self.getPageNo(self.status()).done(function (res) {
-			// Initialize pagination
-			self.initPagination();
-		});
-	});
-
-	self.getStatuses = function() {
-		self.statuses([{
-			'status': 'P',
-			'name': 'CHỜ TRẢ LỜI'
-		}, {
-			'status': 'O',
-			'name': 'ĐANG XỬ LÝ'
-		}, {
-			'status': 'C',
-			'name': 'HOÀN TẤT'
-		}]);
 	}
 
 	self.getPageNo = function(status) {
@@ -84,47 +49,36 @@ function Bucket() {
 		});
 	}
 
-	self.loadBucket = function(pageNo, pageSize, pageSort, status) {
+	self.loadBucket = function(pageNo, pageSize, pageSort, Lkey) {
 		var pageable = {
 			page : pageNo,
 			size : pageSize,
 			sort : pageSort,
-			status: status
+			lastKey: Lkey
 		}
 		$.ajax({
 			type : "GET",
-			url : getbookingsUrl,
+			url : getFilesUrl,
 			dataType : 'json',
 			data : pageable,
 			success : function(res) {		
 				console.log(res);
-				self.bookings(res.data.content);
+				self.files(res.data.content);
+				var lastKey = null;
+				var length = self.files().length;
+				if (length > 0) {
+					lastKey = self.files()[length - 1].key;
+				}
+				self.lastKey(lastKey);
+				console.log(lastKey);
 			}
 		});
 	}
 	
 	self.initPagination = function() {
 		if (pageOptions.totalPages > 0) {
-			$('#pagination-booking').twbsPagination(pageOptions);
+			$('#pagination-bucket').twbsPagination(pageOptions);
 		}
-	}
-
-	self.initSearch = function() {
-		$('#search-btn').on('click', function() {
-			$('#pagination-booking').twbsPagination('destroy');
-			self.bookings([]);
-			
-			// get service group quantity
-			self.getPageNo(self.status()).done(function (res) {
-				// Initialize pagination
-				self.initPagination();
-			});
-		});
-	}
-
-	self.goToDetail = function(data) {
-		var getUrl = goToDetailUrl + '?id=' + data.id;
-		window.location.href = getUrl;
 	}
 
     self.formatDate = function(date) {
