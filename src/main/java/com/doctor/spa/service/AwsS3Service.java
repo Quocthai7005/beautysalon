@@ -6,8 +6,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.doctor.spa.dto.S3ObjectDto;
 
 public interface AwsS3Service {
 
@@ -15,9 +15,9 @@ public interface AwsS3Service {
 
 	List<S3ObjectSummary> getAllItems();
 
-	Page<S3ObjectSummary> getFiles(Pageable pageable, String Directory);
+	Page<S3ObjectDto> getFiles(Pageable pageable, String Directory);
 
 	int getFilesNo(String Directory);
-
-	S3Object getFile(String key);
+	
+	boolean deleteFile(String key);
 }

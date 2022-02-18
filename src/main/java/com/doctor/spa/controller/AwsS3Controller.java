@@ -6,13 +6,15 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
 import com.doctor.spa.common.response.ResponseBody;
+import com.doctor.spa.dto.S3ObjectDto;
 import com.doctor.spa.service.AwsS3Service;
 import com.doctor.spa.util.Pages;
 
@@ -34,7 +36,7 @@ public class AwsS3Controller {
 	}
 
 	@GetMapping(value="/bucket/files")
-	public ResponseEntity<ResponseBody<Page<S3ObjectSummary>>> getFiles(
+	public ResponseEntity<ResponseBody<Page<S3ObjectDto>>> getFiles(
 			Pageable pageable,
 			@RequestParam(required = true) String directory) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getFiles(pageable, directory)));
@@ -46,9 +48,10 @@ public class AwsS3Controller {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getFilesNo(directory)));
 	}
 	
-	@GetMapping(value="/bucket/file/detail")
-	public ResponseEntity<ResponseBody<S3Object>> getFile(
-			@RequestParam(required = true) String key) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getFile(key)));
+	@DeleteMapping(value = "/bucket/file/remove")
+	public ResponseEntity<ResponseBody<Boolean>> deleteService(
+			@RequestParam String name,
+			@RequestParam String directory) {	
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.deleteFile(directory + "/" + name)));
 	}
 }

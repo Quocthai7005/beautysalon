@@ -34,9 +34,8 @@
 													<th class="text-center">Tên file</th>
 													<th class="text-center">Kích thước (KBs)</th>
 													<th class="text-center">Ngày upload</th>
-													<th class="text-center">Người upload</th>
 													<th class="text-center">Storage class</th>
-													<th class="text-center">Chi tiết</th>
+													<th class="text-center">Hiển thị/download</th>
 													<th class="text-center">Xóa file</th>
 												</thead>
 												<tbody data-bind="foreach: files">
@@ -45,10 +44,9 @@
 														<td class="text-left" data-bind="text: key"></td>
 														<td class="text-center" data-bind="text: $parent.formatSize(size)"></td>
 														<td class="text-center" data-bind="text: $parent.formatDate(lastModified)"></td>
-														<td class="text-center" data-bind="text: owner"></td>
-														<td class="text-center" data-bind="text: storageClass"></td>
-														<td class="text-center"><a data-bind="attr: { 'href': $parent.getFileDetailLink(key) }">-></a></td>
-														<td class="text-center" data-bind="text: storageClass"></td>
+														<td class="text-center" data-bind="text: objectClass"></td>
+														<td class="text-center"><a data-bind="attr: { 'href': uri }" target="_blank">-></a></td>
+														<td class="text-center"><button class="btn btn-danger btn-sm" data-bind="click: $parent.deleteFile.bind($data)">Xóa</button></td>
 													</tr>
 												</tbody>
 											</table>

@@ -39,18 +39,26 @@
 										</div>
 										<div class="col-lg-12 col-md-12">
 											<div class="form-inline form-group-ctn">
-												<label for="date" class="custom-label">
-													Ngày tạo:
+												<label for="name" class="custom-label">
+													Người tạo:
 												</label>
-												<span id="date" data-bind="text: createdDate"></span>
+												<span data-bind="text: owner"></span>
 											</div>
 										</div>
 										<div class="col-lg-12 col-md-12">
 											<div class="form-inline form-group-ctn">
-												<label for="uri" class="custom-label">
+												<label for="phone" class="custom-label">
+													Ngày tạo:
+												</label>
+												<span data-bind="text: createdDate"></span>
+											</div>
+										</div>
+										<div class="col-lg-12 col-md-12">
+											<div class="form-inline form-group-ctn">
+												<label for="consultDate" class="custom-label">
 													Url:
 												</label>
-												<a data-bind="attr: {href: uri}" target="_blank">hiển thị/download file</a>
+												<span data-bind="text: uri"></span>
 											</div>
 										</div>
 										</div>

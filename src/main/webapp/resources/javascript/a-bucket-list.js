@@ -10,6 +10,13 @@ function Bucket() {
 	var self = this;
 	var pageSize = 10;
 	
+	var deleteSuccess = 'Xoá thành công';
+	var deleteFail = 'Không thể xoá';
+	var deleteRemind = 'Bạn đã xoá tất cả dịch vụ con chưa?';
+	var deleteConfirm = 'Bạn muốn xoá tin này?';
+	var agree = 'Đồng ý';
+	var cancel = 'Không';
+	
 	self.getUrlParameter = function getUrlParameter(sParam) {
 	    var sPageURL = window.location.search.substring(1),
 	        sURLVariables = sPageURL.split('&'),
@@ -31,8 +38,10 @@ function Bucket() {
 	// Url
 	var rootContext = $('#root-context').val();
 	var getFilesUrl = rootContext + '/admin/bucket/files';
+	var getListPage = rootContext + '/admin/bucket?directory=' + dir;
 	var getPageNoUrl = rootContext + '/admin/bucket/files/no?directory=' + dir;
 	var fileDetailLink = rootContext + '/admin/bucket/file?key=';
+	var deleteUrl = rootContext + '/admin/bucket/file/remove?';
 
 	// Observable
 	self.files = ko.observableArray([]);
@@ -103,4 +112,46 @@ function Bucket() {
 	self.getFileDetailLink = function(key) {
 		return fileDetailLink + key;
 	}
+	
+	self.deleteFile = function(data) {
+		var directory = data.key.split("/")[0];
+		var name = data.key.split("/")[1];
+		var url = deleteUrl + 'name=' + name + '&directory=' + directory;
+		swal({
+			  	text: "Bạn muốn xoá file này?",
+			  	type: 'warning',
+			  	showCancelButton: true,
+			  	confirmButtonText: agree,
+			  	cancelButtonText: cancel,
+			}).then((result) => {
+				if (result.value) {
+					$.ajax({
+						type: 'DELETE',
+						url: url,
+						success: function(msg) {
+							if (msg.code === 200) {
+								if (msg.data === true) {
+									swal({
+									  type: 'success',
+									  text: deleteSuccess,
+									  onClose: function() {
+										  window.location.href = getListPage;
+									  }
+									});
+								} else {
+									swal({
+									  type: 'error',
+									  text: deleteFail,
+									  footer: deleteRemind,
+									});
+								}
+							}
+						},
+						error: function(e) {
+							console.log(e);
+						}
+					});
+				}
+			});
+	};
 }

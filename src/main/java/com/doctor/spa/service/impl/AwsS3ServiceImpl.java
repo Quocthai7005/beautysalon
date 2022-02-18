@@ -3,6 +3,7 @@ package com.doctor.spa.service.impl;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,18 +12,22 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
-import com.amazonaws.services.s3.model.GetObjectRequest;
+import com.amazonaws.services.s3.model.DeleteObjectRequest;
 import com.amazonaws.services.s3.model.ListObjectsV2Request;
 import com.amazonaws.services.s3.model.ListObjectsV2Result;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.amazonaws.services.s3.model.S3Object;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.doctor.spa.dto.S3ObjectDto;
+import com.doctor.spa.mapper.S3ObjectMapper;
 import com.doctor.spa.service.AwsS3Service;
 
 @Service
@@ -34,17 +39,14 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	@Value("${aws.s3.bucket.name}")
 	private String bucketName;
 
-	@Value("${aws.s3.bucket.news}")
-	private String newsPrefix;
-
-	@Value("${aws.s3.bucket.product}")
-	private String productPrefix;
-
 	@Value("${aws.iam.accessKey}")
 	private String accessKey;
 
 	@Value("${aws.iam.secretKey}")
 	private String secretKey;
+
+	@Autowired
+	private S3ObjectMapper s3ObjectMapper;
 
 	@Override
 	// @Async annotation ensures that the method is executed in a different
@@ -75,13 +77,25 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		return file;
 	}
 
+	private String getUsername() {
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			return ((UserDetails) principal).getUsername();
+		} else {
+			return principal.toString();
+		}
+	}
+
 	private String uploadFileToS3Bucket(final String bucketName, final File file) {
 		System.out.println("Uploading file with name= " + file.getName());
 
 		final PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, file.getName(), file)
 				.withCannedAcl(CannedAccessControlList.PublicRead);
+		ObjectMetadata md = new ObjectMetadata();
+		md.addUserMetadata("uploader", getUsername());
+		putObjectRequest.setMetadata(md);
 		amazonS3.putObject(putObjectRequest);
-		return amazonS3.getUrl("mypetswebsitebucket", file.getName()).getPath();
+		return amazonS3.getUrl(bucketName, file.getName()).getPath();
 	}
 
 	@Override
@@ -92,7 +106,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	}
 
 	@Override
-	public Page<S3ObjectSummary> getFiles(Pageable pageable, String directory) {
+	public Page<S3ObjectDto> getFiles(Pageable pageable, String directory) {
 		ListObjectsV2Request req = new ListObjectsV2Request();
 		req.setBucketName(bucketName);
 		req.setPrefix(directory);
@@ -102,7 +116,14 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		int to = (from + pageable.getPageSize()) > (s3ObjectSummaryList.size() - 1) ? (s3ObjectSummaryList.size() - 1)
 				: (from + pageable.getPageSize());
 		List<S3ObjectSummary> sublist = s3ObjectSummaryList.subList(from, to);
-		return new PageImpl<S3ObjectSummary>(sublist);
+		List<S3ObjectDto> dtos = new ArrayList<>();
+		for (S3ObjectSummary obj: sublist) {
+			if ((directory+"/").equals(obj.getKey()))
+				continue;
+			S3ObjectDto dto = s3ObjectMapper.toDto(obj);
+			dtos.add(dto);
+		}
+		return new PageImpl<S3ObjectDto>(dtos);
 	}
 
 	@Override
@@ -115,9 +136,14 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		return s3ObjectSummaryList.size();
 	}
 
-	public S3Object getFile(String key) {
-		GetObjectRequest req = new GetObjectRequest(bucketName, key);
-		S3Object s3Object = amazonS3.getObject(req);
-		return s3Object;
+	@Override
+	public boolean deleteFile(String key) {
+		if (key == null) {
+			return false;
+		}
+		DeleteObjectRequest req = new DeleteObjectRequest(bucketName, key);
+		amazonS3.deleteObject(req);
+		return true;
 	}
+
 }
