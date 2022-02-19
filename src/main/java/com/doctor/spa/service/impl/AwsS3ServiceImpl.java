@@ -4,7 +4,9 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,15 +28,30 @@ import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.dto.S3ObjectDto;
+import com.doctor.spa.dto.SubProductDto;
 import com.doctor.spa.mapper.S3ObjectMapper;
 import com.doctor.spa.service.AwsS3Service;
+import com.doctor.spa.service.NewsService;
+import com.doctor.spa.service.ProductService;
+import com.doctor.spa.service.SubProductService;
 
 @Service
 public class AwsS3ServiceImpl implements AwsS3Service {
 
 	@Autowired
 	private AmazonS3 amazonS3;
+
+	@Autowired
+	private NewsService newService;
+
+	@Autowired
+	private ProductService productService;
+	
+	@Autowired
+	private SubProductService subProductService;
 
 	@Value("${aws.s3.bucket.name}")
 	private String bucketName;
@@ -44,7 +61,16 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 
 	@Value("${aws.iam.secretKey}")
 	private String secretKey;
-
+	
+	@Value("${aws.s3.bucket.news}")
+	private String newsDir;
+	
+	@Value("${aws.s3.bucket.product}")
+	private String productDir;
+	
+	@Value("${aws.s3.bucket.subproduct}")
+	private String subProductDir;
+	
 	@Autowired
 	private S3ObjectMapper s3ObjectMapper;
 
@@ -75,6 +101,54 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 			System.out.println("Error converting the multi-part file to file= " + ex.getMessage());
 		}
 		return file;
+	}
+
+	private Map<String, List<NewsDto>> getKeyWithUsedInNews() {
+		Map<String, List<NewsDto>> pairs = new HashMap<>();
+		List<NewsDto> newsDtos = newService.getAll();
+		for (NewsDto dto : newsDtos) {
+			List<NewsDto> dtos = pairs.get(dto.getImageKey());
+			if (dtos == null) {
+				List<NewsDto> usedDto = new ArrayList<NewsDto>();
+				usedDto.add(dto);
+				pairs.put(dto.getImageKey(), usedDto);
+			} else {
+				dtos.add(dto);
+			}
+		}
+		return pairs;
+	}
+
+	private Map<String, List<ProductDto>> getKeyWithUsedInProduct() {
+		Map<String, List<ProductDto>> pairs = new HashMap<>();
+		List<ProductDto> productDtos = productService.getAll();
+		for (ProductDto dto : productDtos) {
+			List<ProductDto> dtos = pairs.get(dto.getImageKey());
+			if (dtos == null) {
+				List<ProductDto> usedDto = new ArrayList<ProductDto>();
+				usedDto.add(dto);
+				pairs.put(dto.getImageKey(), usedDto);
+			} else {
+				dtos.add(dto);
+			}
+		}
+		return pairs;
+	}
+
+	private Map<String, List<SubProductDto>> getKeyWithUsedInSubProduct() {
+		Map<String, List<SubProductDto>> pairs = new HashMap<>();
+		List<SubProductDto> subProductDtos = subProductService.getAll();
+		for (SubProductDto dto : subProductDtos) {
+			List<SubProductDto> dtos = pairs.get(dto.getImageKey());
+			if (dtos == null) {
+				List<SubProductDto> usedDto = new ArrayList<SubProductDto>();
+				usedDto.add(dto);
+				pairs.put(dto.getImageKey(), usedDto);
+			} else {
+				dtos.add(dto);
+			}
+		}
+		return pairs;
 	}
 
 	private String getUsername() {
@@ -117,11 +191,34 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 				: (from + pageable.getPageSize());
 		List<S3ObjectSummary> sublist = s3ObjectSummaryList.subList(from, to);
 		List<S3ObjectDto> dtos = new ArrayList<>();
-		for (S3ObjectSummary obj: sublist) {
-			if ((directory+"/").equals(obj.getKey()))
-				continue;
-			S3ObjectDto dto = s3ObjectMapper.toDto(obj);
-			dtos.add(dto);
+
+		if (directory.equals(newsDir)) {
+			Map<String, List<NewsDto>> pairs = getKeyWithUsedInNews();
+			for (S3ObjectSummary obj : sublist) {
+				if ((directory + "/").equals(obj.getKey()))
+					continue;
+				S3ObjectDto dto = s3ObjectMapper.toDto(obj);
+				dto.setUsedInNews(pairs.get(obj.getKey()));
+				dtos.add(dto);
+			}
+		} else if (directory.equals(productDir)) {
+			Map<String, List<ProductDto>> pairs = getKeyWithUsedInProduct();
+			for (S3ObjectSummary obj : sublist) {
+				if ((directory + "/").equals(obj.getKey()))
+					continue;
+				S3ObjectDto dto = s3ObjectMapper.toDto(obj);
+				dto.setUsedInProduct(pairs.get(obj.getKey()));
+				dtos.add(dto);
+			}
+		} else if (directory.equals(subProductDir)) {
+			Map<String, List<SubProductDto>> pairs = getKeyWithUsedInSubProduct();
+			for (S3ObjectSummary obj : sublist) {
+				if ((directory + "/").equals(obj.getKey()))
+					continue;
+				S3ObjectDto dto = s3ObjectMapper.toDto(obj);
+				dto.setUsedInSubProduct(pairs.get(obj.getKey()));
+				dtos.add(dto);
+			}
 		}
 		return new PageImpl<S3ObjectDto>(dtos);
 	}

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.dto.SubProductDto;
 import com.doctor.spa.entity.SubProduct;
 import com.doctor.spa.mapper.SubProductMapper;
@@ -141,7 +142,7 @@ public class SubProductServiceImpl implements SubProductService{
 			if (service != null) {
 				com.doctor.spa.entity.Product pService = productRepo.findById(dto.getParentServiceId());
 				service.setName(dto.getName());
-				service.setImage(dto.getImage());
+				service.setImage(dto.getImageKey());
 				service.setContent(dto.getContent());
 				service.setIntro(dto.getIntro());
 				service.setParentProduct(pService);
@@ -184,6 +185,15 @@ public class SubProductServiceImpl implements SubProductService{
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;
+	}
+
+	@Override
+	public List<SubProductDto> getAll() {
+		List<SubProductDto> productDtos = new ArrayList<SubProductDto>();
+		subProductRepo.findAll().forEach(x -> {
+			productDtos.add(subProductMapper.toDto(x));
+		});
+		return productDtos;
 	}
 
 }

@@ -6,7 +6,8 @@ public class NewsDto extends BaseDto {
 	private String url;
 	private String intro;
 	private String content;
-	private String image;
+	private String imageKey;
+	private String imageBaseUrl;
 	private String parentServiceName;
 	private Long parentServiceId;
 	private ProductDto service;
@@ -35,12 +36,6 @@ public class NewsDto extends BaseDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
 	public ProductDto getService() {
 		return service;
 	}
@@ -58,6 +53,18 @@ public class NewsDto extends BaseDto {
 	}
 	public void setParentServiceId(Long parentServiceId) {
 		this.parentServiceId = parentServiceId;
+	}
+	public String getImageKey() {
+		return imageKey;
+	}
+	public void setImageKey(String imageKey) {
+		this.imageKey = imageKey;
+	}
+	public String getImageBaseUrl() {
+		return imageBaseUrl;
+	}
+	public void setImageBaseUrl(String imageBaseUrl) {
+		this.imageBaseUrl = imageBaseUrl;
 	}
 
 }

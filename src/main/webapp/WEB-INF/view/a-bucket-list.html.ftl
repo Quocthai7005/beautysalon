@@ -36,6 +36,7 @@
 													<th class="text-center">Ngày upload</th>
 													<th class="text-center">Storage class</th>
 													<th class="text-center">Hiển thị/download</th>
+													<th class="text-center">Nơi gọi</th>
 													<th class="text-center">Xóa file</th>
 												</thead>
 												<tbody data-bind="foreach: files">
@@ -46,6 +47,38 @@
 														<td class="text-center" data-bind="text: $parent.formatDate(lastModified)"></td>
 														<td class="text-center" data-bind="text: objectClass"></td>
 														<td class="text-center"><a data-bind="attr: { 'href': uri }" target="_blank">-></a></td>
+														
+														
+														<td class="text-center">
+														<!-- ko if: $parent.directory() == 'news' -->
+															<ol data-bind="foreach: usedInNews">
+																<li>
+																	<a data-bind="attr: { 'href': 'news-edit/' + id }" target="_blank">
+																		<span data-bind="text: name"></span>
+																	</a>
+																</li>
+															</ol>
+														<!-- /ko -->
+														<!-- ko if: $parent.directory() == 'product' -->
+															<ol data-bind="foreach: usedInProduct">
+																<li>
+																	<a data-bind="attr: { 'href': 'service-group-edit/' + id }" target="_blank">
+																		<span data-bind="text: name"></span>
+																	</a>
+																</li>
+															</ol>
+														<!-- /ko -->
+														<!-- ko if: $parent.directory() == 'subproduct' -->
+															<ol data-bind="foreach: usedInSubProduct">
+																<li>
+																	
+																	<a data-bind="attr: { 'href': 'service-edit/' + id }" target="_blank">
+																		<span data-bind="text: name"></span>
+																	</a>
+																</li>
+															</ol>
+														<!-- /ko -->
+														</td>
 														<td class="text-center"><button class="btn btn-danger btn-sm" data-bind="click: $parent.deleteFile.bind($data)">Xóa</button></td>
 													</tr>
 												</tbody>

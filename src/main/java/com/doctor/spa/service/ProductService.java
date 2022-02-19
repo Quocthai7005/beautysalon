@@ -32,4 +32,6 @@ public interface ProductService {
 	Map<String, Boolean> validateUrl(Long id, String url);
 
 	Map<String, Boolean> validateUrlNoId(String url);
+	
+	List<ProductDto> getAll();
 }

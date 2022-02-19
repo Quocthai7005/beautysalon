@@ -24,7 +24,8 @@ public class NewsMapperImpl implements NewsMapper {
 		if (news != null) {
 			dto = new NewsDto();
 			dto.setId(news.getId());
-			dto.setImage(amazonS3.getUrl(bucketName, news.getImage()).toString());
+			dto.setImageKey(news.getImage());
+			dto.setImageBaseUrl("https://" + bucketName + ".s3.amazonaws.com/");
 			dto.setContent(news.getContent());
 			dto.setIntro(news.getIntro());
 			dto.setName(news.getName());

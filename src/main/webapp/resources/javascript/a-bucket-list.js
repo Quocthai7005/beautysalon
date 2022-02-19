@@ -45,7 +45,8 @@ function Bucket() {
 
 	// Observable
 	self.files = ko.observableArray([]);
-
+	self.directory = ko.observableArray();
+	self.directory(dir);
 	var pageOptions = {
 		totalPages: 1,
 		visiblePages: 3,

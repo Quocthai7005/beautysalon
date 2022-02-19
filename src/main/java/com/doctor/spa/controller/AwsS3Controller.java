@@ -38,7 +38,7 @@ public class AwsS3Controller {
 	@GetMapping(value="/bucket/files")
 	public ResponseEntity<ResponseBody<Page<S3ObjectDto>>> getFiles(
 			Pageable pageable,
-			@RequestParam(required = true) String directory) {	
+			@RequestParam(required = true) String directory) {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.getFiles(pageable, directory)));
 	}
 
@@ -51,7 +51,7 @@ public class AwsS3Controller {
 	@DeleteMapping(value = "/bucket/file/remove")
 	public ResponseEntity<ResponseBody<Boolean>> deleteService(
 			@RequestParam String name,
-			@RequestParam String directory) {	
+			@RequestParam String directory) {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, awsS3Service.deleteFile(directory + "/" + name)));
 	}
 }

@@ -32,4 +32,6 @@ public interface SubProductService {
 	Map<String, Boolean> validateUrl(String url, Long id);
 	
 	SubProductDto getChildServiceById(long id);
+	
+	List<SubProductDto> getAll();
 }

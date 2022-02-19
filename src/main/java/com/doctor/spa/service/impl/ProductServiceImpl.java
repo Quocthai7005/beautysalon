@@ -18,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.configuration.AjaxTimeoutRedirectFilter;
+import com.doctor.spa.dto.NewsDto;
 import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.entity.SubProduct;
 import com.doctor.spa.mapper.ProductMapper;
@@ -132,7 +133,7 @@ public class ProductServiceImpl implements ProductService {
 			return false;
 		}
 		com.doctor.spa.entity.Product service = productRepo.findById(serviceDto.getId());
-		service.setImage(serviceDto.getImage());
+		service.setImage(serviceDto.getImageKey());
 		service.setName(serviceDto.getName());
 		service.setUrl(serviceDto.getUrl());
 		service.setContent(serviceDto.getContent());
@@ -161,5 +162,14 @@ public class ProductServiceImpl implements ProductService {
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;
+	}
+
+	@Override
+	public List<ProductDto> getAll() {
+		List<ProductDto> productDtos = new ArrayList<ProductDto>();
+		productRepo.findAll().forEach(x -> {
+			productDtos.add(productMapper.toDto(x));
+		});
+		return productDtos;
 	}
 }

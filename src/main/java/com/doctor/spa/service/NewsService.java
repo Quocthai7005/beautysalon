@@ -38,4 +38,6 @@ public interface NewsService {
 	Boolean deletePost(Long id);
 	
 	NewsDto getPost(long id);
+	
+	List<NewsDto> getAll();
 }

@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -29,19 +31,19 @@ import com.doctor.spa.service.NewsService;
 @Service
 @Transactional
 public class NewsServiceImpl implements NewsService {
-	
+
 	@Autowired
 	NewsRepo newsRepo;
-	
+
 	@Autowired
 	SubProductRepo childServiceRepo;
-	
+
 	@Autowired
 	ProductRepo serviceRepo;
-	
+
 	@Autowired
 	SubProductMapper childServiceMapper;
-	
+
 	@Autowired
 	NewsMapper newMapper;
 
@@ -99,7 +101,8 @@ public class NewsServiceImpl implements NewsService {
 	public List<SubProductDto> getChildServices(String url) {
 		News post = newsRepo.findByUrl(url);
 		List<SubProductDto> childServiceDtos = new ArrayList<SubProductDto>();
-		List<SubProduct> childServices = childServiceRepo.findFirst4BySubProductIdByDeletedFalse(post.getProduct().getId());
+		List<SubProduct> childServices = childServiceRepo
+				.findFirst4BySubProductIdByDeletedFalse(post.getProduct().getId());
 		childServices.forEach(childService -> {
 			childService.setUrl(childService.getParentProduct().getUrl() + "/" + childService.getUrl());
 			SubProductDto childServiceDto = childServiceMapper.toDto(childService);
@@ -116,7 +119,7 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public Page<NewsDto> getPostsWithConditions(Long id, String searchText, Pageable pageable) {
-		
+
 		Page<News> newsPosts = new PageImpl<>(Collections.emptyList());
 		if (id != null && searchText != null) {
 			System.out.println(id + " " + searchText);
@@ -130,7 +133,7 @@ public class NewsServiceImpl implements NewsService {
 				newsPosts = newsRepo.findByProductIdBySearchTextByDeletedFalse(id, searchText, pageable);
 			}
 		}
-		
+
 		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
 		newsPosts.getContent().forEach(post -> {
 			NewsDto dto = newMapper.toDto(post);
@@ -143,7 +146,7 @@ public class NewsServiceImpl implements NewsService {
 	public Map<String, Boolean> validateUrlNoId(String url) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
 		List<News> news = newsRepo.findByUrlByDeletedFalse(url);
-		Boolean isValid = news.isEmpty();	
+		Boolean isValid = news.isEmpty();
 		result.put("valid", isValid);
 		return result;
 	}
@@ -156,7 +159,7 @@ public class NewsServiceImpl implements NewsService {
 			return result;
 		}
 		List<News> services = newsRepo.findByUrlByIdNotEqual(id, url);
-		Boolean isValid = services.isEmpty();	
+		Boolean isValid = services.isEmpty();
 		result.put("valid", isValid);
 		return result;
 	}
@@ -170,7 +173,7 @@ public class NewsServiceImpl implements NewsService {
 		// change to entity
 		com.doctor.spa.entity.Product service = new com.doctor.spa.entity.Product();
 		service = serviceRepo.findById(dto.getParentServiceId());
-		
+
 		News news = new News();
 		news.setName(dto.getName());
 		news.setUrl(dto.getUrl());
@@ -186,8 +189,8 @@ public class NewsServiceImpl implements NewsService {
 	public Boolean deletePost(Long id) {
 		if (id == null) {
 			return false;
-		}	
-		newsRepo.deleteById(id);	
+		}
+		newsRepo.deleteById(id);
 		return true;
 	}
 
@@ -207,7 +210,7 @@ public class NewsServiceImpl implements NewsService {
 		// change to entity
 		com.doctor.spa.entity.Product service = new com.doctor.spa.entity.Product();
 		service = serviceRepo.findById(dto.getParentServiceId());
-		
+
 		News news = newsRepo.findById(dto.getId());
 		news.setName(dto.getName());
 		news.setImage(imageService.uploadFile(image));
@@ -217,4 +220,15 @@ public class NewsServiceImpl implements NewsService {
 		newsRepo.save(news);
 		return true;
 	}
+
+	@Override
+	@Transactional
+	public List<NewsDto> getAll() {
+		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
+		newsRepo.findAll().forEach(x -> {
+			newsDtos.add(newMapper.toDto(x));
+		});
+		return newsDtos;
+	}
+
 }

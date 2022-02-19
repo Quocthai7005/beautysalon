@@ -7,7 +7,8 @@ public class ProductDto extends BaseDto {
 	private String name;
 	private String intro;	
 	private String content;
-	private String image;
+	private String imageKey;
+	private String imageBaseUrl;
 	private String url;
 	private Integer displayOrder;
 	
@@ -49,17 +50,23 @@ public class ProductDto extends BaseDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
 	public List<NewsDto> getNews() {
 		return news;
 	}
 	public void setNews(List<NewsDto> news) {
 		this.news = news;
+	}
+	public String getImageKey() {
+		return imageKey;
+	}
+	public void setImageKey(String imageKey) {
+		this.imageKey = imageKey;
+	}
+	public String getImageBaseUrl() {
+		return imageBaseUrl;
+	}
+	public void setImageBaseUrl(String imageBaseUrl) {
+		this.imageBaseUrl = imageBaseUrl;
 	}
 
 }

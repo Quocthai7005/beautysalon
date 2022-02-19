@@ -44,7 +44,8 @@ public class ProductMapperImpl implements ProductMapper {
 			dto.setId(service.getId());
 			dto.setContent(service.getContent());
 			dto.setCreatedDate(service.getCreatedDate().toString());
-			dto.setImage(amazonS3.getUrl(bucketName, service.getImage()).toString());
+			dto.setImageKey(service.getImage());
+			dto.setImageBaseUrl("https://" + bucketName + ".s3.amazonaws.com/");
 			dto.setIntro(service.getIntro());
 			dto.setName(service.getName());
 			dto.setUpdatedDate(service.getUpdatedDate().toString());
@@ -75,7 +76,7 @@ public class ProductMapperImpl implements ProductMapper {
 		com.doctor.spa.entity.Product service = new com.doctor.spa.entity.Product();
 		service.setContent(dto.getContent());
 		service.setSubProducts(new ArrayList<SubProduct>());
-		service.setImage(dto.getImage());
+		service.setImage(dto.getImageKey());
 		service.setIntro(dto.getIntro());
 		service.setName(dto.getName());
 		service.setNews(new ArrayList<News>());

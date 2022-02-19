@@ -93,19 +93,19 @@
 						<li class="nav-item ">
 							<a class="nav-link" href="<@spring.url '/admin/bucket?directory=news'/>">
 								<i class="material-icons">cloud_queue</i>
-								<p>AWS S3 - NEWS</p>
+								<p>AWS S3 - TIN TỨC</p>
 							</a>
 						</li>
 						<li class="nav-item ">
 							<a class="nav-link" href="<@spring.url '/admin/bucket?directory=product'/>">
 								<i class="material-icons">cloud_queue</i>
-								<p>AWS S3 - PRODUCT</p>
+								<p>AWS S3 - NHÓM DV</p>
 							</a>
 						</li>
 						<li class="nav-item ">
-							<a class="nav-link" href="<@spring.url '/admin/bucket?directory=others'/>">
+							<a class="nav-link" href="<@spring.url '/admin/bucket?directory=subproduct'/>">
 								<i class="material-icons">cloud_queue</i>
-								<p>AWS S3 - OTHERS</p>
+								<p>AWS S3 - DV</p>
 							</a>
 						</li>
 					</ul>

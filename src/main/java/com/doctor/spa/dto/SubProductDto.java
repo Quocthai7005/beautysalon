@@ -12,7 +12,9 @@ public class SubProductDto extends BaseDto{
 	
 	private String intro;
 	
-	private String image;
+	private String imageKey;
+	
+	private String imageBaseUrl;
 
 	private String url;
 	
@@ -40,14 +42,6 @@ public class SubProductDto extends BaseDto{
 
 	public void setIntro(String intro) {
 		this.intro = intro;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
 	}
 
 	public String getUrl() {
@@ -80,6 +74,22 @@ public class SubProductDto extends BaseDto{
 
 	public void setIsShownHome(Boolean isShownHome) {
 		this.isShownHome = isShownHome;
+	}
+
+	public String getImageKey() {
+		return imageKey;
+	}
+
+	public void setImageKey(String imageKey) {
+		this.imageKey = imageKey;
+	}
+
+	public String getImageBaseUrl() {
+		return imageBaseUrl;
+	}
+
+	public void setImageBaseUrl(String imageBaseUrl) {
+		this.imageBaseUrl = imageBaseUrl;
 	}
 	
 }
