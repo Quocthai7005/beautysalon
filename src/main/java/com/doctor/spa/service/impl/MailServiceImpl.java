@@ -41,7 +41,7 @@ public class MailServiceImpl implements MailService {
             e.printStackTrace();
         }
     }
- 
+
     public String geContentFromTemplate(Map < String, Object > model) {
         StringBuffer content = new StringBuffer();
  

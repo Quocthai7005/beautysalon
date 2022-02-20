@@ -27,12 +27,13 @@ public class SubscriptionController {
 	}
 
 	@GetMapping(value = "/subscribe/confirm/{id}")
-	public ResponseEntity<ResponseBody<Boolean>> confirm(@PathVariable String id) {
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subscriptionService.confirm(id)));
+	public ResponseEntity<ResponseBody<Boolean>> confirm(@PathVariable String id, @PathVariable String email) {
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subscriptionService.confirm(id, email)));
 	}
 
 	@GetMapping(value = "/unsubscribe/{id}")
-	public ResponseEntity<ResponseBody<Boolean>> unSubscribe(@PathVariable String id) {
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subscriptionService.unSubscribe(id)));
+	public ResponseEntity<ResponseBody<Boolean>> unSubscribe(@PathVariable String id, @PathVariable String email) {
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subscriptionService.unSubscribe(id, email)));
 	}
+	
 }

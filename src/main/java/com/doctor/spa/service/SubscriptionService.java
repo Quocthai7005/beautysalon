@@ -8,9 +8,9 @@ public interface SubscriptionService {
 
 	Boolean subscribe(Subscription subscription);
 
-	Boolean unSubscribe(String id);
+	Boolean unSubscribe(String email, String id);
 
-	Boolean confirm(String id);
+	Boolean confirm(String email, String id);
 	
 	List<Subscription> listAll();
 }

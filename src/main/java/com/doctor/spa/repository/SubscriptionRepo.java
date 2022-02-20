@@ -6,5 +6,5 @@ import com.doctor.spa.entity.Subscription;
 
 public interface SubscriptionRepo extends JpaRepository<Subscription, Long>{
 
-	Subscription findById(String id);
+	Subscription findByIdByEmail(String id, String email);
 }
