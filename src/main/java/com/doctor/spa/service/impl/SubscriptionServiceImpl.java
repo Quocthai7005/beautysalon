@@ -1,5 +1,7 @@
 package com.doctor.spa.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.doctor.spa.entity.Subscription;
@@ -14,18 +16,31 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public Boolean subscribe(Subscription subscription) {
 		subscriptionRepo.save(subscription);
+		
+		//send email with subscription code
+		//create email template
 		return null;
 	}
 
 	@Override
 	public Boolean unSubscribe(String id) {
+		Subscription subscription = subscriptionRepo.findById(id);
+		subscription.setConfirm(false);
+		subscriptionRepo.save(subscription);
 		return null;
 	}
 
 	@Override
 	public Boolean confirm(String id) {
-		// TODO Auto-generated method stub
+		Subscription subscription = subscriptionRepo.findById(id);
+		subscription.setConfirm(true);
+		subscriptionRepo.save(subscription);
 		return null;
+	}
+
+	@Override
+	public List<Subscription> listAll() {
+		return subscriptionRepo.findAll();
 	}
 
 }

@@ -1,5 +1,7 @@
 package com.doctor.spa.service;
 
+import java.util.List;
+
 import com.doctor.spa.entity.Subscription;
 
 public interface SubscriptionService {
@@ -9,4 +11,6 @@ public interface SubscriptionService {
 	Boolean unSubscribe(String id);
 
 	Boolean confirm(String id);
+	
+	List<Subscription> listAll();
 }

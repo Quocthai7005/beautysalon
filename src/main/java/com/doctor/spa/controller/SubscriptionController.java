@@ -6,9 +6,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.doctor.spa.common.response.ResponseBody;
+import com.doctor.spa.entity.Subscription;
 import com.doctor.spa.service.SubscriptionService;
 
 @Controller
@@ -18,14 +21,14 @@ public class SubscriptionController {
 	@Autowired
 	SubscriptionService subscriptionService;
 
-	@GetMapping(value = "/subscribe/{id}")
-	public ResponseEntity<ResponseBody<Boolean>> subscribe(@PathVariable String id) {
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subscriptionService.subscribe(id)));
+	@PostMapping(value = "/subscribe")
+	public ResponseEntity<ResponseBody<Boolean>> subscribe(@RequestParam Subscription subscription) {
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subscriptionService.subscribe(subscription)));
 	}
 
 	@GetMapping(value = "/subscribe/confirm/{id}")
-	public ResponseEntity<ResponseBody<Boolean>> subscribe(@PathVariable String id) {
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subscriptionService.subscribe(id)));
+	public ResponseEntity<ResponseBody<Boolean>> confirm(@PathVariable String id) {
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subscriptionService.confirm(id)));
 	}
 
 	@GetMapping(value = "/unsubscribe/{id}")
