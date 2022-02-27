@@ -30,7 +30,7 @@
 											</#if>
 											<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="padding-top: 10px">
 												<div class="card" style="display:inline-block">
-													<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
+													<img src="${service.imageBaseUrl + service.imageKey}" width=180 height=180 class="card-img-top" alt="${service.name}" />
 													<div class="card-body">
 														<h5 class="card-title">${service.name}</h5>
 														<a style="font-family: Quicksand-Bold" href="service/${service.url}">Xem chi tiết →</a>
@@ -109,7 +109,7 @@
 								</#if>
 								<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="padding-top: 10px">
 									<div class="card" style="display:inline-block">
-										<img src="${service.image}" width=180 height=180 class="card-img-top" alt="${service.name}">
+										<img src="${service.imageBaseUrl + service.imageKey}" width=180 height=180 class="card-img-top" alt="${service.name}">
 										<div class="card-body">
 											<h5 class="card-title">${service.name}</h5>
 											<a style="font-family: Quicksand-Bold" href="${service.url}">Xem chi tiết →</a>

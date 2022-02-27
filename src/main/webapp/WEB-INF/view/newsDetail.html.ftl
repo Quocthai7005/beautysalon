@@ -43,7 +43,7 @@
 							<#list latestPosts as post>						
 								<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
 									<div class="card">
-										<img src="${post.image}" width=180 height=180 class="card-img-top" alt="${post.name}">
+										<img src="${post.imageBaseUrl + post.imageKey}" width=180 height=180 class="card-img-top" alt="${post.name}">
 										<div class="card-body">
 											<h5 class="card-title">${post.name}</h5>
 											<a style="font-family: Quicksand-Bold" href="${post.url}">Xem chi tiết →</a>
