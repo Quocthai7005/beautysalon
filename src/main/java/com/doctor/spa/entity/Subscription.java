@@ -1,9 +1,13 @@
 package com.doctor.spa.entity;
 
+import static javax.persistence.GenerationType.IDENTITY;
+
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -12,14 +16,17 @@ public class Subscription {
 
 	private static final long serialVersionUID = 1L;
 
+	@Column(name = "email")
 	private String email;
 	
-	@Column(name = "firstName")
+	@Column(name = "firstname")
 	private String fistName;
 	
-	@Column(name = "lastName")
+	@Column(name = "lastname")
 	private String lastName;
-	
+
+	@Id
+	@GeneratedValue(strategy = IDENTITY)
 	@Column(name = "id")
 	private String id;
 	

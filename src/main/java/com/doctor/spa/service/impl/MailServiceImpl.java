@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
 import com.doctor.spa.entity.Mail;
@@ -15,6 +16,7 @@ import com.doctor.spa.service.MailService;
 
 import freemarker.template.Configuration;
 
+@Service
 public class MailServiceImpl implements MailService {
 
     @Autowired

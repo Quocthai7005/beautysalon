@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.doctor.spa.entity.Mail;
 import com.doctor.spa.entity.Subscription;
@@ -13,6 +15,8 @@ import com.doctor.spa.repository.SubscriptionRepo;
 import com.doctor.spa.service.MailService;
 import com.doctor.spa.service.SubscriptionService;
 
+@Service
+@Transactional
 public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Autowired
@@ -42,7 +46,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Boolean unSubscribe(String email, String id) {
-		Subscription subscription = subscriptionRepo.findByIdByEmail(id, email);
+		Subscription subscription = subscriptionRepo.findByIdAndEmail(id, email);
 		if (subscription != null) {
 			subscription.setConfirm(false);
 			subscriptionRepo.save(subscription);
@@ -58,7 +62,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Boolean confirm(String email, String id) {
-		Subscription subscription = subscriptionRepo.findByIdByEmail(id, email);
+		Subscription subscription = subscriptionRepo.findByIdAndEmail(id, email);
 		if (subscription != null) {
 			subscription.setConfirm(true);
 			subscriptionRepo.save(subscription);
