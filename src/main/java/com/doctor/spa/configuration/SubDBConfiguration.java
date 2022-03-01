@@ -21,17 +21,21 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@EnableJpaRepositories("com.doctor.spa.secondaryrepository")
-@ComponentScan({ "com.doctor.spa.subentity" })
-@PropertySources({ @PropertySource("classpath:database.properties"),
-		@PropertySource("classpath:application.properties") })
+@EnableJpaRepositories(
+	    basePackages = "com.doctor.spa.secondaryrepository", 
+	    entityManagerFactoryRef = "subEntityManagerFactory", 
+	    transactionManagerRef = "subTransactionManager")
+@PropertySources({
+    @PropertySource("classpath:database.properties"),
+    @PropertySource("classpath:application.properties")
+})
 public class SubDBConfiguration {
 
 	@Autowired
 	private Environment env;
 
 	@Bean
-	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Environment env) {
+	public LocalContainerEntityManagerFactoryBean subEntityManagerFactory(DataSource dataSource, Environment env) {
 		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
 		entityManagerFactoryBean.setDataSource(dataSource);
 		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
@@ -45,14 +49,14 @@ public class SubDBConfiguration {
 	}
 
 	@Bean
-	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+	public JpaTransactionManager subTransactionManager(EntityManagerFactory entityManagerFactory) {
 		JpaTransactionManager transactionManager = new JpaTransactionManager();
 		transactionManager.setEntityManagerFactory(entityManagerFactory);
 		return transactionManager;
 	}
 
 	@Bean
-	public DataSource dataSource() {
+	public DataSource subDataSource() {
 		HikariConfig hikariConfig = new HikariConfig();
 		hikariConfig.setDriverClassName(env.getProperty("spring.secondaryDatasource.driverClassName"));
 		hikariConfig.setJdbcUrl(env.getProperty("spring.secondaryDatasource.jdbc-url"));

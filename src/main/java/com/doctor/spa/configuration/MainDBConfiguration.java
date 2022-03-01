@@ -22,8 +22,10 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
-@EnableJpaRepositories("com.doctor.spa.repository")
-@ComponentScan({"com.doctor.spa.entity"})
+@EnableJpaRepositories(
+	    basePackages = "com.doctor.spa.repository", 
+	    entityManagerFactoryRef = "entityManagerFactory", 
+	    transactionManagerRef = "transactionManager")
 @PropertySources({
     @PropertySource("classpath:database.properties"),
     @PropertySource("classpath:application.properties")
