@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.doctor.spa.dto.PasswordChange;
-import com.doctor.spa.entity.AUser;
+import com.doctor.spa.entity.User;
 import com.doctor.spa.repository.UserRepo;
 import com.doctor.spa.service.AccountService;
 
@@ -28,7 +28,7 @@ public class AccountServiceImpl implements AccountService {
 		if (!userInfo.getNewPassword().equals(userInfo.getConfirmPassword())) {
 			return false;
 		}
-		AUser user = userRepo.findByUsername(userInfo.getUsername());
+		User user = userRepo.findByUsername(userInfo.getUsername());
 		user.setPassword(userInfo.getNewPassword());
 		userRepo.save(user);
 		return true;

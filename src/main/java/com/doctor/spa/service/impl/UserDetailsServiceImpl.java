@@ -13,7 +13,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.doctor.spa.entity.AUser;
+import com.doctor.spa.entity.User;
 import com.doctor.spa.entity.UserRole;
 import com.doctor.spa.repository.RoleRepo;
 import com.doctor.spa.repository.UserRepo;
@@ -28,7 +28,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		AUser user = userRepository.findByUsername(username);
+		User user = userRepository.findByUsername(username);
 		Set<GrantedAuthority> grantedAuthorities = new HashSet();
 		List<UserRole> roles = roleRepository.findByUsername(username);
 		for (UserRole role : roles){

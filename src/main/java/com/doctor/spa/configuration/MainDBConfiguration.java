@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
 import org.springframework.core.env.Environment;
@@ -22,42 +23,39 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableJpaRepositories("com.doctor.spa.repository")
-@ComponentScan({"com.doctor.spa"})
+@ComponentScan({"com.doctor.spa.entity"})
 @PropertySources({
     @PropertySource("classpath:database.properties"),
     @PropertySource("classpath:application.properties")
 })
-public class DbConfiguration {
-	
+public class MainDBConfiguration {
+
 	@Autowired
 	private Environment env;
 
- @Bean
-  public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource,
-      Environment env) {
-    LocalContainerEntityManagerFactoryBean entityManagerFactoryBean =
-        new LocalContainerEntityManagerFactoryBean();
-    entityManagerFactoryBean.setDataSource(dataSource);
-    entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-    entityManagerFactoryBean.setPackagesToScan("com.doctor.spa.entity");
-    Properties jpaProperties = new Properties();
-    jpaProperties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
-    jpaProperties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
-    jpaProperties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
-    entityManagerFactoryBean.setJpaProperties(jpaProperties);
-    return entityManagerFactoryBean;
-  }
-	
-	
+	@Bean
+	public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, Environment env) {
+		LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+		entityManagerFactoryBean.setDataSource(dataSource);
+		entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+		entityManagerFactoryBean.setPackagesToScan("com.doctor.spa.entity");
+		Properties jpaProperties = new Properties();
+		jpaProperties.put("hibernate.dialect", env.getRequiredProperty("hibernate.dialect"));
+		jpaProperties.put("hibernate.show_sql", env.getRequiredProperty("hibernate.show_sql"));
+		jpaProperties.put("hibernate.format_sql", env.getRequiredProperty("hibernate.format_sql"));
+		entityManagerFactoryBean.setJpaProperties(jpaProperties);
+		return entityManagerFactoryBean;
+	}
 
 	@Bean
-    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
-        JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory);
-        return transactionManager;
-    }
+	public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory) {
+		JpaTransactionManager transactionManager = new JpaTransactionManager();
+		transactionManager.setEntityManagerFactory(entityManagerFactory);
+		return transactionManager;
+	}
 
 	@Bean
+	@Primary
 	public DataSource dataSource() {
 		HikariConfig hikariConfig = new HikariConfig();
 		hikariConfig.setDriverClassName(env.getProperty("spring.primaryDatasource.driverClassName"));
