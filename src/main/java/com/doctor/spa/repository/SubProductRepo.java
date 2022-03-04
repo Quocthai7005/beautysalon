@@ -1,6 +1,7 @@
 package com.doctor.spa.repository;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +17,7 @@ public interface SubProductRepo extends JpaRepository<SubProduct, Long>{
 	// Admin's query
 
 	@Query(value = "SELECT * FROM subproduct cs WHERE cs.parent_product_id = ?1 AND cs.is_deleted = 0 LIMIT 4", nativeQuery = true)
-	List<SubProduct> findFirst4BySubProductIdByDeletedFalse(Long id);
+	Stream<SubProduct> findFirst4BySubProductIdByDeletedFalse(Long id);
 
 	//@Query(value = "SELECT cs FROM subproduct cs WHERE cs.parent_product_id = ?1 AND cs.is_deleted = 0")
 	Page<SubProduct> findByParentProductIdAndDeleted(Long id, Boolean isDeleted, Pageable pageable);

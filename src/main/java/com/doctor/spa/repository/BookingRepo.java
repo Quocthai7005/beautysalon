@@ -9,12 +9,13 @@ import org.springframework.data.jpa.repository.Query;
 
 import com.doctor.spa.entity.Booking;
 
-public interface BookingRepo extends JpaRepository<Booking, Long>{
+public interface BookingRepo extends JpaRepository<Booking, Long> {
 
 	@Query(value = "SELECT b FROM Booking b WHERE b.status = ?1")
 	Page<Booking> findByStatus(Pageable pageable, String status);
 
 	List<Booking> findByStatus(String status);
-	
+
 	Booking findById(long id);
+
 }

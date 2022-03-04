@@ -94,6 +94,6 @@ public class BookingServiceImpl implements BookingService {
 		Booking booking = bookingRepo.findById(id);
 		booking.setStatus(status);
 		bookingRepo.save(booking);
-		return null;
+		return true;
 	}
 }

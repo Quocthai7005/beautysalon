@@ -1,6 +1,7 @@
 package com.doctor.spa.repository;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,7 +32,7 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 
 	Product findByUrl(String url);
 	
-	List<Product> findByDeletedFalseAndUrlNotLike(String url);
+	Stream<Product> findByDeletedFalseAndUrlNotLike(String url);
 	
 	@Query(value = "SELECT * FROM product s WHERE s.url LIKE ?1 AND s.id != ?2 AND s.is_deleted = 0", nativeQuery = true)
 	List<Product> findByUrlByIdNotEqual(String url, Long id);

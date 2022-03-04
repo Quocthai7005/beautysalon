@@ -1,7 +1,5 @@
 package com.doctor.spa.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,12 +16,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.doctor.spa.configuration.AjaxTimeoutRedirectFilter;
-import com.doctor.spa.dto.NewsDto;
 import com.doctor.spa.dto.ProductDto;
-import com.doctor.spa.entity.SubProduct;
 import com.doctor.spa.mapper.ProductMapper;
-import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.repository.ProductRepo;
+import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.service.AwsS3Service;
 import com.doctor.spa.service.ProductService;
 
@@ -31,7 +27,7 @@ import com.doctor.spa.service.ProductService;
 @Transactional(readOnly = true)
 public class ProductServiceImpl implements ProductService {
 	
-	private static final Logger LOGGER = LoggerFactory.getLogger(AjaxTimeoutRedirectFilter.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
 	
 	@Autowired
 	ProductRepo productRepo;
@@ -46,44 +42,38 @@ public class ProductServiceImpl implements ProductService {
 	AwsS3Service imageService;
 
 	@Override
-	public List<ProductDto> getAllServices() {	
-		List<com.doctor.spa.entity.Product> products = this.productRepo.findByDeletedFalse();
-		List<ProductDto> productDtos = products
+	public List<ProductDto> getAllServices() {
+		return this.productRepo.findByDeletedFalse()
 				.stream()
-				.map(product -> productMapper.toDto(product)).collect(Collectors.toList());
-		return productDtos;
+				.map(productMapper::toDto)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public ProductDto getServiceByUrl(String url) {
-		com.doctor.spa.entity.Product product = productRepo.findByUrl(url);
-		ProductDto dto = productMapper.toDto(product);
-		return dto;
+		return productMapper.toDto(productRepo.findByUrl(url));
 	}
 
 	@Override
 	public List<ProductDto> getServiceOtherThan(String url) {
-		List<com.doctor.spa.entity.Product> products = productRepo.findByDeletedFalseAndUrlNotLike(url);
-		List<ProductDto> productDtos = products.stream().map(service -> productMapper.toDto(service)).collect(Collectors.toList());
-		return productDtos;
+		return productRepo
+				.findByDeletedFalseAndUrlNotLike(url)
+				.map(productMapper::toDto)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public Page<ProductDto> getServices(Pageable pageable) {
-		Page<com.doctor.spa.entity.Product> services = new PageImpl<>(Collections.emptyList());
-		services = productRepo.findByDeletedFalse(pageable);
-		List<ProductDto> serviceDtos = new ArrayList<ProductDto>();
-		services.getContent().forEach(service -> {
-			ProductDto dto = productMapper.toDto(service);
-			serviceDtos.add(dto);
-		});
-		return new PageImpl<ProductDto>(serviceDtos);
+		return new PageImpl<>(
+				productRepo.findByDeletedFalse(pageable)
+				.getContent()
+				.stream().map(productMapper::toDto)
+				.collect(Collectors.toList()));
 	}
 	
 	@Override
 	public Integer getServiceNo() {	
-		Integer serviceNo = productRepo.countByDeletedFalse();
-		return serviceNo;	
+		return productRepo.countByDeletedFalse();
 	}
 
 	@Override
@@ -92,8 +82,7 @@ public class ProductServiceImpl implements ProductService {
 		if (id == null) {
 			return false;
 		}
-		List<SubProduct> childServices = subProductRepo.findFirst4BySubProductIdByDeletedFalse(id);
-		if (childServices.size() > 0) {
+		if (subProductRepo.findFirst4BySubProductIdByDeletedFalse(id).count() > 0) {
 			return false;
 		} else {
 			productRepo.deleteByIdDeletedFalse(id);
@@ -117,9 +106,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public ProductDto getServiceById(long id) {
-		com.doctor.spa.entity.Product service = productRepo.findById(id);
-		ProductDto dto = productMapper.toDto(service);
-		return dto;
+		return productMapper.toDto(productRepo.findById(id));
 	}
 
 	@Override
@@ -166,10 +153,10 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<ProductDto> getAll() {
-		List<ProductDto> productDtos = new ArrayList<ProductDto>();
-		productRepo.findAll().forEach(x -> {
-			productDtos.add(productMapper.toDto(x));
-		});
-		return productDtos;
+		return productRepo
+				.findAll()
+				.stream()
+				.map(productMapper::toDto)
+				.collect(Collectors.toList());
 	}
 }

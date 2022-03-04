@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,14 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.dto.SubProductDto;
 import com.doctor.spa.entity.SubProduct;
 import com.doctor.spa.mapper.SubProductMapper;
-import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.repository.ProductRepo;
-import com.doctor.spa.service.SubProductService;
+import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.service.AwsS3Service;
+import com.doctor.spa.service.SubProductService;
 
 @Service
 @Transactional
@@ -72,15 +72,12 @@ public class SubProductServiceImpl implements SubProductService{
 	}
 
 	@Override
-	public Integer getServiceNo(Long id) {
-		List<SubProduct> services = new ArrayList<SubProduct>();
+	public long getServiceNo(Long id) {
 		if (id == 0 || id == null) {
-			services = subProductRepo.findByDeletedFalse();
+			return subProductRepo.findByDeletedFalse().size();
 		} else {
-			services = subProductRepo.findFirst4BySubProductIdByDeletedFalse(id);
+			return subProductRepo.findFirst4BySubProductIdByDeletedFalse(id).count();
 		}
-		System.out.println(services.size());
-		return services.size();
 	}
 
 	@Override
