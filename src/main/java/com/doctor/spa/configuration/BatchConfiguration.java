@@ -3,9 +3,12 @@ package com.doctor.spa.configuration;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.springframework.batch.core.Job;
+import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.EnableBatchProcessing;
 import org.springframework.batch.core.configuration.annotation.JobBuilderFactory;
 import org.springframework.batch.core.configuration.annotation.StepBuilderFactory;
+import org.springframework.batch.core.launch.support.RunIdIncrementer;
 import org.springframework.batch.item.database.JpaItemWriter;
 import org.springframework.batch.item.file.FlatFileItemReader;
 import org.springframework.batch.item.file.LineMapper;
@@ -25,9 +28,6 @@ public class BatchConfiguration {
 	public JobBuilderFactory jobBuilderFactory;
 
 	@Autowired
-	public EntityManagerFactory entityManagerFactory;
-
-	@Autowired
 	public StepBuilderFactory stepBuilderFactory;
 
 	@Bean
@@ -41,7 +41,7 @@ public class BatchConfiguration {
 			public Invoice mapLine(String line, int lineNumber) throws Exception {
 				return null;
 			}
-			
+
 		});
 		return reader;
 	}
@@ -52,9 +52,21 @@ public class BatchConfiguration {
 	}
 
 	@Bean
-	public JpaItemWriter<Invoice> writer(DataSource dataSource) {
-		JpaItemWriter<Invoice> writer = new JpaItemWriter<Invoice>();
+	public JpaItemWriter<Invoice> writer(EntityManagerFactory entityManagerFactory) {
+		JpaItemWriter<Invoice> writer = new JpaItemWriter<>();
 		writer.setEntityManagerFactory(entityManagerFactory);
 		return writer;
+	}
+
+	@Bean
+	public Job importUserJob(JobCompletionNotificationListener listener, Step step1) {
+		return jobBuilderFactory.get("importInvoiceJob").incrementer(new RunIdIncrementer()).listener(listener).flow(step1)
+				.end().build();
+	}
+
+	@Bean
+	public Step step1(JpaItemWriter<Invoice> writer) {
+		return stepBuilderFactory.get("step1").<Invoice, Invoice>chunk(10).reader(reader()).processor(processor())
+				.writer(writer).build();
 	}
 }
