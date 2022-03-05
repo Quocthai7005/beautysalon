@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,15 +15,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.doctor.spa.dto.SubProductDto;
 import com.doctor.spa.dto.NewsDto;
-import com.doctor.spa.entity.SubProduct;
+import com.doctor.spa.dto.SubProductDto;
 import com.doctor.spa.entity.News;
-import com.doctor.spa.mapper.SubProductMapper;
 import com.doctor.spa.mapper.NewsMapper;
-import com.doctor.spa.repository.SubProductRepo;
+import com.doctor.spa.mapper.SubProductMapper;
 import com.doctor.spa.repository.NewsRepo;
 import com.doctor.spa.repository.ProductRepo;
+import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.service.AwsS3Service;
 import com.doctor.spa.service.NewsService;
 
@@ -52,14 +50,12 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public Page<NewsDto> getPosts(Pageable pageable) {
-		Page<News> newsPosts = new PageImpl<>(Collections.emptyList());
-		newsPosts = newsRepo.findByDeletedFalse(pageable);
-		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
-		newsPosts.getContent().forEach(post -> {
-			NewsDto dto = newMapper.toDto(post);
-			newsDtos.add(dto);
-		});
-		return new PageImpl<NewsDto>(newsDtos);
+		return new PageImpl<>(newsRepo
+				.findByDeletedFalse(pageable)
+				.getContent()
+				.stream()
+				.map(newMapper::toDto)
+				.collect(Collectors.toList()));
 	}
 
 	@Override
@@ -76,44 +72,35 @@ public class NewsServiceImpl implements NewsService {
 				result = newsRepo.findByProductIdBySearchTextByDeletedFalse(id, searchText);
 			}
 		}
-		Integer postNo = result.size();
-		return postNo;
+		return result.size();
 	}
 
 	@Override
 	public News getSinglePost(String url) {
-		News post = newsRepo.findByUrl(url);
-		return post;
+		return newsRepo.findByUrl(url);
 	}
 
 	@Override
 	public List<NewsDto> getLatestPost() {
-		List<News> posts = newsRepo.findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
-		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
-		posts.forEach(post -> {
-			NewsDto dto = newMapper.toDto(post);
-			newsDtos.add(dto);
-		});
-		return newsDtos;
+		return newsRepo
+				.findFirst4ByUrlNotLikeOrderByCreatedDateDesc()
+				.map(newMapper::toDto)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public List<SubProductDto> getChildServices(String url) {
-		News post = newsRepo.findByUrl(url);
-		List<SubProductDto> childServiceDtos = new ArrayList<SubProductDto>();
-		List<SubProduct> childServices = childServiceRepo
-				.findFirst4BySubProductIdByDeletedFalse(post.getProduct().getId());
-		childServices.forEach(childService -> {
-			childService.setUrl(childService.getParentProduct().getUrl() + "/" + childService.getUrl());
-			SubProductDto childServiceDto = childServiceMapper.toDto(childService);
-			childServiceDtos.add(childServiceDto);
-		});
-		return childServiceDtos;
+		return childServiceRepo
+				.findFirst4BySubProductIdByDeletedFalse(newsRepo.findByUrl(url).getProduct().getId())
+				.map(x -> {
+					x.setUrl(x.getParentProduct().getUrl() + "/" + x.getUrl());
+					return x;
+				}).map(childServiceMapper::toDto)
+				.collect(Collectors.toList());
 	}
 
 	@Override
 	public Integer getPostsNo() {
-		// TODO Auto-generated method stub
 		return newsRepo.countByDeletedFalse();
 	}
 
@@ -122,7 +109,6 @@ public class NewsServiceImpl implements NewsService {
 
 		Page<News> newsPosts = new PageImpl<>(Collections.emptyList());
 		if (id != null && searchText != null) {
-			System.out.println(id + " " + searchText);
 			if (id == 0 && searchText.equals("")) {
 				newsPosts = newsRepo.findByDeletedFalse(pageable);
 			} else if (id == 0 && !searchText.equals("")) {
@@ -133,13 +119,12 @@ public class NewsServiceImpl implements NewsService {
 				newsPosts = newsRepo.findByProductIdBySearchTextByDeletedFalse(id, searchText, pageable);
 			}
 		}
-
-		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
-		newsPosts.getContent().forEach(post -> {
-			NewsDto dto = newMapper.toDto(post);
-			newsDtos.add(dto);
-		});
-		return new PageImpl<NewsDto>(newsDtos);
+		
+		return new PageImpl<>(newsPosts.
+				getContent().
+				stream().
+				map(newMapper::toDto)
+				.collect(Collectors.toList()));
 	}
 
 	@Override
@@ -196,9 +181,7 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	public NewsDto getPost(long id) {
-		News news = newsRepo.findById(id);
-		NewsDto dto = newMapper.toDto(news);
-		return dto;
+		return newMapper.toDto(newsRepo.findById(id));
 	}
 
 	@Override
@@ -224,11 +207,10 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	@Transactional
 	public List<NewsDto> getAll() {
-		List<NewsDto> newsDtos = new ArrayList<NewsDto>();
-		newsRepo.findAll().forEach(x -> {
-			newsDtos.add(newMapper.toDto(x));
-		});
-		return newsDtos;
+		return newsRepo.findAll()
+			.stream()
+			.map(newMapper::toDto)
+			.collect(Collectors.toList());
 	}
 
 }

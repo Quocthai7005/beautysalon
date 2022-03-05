@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -15,14 +16,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.dto.SubProductDto;
 import com.doctor.spa.entity.SubProduct;
 import com.doctor.spa.mapper.SubProductMapper;
-import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.repository.ProductRepo;
-import com.doctor.spa.service.SubProductService;
+import com.doctor.spa.repository.SubProductRepo;
 import com.doctor.spa.service.AwsS3Service;
+import com.doctor.spa.service.SubProductService;
 
 @Service
 @Transactional
@@ -42,61 +42,51 @@ public class SubProductServiceImpl implements SubProductService{
 
 	@Override
 	public List<SubProductDto> getHomeShownChildService() {
-		List<SubProduct> services = subProductRepo.getByIsShownHomeTrue();
-		List<SubProductDto> serviceDtos = new ArrayList<SubProductDto>();
-		services.forEach(service -> {
-			service.setUrl(service.getParentProduct().getUrl() + "/" + service.getUrl());
-			SubProductDto serviceDto = subProductMapper.toDto(service);
-			serviceDtos.add(serviceDto);
-		});
-		return serviceDtos;
+		return subProductRepo.getByIsShownHomeTrue()
+			.stream()
+			.map(x -> {
+				x.setUrl(x.getParentProduct().getUrl() + "/" + x.getUrl());
+				return x;
+			})
+			.map(subProductMapper::toDto)
+			.collect(Collectors.toList());
 	}
 
 	@Override
 	public SubProductDto getChildServiceByUrl(String url) {
-		SubProduct childService = subProductRepo.findByUrl(url);
-		SubProductDto childServiceDto = subProductMapper.toDto(childService);
-		return childServiceDto;
+		return subProductMapper.toDto(subProductRepo.findByUrl(url));
 	}
 
 	@Override
 	public List<SubProductDto> getChildServiceOtherThan(String serviceUrl, String childServiceUrl) {
-		com.doctor.spa.entity.Product service = productRepo.findByUrl(serviceUrl);
-		List<SubProduct> childServices = service.getSubProducts().stream().filter(s -> (s.getUrl() != childServiceUrl && s.isDeleted() == false)).collect(Collectors.toList());
-		List<SubProductDto> serviceDtos = new ArrayList<SubProductDto>();
-		childServices.forEach(childService -> {
-			SubProductDto serviceDto = subProductMapper.toDto(childService);
-			serviceDtos.add(serviceDto);
-		});
-		return serviceDtos;
+		return productRepo.findByUrl(serviceUrl).getSubProducts()
+			.stream()
+			.filter(s -> (!s.getUrl().equals(childServiceUrl) && !s.isDeleted()))
+			.map(subProductMapper::toDto)
+			.collect(Collectors.toList());
 	}
 
 	@Override
-	public Integer getServiceNo(Long id) {
-		List<SubProduct> services = new ArrayList<SubProduct>();
+	public long getServiceNo(Long id) {
 		if (id == 0 || id == null) {
-			services = subProductRepo.findByDeletedFalse();
+			return subProductRepo.findByDeletedFalse().size();
 		} else {
-			services = subProductRepo.findFirst4BySubProductIdByDeletedFalse(id);
+			return subProductRepo.findFirst4BySubProductIdByDeletedFalse(id).count();
 		}
-		System.out.println(services.size());
-		return services.size();
 	}
 
 	@Override
 	public Page<SubProductDto> getChildServiceByGroupId(Long id, Pageable pageable) {
-		Page<SubProduct> services = new PageImpl<>(Collections.emptyList());
+		Page<SubProduct> services;
 		if (id == 0 || id == null) {
 			services = subProductRepo.findByDeletedFalse(pageable);
 		} else {
 			services = subProductRepo.findByParentProductIdAndDeleted(id, false, pageable);
 		}
-		List<SubProductDto> serviceDtos = new ArrayList<SubProductDto>();
-		services.getContent().forEach(service -> {
-			SubProductDto dto = subProductMapper.toDto(service);
-			serviceDtos.add(dto);
-		});
-		return new PageImpl<SubProductDto>(serviceDtos);
+		return new PageImpl<>(services.getContent()
+				.stream()
+				.map(subProductMapper::toDto)
+				.collect(Collectors.toList()));
 	}
 
 	@Override
@@ -189,11 +179,11 @@ public class SubProductServiceImpl implements SubProductService{
 
 	@Override
 	public List<SubProductDto> getAll() {
-		List<SubProductDto> productDtos = new ArrayList<SubProductDto>();
-		subProductRepo.findAll().forEach(x -> {
-			productDtos.add(subProductMapper.toDto(x));
-		});
-		return productDtos;
+		return subProductRepo.findAll().
+				stream()
+				.map(subProductMapper::toDto)
+				.collect(Collectors.toList());
+
 	}
 
 }

@@ -49,7 +49,7 @@ public class ASubProductController {
 	}
 	
 	@GetMapping(value="/service-list/no")
-	public ResponseEntity<ResponseBody<Integer>> getChildServiceNo(@RequestParam Long groupId) {
+	public ResponseEntity<ResponseBody<Long>> getChildServiceNo(@RequestParam Long groupId) {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, childService.getServiceNo(groupId)));
 	}
 	

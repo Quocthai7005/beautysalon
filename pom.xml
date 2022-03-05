@@ -167,6 +167,18 @@
 			<artifactId>mail</artifactId>
 			<version>1.4.7</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-redis</artifactId>
+			<version>2.3.3.RELEASE</version>
+		</dependency>
+
+		<dependency>
+			<groupId>redis.clients</groupId>
+			<artifactId>jedis</artifactId>
+			<version>3.3.0</version>
+			<type>jar</type>
+		</dependency>
 	</dependencies>
 
 
@@ -187,10 +199,14 @@
 
 	<profiles>
 		<profile>
+			<id>develop</id>
 			<activation>
-				<activeByDefault>false</activeByDefault>
+				<activeByDefault>true</activeByDefault>
+				<property>
+					<name>spring.profiles.active</name>
+					<value>develop</value>
+				</property>
 			</activation>
-			<id>openshift</id>
 			<build>
 				<plugins>
 					<plugin>
@@ -207,7 +223,41 @@
 								<configuration>
 									<path>/</path>
 									<enableNaming>false</enableNaming>
-									<finalName>spa.jar</finalName>
+									<finalName>spa-dev.war</finalName>
+									<charset>utf-8</charset>
+								</configuration>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>production</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+				<property>
+					<name>spring.profiles.active</name>
+					<value>production</value>
+				</property>
+			</activation>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.tomcat.maven</groupId>
+						<artifactId>tomcat7-maven-plugin</artifactId>
+						<version>2.0</version>
+						<executions>
+							<execution>
+								<id>tomcat-run</id>
+								<goals>
+									<goal>exec-war-only</goal>
+								</goals>
+								<phase>package</phase>
+								<configuration>
+									<path>/</path>
+									<enableNaming>false</enableNaming>
+									<finalName>spa-prod.war</finalName>
 									<charset>utf-8</charset>
 								</configuration>
 							</execution>

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,9 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Autowired
 	MailService mailService;
 
+	@Autowired
+	RedisTemplate<String, ?> redisTemplate;
+
 	@Override
 	public Boolean subscribe(Subscription subscription) {
 		subscriptionRepo.save(subscription);
@@ -37,7 +41,8 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("firstName", subscription.getFistName());
 		model.put("lastName", subscription.getLastName());
-		model.put("subscriptionUrl", "http://localhost:8080/subscribe/confirm?id=" + id + "&email=" + subscription.getEmail());
+		model.put("subscriptionUrl",
+				"http://localhost:8080/subscribe/confirm?id=" + id + "&email=" + subscription.getEmail());
 		subscribeMail.setModel(model);
 
 		mailService.sendEmail(subscribeMail);
@@ -57,6 +62,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public List<Subscription> listAll() {
+		redisTemplate.opsForList();
 		return subscriptionRepo.findAll();
 	}
 

@@ -17,7 +17,7 @@ public interface SubProductService {
 
 	List<SubProductDto> getChildServiceOtherThan(String serviceUrl, String childServiceUrl);
 	
-	Integer getServiceNo(Long id);
+	long getServiceNo(Long id);
 	
 	Page<SubProductDto> getChildServiceByGroupId(Long id, Pageable pageable);
 	

@@ -1,6 +1,7 @@
 package com.doctor.spa.repository;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -49,6 +50,8 @@ public interface NewsRepo extends PagingAndSortingRepository<News, Long> {
 	
 	Page<News> findAll(Pageable pageable);
 	
+	List<News> findAll();
+	
 	Integer countByDeletedFalse();
 	
 	Page<News> findByDeletedFalse(Pageable pageable);
@@ -64,6 +67,6 @@ public interface NewsRepo extends PagingAndSortingRepository<News, Long> {
 	List<News> findByProductId(Long id);
 	
 	@Query(value = "SELECT * FROM News p WHERE p.is_deleted = 0 ORDER BY p.created_date LIMIT 4 ", nativeQuery = true)
-	List<News> findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
+	Stream<News> findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
 	
 }
