@@ -67,6 +67,6 @@ public interface NewsRepo extends PagingAndSortingRepository<News, Long> {
 	List<News> findByProductId(Long id);
 	
 	@Query(value = "SELECT * FROM News p WHERE p.is_deleted = 0 ORDER BY p.created_date LIMIT 4 ", nativeQuery = true)
-	Stream<News> findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
+	List<News> findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
 	
 }

@@ -24,7 +24,7 @@ import com.doctor.spa.service.AwsS3Service;
 import com.doctor.spa.service.ProductService;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class ProductServiceImpl implements ProductService {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);

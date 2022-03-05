@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -81,11 +82,12 @@ public class NewsServiceImpl implements NewsService {
 	}
 
 	@Override
+	@Transactional
 	public List<NewsDto> getLatestPost() {
-		return newsRepo
-				.findFirst4ByUrlNotLikeOrderByCreatedDateDesc()
-				.map(newMapper::toDto)
-				.collect(Collectors.toList());
+			return  newsRepo
+					.findFirst4ByUrlNotLikeOrderByCreatedDateDesc().stream()
+					.map(newMapper::toDto)
+					.collect(Collectors.toList());
 	}
 
 	@Override
