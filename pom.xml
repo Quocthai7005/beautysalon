@@ -196,11 +196,10 @@
 			<id>develop</id>
 			<activation>
 				<activeByDefault>true</activeByDefault>
-				<property>
-					<name>spring.profiles.active</name>
-					<value>develop</value>
-				</property>
 			</activation>
+			<properties>
+				<spring.profiles.active>develop</spring.profiles.active>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>
@@ -230,11 +229,10 @@
 			<id>production</id>
 			<activation>
 				<activeByDefault>false</activeByDefault>
-				<property>
-					<name>spring.profiles.active</name>
-					<value>production</value>
-				</property>
 			</activation>
+			<properties>
+				<spring.profiles.active>production</spring.profiles.active>
+			</properties>
 			<build>
 				<plugins>
 					<plugin>

@@ -30,6 +30,7 @@ import com.zaxxer.hikari.HikariDataSource;
     @PropertySource("classpath:database.properties"),
     @PropertySource("classpath:application.properties")
 })
+@Profile("develop")
 public class MainDBConfiguration {
 
 	@Autowired

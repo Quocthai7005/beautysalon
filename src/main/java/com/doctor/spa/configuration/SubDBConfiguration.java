@@ -29,6 +29,7 @@ import com.zaxxer.hikari.HikariDataSource;
     @PropertySource("classpath:database.properties"),
     @PropertySource("classpath:application.properties")
 })
+@Profile("production")
 public class SubDBConfiguration {
 
 	@Autowired
