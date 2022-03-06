@@ -3,7 +3,9 @@ package com.doctor.spa.configuration;
 import org.springframework.batch.core.BatchStatus;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.listener.JobExecutionListenerSupport;
+import org.springframework.stereotype.Component;
 
+@Component
 public class JobCompletionNotificationListener extends JobExecutionListenerSupport {
 
 	  public JobCompletionNotificationListener() {
