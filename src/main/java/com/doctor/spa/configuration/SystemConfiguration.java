@@ -7,14 +7,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class SystemConfiguration {
 
-	@Value("${paging.default_page}")
+	@Value("0")
 	private int defaultPage;
 	
 	@Value("${paging.default_size}")
 	private int defaultSize;
-
-	@Value("${attachment.base_path}")
-	private String basePath;
 
 	public int getDefaultPage() {
 		return defaultPage;
@@ -22,10 +19,6 @@ public class SystemConfiguration {
 
 	public int getDefaultSize() {
 		return defaultSize;
-	}
-
-	public String getBasePath() {
-		return basePath;
 	}
 
 }
