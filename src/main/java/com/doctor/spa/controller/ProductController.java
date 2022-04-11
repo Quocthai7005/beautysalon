@@ -33,30 +33,21 @@ public class ProductController {
 	
 	@GetMapping(value = "/{url}")
 	public String goToService(@PathVariable String url, Model model) {
-		ProductDto service = serService.getServiceByUrl(url);
-		List<ProductDto> otherServices = serService.getServiceOtherThan(url);
-		List<ProductDto> menuServices = serService.getAllServices();
-		List<PageText> pageTexts = pageTextService.findByPage("home");
-		model.addAttribute("menuServices", menuServices);
-		model.addAttribute("pageTexts", pageTexts);
-		model.addAttribute("service", service);
-		model.addAttribute("otherServices", otherServices);
+		model.addAttribute("menuServices", serService.getAllServices());
+		model.addAttribute("pageTexts", pageTextService.findByPage("home"));
+		model.addAttribute("service", serService.getServiceByUrl(url));
+		model.addAttribute("otherServices", serService.getServiceOtherThan(url));
 		model.addAttribute("menu", ConstUtil.menuService);
 		return Pages.SERVICE;
 	}
 	
 	@GetMapping(value = "/{service}/{childService}")
 	public String goToChildService(@PathVariable String service, @PathVariable String childService, Model model) {
-		SubProductDto childServiceDto = childSerService.getChildServiceByUrl(childService);
-		List<SubProductDto> otherChildServiceDtos = childSerService.getChildServiceOtherThan(service, childService);
-		List<ProductDto> otherServiceDtos = serService.getServiceOtherThan(service);
-		List<ProductDto> menuServices = serService.getAllServices();
-		List<PageText> pageTexts = pageTextService.findByPage("home");
-		model.addAttribute("menuServices", menuServices);
-		model.addAttribute("pageTexts", pageTexts);
-		model.addAttribute("otherChildServices", otherChildServiceDtos);
-		model.addAttribute("childService", childServiceDto);
-		model.addAttribute("services", otherServiceDtos);
+		model.addAttribute("menuServices", serService.getAllServices());
+		model.addAttribute("pageTexts", pageTextService.findByPage("home"));
+		model.addAttribute("otherChildServices", childSerService.getChildServiceOtherThan(service, childService));
+		model.addAttribute("childService", childSerService.getChildServiceByUrl(childService));
+		model.addAttribute("services", serService.getServiceOtherThan(service));
 		model.addAttribute("menu", ConstUtil.menuService);
 		return Pages.SERVICE_DETAIL;
 	}

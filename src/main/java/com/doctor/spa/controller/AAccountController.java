@@ -25,8 +25,7 @@ public class AAccountController {
 
 	@RequestMapping(value="/account", method=RequestMethod.GET)
 	public String goMain(Authentication authentication, Model model) {
-		String username = authentication.getName();
-		model.addAttribute("username", username);
+		model.addAttribute("username", authentication.getName());
 		return Pages.A_ACCOUNT;
 	}
 	

@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -66,11 +65,11 @@ public class NewsServiceImpl implements NewsService {
 			if (id == 0 && searchText.equals("")) {
 				result = newsRepo.findByDeletedFalse();
 			} else if (id == 0 && !searchText.equals("")) {
-				result = newsRepo.findBySearchTextByDeletedFalse(searchText);
+				result = newsRepo.findByNameContainsAndDeletedFalse(searchText);
 			} else if (id != 0 && searchText.equals("")) {
-				result = newsRepo.findByProductIdByDeletedFalse(id);
+				result = newsRepo.findByProductIdAndDeletedFalse(id);
 			} else {
-				result = newsRepo.findByProductIdBySearchTextByDeletedFalse(id, searchText);
+				result = newsRepo.findByProductIdAndNameContainsAndDeletedFalse(id, searchText);
 			}
 		}
 		return result.size();
@@ -85,15 +84,17 @@ public class NewsServiceImpl implements NewsService {
 	@Transactional
 	public List<NewsDto> getLatestPost() {
 			return  newsRepo
-					.findFirst4ByUrlNotLikeOrderByCreatedDateDesc().stream()
+					.findTop4ByDeletedFalseOrderByCreatedDateDesc().stream()
 					.map(newMapper::toDto)
 					.collect(Collectors.toList());
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<SubProductDto> getChildServices(String url) {
 		return childServiceRepo
-				.findFirst4BySubProductIdByDeletedFalse(newsRepo.findByUrl(url).getProduct().getId())
+				.findTop4ByParentProductIdAndDeletedFalse(newsRepo.findByUrl(url).getProduct().getId())
+				.stream()
 				.map(x -> {
 					x.setUrl(x.getParentProduct().getUrl() + "/" + x.getUrl());
 					return x;
@@ -114,11 +115,11 @@ public class NewsServiceImpl implements NewsService {
 			if (id == 0 && searchText.equals("")) {
 				newsPosts = newsRepo.findByDeletedFalse(pageable);
 			} else if (id == 0 && !searchText.equals("")) {
-				newsPosts = newsRepo.findBySearchTextByDeletedFalse(searchText, pageable);
+				newsPosts = newsRepo.findByNameContainsAndDeletedFalse(searchText, pageable);
 			} else if (id != 0 && searchText.equals("")) {
-				newsPosts = newsRepo.findByProductIdByDeletedFalse(id, pageable);
+				newsPosts = newsRepo.findByProductIdAndDeletedFalse(id, pageable);
 			} else {
-				newsPosts = newsRepo.findByProductIdBySearchTextByDeletedFalse(id, searchText, pageable);
+				newsPosts = newsRepo.findByProductIdAndNameContainsAndDeletedFalse(id, searchText, pageable);
 			}
 		}
 		
@@ -132,7 +133,7 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	public Map<String, Boolean> validateUrlNoId(String url) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
-		List<News> news = newsRepo.findByUrlByDeletedFalse(url);
+		List<News> news = newsRepo.findByUrlAndDeletedFalse(url);
 		Boolean isValid = news.isEmpty();
 		result.put("valid", isValid);
 		return result;
@@ -145,7 +146,7 @@ public class NewsServiceImpl implements NewsService {
 			result.put("valid", false);
 			return result;
 		}
-		List<News> services = newsRepo.findByUrlByIdNotEqual(id, url);
+		List<News> services = newsRepo.findByUrlAndIdNot(id, url);
 		Boolean isValid = services.isEmpty();
 		result.put("valid", isValid);
 		return result;

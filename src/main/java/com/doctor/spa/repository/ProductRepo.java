@@ -31,8 +31,8 @@ public interface ProductRepo extends JpaRepository<Product, Long> {
 	Product findById(Long id);
 
 	Product findByUrl(String url);
-	
-	Stream<Product> findByDeletedFalseAndUrlNotLike(String url);
+
+	List<Product> findByDeletedFalseAndUrlNotLike(String url);
 	
 	@Query(value = "SELECT * FROM product s WHERE s.url LIKE ?1 AND s.id != ?2 AND s.is_deleted = 0", nativeQuery = true)
 	List<Product> findByUrlByIdNotEqual(String url, Long id);

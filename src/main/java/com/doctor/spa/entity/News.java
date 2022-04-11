@@ -15,17 +15,17 @@ public class News extends BaseEntity {
 	@Column(name = "name")
 	private String name;
 
-	@Column(name = "url")
-	private String url;
-
 	@Column(name = "intro")
 	private String intro;
 
-	@Column(name = "content")
-	private String content;
-
 	@Column(name = "image")
 	private String image;
+
+	@Column(name = "url")
+	private String url;
+
+	@Column(name = "content")
+	private String content;
 
 	@ManyToOne
 	@JoinColumn(name = "product_id", nullable = false)

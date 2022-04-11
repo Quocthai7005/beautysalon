@@ -36,32 +36,25 @@ public class HomeController {
 	
 	@RequestMapping(value={"home", "/"}, method=RequestMethod.GET)
 	public String goHome(Model model) {
-		List<PageText> pageTexts = pageTextService.findByPage("home");
-		List<ProductDto> services = serService.getAllServices();
-		List<NewsDto> postDtos = postService.getLatestPost();
-		model.addAttribute("postDtos", postDtos);
-		model.addAttribute("pageTexts", pageTexts);
-		model.addAttribute("menuServices", services);
+		model.addAttribute("postDtos", postService.getLatestPost());
+		model.addAttribute("pageTexts", pageTextService.findByPage("home"));
+		model.addAttribute("menuServices", serService.getAllServices());
 		model.addAttribute("menu", ConstUtil.menuHome);
 		return Pages.HOME;
 	}
 	
 	@RequestMapping(value="contact", method=RequestMethod.GET)
 	public String goContact(Model model) {
-		List<PageText> pageTexts = pageTextService.findByPage("home");
-		List<ProductDto> services = serService.getAllServices();
-		List<SubProductDto> childServiceDtos = childSerService.getHomeShownChildService();
-		model.addAttribute("childServiceDtos", childServiceDtos);
-		model.addAttribute("pageTexts", pageTexts);
-		model.addAttribute("menuServices", services);
+		model.addAttribute("childServiceDtos", childSerService.getHomeShownChildService());
+		model.addAttribute("pageTexts", pageTextService.findByPage("home"));
+		model.addAttribute("menuServices", serService.getAllServices());
 		model.addAttribute("menu", ConstUtil.menuContact);
 		return Pages.CONTACT;
 	}
 	
 	@RequestMapping(value="booking", method=RequestMethod.GET)
 	public String goBooking(Model model) {
-		List<ProductDto> services = serService.getAllServices();
-		model.addAttribute("menuServices", services);
+		model.addAttribute("menuServices", serService.getAllServices());
 		model.addAttribute("menu", ConstUtil.menuBooking);
 		return Pages.BOOKING;
 	}

@@ -1,7 +1,6 @@
 package com.doctor.spa.repository;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,35 +16,26 @@ import com.doctor.spa.entity.News;
 public interface NewsRepo extends PagingAndSortingRepository<News, Long> {
 	
 	// Admin's query
-	
-	@Query(value = "SELECT p FROM News p WHERE p.product.id = ?1 AND p.name LIKE %?2% AND p.deleted = 0")
-	Page<News> findByProductIdBySearchTextByDeletedFalse(Long id, String searchText, Pageable pageable);
 
-	@Query(value = "SELECT p FROM News p WHERE p.product.id = ?1 AND p.name LIKE %?2% AND p.deleted = 0")
-	List<News> findByProductIdBySearchTextByDeletedFalse(Long id, String searchText);
+	Page<News> findByProductIdAndNameContainsAndDeletedFalse(Long id, String searchText, Pageable pageable);
+
+	List<News> findByProductIdAndNameContainsAndDeletedFalse(Long id, String searchText);
+
+	Page<News> findByProductIdAndDeletedFalse(Long id, Pageable pageable);
+
+	List<News> findByProductIdAndDeletedFalse(Long id);
+
+	Page<News> findByNameContainsAndDeletedFalse(String searchText, Pageable pageable);
 	
-	@Query(value = "SELECT p FROM News p WHERE p.product.id = ?1 AND p.deleted = 0")
-	Page<News> findByProductIdByDeletedFalse(Long id, Pageable pageable);
-	
-	@Query(value = "SELECT p FROM News p WHERE p.product.id = ?1 AND p.deleted = 0")
-	List<News> findByProductIdByDeletedFalse(Long id);
-	
-	@Query(value = "SELECT p FROM News p WHERE p.name LIKE %?1% AND p.deleted = 0")
-	Page<News> findBySearchTextByDeletedFalse(String searchText, Pageable pageable);
-	
-	@Query(value = "SELECT * FROM News p WHERE p.name LIKE %?1% AND p.is_deleted = 0", nativeQuery = true)
-	List<News> findBySearchTextByDeletedFalse(String searchText);
+	List<News> findByNameContainsAndDeletedFalse(String searchText);
 	
 	@Modifying
 	@Transactional
 	@Query(value = "UPDATE News p SET p.is_deleted=1 WHERE p.id = ?1", nativeQuery = true)
 	void deleteById(Long id);
-	
-	// Others' query
-	
+
 	News findById(Long id);
-	
-	@Query(value = "SELECT * FROM News p WHERE p.url LIKE ?1 AND p.is_deleted = 0", nativeQuery = true)
+
 	News findByUrl(String url);
 	
 	Page<News> findAll(Pageable pageable);
@@ -58,15 +48,12 @@ public interface NewsRepo extends PagingAndSortingRepository<News, Long> {
 
 	List<News> findByDeletedFalse();
 	
-	@Query(value = "SELECT * FROM News p WHERE p.url LIKE ?2 AND p.id != ?1 AND p.is_deleted = 0", nativeQuery = true)
-	List<News> findByUrlByIdNotEqual(Long id, String url);
-	
-	@Query(value = "SELECT * FROM News p WHERE p.url LIKE ?1 AND p.is_deleted = 0", nativeQuery = true)
-	List<News> findByUrlByDeletedFalse(String url);
+	List<News> findByUrlAndIdNot(Long id, String url);
+
+	List<News> findByUrlAndDeletedFalse(String url);
 	
 	List<News> findByProductId(Long id);
-	
-	@Query(value = "SELECT * FROM News p WHERE p.is_deleted = 0 ORDER BY p.created_date LIMIT 4 ", nativeQuery = true)
-	List<News> findFirst4ByUrlNotLikeOrderByCreatedDateDesc();
+
+	List<News> findTop4ByDeletedFalseOrderByCreatedDateDesc();
 	
 }

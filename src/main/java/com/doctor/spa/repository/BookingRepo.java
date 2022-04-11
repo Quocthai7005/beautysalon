@@ -11,8 +11,7 @@ import com.doctor.spa.entity.Booking;
 
 public interface BookingRepo extends JpaRepository<Booking, Long> {
 
-	@Query(value = "SELECT b FROM Booking b WHERE b.status = ?1")
-	Page<Booking> findByStatus(Pageable pageable, String status);
+	Page<Booking> findByStatus(String status, Pageable pageable);
 
 	List<Booking> findByStatus(String status);
 

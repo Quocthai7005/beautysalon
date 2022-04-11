@@ -17,17 +17,13 @@ public interface SubProductRepo extends JpaRepository<SubProduct, Long>{
 	// Admin's query
 
 	@Query(value = "SELECT * FROM subproduct cs WHERE cs.parent_product_id = ?1 AND cs.is_deleted = 0 LIMIT 4", nativeQuery = true)
-	Stream<SubProduct> findFirst4BySubProductIdByDeletedFalse(Long id);
+	List<SubProduct> findTop4ByParentProductIdAndDeletedFalse(Long id);
 
 	//@Query(value = "SELECT cs FROM subproduct cs WHERE cs.parent_product_id = ?1 AND cs.is_deleted = 0")
 	Page<SubProduct> findByParentProductIdAndDeleted(Long id, Boolean isDeleted, Pageable pageable);
 
 	@Query(value = "SELECT * FROM subproduct s WHERE s.url LIKE ?1 AND s.id != ?2 AND s.is_deleted = 0", nativeQuery = true)
 	List<SubProduct> findByUrlByIdNotEqualByDeletedFalse(String url, Long id);
-
-	@Modifying
-	@Query(value = "UPDATE subproduct cs SET cs.is_deleted=1 WHERE cs.id IN ?1", nativeQuery = true)
-	void deleteByIds(List<Long> ids);
 
 	@Modifying
 	@Transactional
@@ -42,8 +38,6 @@ public interface SubProductRepo extends JpaRepository<SubProduct, Long>{
 	SubProduct findById(Long id);
 
 	SubProduct findByUrl(String url);
-
-	List<SubProduct> findByUrlNotLikeAndDeletedFalse(String url);
 
 	Page<SubProduct> findByDeletedFalse(Pageable pageable);
 

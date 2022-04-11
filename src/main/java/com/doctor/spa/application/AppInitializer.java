@@ -7,13 +7,12 @@ import com.doctor.spa.configuration.AsyncConfiguration;
 import com.doctor.spa.configuration.MainDBConfiguration;
 import com.doctor.spa.configuration.MvcConfiguration;
 import com.doctor.spa.configuration.RedisConfiguration;
-import com.doctor.spa.configuration.SubDBConfiguration;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[] { SubDBConfiguration.class,
+        return new Class<?>[] {
         	MainDBConfiguration.class,
         	AmazonConfiguration.class,
         	AsyncConfiguration.class, RedisConfiguration.class};

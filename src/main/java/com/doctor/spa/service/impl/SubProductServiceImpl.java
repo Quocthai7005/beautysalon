@@ -1,12 +1,9 @@
 package com.doctor.spa.service.impl;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -71,7 +68,7 @@ public class SubProductServiceImpl implements SubProductService{
 		if (id == 0 || id == null) {
 			return subProductRepo.findByDeletedFalse().size();
 		} else {
-			return subProductRepo.findFirst4BySubProductIdByDeletedFalse(id).count();
+			return subProductRepo.findTop4ByParentProductIdAndDeletedFalse(id).size();
 		}
 	}
 
@@ -102,17 +99,13 @@ public class SubProductServiceImpl implements SubProductService{
 	@Override
 	@Transactional
 	public Boolean createService(SubProductDto dto, MultipartFile image) {
-		if (dto == null) {
-			return false;
-		}
 		try {
 			SubProduct service = new SubProduct();
-			com.doctor.spa.entity.Product pService = productRepo.findById(dto.getParentServiceId());
 			service.setName(dto.getName());
 			service.setImage(imageService.uploadFile(image));
 			service.setContent(dto.getContent());
 			service.setIntro(dto.getIntro());
-			service.setParentProduct(pService);
+			service.setParentProduct(productRepo.findById(dto.getParentServiceId()));
 			service.setShownHome(dto.getIsShownHome());
 			subProductRepo.save(service);
 		} catch(Exception e) {
@@ -124,9 +117,6 @@ public class SubProductServiceImpl implements SubProductService{
 	@Override
 	@Transactional
 	public Boolean updateService(SubProductDto dto) {
-		if (dto == null) {
-			return false;
-		}
 		try {
 			SubProduct service = subProductRepo.findById(dto.getId());
 			if (service != null) {
@@ -183,7 +173,6 @@ public class SubProductServiceImpl implements SubProductService{
 				stream()
 				.map(subProductMapper::toDto)
 				.collect(Collectors.toList());
-
 	}
 
 }

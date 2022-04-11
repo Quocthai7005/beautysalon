@@ -15,7 +15,6 @@ public interface PageTextRepo extends JpaRepository<PageText, Long>{
 	
 	List<PageText> findBySection(String section);
 	
-	@Query(value = "SELECT * FROM micellaneous_text s WHERE s.section LIKE ?1 AND s.is_deleted = 0 AND s.is_shown_home = 1", nativeQuery = true)
 	List<PageText> findBySectionAndIsShownHomeTrue(String section);
 	
 	PageText findById(Long id);

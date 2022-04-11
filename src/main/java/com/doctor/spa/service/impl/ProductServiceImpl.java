@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.doctor.spa.configuration.AjaxTimeoutRedirectFilter;
 import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.mapper.ProductMapper;
 import com.doctor.spa.repository.ProductRepo;
@@ -55,9 +54,11 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
+	@Transactional
 	public List<ProductDto> getServiceOtherThan(String url) {
 		return productRepo
 				.findByDeletedFalseAndUrlNotLike(url)
+				.stream()
 				.map(productMapper::toDto)
 				.collect(Collectors.toList());
 	}
@@ -82,7 +83,7 @@ public class ProductServiceImpl implements ProductService {
 		if (id == null) {
 			return false;
 		}
-		if (subProductRepo.findFirst4BySubProductIdByDeletedFalse(id).count() > 0) {
+		if (subProductRepo.findTop4ByParentProductIdAndDeletedFalse(id).size() > 0) {
 			return false;
 		} else {
 			productRepo.deleteByIdDeletedFalse(id);

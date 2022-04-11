@@ -45,11 +45,9 @@ public class NewsController {
 
 	@GetMapping
 	public String goToService(Model model) {
-		List<ProductDto> menuServices = serService.getAllServices();
-		List<PageText> pageTexts = pageTextService.findByPage("home");
-		model.addAttribute("pageTexts", pageTexts);
+		model.addAttribute("pageTexts", pageTextService.findByPage("home"));
 		model.addAttribute("menu", ConstUtil.menuNews);
-		model.addAttribute("menuServices", menuServices);
+		model.addAttribute("menuServices", serService.getAllServices());
 		return com.doctor.spa.util.Pages.POST;
 	}
 
@@ -65,17 +63,12 @@ public class NewsController {
 
 	@GetMapping(value = "/post/{url}")
 	public String goToPost(@PathVariable String url, Model model) {
-		News post = newsService.getSinglePost(url);
-		List<NewsDto> latestPosts =  newsService.getLatestPost();
-		List<SubProductDto> childServices = newsService.getChildServices(url);
-		List<ProductDto> menuServices = serService.getAllServices();
-		List<PageText> pageTexts = pageTextService.findByPage("home");
-		model.addAttribute("pageTexts", pageTexts);
-		model.addAttribute("childServices", childServices);
+		model.addAttribute("pageTexts", pageTextService.findByPage("home"));
+		model.addAttribute("childServices", newsService.getChildServices(url));
 		model.addAttribute("menu", ConstUtil.menuNews);
-		model.addAttribute("post", post);
-		model.addAttribute("menuServices", menuServices);
-		model.addAttribute("latestPosts", latestPosts);
+		model.addAttribute("post", newsService.getSinglePost(url));
+		model.addAttribute("menuServices", serService.getAllServices());
+		model.addAttribute("latestPosts", newsService.getLatestPost());
 		return Pages.POST_DETAIL;
 	}
 }

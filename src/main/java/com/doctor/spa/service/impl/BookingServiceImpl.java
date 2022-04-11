@@ -63,7 +63,7 @@ public class BookingServiceImpl implements BookingService {
 		if (status == null || "".equals(status)) {
 			bookings = bookingRepo.findAll(pageable);
 		} else {
-			bookings = bookingRepo.findByStatus(pageable, status);
+			bookings = bookingRepo.findByStatus(status, pageable);
 		}
 		List<BookingDto> bookingDtos = new ArrayList<>();
 		for (Booking booking: bookings) {
