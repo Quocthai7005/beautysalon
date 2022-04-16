@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@Controller("ApiProductController")
 @RequestMapping(value = "/api/admin")
 public class AProductController {
 	

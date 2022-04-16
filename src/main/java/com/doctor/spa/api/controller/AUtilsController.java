@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-@Controller
+@Controller("ApiUtilsController")
 @RequestMapping(value = "/api/admin")
 public class AUtilsController {
 	

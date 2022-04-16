@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-@Controller
+@Controller("ApiS3Controller")
 @RequestMapping(value = "/api/admin")
 public class AwsS3Controller {
 

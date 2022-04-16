@@ -19,7 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.Map;
 
-@Controller
+@Controller("ApiSubProductController")
 @RequestMapping(value = "/api/admin")
 public class ASubProductController {
 	
@@ -42,11 +42,6 @@ public class ASubProductController {
 	@DeleteMapping(value = "/service-delete/{id}")
 	public ResponseEntity<ResponseBody<Boolean>> deleteService(@PathVariable long id) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.deleteService(id)));
-	}
-	
-	@RequestMapping(value="/service-add", method=RequestMethod.GET)
-	public String goToAddPage() {	
-		return Pages.A_SERVICE_ADD;
 	}
 	
 	@PostMapping(value = "/service-create")

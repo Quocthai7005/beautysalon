@@ -1,9 +1,8 @@
 package com.doctor.spa.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "user_role")
@@ -14,6 +13,7 @@ public class UserRole {
 	private String userRole;
  
     @Id
+    @GeneratedValue(strategy = IDENTITY)
     @Column(name = "role_id", nullable = false)
     public String getRoleId() {
         return roleId;

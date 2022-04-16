@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@Controller
+@Controller("ApiAccountController")
 @RequestMapping(value = "/api/admin")
 public class AAccountController {
 	
