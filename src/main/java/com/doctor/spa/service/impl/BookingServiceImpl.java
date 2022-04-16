@@ -29,10 +29,7 @@ public class BookingServiceImpl implements BookingService {
 	BookingMapper bookingMapper;
 	
 	@Override
-	public Boolean createBooking(BookingDto dto) {
-		if (dto == null) {
-			return false;
-		}
+	public BookingDto createBooking(BookingDto dto) {
 		Booking booking = new Booking();
 		booking.setName(dto.getName());
 		booking.setEmail(dto.getEmail());
@@ -42,34 +39,20 @@ public class BookingServiceImpl implements BookingService {
 		LocalDateTime date = LocalDateTime.parse(dto.getConsultDate());
 		booking.setConsultDate(date);
 		bookingRepo.save(booking);
-		return true;
+		return dto;
 	}
 
 	@Override
 	public Page<BookingDto> getBookings(Pageable pageable) {
-		Page<Booking> bookings = new PageImpl<>(Collections.emptyList());
-		bookings = bookingRepo.findAll(pageable);
-		List<BookingDto> bookingDtos = new ArrayList<>();
-		for (Booking booking: bookings) {
-			bookingDtos.add(bookingMapper.toDto(booking));
-		}
-		return new PageImpl<BookingDto>(bookingDtos);
+		return bookingRepo.findAll(pageable).map(bookingMapper::toDto);
 	}
 
 	@Override
 	public Page<BookingDto> getBookingsWithStatus(Pageable pageable, String status) {
-
-		Page<Booking> bookings = new PageImpl<>(Collections.emptyList());
-		if (status == null || "".equals(status)) {
-			bookings = bookingRepo.findAll(pageable);
-		} else {
-			bookings = bookingRepo.findByStatus(status, pageable);
-		}
-		List<BookingDto> bookingDtos = new ArrayList<>();
-		for (Booking booking: bookings) {
-			bookingDtos.add(bookingMapper.toDto(booking));
-		}
-		return new PageImpl<BookingDto>(bookingDtos);
+		return ((status == null || "".equals(status) ?
+				bookingRepo.findAll(pageable) :
+				bookingRepo.findByStatus(status, pageable)))
+				.map(bookingMapper::toDto);
 	}
 
 	@Override

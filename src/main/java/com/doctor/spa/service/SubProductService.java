@@ -23,7 +23,7 @@ public interface SubProductService {
 	
 	Boolean deleteService(Long id);
 	
-	Boolean createService(SubProductDto serviceDto, MultipartFile image);
+	SubProductDto createService(SubProductDto serviceDto, MultipartFile image);
 	
 	Boolean updateService(SubProductDto serviceDto);
 	

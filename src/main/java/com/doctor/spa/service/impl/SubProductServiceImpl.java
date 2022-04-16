@@ -89,29 +89,22 @@ public class SubProductServiceImpl implements SubProductService{
 	@Override
 	@Transactional
 	public Boolean deleteService(Long id) {
-		if (id == null) {
-			return false;
-		}
 		subProductRepo.deleteById(id);
 		return true;
 	}
 
 	@Override
 	@Transactional
-	public Boolean createService(SubProductDto dto, MultipartFile image) {
-		try {
-			SubProduct service = new SubProduct();
-			service.setName(dto.getName());
-			service.setImage(imageService.uploadFile(image));
-			service.setContent(dto.getContent());
-			service.setIntro(dto.getIntro());
-			service.setParentProduct(productRepo.findById(dto.getParentServiceId()));
-			service.setShownHome(dto.getIsShownHome());
-			subProductRepo.save(service);
-		} catch(Exception e) {
-			return false;
-		}
-		return true;
+	public SubProductDto createService(SubProductDto dto, MultipartFile image) {
+		SubProduct service = new SubProduct();
+		service.setName(dto.getName());
+		service.setImage(imageService.uploadFile(image));
+		service.setContent(dto.getContent());
+		service.setIntro(dto.getIntro());
+		service.setParentProduct(productRepo.findById(dto.getParentServiceId()));
+		service.setShownHome(dto.getIsShownHome());
+		subProductRepo.save(service);
+		return dto;
 	}
 
 	@Override
@@ -157,13 +150,9 @@ public class SubProductServiceImpl implements SubProductService{
 	@Override
 	public Map<String, Boolean> validateUrl(String url, Long id) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
-		if (id == null) {
-			result.put("valid", false);
-			return result;
-		}
 		List<SubProduct> services = subProductRepo.findByUrlByIdNotEqualByDeletedFalse(url, id);
 		Boolean isValid = services.isEmpty();	
-		result.put("valid", isValid);
+		result.put("valid", true);
 		return result;
 	}
 

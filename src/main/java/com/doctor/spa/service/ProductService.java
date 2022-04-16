@@ -27,7 +27,7 @@ public interface ProductService {
 	
 	Boolean createService(ProductDto dto, MultipartFile image);
 	
-	Boolean updateService(ProductDto serviceDto);
+	ProductDto updateService(ProductDto serviceDto);
 	
 	Map<String, Boolean> validateUrl(Long id, String url);
 

@@ -80,9 +80,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional
 	public Boolean deleteService(Long id) {
-		if (id == null) {
-			return false;
-		}
 		if (subProductRepo.findTop4ByParentProductIdAndDeletedFalse(id).size() > 0) {
 			return false;
 		} else {
@@ -95,9 +92,6 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	@Transactional
 	public Boolean createService(ProductDto dto, MultipartFile image) {
-		if (dto == null) {
-			return false;
-		}
 		com.doctor.spa.entity.Product service = productMapper.toEntity(dto);
 		String imageName = imageService.uploadFile(image);
 		service.setImage(imageName);
@@ -112,34 +106,22 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	@Transactional
-	public Boolean updateService(ProductDto serviceDto) {
-		// Get service
-		if (serviceDto == null) {
-			return false;
-		}
-		if (serviceDto.getId() == null) {
-			return false;
-		}
+	public ProductDto updateService(ProductDto serviceDto) {
 		com.doctor.spa.entity.Product service = productRepo.findById(serviceDto.getId());
 		service.setImage(serviceDto.getImageKey());
 		service.setName(serviceDto.getName());
 		service.setUrl(serviceDto.getUrl());
 		service.setContent(serviceDto.getContent());
 		productRepo.save(service);
-		// Save
-		return true;
+		return serviceDto;
 	}
 
 	@Override
 	public Map<String, Boolean> validateUrl(Long id, String url) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
-		if (id == null) {
-			result.put("valid", false);
-			return result;
-		}
 		List<com.doctor.spa.entity.Product> services = productRepo.findByUrlByIdNotEqual(url, id);
 		Boolean isValid = services.isEmpty();	
-		result.put("valid", isValid);
+		result.put("valid", id == null ? false : isValid);
 		return result;
 	}
 

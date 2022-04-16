@@ -1,6 +1,6 @@
 package com.doctor.spa.util;
 
-public final class ConstUtil {
+public final class Menus {
 	
 	public static String menuHome = "home";
 	public static String menuService = "service";

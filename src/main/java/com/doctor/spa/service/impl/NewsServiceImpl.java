@@ -154,30 +154,21 @@ public class NewsServiceImpl implements NewsService {
 
 	@Override
 	@Transactional
-	public Boolean createPost(NewsDto dto, MultipartFile image) {
-		if (dto == null) {
-			return false;
-		}
-		// change to entity
-		com.doctor.spa.entity.Product service = new com.doctor.spa.entity.Product();
-		service = serviceRepo.findById(dto.getParentServiceId());
-
+	public NewsDto createPost(NewsDto dto, MultipartFile image) {
 		News news = new News();
 		news.setName(dto.getName());
 		news.setUrl(dto.getUrl());
 		news.setImage(imageService.uploadFile(image));
 		news.setContent(dto.getContent());
 		news.setIntro(dto.getIntro());
-		news.setProduct(service);
-		newsRepo.save(news);
-		return true;
+		news.setProduct(serviceRepo.findById(dto.getParentServiceId()));
+		news = newsRepo.save(news);
+		dto.setId(news.getId());
+		return dto;
 	}
 
 	@Override
 	public Boolean deletePost(Long id) {
-		if (id == null) {
-			return false;
-		}
 		newsRepo.deleteById(id);
 		return true;
 	}
@@ -190,19 +181,12 @@ public class NewsServiceImpl implements NewsService {
 	@Override
 	@Transactional
 	public Boolean updatePost(NewsDto dto, MultipartFile image) {
-		if (dto == null) {
-			return false;
-		}
-		// change to entity
-		com.doctor.spa.entity.Product service = new com.doctor.spa.entity.Product();
-		service = serviceRepo.findById(dto.getParentServiceId());
-
 		News news = newsRepo.findById(dto.getId());
 		news.setName(dto.getName());
 		news.setImage(imageService.uploadFile(image));
 		news.setContent(dto.getContent());
 		news.setIntro(dto.getIntro());
-		news.setProduct(service);
+		news.setProduct(serviceRepo.findById(dto.getParentServiceId()));
 		newsRepo.save(news);
 		return true;
 	}
