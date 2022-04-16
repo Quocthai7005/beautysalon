@@ -31,7 +31,7 @@ public interface NewsService {
 	
 	Map<String, Boolean> validateUrl(Long id, String url);
 	
-	Boolean createPost(NewsDto dto, MultipartFile image);
+	NewsDto createPost(NewsDto dto, MultipartFile image);
 	
 	Boolean updatePost(NewsDto dto, MultipartFile image);
 	

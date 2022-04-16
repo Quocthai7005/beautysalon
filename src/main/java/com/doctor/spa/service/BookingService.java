@@ -7,7 +7,7 @@ import com.doctor.spa.dto.BookingDto;
 
 public interface BookingService {
 
-	Boolean createBooking(BookingDto dto);
+	BookingDto createBooking(BookingDto dto);
 
 	Page<BookingDto> getBookings(Pageable pageable);
 
