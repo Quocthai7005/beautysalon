@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.doctor.spa.dto.UserDto;
+import com.doctor.spa.util.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -26,6 +28,8 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 	@Autowired
 	private RoleRepo roleRepository;
 
+	private static final int salt = 30;
+
 	@Transactional(readOnly = true)
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		User user = userRepository.findByUsername(username);
@@ -36,5 +40,13 @@ public class UserDetailsServiceImpl implements UserDetailsService{
 			grantedAuthorities.add(new SimpleGrantedAuthority(role.getUserRole()));
 		}
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
+	}
+
+	public User createUser(UserDto dto) {
+		User user = new User();
+		user.setUsername(dto.getUsername());
+		user.setPassword(PasswordEncryptor.generateSecurePassword(dto.getPassword(), PasswordEncryptor.getSaltvalue(salt)));
+		userRepository.save(user);
+		return user;
 	}
 }

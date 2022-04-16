@@ -1,14 +1,21 @@
 package com.doctor.spa.configuration;
 
+import com.doctor.spa.util.PasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.access.ExceptionTranslationFilter;
+
+import java.util.ArrayList;
 
 @Configuration
 @EnableWebSecurity
@@ -42,6 +49,22 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userDetailsService);
+		auth.authenticationProvider(new AuthenticationProvider() {
+			@Override
+			public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+				String username = authentication.getName();
+				String password = PasswordEncryptor.generateSecurePassword(
+						authentication.getCredentials().toString(),
+						PasswordEncryptor.getSaltvalue(30));
+				return new UsernamePasswordAuthenticationToken(
+						username, password, new ArrayList<>());
+			}
+
+			@Override
+			public boolean supports(Class<?> aClass) {
+				return false;
+			}
+		});
 	}
 }
 
