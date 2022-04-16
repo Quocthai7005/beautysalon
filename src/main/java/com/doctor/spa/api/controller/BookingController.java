@@ -1,5 +1,8 @@
-package com.doctor.spa.controller;
+package com.doctor.spa.api.controller;
 
+import com.doctor.spa.common.response.ResponseBody;
+import com.doctor.spa.dto.BookingDto;
+import com.doctor.spa.service.BookingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -8,12 +11,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.doctor.spa.common.response.ResponseBody;
-import com.doctor.spa.dto.BookingDto;
-import com.doctor.spa.service.BookingService;
-
 @Controller
-@RequestMapping(value = "/booking")
+@RequestMapping(value = "/api/booking")
 public class BookingController {
 	
 	@Autowired

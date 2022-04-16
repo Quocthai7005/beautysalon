@@ -1,39 +1,25 @@
-package com.doctor.spa.controller;
+package com.doctor.spa.api.controller;
 
-import java.util.Map;
-
+import com.doctor.spa.common.response.ResponseBody;
+import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.doctor.spa.common.response.ResponseBody;
-import com.doctor.spa.dto.NewsDto;
-import com.doctor.spa.service.NewsService;
-import com.doctor.spa.util.Pages;
+import java.util.Map;
 
 @Controller
-@RequestMapping(value = "/admin")
+@RequestMapping(value = "/api/admin")
 public class ANewsController {
 	
 	@Autowired
 	NewsService newsService;
-
-	@RequestMapping(value="/news-list", method=RequestMethod.GET)
-	public String goToList() {	
-		return Pages.A_POST_LIST;
-	}
 	
 	@GetMapping(value="/news-list/no")
 	public ResponseEntity<ResponseBody<Integer>> getChildServiceNo(@RequestParam Long groupId, @RequestParam String searchText) {
@@ -77,15 +63,5 @@ public class ANewsController {
 	@DeleteMapping(value = "/news-delete/{id}")
 	public ResponseEntity<ResponseBody<Boolean>> deleteService(@PathVariable long id) {	
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, newsService.deletePost(id)));
-	}
-	
-	@RequestMapping(value="/news-edit/{id}", method=RequestMethod.GET)
-	public String goToEdit() {	
-		return Pages.A_POST_EDIT;
-	}
-	
-	@RequestMapping(value="/news-add", method=RequestMethod.GET)
-	public String goToAdd() {	
-		return Pages.A_POST_ADD;
 	}
 }

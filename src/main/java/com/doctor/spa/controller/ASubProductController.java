@@ -69,7 +69,7 @@ public class ASubProductController {
 	}
 	
 	@PostMapping(value = "/service-create")
-	public ResponseEntity<ResponseBody<Boolean>> createService(
+	public ResponseEntity<ResponseBody<SubProductDto>> createService(
 			@RequestPart MultipartFile imgFile,
 			@RequestPart SubProductDto data) throws JsonParseException, JsonMappingException, IOException {
 		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, childService.createService(data, imgFile)));

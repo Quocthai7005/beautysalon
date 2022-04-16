@@ -1,5 +1,8 @@
-package com.doctor.spa.controller;
+package com.doctor.spa.api.controller;
 
+import com.doctor.spa.common.response.ResponseBody;
+import com.doctor.spa.dto.S3ObjectDto;
+import com.doctor.spa.service.AwsS3Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,27 +14,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.doctor.spa.common.response.ResponseBody;
-import com.doctor.spa.dto.S3ObjectDto;
-import com.doctor.spa.service.AwsS3Service;
-import com.doctor.spa.util.Pages;
-
 @Controller
-@RequestMapping(value = "admin")
+@RequestMapping(value = "/api/admin")
 public class AwsS3Controller {
 
 	@Autowired
 	AwsS3Service awsS3Service;
-
-	@GetMapping(value = "/bucket")
-	public String toBucketList() {	
-		return Pages.A_BUCKET_LIST;
-	}
-
-	@GetMapping(value = "/bucket/file")
-	public String toFileDetail() {	
-		return Pages.A_FILE_DETAIL;
-	}
 
 	@GetMapping(value="/bucket/files")
 	public ResponseEntity<ResponseBody<Page<S3ObjectDto>>> getFiles(
