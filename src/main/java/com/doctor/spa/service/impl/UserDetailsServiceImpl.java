@@ -45,6 +45,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantedAuthorities);
 	}
 
+	@Transactional
 	public User createUser(UserDto dto) {
 		User user = new User();
 		UserRole role = new UserRole();

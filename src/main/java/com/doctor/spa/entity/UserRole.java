@@ -7,23 +7,26 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Entity
 @Table(name = "user_role")
 public class UserRole {
-	
-	private String roleId;
-    private String username;
-	private String userRole;
- 
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
-    @Column(name = "role_id", nullable = false)
-    public String getRoleId() {
+    @Column(name = "role_id")
+	private Long roleId;
+    @Column(name = "username", nullable = false)
+    private String username;
+    @Column(name = "user_role")
+	private String userRole;
+
+
+    public Long getRoleId() {
         return roleId;
     }
  
-    public void setRoleId(String roleId) {
+    public void setRoleId(Long roleId) {
         this.roleId = roleId;
     }
  
-    @Column(name = "username", nullable = false)
+
     public String getUsername() {
 		return username;
 	}
@@ -32,8 +35,6 @@ public class UserRole {
 		this.username = username;
 	}
 
-    
-    @Column(name = "user_role")
     public String getUserRole() {
         return userRole;
     }

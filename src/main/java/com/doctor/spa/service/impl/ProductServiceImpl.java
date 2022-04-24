@@ -27,18 +27,19 @@ import com.doctor.spa.service.ProductService;
 public class ProductServiceImpl implements ProductService {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(ProductServiceImpl.class);
-	
-	@Autowired
-	ProductRepo productRepo;
-	
-	@Autowired
-	SubProductRepo subProductRepo;
-	
-	@Autowired
-	ProductMapper productMapper;
 
-	@Autowired
-	AwsS3Service imageService;
+	private final ProductRepo productRepo;
+	private final SubProductRepo subProductRepo;
+	private final ProductMapper productMapper;
+	private final AwsS3Service imageService;
+
+	public ProductServiceImpl(ProductRepo productRepo, SubProductRepo subProductRepo,
+							  ProductMapper productMapper, AwsS3Service imageService) {
+		this.productRepo = productRepo;
+		this.subProductRepo = subProductRepo;
+		this.productMapper = productMapper;
+		this.imageService = imageService;
+	}
 
 	@Override
 	public List<ProductDto> getAllServices() {

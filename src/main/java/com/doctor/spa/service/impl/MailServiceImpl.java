@@ -23,14 +23,19 @@ import freemarker.template.Configuration;
 @Service
 public class MailServiceImpl implements MailService {
 
-	@Autowired
-	JavaMailSender mailSender;
+	private final JavaMailSender mailSender;
 
-	@Autowired
-	private TaskExecutor taskExecutor;
+	private final TaskExecutor taskExecutor;
 
-	@Autowired
-	Configuration fmConfiguration;
+	private final Configuration fmConfiguration;
+
+	public MailServiceImpl(JavaMailSender mailSender,
+						   TaskExecutor taskExecutor,
+						   Configuration fmConfiguration) {
+		this.mailSender = mailSender;
+		this.taskExecutor = taskExecutor;
+		this.fmConfiguration = fmConfiguration;
+	}
 
 	public void sendEmail(Mail mail) {
 		MimeMessage mimeMessage = mailSender.createMimeMessage();

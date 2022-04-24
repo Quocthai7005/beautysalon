@@ -10,9 +10,13 @@ import com.doctor.spa.service.AccountService;
 
 @Component
 public class AccountServiceImpl implements AccountService {
-	
+
+	private final UserRepo userRepo;
+
 	@Autowired
-	UserRepo userRepo;
+	public AccountServiceImpl(UserRepo userRepo) {
+		this.userRepo = userRepo;
+	}
 
 	@Override
 	public Boolean updatePassword(PasswordChange userInfo) {

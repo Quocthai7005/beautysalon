@@ -19,12 +19,14 @@ import com.doctor.spa.service.BookingService;
 @Transactional
 public class BookingServiceImpl implements BookingService {
 
-	@Autowired
-	BookingRepo bookingRepo;
-	
-	@Autowired
-	BookingMapper bookingMapper;
-	
+	private final BookingRepo bookingRepo;
+	private final BookingMapper bookingMapper;
+
+	public BookingServiceImpl(BookingRepo bookingRepo, BookingMapper bookingMapper) {
+		this.bookingRepo = bookingRepo;
+		this.bookingMapper = bookingMapper;
+	}
+
 	@Override
 	public BookingDto createBooking(BookingDto dto) {
 		Booking booking = new Booking();

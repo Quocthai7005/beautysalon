@@ -19,9 +19,12 @@ import java.util.Map;
 @Controller("ApiProductController")
 @RequestMapping(value = "/api/admin")
 public class AProductController {
-	
-	@Autowired
-	ProductService prodService;
+
+	private final ProductService prodService;
+
+	public AProductController(ProductService prodService) {
+		this.prodService = prodService;
+	}
 	
 	@GetMapping(value = "/service-group-edit/{id}")
 	public String editService(@PathVariable long id) {	
