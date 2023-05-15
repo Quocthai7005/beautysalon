@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.doctor.spa.entity.PageText;
-import com.doctor.spa.repository.MessengerRepo;
+import com.doctor.spa.repository.MessengerRepository;
 import com.doctor.spa.service.MessengerService;
 
 @Service
 public class MessengerServiceImpl implements MessengerService {
 	
 	@Autowired
-	MessengerRepo messengerRepo;
+	MessengerRepository messengerRepository;
 
 	@Override
 	public Map<String, String> getMessengerInfo() {
 		Map<String, String> result = new HashMap<String, String>();
-		List<PageText> messengerInfo = messengerRepo.findBySection("messenger");
+		List<PageText> messengerInfo = messengerRepository.findBySection("messenger");
 		messengerInfo.forEach(s -> {
 			result.put(s.getTitle(), s.getContent());
 		});
@@ -32,12 +32,12 @@ public class MessengerServiceImpl implements MessengerService {
 	@Transactional
 	public Boolean updateMessengerInfo(Map<String, String> info) {
 		
-		PageText appId = messengerRepo.findByTitle("appId");
-		PageText pageId = messengerRepo.findByTitle("pageId");
-		PageText xfbml = messengerRepo.findByTitle("xfbml");
-		PageText version = messengerRepo.findByTitle("version");
-		PageText autoLogAppEvents = messengerRepo.findByTitle("autoLogAppEvents");
-		PageText minimized = messengerRepo.findByTitle("minimized");
+		PageText appId = messengerRepository.findByTitle("appId");
+		PageText pageId = messengerRepository.findByTitle("pageId");
+		PageText xfbml = messengerRepository.findByTitle("xfbml");
+		PageText version = messengerRepository.findByTitle("version");
+		PageText autoLogAppEvents = messengerRepository.findByTitle("autoLogAppEvents");
+		PageText minimized = messengerRepository.findByTitle("minimized");
 		
 		appId.setContent(info.get("appId"));
 		pageId.setContent(info.get("pageId"));
@@ -46,12 +46,12 @@ public class MessengerServiceImpl implements MessengerService {
 		autoLogAppEvents.setContent(info.get("autoLogAppEvents"));
 		minimized.setContent(info.get("minimized"));
 		
-		messengerRepo.save(appId);
-		messengerRepo.save(pageId);
-		messengerRepo.save(xfbml);
-		messengerRepo.save(version);
-		messengerRepo.save(autoLogAppEvents);
-		messengerRepo.save(minimized);
+		messengerRepository.save(appId);
+		messengerRepository.save(pageId);
+		messengerRepository.save(xfbml);
+		messengerRepository.save(version);
+		messengerRepository.save(autoLogAppEvents);
+		messengerRepository.save(minimized);
 		
 		return true;
 	}

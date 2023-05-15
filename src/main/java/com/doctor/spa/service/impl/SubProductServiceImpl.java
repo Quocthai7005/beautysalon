@@ -16,8 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.doctor.spa.dto.SubProductDto;
 import com.doctor.spa.entity.SubProduct;
 import com.doctor.spa.mapper.SubProductMapper;
-import com.doctor.spa.repository.ProductRepo;
-import com.doctor.spa.repository.SubProductRepo;
+import com.doctor.spa.repository.ProductRepository;
+import com.doctor.spa.repository.SubProductRepository;
 import com.doctor.spa.service.AwsS3Service;
 import com.doctor.spa.service.SubProductService;
 
@@ -26,10 +26,10 @@ import com.doctor.spa.service.SubProductService;
 public class SubProductServiceImpl implements SubProductService{
 	
 	@Autowired
-	SubProductRepo subProductRepo;
+	SubProductRepository subProductRepository;
 	
 	@Autowired
-	ProductRepo productRepo;
+    ProductRepository productRepository;
 	
 	@Autowired
 	SubProductMapper subProductMapper;
@@ -39,7 +39,7 @@ public class SubProductServiceImpl implements SubProductService{
 
 	@Override
 	public List<SubProductDto> getHomeShownChildService() {
-		return subProductRepo.getByIsShownHomeTrue()
+		return subProductRepository.getByIsShownHomeTrue()
 			.stream()
 			.map(x -> {
 				x.setUrl(x.getParentProduct().getUrl() + "/" + x.getUrl());
@@ -51,12 +51,12 @@ public class SubProductServiceImpl implements SubProductService{
 
 	@Override
 	public SubProductDto getChildServiceByUrl(String url) {
-		return subProductMapper.toDto(subProductRepo.findByUrl(url));
+		return subProductMapper.toDto(subProductRepository.findByUrl(url));
 	}
 
 	@Override
 	public List<SubProductDto> getChildServiceOtherThan(String serviceUrl, String childServiceUrl) {
-		return productRepo.findByUrl(serviceUrl).getSubProducts()
+		return productRepository.findByUrl(serviceUrl).getSubProducts()
 			.stream()
 			.filter(s -> (!s.getUrl().equals(childServiceUrl) && !s.isDeleted()))
 			.map(subProductMapper::toDto)
@@ -66,9 +66,9 @@ public class SubProductServiceImpl implements SubProductService{
 	@Override
 	public long getServiceNo(Long id) {
 		if (id == 0 || id == null) {
-			return subProductRepo.findByDeletedFalse().size();
+			return subProductRepository.findByDeletedFalse().size();
 		} else {
-			return subProductRepo.findTop4ByParentProductIdAndDeletedFalse(id).size();
+			return subProductRepository.findTop4ByParentProductIdAndDeletedFalse(id).size();
 		}
 	}
 
@@ -76,9 +76,9 @@ public class SubProductServiceImpl implements SubProductService{
 	public Page<SubProductDto> getChildServiceByGroupId(Long id, Pageable pageable) {
 		Page<SubProduct> services;
 		if (id == 0 || id == null) {
-			services = subProductRepo.findByDeletedFalse(pageable);
+			services = subProductRepository.findByDeletedFalse(pageable);
 		} else {
-			services = subProductRepo.findByParentProductIdAndDeleted(id, false, pageable);
+			services = subProductRepository.findByParentProductIdAndDeleted(id, false, pageable);
 		}
 		return new PageImpl<>(services.getContent()
 				.stream()
@@ -89,7 +89,7 @@ public class SubProductServiceImpl implements SubProductService{
 	@Override
 	@Transactional
 	public Boolean deleteService(Long id) {
-		subProductRepo.deleteById(id);
+		subProductRepository.deleteById(id);
 		return true;
 	}
 
@@ -101,9 +101,9 @@ public class SubProductServiceImpl implements SubProductService{
 		service.setImage(imageService.uploadFile(image));
 		service.setContent(dto.getContent());
 		service.setIntro(dto.getIntro());
-		service.setParentProduct(productRepo.findById(dto.getParentServiceId()));
+		service.setParentProduct(productRepository.findById(dto.getParentServiceId()));
 		service.setShownHome(dto.getIsShownHome());
-		subProductRepo.save(service);
+		subProductRepository.save(service);
 		return dto;
 	}
 
@@ -111,16 +111,16 @@ public class SubProductServiceImpl implements SubProductService{
 	@Transactional
 	public Boolean updateService(SubProductDto dto) {
 		try {
-			SubProduct service = subProductRepo.findById(dto.getId());
+			SubProduct service = subProductRepository.findById(dto.getId());
 			if (service != null) {
-				com.doctor.spa.entity.Product pService = productRepo.findById(dto.getParentServiceId());
+				com.doctor.spa.entity.Product pService = productRepository.findById(dto.getParentServiceId());
 				service.setName(dto.getName());
 				service.setImage(dto.getImageKey());
 				service.setContent(dto.getContent());
 				service.setIntro(dto.getIntro());
 				service.setParentProduct(pService);
 				service.setShownHome(dto.getIsShownHome());
-				subProductRepo.save(service);
+				subProductRepository.save(service);
 			}
 		} catch(Exception e) {
 			return false;
@@ -131,7 +131,7 @@ public class SubProductServiceImpl implements SubProductService{
 	@Override
 	public Map<String, Boolean> validateUrlNoId(String url) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
-		List<SubProduct> services = subProductRepo.findByUrlByDeletedFalse(url);
+		List<SubProduct> services = subProductRepository.findByUrlByDeletedFalse(url);
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", isValid);
 		return result;
@@ -139,7 +139,7 @@ public class SubProductServiceImpl implements SubProductService{
 
 	@Override
 	public SubProductDto getChildServiceById(long id) {
-		SubProduct service = subProductRepo.findById(id);
+		SubProduct service = subProductRepository.findById(id);
 		SubProductDto serviceDto = new SubProductDto(); 
 		if (service != null) {
 			serviceDto = subProductMapper.toDto(service);
@@ -150,7 +150,7 @@ public class SubProductServiceImpl implements SubProductService{
 	@Override
 	public Map<String, Boolean> validateUrl(String url, Long id) {
 		Map<String, Boolean> result = new HashMap<String, Boolean>();
-		List<SubProduct> services = subProductRepo.findByUrlByIdNotEqualByDeletedFalse(url, id);
+		List<SubProduct> services = subProductRepository.findByUrlByIdNotEqualByDeletedFalse(url, id);
 		Boolean isValid = services.isEmpty();	
 		result.put("valid", true);
 		return result;
@@ -158,7 +158,7 @@ public class SubProductServiceImpl implements SubProductService{
 
 	@Override
 	public List<SubProductDto> getAll() {
-		return subProductRepo.findAll().
+		return subProductRepository.findAll().
 				stream()
 				.map(subProductMapper::toDto)
 				.collect(Collectors.toList());

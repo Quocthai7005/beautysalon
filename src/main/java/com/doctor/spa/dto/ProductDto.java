@@ -19,7 +19,7 @@ public class ProductDto extends BaseDto {
 		this.displayOrder = displayOrder;
 	}
 	private List<SubProductDto> childServices;
-	private List<NewsDto> news;
+	private List<PostDto> news;
 	public String getUrl() {
 		return url;
 	}
@@ -50,10 +50,10 @@ public class ProductDto extends BaseDto {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public List<NewsDto> getNews() {
+	public List<PostDto> getNews() {
 		return news;
 	}
-	public void setNews(List<NewsDto> news) {
+	public void setNews(List<PostDto> news) {
 		this.news = news;
 	}
 	public String getImageKey() {

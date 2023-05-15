@@ -9,7 +9,7 @@
 	<body>
 		<input type="hidden" id="root-context" value="${rootContext.getContextPath()}"></input>
 		<#-- Navigation bar -->
-		<div id="main-news-post">
+		<div id="main-posts-post">
 			<#include "nav.html.ftl">
 			<#include "carousel.html.ftl">
 			<div class="container">

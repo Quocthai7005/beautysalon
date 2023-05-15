@@ -98,7 +98,7 @@
 								<div class="card-content table-responsive">
 									<div class="row">			  
 
-										<form id="edit-news-form">
+										<form id="edit-posts-form">
 											<div class="col-lg-12 col-md-12">
 												<div class="form-inline form-group-ctn">
 													<label for="status-select" class="custom-label">

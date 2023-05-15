@@ -5,16 +5,16 @@ import org.springframework.stereotype.Component;
 
 import com.doctor.spa.dto.PasswordChange;
 import com.doctor.spa.entity.User;
-import com.doctor.spa.repository.UserRepo;
+import com.doctor.spa.repository.UserRepository;
 import com.doctor.spa.service.AccountService;
 
 @Component
 public class AccountServiceImpl implements AccountService {
 
-	private final UserRepo userRepo;
+	private final UserRepository userRepo;
 
 	@Autowired
-	public AccountServiceImpl(UserRepo userRepo) {
+	public AccountServiceImpl(UserRepository userRepo) {
 		this.userRepo = userRepo;
 	}
 

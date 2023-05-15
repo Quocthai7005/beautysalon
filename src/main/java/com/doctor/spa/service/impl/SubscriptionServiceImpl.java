@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.doctor.spa.entity.Mail;
 import com.doctor.spa.entity.Subscription;
-import com.doctor.spa.repository.SubscriptionRepo;
+import com.doctor.spa.repository.SubscriptionRepository;
 import com.doctor.spa.service.MailService;
 import com.doctor.spa.service.SubscriptionService;
 
@@ -21,7 +21,7 @@ import com.doctor.spa.service.SubscriptionService;
 public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Autowired
-	SubscriptionRepo subscriptionRepo;
+	SubscriptionRepository subscriptionRepository;
 
 	@Autowired
 	MailService mailService;
@@ -31,7 +31,7 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Boolean subscribe(Subscription subscription) {
-		subscriptionRepo.save(subscription);
+		subscriptionRepository.save(subscription);
 		Mail subscribeMail = new Mail();
 		subscribeMail.setMailFrom("nguyenquocthai7005@gmail.com");
 		subscribeMail.setMailTo(subscription.getEmail());
@@ -51,10 +51,10 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 
 	@Override
 	public Boolean unSubscribe(String email, String id) {
-		Subscription subscription = subscriptionRepo.findByIdAndEmail(id, email);
+		Subscription subscription = subscriptionRepository.findByIdAndEmail(id, email);
 		if (subscription != null) {
 			subscription.setConfirm(false);
-			subscriptionRepo.save(subscription);
+			subscriptionRepository.save(subscription);
 			return true;
 		}
 		return false;
@@ -63,15 +63,15 @@ public class SubscriptionServiceImpl implements SubscriptionService {
 	@Override
 	public List<Subscription> listAll() {
 		redisTemplate.opsForList();
-		return subscriptionRepo.findAll();
+		return subscriptionRepository.findAll();
 	}
 
 	@Override
 	public Boolean confirm(String email, String id) {
-		Subscription subscription = subscriptionRepo.findByIdAndEmail(id, email);
+		Subscription subscription = subscriptionRepository.findByIdAndEmail(id, email);
 		if (subscription != null) {
 			subscription.setConfirm(true);
-			subscriptionRepo.save(subscription);
+			subscriptionRepository.save(subscription);
 			return true;
 		}
 		return false;

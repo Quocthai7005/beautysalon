@@ -28,13 +28,13 @@ import com.amazonaws.services.s3.model.ListObjectsV2Result;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
-import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.dto.PostDto;
 import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.dto.S3ObjectDto;
 import com.doctor.spa.dto.SubProductDto;
 import com.doctor.spa.mapper.S3ObjectMapper;
 import com.doctor.spa.service.AwsS3Service;
-import com.doctor.spa.service.NewsService;
+import com.doctor.spa.service.PostService;
 import com.doctor.spa.service.ProductService;
 import com.doctor.spa.service.SubProductService;
 
@@ -45,7 +45,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 	private AmazonS3 amazonS3;
 
 	@Autowired
-	private NewsService newService;
+	private PostService newService;
 
 	@Autowired
 	private ProductService productService;
@@ -103,13 +103,13 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		return file;
 	}
 
-	private Map<String, List<NewsDto>> getKeyWithUsedInNews() {
-		Map<String, List<NewsDto>> pairs = new HashMap<>();
-		List<NewsDto> newsDtos = newService.getAll();
-		for (NewsDto dto : newsDtos) {
-			List<NewsDto> dtos = pairs.get(dto.getImageKey());
+	private Map<String, List<PostDto>> getKeyWithUsedInNews() {
+		Map<String, List<PostDto>> pairs = new HashMap<>();
+		List<PostDto> newsDtos = newService.getAll();
+		for (PostDto dto : newsDtos) {
+			List<PostDto> dtos = pairs.get(dto.getImageKey());
 			if (dtos == null) {
-				List<NewsDto> usedDto = new ArrayList<NewsDto>();
+				List<PostDto> usedDto = new ArrayList<PostDto>();
 				usedDto.add(dto);
 				pairs.put(dto.getImageKey(), usedDto);
 			} else {
@@ -193,7 +193,7 @@ public class AwsS3ServiceImpl implements AwsS3Service {
 		List<S3ObjectDto> dtos = new ArrayList<>();
 
 		if (directory.equals(newsDir)) {
-			Map<String, List<NewsDto>> pairs = getKeyWithUsedInNews();
+			Map<String, List<PostDto>> pairs = getKeyWithUsedInNews();
 			for (S3ObjectSummary obj : sublist) {
 				if ((directory + "/").equals(obj.getKey()))
 					continue;

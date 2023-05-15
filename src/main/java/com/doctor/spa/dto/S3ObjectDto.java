@@ -14,13 +14,13 @@ public class S3ObjectDto {
 	private Date lastModified;
 	private String uploader;
 	private List<Pair<Long, String>> usedIn;
-	private List<NewsDto> usedInNews;
+	private List<PostDto> usedInNews;
 	private List<ProductDto> usedInProduct;
 
-	public List<NewsDto> getUsedInNews() {
+	public List<PostDto> getUsedInNews() {
 		return usedInNews;
 	}
-	public void setUsedInNews(List<NewsDto> usedInNews) {
+	public void setUsedInNews(List<PostDto> usedInNews) {
 		this.usedInNews = usedInNews;
 	}
 	public List<ProductDto> getUsedInProduct() {
@@ -79,10 +79,10 @@ public class S3ObjectDto {
 	public void setUsedIn(List<Pair<Long, String>> usedIn) {
 		this.usedIn = usedIn;
 	}
-	public List<NewsDto> getUsedIn2() {
+	public List<PostDto> getUsedIn2() {
 		return usedInNews;
 	}
-	public void setUsedIn2(List<NewsDto> usedIn2) {
+	public void setUsedIn2(List<PostDto> usedIn2) {
 		this.usedInNews = usedIn2;
 	}
 }

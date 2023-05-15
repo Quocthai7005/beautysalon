@@ -11,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.doctor.spa.dto.ImageDto;
 import com.doctor.spa.entity.PageText;
-import com.doctor.spa.repository.PageTextRepo;
+import com.doctor.spa.repository.PageTextRepository;
 import com.doctor.spa.service.PageTextService;
 
 @Service
@@ -19,26 +19,26 @@ import com.doctor.spa.service.PageTextService;
 public class PageTextServiceImpl implements PageTextService{
 	
 	@Autowired
-	private PageTextRepo pageTextRepo;
+	private PageTextRepository pageTextRepository;
 
 	
 	@Override
 	public PageText getTextByPageAndSection(String page, String section) {
-		PageText pt = pageTextRepo.findByPageInAndSectionIn(page, section);
+		PageText pt = pageTextRepository.findByPageInAndSectionIn(page, section);
 		return pt;
 	}
 
 
 	@Override
 	public List<PageText> findByPage(String page) {
-		List<PageText> pageTexts = pageTextRepo.findByPage(page);
+		List<PageText> pageTexts = pageTextRepository.findByPage(page);
 		return pageTexts;
 	}
 
 
 	@Override
 	public List<ImageDto> getHeaderImage() {
-		List<PageText> images = pageTextRepo.findBySection("header_image");
+		List<PageText> images = pageTextRepository.findBySection("header_image");
 		List<ImageDto> imageDtos = new ArrayList<ImageDto>();
 		images.forEach(pageText -> {
 			ImageDto imageDto = new ImageDto();
@@ -54,12 +54,12 @@ public class PageTextServiceImpl implements PageTextService{
 	@Override
 	public Boolean updateImage(List<ImageDto> modifiedImages) {
 		
-		List<PageText> originImages = pageTextRepo.findBySection("header_image");
+		List<PageText> originImages = pageTextRepository.findBySection("header_image");
 		for (int i = 0; i < originImages.size(); i++) {
-			PageText image = pageTextRepo.findById(modifiedImages.get(i).getId());
+			PageText image = pageTextRepository.findById(modifiedImages.get(i).getId());
 			image.setContent(modifiedImages.get(i).getBase64Image());
 			image.setIsShownHome(modifiedImages.get(i).getIsShownHome());
-			pageTextRepo.save(image);
+			pageTextRepository.save(image);
 		}
 		return true;
 	}
@@ -67,7 +67,7 @@ public class PageTextServiceImpl implements PageTextService{
 
 	@Override
 	public List<ImageDto> getShownImage() {
-		List<PageText> pageTexts = pageTextRepo.findBySectionAndIsShownHomeTrue("header_image");
+		List<PageText> pageTexts = pageTextRepository.findBySectionAndIsShownHomeTrue("header_image");
 		List<ImageDto> imageDtos = new ArrayList<>();
 		pageTexts.forEach(pageText -> {
 			ImageDto dto = new ImageDto();
@@ -83,7 +83,7 @@ public class PageTextServiceImpl implements PageTextService{
 	@Override
 	public Map<String, String> getContact() {
 		Map<String, String> result = new HashMap<String, String>();
-		List<PageText> contact = pageTextRepo.findBySection("footer");
+		List<PageText> contact = pageTextRepository.findBySection("footer");
 		contact.forEach(s -> {
 			result.put(s.getTitle(), s.getContent());
 		});
@@ -94,20 +94,20 @@ public class PageTextServiceImpl implements PageTextService{
 	@Override
 	public Boolean updateContact(Map<String, String> contact) {
 
-		PageText address = pageTextRepo.findByTitle("address");
-		PageText phone = pageTextRepo.findByTitle("phone");
-		PageText map = pageTextRepo.findByTitle("map");
-		PageText facebook = pageTextRepo.findByTitle("facebook");
+		PageText address = pageTextRepository.findByTitle("address");
+		PageText phone = pageTextRepository.findByTitle("phone");
+		PageText map = pageTextRepository.findByTitle("map");
+		PageText facebook = pageTextRepository.findByTitle("facebook");
 		
 		address.setContent(contact.get("address"));
 		phone.setContent(contact.get("phone"));
 		map.setContent(contact.get("map"));
 		facebook.setContent(contact.get("facebook"));
 		
-		pageTextRepo.save(address);
-		pageTextRepo.save(phone);
-		pageTextRepo.save(map);
-		pageTextRepo.save(facebook);
+		pageTextRepository.save(address);
+		pageTextRepository.save(phone);
+		pageTextRepository.save(map);
+		pageTextRepository.save(facebook);
 		
 		return true;
 	}

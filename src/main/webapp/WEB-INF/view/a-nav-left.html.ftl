@@ -35,7 +35,7 @@
 							</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link" href="<@spring.url '/admin/news-list'/>">
+							<a class="nav-link" href="<@spring.url '/admin/posts-list'/>">
 								<i class="material-icons">library_books</i>
 								<p>TRANG TIN</p>
 							</a>
@@ -91,7 +91,7 @@
 							</a>
 						</li>
 						<li class="nav-item ">
-							<a class="nav-link" href="<@spring.url '/admin/bucket?directory=news'/>">
+							<a class="nav-link" href="<@spring.url '/admin/bucket?directory=posts'/>">
 								<i class="material-icons">cloud_queue</i>
 								<p>AWS S3 - TIN TỨC</p>
 							</a>

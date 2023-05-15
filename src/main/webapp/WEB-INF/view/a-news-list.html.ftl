@@ -66,7 +66,7 @@
                                     </div>
                                     <div class="row">              
                         				<div class="col-lg-4 col-md-12 col-xs-12">
-		                                    <a href="<@spring.url '/admin/news-add'/>" class="btn btn-info pull-left" data-bind="click: goToCreate"><span><i class="fa fa-plus"></i>&nbsp;&nbsp;</span>Tạo mới</a>   
+		                                    <a href="<@spring.url '/admin/posts-add'/>" class="btn btn-info pull-left" data-bind="click: goToCreate"><span><i class="fa fa-plus"></i>&nbsp;&nbsp;</span>Tạo mới</a>
                                     	</div>
                                     	<div class="col-lg-8 col-md-12 col-xs-12">
 											<ul id="pagination-post" class="pagination-sm pull-right"></ul>		                                    

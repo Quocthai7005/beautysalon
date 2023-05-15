@@ -124,7 +124,7 @@
 
 					<div class="col-lg-12 col-xs-12" style="margin-bottom: 20px; margin-top: 30px">
 						<div class="row center-block">
-							<button class="btn btn-default" id="btn-news"><@spring.message "menu.news"/></button>
+							<button class="btn btn-default" id="btn-posts"><@spring.message "menu.posts"/></button>
 						</div> 
 					</div>
 				</div>

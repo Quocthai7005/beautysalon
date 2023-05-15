@@ -2,19 +2,19 @@
 <html>   
 	<head>
 		<#include "headerinc.html.ftl">
-		<link rel="stylesheet" type="text/css" href="<@spring.url '/resources/css/news.css'/>"/>
-		<script src="<@spring.url '/resources/javascript/news.js'/>"></script>
+		<link rel="stylesheet" type="text/css" href="<@spring.url '/resources/css/posts.css'/>"/>
+		<script src="<@spring.url '/resources/javascript/posts.js'/>"></script>
 		<#import "/spring.ftl" as spring/>
 	</head>
 	<body>
 		<input type="hidden" id="root-context" value="${rootContext.getContextPath()}"></input>
 		<#-- Navigation bar -->
-		<div id="main-news">
+		<div id="main-posts">
 			<#include "nav.html.ftl">
 			<#include "carousel.html.ftl">
 			<div class="container">
 				<#-- header -->
-				<div class="row" id="header-news">
+				<div class="row" id="header-posts">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<h2><@spring.message "header.newPost"/></h2>
 					</div>
@@ -27,7 +27,7 @@
 				</div>
 
 				<#-- content -->
-				<div class="row" id="content-news">
+				<div class="row" id="content-posts">
 					<div class="col-lg-12 text-center">
 						<div id="page-content">
 							<div data-bind="if: newsPosts().length == 0" style="text-align: center">
@@ -40,7 +40,7 @@
 											<img data-bind="attr: {src: $data.image}" width=180 height=180 class="card-img-top">
 											<div class="card-body">
 												<h5 class="card-title"><span data-bind="text: $data.name"></h5>
-												<a data-bind="attr: {href: 'news/post/' + $data.url}" style="font-family: Quicksand-Bold">Xem chi tiết →</a>
+												<a data-bind="attr: {href: 'posts/post/' + $data.url}" style="font-family: Quicksand-Bold">Xem chi tiết →</a>
 											</div>
 										<div>
 									</li>

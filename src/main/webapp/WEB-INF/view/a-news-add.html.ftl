@@ -27,7 +27,7 @@
                                 
                                 	<div class="row">              
                         				<div class="col-lg-12 col-md-12">
-		                                    <form id="create-news-form">
+		                                    <form id="create-posts-form">
 		                                    	<input data-bind="value: id" name="id" type="hidden" id="service-id">
 
 												<#-- service name -->
@@ -88,8 +88,8 @@
 											  	<#-- content -->
 											  	<div class="col-lg-12 col-md-12">
 												  	<div class="form-group">
-												    	<label for="news-content-inp" class="custom-label">Nội dung tin</label>
-												    	<textarea data-bind="value: content" id="news-content-inp" name="content"></textarea>
+												    	<label for="posts-content-inp" class="custom-label">Nội dung tin</label>
+												    	<textarea data-bind="value: content" id="posts-content-inp" name="content"></textarea>
 												  	</div>
 											  	</div>
 											  										  	

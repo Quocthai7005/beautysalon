@@ -17,16 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.doctor.spa.entity.User;
 import com.doctor.spa.entity.UserRole;
-import com.doctor.spa.repository.RoleRepo;
-import com.doctor.spa.repository.UserRepo;
+import com.doctor.spa.repository.RoleRepository;
+import com.doctor.spa.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	@Autowired
-	private UserRepo userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	private RoleRepo roleRepository;
+	private RoleRepository roleRepository;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;

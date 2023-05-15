@@ -3,20 +3,20 @@ package com.doctor.spa.mapper.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.doctor.spa.entity.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import com.amazonaws.services.s3.AmazonS3;
 import com.doctor.spa.dto.SubProductDto;
-import com.doctor.spa.dto.NewsDto;
+import com.doctor.spa.dto.PostDto;
 import com.doctor.spa.dto.ProductDto;
 import com.doctor.spa.entity.SubProduct;
-import com.doctor.spa.entity.News;
 import com.doctor.spa.mapper.SubProductMapper;
-import com.doctor.spa.mapper.NewsMapper;
+import com.doctor.spa.mapper.PostMapper;
 import com.doctor.spa.mapper.ProductMapper;
-import com.doctor.spa.repository.NewsRepo;
+import com.doctor.spa.repository.PostRepository;
 
 @Service
 public class ProductMapperImpl implements ProductMapper {
@@ -31,10 +31,10 @@ public class ProductMapperImpl implements ProductMapper {
 	SubProductMapper childServiceMapper;
 
 	@Autowired
-	NewsRepo newsRepo;
+	PostRepository postRepository;
 
 	@Autowired
-	NewsMapper newsMapper;
+	PostMapper postMapper;
 
 	@Override
 	public ProductDto toDto(com.doctor.spa.entity.Product service) {
@@ -60,10 +60,10 @@ public class ProductMapperImpl implements ProductMapper {
 			});
 			dto.setChildServices(childServiceDtos);
 
-			List<News> news = newsRepo.findByProductId(service.getId());
-			List<NewsDto> newsPosts = new ArrayList<NewsDto>();
-			news.forEach(newsPost -> {
-				NewsDto newsDto = newsMapper.toDto(newsPost);
+			List<Post> posts = postRepository.findByProductId(service.getId());
+			List<PostDto> newsPosts = new ArrayList<PostDto>();
+			posts.forEach(newsPost -> {
+				PostDto newsDto = postMapper.toDto(newsPost);
 				newsPosts.add(newsDto);
 			});
 			dto.setNews(newsPosts);
@@ -79,7 +79,7 @@ public class ProductMapperImpl implements ProductMapper {
 		service.setImage(dto.getImageKey());
 		service.setIntro(dto.getIntro());
 		service.setName(dto.getName());
-		service.setNews(new ArrayList<News>());
+		service.setNews(new ArrayList<Post>());
 		service.setUrl(dto.getUrl());
 		return service;
 	}

@@ -37,14 +37,14 @@ public class Product extends BaseEntity {
 	private List<SubProduct> subProducts = new ArrayList<SubProduct>();
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
-	private List<News> news = new ArrayList<News>();
+	private List<Post> posts = new ArrayList<Post>();
 
-	public List<News> getNews() {
-		return news;
+	public List<Post> getNews() {
+		return posts;
 	}
 
-	public void setNews(List<News> news) {
-		this.news = news;
+	public void setNews(List<Post> posts) {
+		this.posts = posts;
 	}
 
 	public String getUrl() {

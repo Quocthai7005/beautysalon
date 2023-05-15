@@ -50,10 +50,10 @@
 														
 														
 														<td class="text-center">
-														<!-- ko if: $parent.directory() == 'news' -->
+														<!-- ko if: $parent.directory() == 'posts' -->
 															<ol data-bind="foreach: usedInNews">
 																<li>
-																	<a data-bind="attr: { 'href': 'news-edit/' + id }" target="_blank">
+																	<a data-bind="attr: { 'href': 'posts-edit/' + id }" target="_blank">
 																		<span data-bind="text: name"></span>
 																	</a>
 																</li>
