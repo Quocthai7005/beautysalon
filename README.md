@@ -25,3 +25,6 @@ Admin UI:
 3. On-going development
 - To convert MVC controller into api controller
 - To implement UI with Angular framework
+- To implement password hashing anda data encryption
+- To implement subscription
+- To implement user registration
