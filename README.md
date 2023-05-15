@@ -7,12 +7,14 @@ This project is a web application that represent a beauty salon.
 - Docker for quick deployment
 
 2. Features of this project:
+
 End user UI:
 - Homepage
 - Services/subservices
 - Post
 - Booking
 - Confirmation mail
+
 Admin UI:
 - Homepage
 - Services/subservices management
