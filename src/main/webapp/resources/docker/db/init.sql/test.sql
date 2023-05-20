@@ -1,3 +1,10 @@
+Create database drduongspa;
+use drduongspa;
+
+CREATE USER 'drduongspa'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON * . * TO 'drduongspa'@'%';
+FLUSH PRIVILEGES;
+
 DROP TABLE IF EXISTS `booking`;
 CREATE TABLE `booking` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
