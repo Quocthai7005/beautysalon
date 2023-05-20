@@ -12,8 +12,8 @@ create table user_role (
     primary key (role_id)
 );
 
-drop table child_service;
-create table child_service (
+drop table sub_service;
+create table sub_service (
     id int not null AUTO_INCREMENT,
     parent_service_id int,
     name varchar(100),
