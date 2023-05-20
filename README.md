@@ -32,6 +32,7 @@ _Use docker to install database:_
 - Run docker compose command
   docker-compose -f docker-compose.yaml up
 - After successfully installing the mysql container, use a database workbench to test connection
+
   _database_: MySQL
   _username_: drduongspa
   _password_: password
