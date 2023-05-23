@@ -1,12 +1,7 @@
 package com.doctor.spa.application;
 
+import com.doctor.spa.configuration.*;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
-
-import com.doctor.spa.configuration.AmazonConfiguration;
-import com.doctor.spa.configuration.AsyncConfiguration;
-import com.doctor.spa.configuration.MainDBConfiguration;
-import com.doctor.spa.configuration.MvcConfiguration;
-import com.doctor.spa.configuration.RedisConfiguration;
 
 public class AppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -15,7 +10,9 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
         return new Class<?>[] {
         	MainDBConfiguration.class,
         	AmazonConfiguration.class,
-        	AsyncConfiguration.class, RedisConfiguration.class};
+        	AsyncConfiguration.class,
+                RedisConfiguration.class,
+                WebSecurityConfiguration.class};
     }
 
     @Override
