@@ -16,7 +16,7 @@ import java.util.Map;
 
 @Controller("ApiNewsController")
 @RequestMapping(value = "/api/admin")
-public class AdminNewsController {
+public class AdminPostController {
 	
 	@Autowired
 	PostService postService;

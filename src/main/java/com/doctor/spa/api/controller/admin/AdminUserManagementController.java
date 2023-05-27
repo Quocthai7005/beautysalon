@@ -19,7 +19,7 @@ public class AdminUserManagementController {
     @Autowired
     UserDetailsServiceImpl userDetailsService;
 
-    @PostMapping(value = "/create-user")
+    @PostMapping(value = "/create")
     public ResponseEntity<ResponseBody<User>> createUser(@RequestBody UserDto dto) {
         return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, userDetailsService.createUser(dto)));
     }

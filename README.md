@@ -1,5 +1,10 @@
 This project is a web application that represent a beauty salon.
 
+**Environment:**
+Java 8
+Tomcat 8.5
+MySQL: any version Or using Docker
+
 **1. Technologies that I am using in this application:**
 * Spring framework
 * Freemarker
