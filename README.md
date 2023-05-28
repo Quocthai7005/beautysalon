@@ -1,9 +1,9 @@
 This project is a web application that represent a beauty salon.
 
 **Environment:**
-Java 8
-Tomcat 8.5
-MySQL: any version Or using Docker
+* Java 8
+* Tomcat 8.5
+* MySQL: any version Or using Docker
 
 **1. Technologies that I am using in this application:**
 * Spring framework
@@ -51,7 +51,6 @@ _Use docker to install database:_
   _port_: 3306
 
 **4. On-going development**
-
 - To convert MVC controller into api controller
 - To implement UI with Angular framework
 - To implement password hashing anda data encryption
