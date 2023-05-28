@@ -10,9 +10,9 @@
 	<url>http://maven.apache.org</url>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
 		<collections.util.version>4.1</collections.util.version>
 	</properties>
+
 	<dependencyManagement>
 		<dependencies>
 			<dependency>

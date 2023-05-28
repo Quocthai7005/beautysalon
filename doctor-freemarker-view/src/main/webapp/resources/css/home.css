@@ -82,7 +82,7 @@
 	text-align: center;
 }
 #map-ctn iframe {
-	display: inline-block
+	display: inline-block;
 	width: 100vh;
 	height: 60vh;
 }

@@ -1,4 +1,4 @@
-package com.doctor.spa.api.client;
+package client;
 
 import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
