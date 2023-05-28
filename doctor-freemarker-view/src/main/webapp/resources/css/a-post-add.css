@@ -1,0 +1,44 @@
+.custom-image-upload {
+  display: inline-block;
+  padding: 6px 12px;
+  width: 135px !important;
+}
+.custom-label {
+	width: 150px !important;
+}
+#preview-image {
+	margin-left: 20px;
+}
+#image-inp {
+	width: 135px;
+	margin-left: -130px;
+	height: 50px;
+	margin-top: -100px;
+	top: 65px;
+}
+#service-name-inp,
+#url-inp {
+	width: 278px;
+}
+#select-ctn .dropdown-menu > li > a, .dropdown-menu > li > a {
+	color: #000000 !important;
+}
+
+#select-ctn .dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+	background-color: #eeeeee !important;
+}
+#select-ctn .dropdown-toggle {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+}
+#service-group-selec-label {
+	margin-right: 20px;
+}
+#shown-in-home {
+	width: 20px;
+	height: 20px;
+	margin-top: -10px;
+}
+.form-group {
+	margin-top: 0;
+}

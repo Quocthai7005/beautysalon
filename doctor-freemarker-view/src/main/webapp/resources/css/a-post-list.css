@@ -1,0 +1,28 @@
+.dropdown-menu > li > a, .dropdown-menu > li > a {
+	color: #000000 !important;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+	background-color: #eeeeee !important;
+}
+.dropdown-toggle {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+}
+#service-group-selec-label {
+	margin-right: 20px;
+}
+#search-text {
+	margin-right: 20px;
+}
+#search-text input {
+	margin-top: 9px;
+	border-radius: 5px !important;
+	height: 42px;
+	color: #000000;
+	padding: 8px;
+}
+::placeholder { 
+    color: #d8d8d8;
+    opacity: 1;
+}

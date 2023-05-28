@@ -1,0 +1,59 @@
+.custom-label {
+	width: 150px !important;
+}
+body {
+	line-height: 1.5;
+    /* font-family: "Roboto", "Helvetica", "Arial", sans-serif; */
+    font-family: Quicksand-Regular;
+    
+}
+@font-face {
+    font-family: Quicksand-Regular;
+    src: url('../fonts/Quicksand-Regular.ttf');
+}
+.bootstrap-select {
+	width: 278px !important;	
+}
+small[data-bv-result="INVALID"] {
+	display: block !important;
+	color: red;
+}
+
+.is-fileinput .help-block {
+	margin-right: -150px;
+	position: relative;
+    left: -140px;
+    bottom: -30px;
+}
+
+.is-fileinput .help-block {
+	margin-right: -150px;
+	position: relative;
+    left: -140px;
+    bottom: -30px;
+}
+
+.bootstrap-select .help-block {
+	position: relative;
+    bottom: -5px;
+}
+.sidebar .nav p {
+	font-size: 18px;
+}
+.sidebar .logo {
+	position: relative;
+	z-index: 4;
+}
+.sidebar .nav > li > a:hover,
+.sidebar .nav > li > a:focus {
+    background-color: #be3263!important;
+}
+.content {
+	margin-top: 0px !important;	
+}
+.nav-item .nav-item > .nav-link p {
+	font-size: 14px !important;
+}
+.logo img {
+    filter: brightness(10);
+}

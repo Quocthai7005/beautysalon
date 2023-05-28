@@ -1,0 +1,41 @@
+.custom-image-upload {
+  border: 1px solid #ccc;
+  display: inline-block;
+  padding: 6px 12px;
+  width: 135px !important;
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+.custom-label {
+	width: 150px !important;
+}
+.preview-image {
+	margin-left: 20px;
+}
+.image-inp {
+	opacity: 0;
+    position: absolute;
+    top: -50px !important;
+    right: 0;
+    bottom: 0;
+    left: 23% !important;
+    width: 138px !important;
+    height: 50px !important;
+    z-index: 5000 !important;
+}
+input[type=checkbox] {
+	width: 20px;
+	height: 20px;
+}
+.show-image {
+	font-size: 16px;
+}
+.form-inline .form-group {
+	margin-top: 8px;
+	width: 70%;
+}
+.form-inline .form-group .form-control {
+	width: 100%;
+}

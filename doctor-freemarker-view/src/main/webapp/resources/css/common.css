@@ -1,0 +1,96 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	vertical-align: baseline;
+	color: #777;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+
+@font-face {
+    font-family: NotoSans-Regular;
+    src: url('../fonts/NotoSans-Regular.ttf');
+}
+@font-face {
+    font-family: Quicksand-Bold;
+    src: url('../fonts/Quicksand-Bold.ttf');
+}
+@font-face {
+    font-family: Quicksand-Light;
+    src: url('../fonts/Quicksand-Light.ttf');
+}
+@font-face {
+    font-family: Quicksand-Regular;
+    src: url('../fonts/Quicksand-Regular.ttf');
+}
+@font-face {
+    font-family: Quicksand-Light;
+    src: url('../fonts/Quicksand-Light.ttf');
+}
+@font-face {
+    font-family: Quicksand-SemiBold;
+    src: url('../fonts/Quicksand-SemiBold.ttf');
+}
+
+body {
+	line-height: 1.5;
+    font-family: Quicksand-Regular, sans-serif, "Arial";
+    
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+.container {
+	background-color: #f2f2e8;
+}
+.row {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display:         flex;
+  flex-wrap: wrap;
+}
+.row > [class*='col-'] {
+  display: flex;
+  flex-direction: column;
+}
+.card {
+	display: inline-block;
+}
+.question-form {
+	margin: 0 auto;
+	width: 30%;
+}

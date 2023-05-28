@@ -1,0 +1,61 @@
+/* styles */
+
+.navbar-brand {
+    padding-top: 8px;
+}
+#nav-container {
+    background-color: #f2f2e8;
+    font-size: 20px;
+}
+#myCarousel {
+    margin-top: 50px;
+}
+.faci-container {  
+    margin: 60px 0 60px 0; 
+}
+.faci-container img {
+    border: 2px solid #C0BEBE;
+}
+.faci-container img:hover {
+    opacity: 0.9;
+}
+
+/* General */
+.btn.girlish {
+    margin: 8px 30px 8px 8px;
+    border-radius: 24px;
+    border: 1.5px solid #b9285b;
+    color: #b9285b;
+}
+.btn.girlish:hover {
+    background-color: #b9285b;
+    color: #fff;
+}
+#menu-navbar li:hover {
+	background-color: #e7e7e7;
+}
+#menu-navbar .active a {
+	background-color: #b9285b;
+	color: #ffffff;
+}
+#page-footer {
+	text-align: left;
+	padding-top: 20px;
+	color: #d7006b;
+	background-color: #f2f2e8;
+	padding-left: 30px;
+	padding-right: 30px;
+}
+#facebook-site {
+	font-size: 16px;	
+	text-decoration: none;
+}
+#address-text {
+    margin-bottom: 20px;
+    font-size: 15px;
+    line-height: 30px;
+}
+.carousel-inner > .item > img {
+	width: 100% !important;
+	height: auto;
+}

@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  db:
+    container_name: mydb
+    restart: always
+    image: mysql:latest
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_DATABASE: drduongspa
+      MYSQL_ROOT_PASSWORD: 'admin'
+      MYSQL_USER: 'drduongspa'
+      MYSQL_PASS: 'password'
+    volumes:
+      - db:/var/lib/mysql
+      - ./db/init.sql:/test.sql
+volumes:
+  db:
+    driver: local
