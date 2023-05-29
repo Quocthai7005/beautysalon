@@ -34,7 +34,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		http.csrf().disable()
 		.authorizeRequests()
 		.antMatchers("/resources/css/**", "/resources/javascript/**", "/resources/image/**", "/resources/fonts/**", "/admin/login", "/home", "/", "/service", "/post", "/contact", "/service/**", "/billing", "/billing/**", "/bucket", "/bucket/**", "/post/**", "/messenger/**", "/booking", "/booking/**", "/api/**").permitAll()
-		.antMatchers("/admin/**", "/admin").hasAnyAuthority("admin", "Admin", "ADMIN").anyRequest().authenticated()
+		.antMatchers("/admin/**", "/admin").hasAnyAuthority("admin", "Admin", "ADMIN").anyRequest().authenticated();
 		/*.and()
 		.formLogin()
 		.loginPage("/api/admin/token/login")
@@ -43,12 +43,11 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 		.defaultSuccessUrl("/admin/main", true)
 		//.usernameParameter("username").passwordParameter("password")
 		.permitAll()*/
-		.and()
-		.logout().logoutSuccessUrl("/admin/login")
-		//.deleteCookies("JSESSIONID")
-		.permitAll();
+		//.and()
+		//.logout().logoutSuccessUrl("/admin/login")
+		//.deleteCookies("JSESSIONID").permitAll();
 
-		//http.addFilterBefore(this.jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
+		http.addFilterBefore(this.jwtFilterRequest, UsernamePasswordAuthenticationFilter.class);
 	}
 
 	@Bean
