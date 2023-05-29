@@ -1,6 +1,6 @@
-package client.impl;
+package com.doctor.spa.client.impl;
 
-import client.api.JsonParser;
+import com.doctor.spa.client.api.JsonParser;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonParserImpl<T> implements JsonParser {

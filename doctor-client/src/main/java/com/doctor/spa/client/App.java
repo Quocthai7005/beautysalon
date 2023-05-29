@@ -1,4 +1,4 @@
-package client;
+package com.doctor.spa.client;
 
 /**
  * Hello world!

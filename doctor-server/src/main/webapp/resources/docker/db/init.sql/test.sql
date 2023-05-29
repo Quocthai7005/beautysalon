@@ -167,7 +167,7 @@ CREATE TABLE `user` (
 --
 
 LOCK TABLES `user` WRITE;
-INSERT INTO `user` VALUES ('thai.nguyenquoc','1234@Tpszz',0);
+INSERT INTO `user` VALUES ('thai.nguyenquoc','$2a$10$H1WwmDP4JeuEr9/7Q8HlR.uvCRqfARHVlsRY2zv2eJNgmo8KHTcWm',0);
 UNLOCK TABLES;
 
 --

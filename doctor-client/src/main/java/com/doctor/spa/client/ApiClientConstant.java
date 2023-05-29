@@ -1,4 +1,4 @@
-package com.doctor.spa.api.client;
+package com.doctor.spa.client;
 
 public interface ApiClientConstant {
 

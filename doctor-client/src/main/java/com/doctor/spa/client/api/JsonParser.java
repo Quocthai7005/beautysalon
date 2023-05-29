@@ -1,8 +1,5 @@
-package client.api;
+package com.doctor.spa.client.api;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public interface JsonParser<T> {
 
     T parseJson(String jsonString) throws Exception;

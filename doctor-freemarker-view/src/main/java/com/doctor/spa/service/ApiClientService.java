@@ -1,4 +1,5 @@
 package com.doctor.spa.service;
 
-public class ApiClientService {
+public interface ApiClientService {
+
 }

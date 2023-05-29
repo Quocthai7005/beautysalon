@@ -187,11 +187,6 @@
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-core</artifactId>
     </dependency>
-    <dependency>
-      <groupId>com.doctor</groupId>
-      <artifactId>doctor-client</artifactId>
-      <version>1.0</version>
-    </dependency>
   </dependencies>
 
   <build>

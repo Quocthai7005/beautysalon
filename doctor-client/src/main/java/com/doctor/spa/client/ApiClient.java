@@ -1,4 +1,4 @@
-package client;
+package com.doctor.spa.client;
 
 import org.springframework.http.*;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -7,8 +7,13 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@Component
 public class ApiClient {
     private final RestTemplate restTemplate;
     private final AuthenticationManager authenticationManager;
@@ -21,9 +26,9 @@ public class ApiClient {
         this.userDetailsService = userDetailsService;
     }
 
-    public ResponseEntity<String> get(String url) {
+    public ResponseEntity<String> get(String url, Map<String, String> params) {
         HttpEntity<String> requestEntity = createRequestEntity();
-        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, String.class);
+        return restTemplate.exchange(url, HttpMethod.GET, requestEntity, String.class, params);
     }
 
     public ResponseEntity<String> post(String url, String requestBody, MediaType contentType) {

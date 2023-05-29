@@ -1,4 +1,4 @@
-package client;
+package com.doctor.spa.client;
 
 import static org.junit.Assert.assertTrue;
 

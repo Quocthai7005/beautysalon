@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller("ApiPublicNewsController")
-@RequestMapping(value = "/api/news")
+@RequestMapping(value = "/api/post")
 public class PostController {
 
 	@Autowired
