@@ -30,24 +30,24 @@ public class AdminSubProductController {
 	
 	@GetMapping(value="/service-list/no")
 	public ResponseEntity<ResponseBody<Long>> getChildServiceNo(@RequestParam Long groupId) {
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.getServiceNo(groupId)));
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.getProductNo(groupId)));
 	}
 	
 	@GetMapping(value="/service-list/all")
 	public ResponseEntity<ResponseBody<Page<SubProductDto>>> getChildServices(@RequestParam Long groupId, Pageable pageable) {
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.getChildServiceByGroupId(groupId, pageable)));
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.getSubProductByGroupId(groupId, pageable)));
 	}
 	
 	@DeleteMapping(value = "/service-delete/{id}")
 	public ResponseEntity<ResponseBody<Boolean>> deleteService(@PathVariable long id) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.deleteService(id)));
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.deleteSubProduct(id)));
 	}
 	
 	@PostMapping(value = "/service-create")
 	public ResponseEntity<ResponseBody<SubProductDto>> createService(
 			@RequestPart MultipartFile imgFile,
 			@RequestPart SubProductDto data) throws JsonParseException, JsonMappingException, IOException {
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.createService(data, imgFile)));
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.createSubProduct(data, imgFile)));
 	}
 	
 	@GetMapping(value = "/service-validate/url/noid")
@@ -62,11 +62,11 @@ public class AdminSubProductController {
 	
 	@GetMapping(value = "/service/child/{id}")
 	public ResponseEntity<ResponseBody<SubProductDto>> getChildService(@PathVariable long id) {
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.getChildServiceById(id)));
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.getSubProductById(id)));
 	}
 	
 	@PostMapping(value = "/service-update")
 	public ResponseEntity<ResponseBody<Boolean>> updateService(@RequestBody SubProductDto dto) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.updateService(dto)));
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, subProductService.updateSubProduct(dto)));
 	}
 }

@@ -40,8 +40,8 @@ public class ProductController {
 	public String goToChildService(@PathVariable String service, @PathVariable String childService, Model model) {
 		model.addAttribute("menuServices", serService.getAllServices());
 		model.addAttribute("pageTexts", pageTextService.findByPage("home"));
-		model.addAttribute("otherChildServices", childSerService.getChildServiceOtherThan(service, childService));
-		model.addAttribute("childService", childSerService.getChildServiceByUrl(childService));
+		model.addAttribute("otherChildServices", childSerService.getSubProductOtherThan(service, childService));
+		model.addAttribute("childService", childSerService.getSubProductByUrl(childService));
 		model.addAttribute("services", serService.getServiceOtherThan(service));
 		model.addAttribute("menu", Menus.menuService);
 		return Pages.SERVICE_DETAIL;

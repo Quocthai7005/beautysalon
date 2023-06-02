@@ -13,25 +13,25 @@ public interface SubProductService {
 	
 	List<SubProductDto> getHomeShownChildService();
 	
-	SubProductDto getChildServiceByUrl(String url);
+	SubProductDto getSubProductByUrl(String url);
 
-	List<SubProductDto> getChildServiceOtherThan(String serviceUrl, String childServiceUrl);
+	List<SubProductDto> getSubProductOtherThan(String serviceUrl, String childServiceUrl);
 	
-	long getServiceNo(Long id);
+	long getProductNo(Long id);
 	
-	Page<SubProductDto> getChildServiceByGroupId(Long id, Pageable pageable);
+	Page<SubProductDto> getSubProductByGroupId(Long id, Pageable pageable);
 	
-	Boolean deleteService(Long id);
+	Boolean deleteSubProduct(Long id);
 	
-	SubProductDto createService(SubProductDto serviceDto, MultipartFile image);
+	SubProductDto createSubProduct(SubProductDto serviceDto, MultipartFile image);
 	
-	Boolean updateService(SubProductDto serviceDto);
+	Boolean updateSubProduct(SubProductDto serviceDto);
 	
 	Map<String, Boolean> validateUrlNoId(String url);
 	
 	Map<String, Boolean> validateUrl(String url, Long id);
 	
-	SubProductDto getChildServiceById(long id);
+	SubProductDto getSubProductById(long id);
 	
 	List<SubProductDto> getAll();
 }

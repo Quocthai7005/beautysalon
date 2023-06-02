@@ -50,12 +50,12 @@ public class SubProductServiceImpl implements SubProductService{
 	}
 
 	@Override
-	public SubProductDto getChildServiceByUrl(String url) {
+	public SubProductDto getSubProductByUrl(String url) {
 		return subProductMapper.toDto(subProductRepository.findByUrl(url));
 	}
 
 	@Override
-	public List<SubProductDto> getChildServiceOtherThan(String serviceUrl, String childServiceUrl) {
+	public List<SubProductDto> getSubProductOtherThan(String serviceUrl, String childServiceUrl) {
 		return productRepository.findByUrl(serviceUrl).getSubProducts()
 			.stream()
 			.filter(s -> (!s.getUrl().equals(childServiceUrl) && !s.isDeleted()))
@@ -64,7 +64,7 @@ public class SubProductServiceImpl implements SubProductService{
 	}
 
 	@Override
-	public long getServiceNo(Long id) {
+	public long getProductNo(Long id) {
 		if (id == 0 || id == null) {
 			return subProductRepository.findByDeletedFalse().size();
 		} else {
@@ -73,7 +73,7 @@ public class SubProductServiceImpl implements SubProductService{
 	}
 
 	@Override
-	public Page<SubProductDto> getChildServiceByGroupId(Long id, Pageable pageable) {
+	public Page<SubProductDto> getSubProductByGroupId(Long id, Pageable pageable) {
 		Page<SubProduct> services;
 		if (id == 0 || id == null) {
 			services = subProductRepository.findByDeletedFalse(pageable);
@@ -88,14 +88,14 @@ public class SubProductServiceImpl implements SubProductService{
 
 	@Override
 	@Transactional
-	public Boolean deleteService(Long id) {
+	public Boolean deleteSubProduct(Long id) {
 		subProductRepository.deleteById(id);
 		return true;
 	}
 
 	@Override
 	@Transactional
-	public SubProductDto createService(SubProductDto dto, MultipartFile image) {
+	public SubProductDto createSubProduct(SubProductDto dto, MultipartFile image) {
 		SubProduct service = new SubProduct();
 		service.setName(dto.getName());
 		service.setImage(imageService.uploadFile(image));
@@ -109,7 +109,7 @@ public class SubProductServiceImpl implements SubProductService{
 
 	@Override
 	@Transactional
-	public Boolean updateService(SubProductDto dto) {
+	public Boolean updateSubProduct(SubProductDto dto) {
 		try {
 			SubProduct service = subProductRepository.findById(dto.getId());
 			if (service != null) {
@@ -138,7 +138,7 @@ public class SubProductServiceImpl implements SubProductService{
 	}
 
 	@Override
-	public SubProductDto getChildServiceById(long id) {
+	public SubProductDto getSubProductById(long id) {
 		SubProduct service = subProductRepository.findById(id);
 		SubProductDto serviceDto = new SubProductDto(); 
 		if (service != null) {
