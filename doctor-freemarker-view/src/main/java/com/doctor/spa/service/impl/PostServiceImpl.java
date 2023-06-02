@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
+import java.util.HashMap;
 import java.util.Map;
 
 @Service
@@ -30,7 +31,7 @@ public class PostServiceImpl implements PostService {
 
 	@Override
 	public PostDto getSinglePost(String url, Map<String, String> params) {
-		ResponseEntity<String> entity = apiClient.get(url, params);
+		ResponseEntity<String> entity = apiClient.get(new HashMap<String, String>(), url, params);
 		try {
 			return jsonParser.parseJson(entity.getBody());
 		} catch (Exception e) {

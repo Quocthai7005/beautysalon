@@ -47,16 +47,11 @@ public class MvcConfiguration extends WebMvcConfigurerAdapter {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/").setCachePeriod(31556926);
 	}
-	
-	@Bean
-	public LoginSuccessHandler loginSuccessHandler() {
-	    return new LoginSuccessHandler();
-	}
+
 
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
-		registry.addInterceptor(localeInterceptor());
-		registry.addInterceptor(loginSuccessHandler());
+		//registry.addInterceptor(localeInterceptor());
 	}
 
 	@Bean

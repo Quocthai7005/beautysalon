@@ -16,23 +16,28 @@ import java.util.Map;
 @Component
 public class ApiClient {
     private final RestTemplate restTemplate;
-    private final AuthenticationManager authenticationManager;
-    private final UserDetailsService userDetailsService;
 
 
-    public ApiClient(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
+    public ApiClient() {
         this.restTemplate = new RestTemplate();
-        this.authenticationManager = authenticationManager;
-        this.userDetailsService = userDetailsService;
     }
 
-    public ResponseEntity<String> get(String url, Map<String, String> params) {
-        HttpEntity<String> requestEntity = createRequestEntity();
+    public ResponseEntity<String> get(Map<String, String> requestHeaders, String url, Map<String, String> params) {
+        HttpHeaders headers = createHeaders(MediaType.APPLICATION_JSON);
+        String authorization = requestHeaders.get("Authorization");
+        if (authorization != null && !authorization.isEmpty()) {
+            headers.set("Authorization", requestHeaders.get("Authorization"));
+        }
+        HttpEntity<String> requestEntity = new HttpEntity<>(headers);
         return restTemplate.exchange(url, HttpMethod.GET, requestEntity, String.class, params);
     }
 
-    public ResponseEntity<String> post(String url, String requestBody, MediaType contentType) {
+    public ResponseEntity<String> post(Map<String, String> requestHeaders, String url, String requestBody, MediaType contentType) {
         HttpHeaders headers = createHeaders(contentType);
+        String authorization = requestHeaders.get("Authorization");
+        if (authorization != null && !authorization.isEmpty()) {
+            headers.set("Authorization", requestHeaders.get("Authorization"));
+        }
         HttpEntity<String> requestEntity = new HttpEntity<>(requestBody, headers);
         return restTemplate.exchange(url, HttpMethod.POST, requestEntity, String.class);
     }
@@ -49,18 +54,6 @@ public class ApiClient {
         return headers;
     }
 
-    public void authenticate(String username, String password) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(username, password)
-        );
-
-        // Set the authenticated user in the SecurityContext
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-
-        // Generate JWT token
-        UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-        //return generateJwtToken(userDetails);
-    }
 
     private String getAuthorizationHeader() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

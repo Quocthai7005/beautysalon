@@ -1,29 +1,32 @@
 package com.doctor.spa.service.impl;
 
 import com.doctor.spa.client.ApiClient;
-import com.doctor.spa.client.api.JsonParser;
+import com.doctor.spa.dto.AuthSuccessDto;
+import com.doctor.spa.entity.AuthRequest;
 import com.doctor.spa.service.LoginService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Map;
+import javax.annotation.PostConstruct;
+import java.util.HashMap;
 
 @Service
 @Transactional
 public class LoginServiceImpl implements LoginService {
 
-    static JsonParser<String> jsonParser;
-
     @Autowired
     ApiClient apiClient;
 
     @Override
-    public String getLoginToken(String url, Map<String, String> params) {
-        ResponseEntity<String> entity = apiClient.get(url, params);
+    public ResponseEntity<String> getLoginToken(String url, AuthRequest authRequest) throws Exception {
+        ObjectMapper ojm = new ObjectMapper();
+        ResponseEntity<String> entity = apiClient.post(new HashMap<>(), url, ojm.writeValueAsString(authRequest), MediaType.APPLICATION_JSON);
         try {
-            return jsonParser.parseJson(entity.getBody());
+            return entity;
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

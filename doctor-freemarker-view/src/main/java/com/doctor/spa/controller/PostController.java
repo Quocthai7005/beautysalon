@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -25,7 +26,7 @@ public class PostController {
     PostService postService;
 
     @GetMapping(value = "/")
-    public ResponseEntity<ResponseBody<PostDto>> getPost(@RequestParam Map<String, String> parameters) {
+    public ResponseEntity<ResponseBody<PostDto>> getPost(@RequestHeader Map<String, String> headers, @RequestParam Map<String, String> parameters) {
         return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, postService.getSinglePost(GET_SINGLE_POST, parameters)));
     }
 }
