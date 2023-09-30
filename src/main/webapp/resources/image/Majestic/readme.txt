@@ -1,0 +1,1 @@
+<a href="https://www.freepik.com/free-photo/woman-with-nail-art-promoting-design-luxury-earrings-ring_5588693.htm#query=nail%20banner&position=24&from_view=search&track=ais">Image by azerbaijan_stockers</a> on Freepik

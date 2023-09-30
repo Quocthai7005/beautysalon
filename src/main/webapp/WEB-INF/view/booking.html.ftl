@@ -10,42 +10,72 @@
 		<input type="hidden" id="root-context" value="${rootContext.getContextPath()}"></input>
 		<#-- Navigation bar -->
 		<#include "nav.html.ftl">
-		<#include "carousel.html.ftl">
 		<div id="main">	   
 			<div class="container" style="background-color: #fff">   
 				<#-- services -->
 				<div class="row" id="contact-ctn">
-					<div class="col-lg-12 col-xs-12" id="what-we-bring" style="margin-bottom: 10px;">
-						<h2 class="text-center" id="title" style="margin-bottom: 10px">ĐẶT LỊCH</h2>
-						<h5 class="text-center" id="title" style="margin-bottom: 10px">Vui lòng điền thông tin, chúng tôi sẽ liên hệ quý khách trong ngày</h2>
+					<div class="col-lg-12 col-xs-12" id="what-we-bring" style="margin-bottom: 10px;margin-top:20px">
+						<h2 class="text-center" id="title" style="margin-bottom: 10px"><@spring.message "menu.booking"/></h2>
 					</div>
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
 						<form class="question-form" id="question-form" action="booking/create">
 							<input name="status" type="hidden">
 							<input name="id" type="hidden">
 							<div class="form-group">
-								<label for="name">Họ tên</label>
+								<label for="name">Your name</label>
 								<input required name="name" type="text" class="form-control" id="name">
 							</div>
 							<div class="form-group">
-								<label for="email">Địa chỉ email</label>
-								<input name="email" type="email" class="form-control" id="email" placeholder="name@example.com">
-							</div>
-							<div class="form-group">
-								<label for="phone">Số điện thoại</label>
+								<label for="phone">Your phone number</label>
 								<input required name="phone" type="number" class="form-control" id="phone">
 							</div>
 							<div class="form-group">
-								<label for="datepicker">Ngày hẹn</label>
-								<div class='input-group date' id='datepicker'>
-									<input required type="text" id="processdate" class="form-control" placeholder="2022-03-02" name="consultDate" /> <span class="input-group-addon btn"><i class="glyphicon glyphicon-calendar"></i> </span>
+								<label for="datepicker">Choose a time for your appointment</label>
+								<div class='input-group form-inline date' id='datepicker'>
+									<input required type="text" id="processdate" class="form-control" placeholder="2023-12-01" name="consultDate" /> <span class="input-group-addon btn"><i class="glyphicon glyphicon-calendar"></i> </span>
 								</div>
 							</div>
+
+							<div class="form-inline">
+								<div class='form-inline date' id='datepicker'>
+									<select id="hour" name="hour" class="form-control">
+										<option>9</option>
+										<option>10</option>
+										<option>11</option>
+										<option>12</option>
+										<option>13</option>
+										<option>14</option>
+										<option>15</option>
+										<option>16</option>
+										<option>17</option>
+										<option>18</option>
+										<option>19</option>
+									</select>
+									<select id="minute" name="minute" class="form-control">
+										<option>00</option>
+										<option>30</option>
+									</select>
+								</div>
+								<small>Office hours are 9:30am to 7pm</small>
+							</div>
 							<div class="form-group">
-								<label for="question">Câu hỏi tư vấn</label>
+								<label for="selectServices">Choose your service(s)</label>
+								<select id="selectServices" name="services" class="selectpicker form-control" multiple data-live-search="true">
+									<#list menuServices?keys as key>
+										<h3 style="margin-top: 20px">${key}</h3>
+										<table class="table table-striped" style="width:60%;align-self: center;">
+											<#list menuServices[key] as service>
+												<option value="${service.name}">${service.name}</option>
+											</#list>
+										</table>
+									</#list>
+								</select>
+							</div>
+							<div class="form-group">
+								<label for="question">Remarks if any</label>
 								<textarea name="question" class="form-control" id="question" rows="3"></textarea>
 							</div>
-							<button type="submit" class="btn btn-primary">Gửi câu hỏi</button>
+							<button type="submit" class="btn btn-primary">Book</button>
 						</form>
 					</div>
 				</div>

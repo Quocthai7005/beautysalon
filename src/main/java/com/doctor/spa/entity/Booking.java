@@ -38,6 +38,15 @@ public class Booking {
 
 	@Column(name = "status")
 	private String status;
+
+	@Column(name = "hour")
+	private String hour;
+
+	@Column(name = "minute")
+	private String minute;
+
+	@Column(name = "services")
+	private String services;
 	
 	@Convert(converter = LocalDateTimeConverter.class)
 	@Column(name = "consult_date", nullable = true, length = 23)
@@ -88,6 +97,7 @@ public class Booking {
 	}
 
 	public void setStatus(String status) {
+		// NEW, CONFIRMED, DONE, CANCELLED
 		this.status = status;
 	}
 
@@ -101,5 +111,29 @@ public class Booking {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getHour() {
+		return hour;
+	}
+
+	public void setHour(String hour) {
+		this.hour = hour;
+	}
+
+	public String getMinute() {
+		return minute;
+	}
+
+	public void setMinute(String minute) {
+		this.minute = minute;
+	}
+
+	public String getServices() {
+		return services;
+	}
+
+	public void setServices(String services) {
+		this.services = services;
 	}
 }

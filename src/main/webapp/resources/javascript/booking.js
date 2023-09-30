@@ -1,14 +1,14 @@
 $( document ).ready(function() {
 
 	$('#datepicker').datepicker({
-          showOn: "button",
-          buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
-          buttonImageOnly: true,
-          buttonText: "Select date",
-          autoclose: true,
+		showOn: "button",
+		buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
+		buttonImageOnly: true,
+		buttonText: "Select appointment date time",
+		autoclose: true,
 		format: 'yyyy-mm-dd'
 	});
-	
+	$("#selectServices").selectpicker();
 	$("#question-form").submit(function(event) {
 		event.preventDefault();
 		var actionurl = event.currentTarget.action;
@@ -20,7 +20,10 @@ $( document ).ready(function() {
 			"email": $('input[name="email"]').val(),
 			"phone": $('input[name="phone"]').val(),
 			"consultDate": $('input[name="consultDate"]').val() + 'T10:15:30',
-			"question": $('textarea[name="question"]').val()
+			"question": $('textarea[name="question"]').val(),
+			"hour": $('select[name="hour"]').val(),
+			"minute": $('select[name="minute"]').val(),
+			"services": $('select[name="services"]').val()
 		}
 		
 		$.ajax({

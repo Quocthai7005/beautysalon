@@ -1,8 +1,13 @@
 package com.doctor.spa.service.impl;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import com.doctor.spa.entity.Mail;
+import com.doctor.spa.service.MailService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -21,6 +26,9 @@ public class BookingServiceImpl implements BookingService {
 	private final BookingRepository bookingRepository;
 	private final BookingMapper bookingMapper;
 
+	@Autowired
+	MailService mailService;
+
 	public BookingServiceImpl(BookingRepository bookingRepository, BookingMapper bookingMapper) {
 		this.bookingRepository = bookingRepository;
 		this.bookingMapper = bookingMapper;
@@ -33,11 +41,41 @@ public class BookingServiceImpl implements BookingService {
 		booking.setEmail(dto.getEmail());
 		booking.setPhone(dto.getPhone());
 		booking.setQuestion(dto.getQuestion());
-		booking.setStatus(dto.getStatus());
+		booking.setStatus("NEW");
+		booking.setHour(dto.getHour());
+		booking.setMinute(dto.getMinute());
+		String services = "";
+		for (String service: dto.getServices()) {
+			services = services.concat(service).concat("; ");
+		}
+		booking.setServices(services);
 		LocalDateTime date = LocalDateTime.parse(dto.getConsultDate());
 		booking.setConsultDate(date);
 		bookingRepository.save(booking);
+
+		sendNotificationEmail(dto);
 		return dto;
+	}
+
+	public void sendNotificationEmail(BookingDto dto) {
+		Mail bookingNotification = new Mail();
+
+		bookingNotification.setMailFrom("Thai.nguyen.glo@gmail.com");
+		bookingNotification.setMailTo("nguyenquocthai2779@gmail.com");
+		bookingNotification.setMailSubject("subscription email");
+		bookingNotification.setType("Booking");
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("name", dto.getName());
+		model.put("email", dto.getEmail());
+		model.put("phone", dto.getPhone());
+		model.put("date", dto.getConsultDate());
+		model.put("time", dto.getHour() + ":" + dto.getMinute());
+		model.put("services", dto.getServices());
+		model.put("status", "NEW");
+		model.put("question", "question");
+		bookingNotification.setModel(model);
+
+		mailService.sendEmail(bookingNotification);
 	}
 
 	@Override

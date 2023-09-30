@@ -1,8 +1,6 @@
 package com.doctor.spa.service.impl;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -162,6 +160,24 @@ public class SubProductServiceImpl implements SubProductService{
 				stream()
 				.map(subProductMapper::toDto)
 				.collect(Collectors.toList());
+	}
+
+	@Override
+	public LinkedHashMap<String, List<SubProductDto>> getAllAndGroupByParent() {
+		List<SubProductDto> services = subProductRepository.findAll().
+				stream()
+				.map(subProductMapper::toDto)
+				.collect(Collectors.toList());
+		LinkedHashMap<String, List<SubProductDto>> serviceMap = new LinkedHashMap();
+		for (SubProductDto dto: services) {
+			List<SubProductDto> serviceList = serviceMap.get(dto.getParentServiceName());
+			if (serviceList == null) {
+				serviceList = new ArrayList<>();
+				serviceMap.put(dto.getParentServiceName(), serviceList);
+			}
+			serviceList.add(dto);
+		}
+		return serviceMap;
 	}
 
 }

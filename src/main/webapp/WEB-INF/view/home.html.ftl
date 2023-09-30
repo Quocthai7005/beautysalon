@@ -14,157 +14,54 @@
 		<div id="main">
 			<div class="container">
 				<#-- services -->
-				<div class="row" id="service-ctn">
+				<div class="row" style="padding-top: 20px; background-color:#ffffff; padding-bottom: 20px">
 					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-						<h2 class="text-center" id="title" style="margin-bottom: 10px">DỊCH VỤ</h2>
+						<h1 class="text-center" id="title" style="margin-bottom: 10px">WE</h1>
 					</div>
-					<div id="services">
-						<div class="col-lg-12">
-							<div class="row">
-							
-								<#-- services loop -->
-								<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-										<#list menuServices as service>
-											<#if service?index % 4 = 0>
-												<ul>
-											</#if>
-											<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="padding-top: 10px">
-												<div class="card" style="display:inline-block">
-													<img src="${service.imageBaseUrl + service.imageKey}" width=180 height=180 class="card-img-top" alt="${service.name}" />
-													<div class="card-body">
-														<h5 class="card-title">${service.name}</h5>
-														<a style="font-family: Quicksand-Bold" href="service/${service.url}">Xem chi tiết →</a>
-													</div>
-												</div>
-											</li>
-											<#if (service?index + 1) % 4 = 0>
-												</ul>
-											</#if>
-										</#list>	
-								</div>
+					<div style="margin-top: 20px">
+						<div class="col-lg-6 text-justify" style="padding-left: 50px">
+							<p>Welcome to our exquisite nail spa nestled in the charming town of Holden, Massachusetts. At our establishment, we redefine the art of pampering, offering a haven of tranquility and top-notch services for your nail care needs. With a commitment to excellence, our spa boasts a serene ambiance that instantly transports you to a world of relaxation.</p>
+						</div>
+						<div class="col-lg-6">
+							<div class="card" style="width: 60%; padding: 0">
+								<img src="<@spring.url '/resources/image/Majestic/location.jpg'/>" width="95%" alt="brand" />
 							</div>
 						</div>
 					</div>
 				</div>
-				
-				<div class="row" id="service-ctn" style="padding-top: 50px">
-					<div class="col-lg-12 col-xs-12" id="what-we-bring" style="margin-bottom: 10px;">
-						<h2 class="text-center" id="title" style="margin-bottom: 10px">CẢM NHẬN CỦA KHÁCH HÀNG</h2>
+
+				<div class="row" style="margin-top: 20px; padding-bottom: 20px; border-radius: 15px;">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<h1 class="text-center" id="title" style="margin-bottom: 10px">MAKE YOU RELAXED & ATTRACTIVE</h1>
 					</div>
-					<div class="col-lg-12 col-xs-12">
-						<ul style="margin-bottom: 20px">
-							<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="card" style="width: 100%; padding: 0">
-									<img style="width: 100%" src="https://mypetswebsitebucket.s3.ap-southeast-1.amazonaws.com/4.jpg" class="card-img-top" alt="">
-									<div class="card-body">
-										<h5 class="card-title">My name</h5>
-									   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									</div>
-								</div>
-							</li>
-							<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="card" style="width: 100%; padding: 0">
-									<img style="width: 100%" src="https://mypetswebsitebucket.s3.ap-southeast-1.amazonaws.com/4.jpg" class="card-img-top" alt="">
-									<div class="card-body">
-										<h5 class="card-title">My name</h5>
-										<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									</div>
-								</div>
-							</li>
-						</ul>
-						<ul style="margin-bottom: 20px">
-							<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="card" style="width: 100%; padding: 0">
-									<img style="width: 100%" src="https://mypetswebsitebucket.s3.ap-southeast-1.amazonaws.com/4.jpg" class="card-img-top" alt="">
-									<div class="card-body">
-										<h5 class="card-title">My name</h5>
-									   <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									</div>
-								</div>
-							</li>
-							<li class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-								<div class="card" style="width: 100%; padding: 0">
-									<img style="width: 100%" src="https://mypetswebsitebucket.s3.ap-southeast-1.amazonaws.com/4.jpg" class="card-img-top" alt="">
-									<div class="card-body">
-										<h5 class="card-title">My name</h5>
-										<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-									</div>
-								</div>
-							</li>
-						</ul>	 
+					<div style="margin-top: 20px">
+						<div class="col-lg-6">
+							<div class="card" style="width: 80%; padding: 0">
+								<a href="https://www.freepik.com/free-photo/woman-with-nail-art-promoting-design-luxury-earrings-ring_5588693.htm#query=nail%20banner&position=24&from_view=search&track=ais "><img src="<@spring.url '/resources/image/Majestic/homeImage1.jpg'/>" width="95%" alt="brand" /></a>
+							</div>
+						</div>
+						<div class="col-lg-6 text-justify">
+							<p>Our highly trained and experienced nail technicians are dedicated to providing you with impeccable nail treatments that leave you feeling rejuvenated and refreshed. From classic manicures and pedicures to trendy nail art and the latest in nail enhancements, we offer a wide array of services to cater to your unique style and preferences.</p>
+						</div>
 					</div>
 				</div>
-				
-				<#-- Outstanding services -->
-				<div class="row" id="outstand-service-ctn" style="padding-top: 50px">
-					<div class="col-lg-12 col-xs-12" id="what-we-bring" style="margin-bottom: 10px;">
-						<h2 class="text-center" id="title" style="margin-bottom: 10px">TIN TỨC</h2>
-					</div>
-					
-					<#-- outstanding services loop -->
-					<div class="col-lg-12 col-xs-12">
-							<#list postDtos as service>
-								<#if service?index % 4 = 0>
-									<ul>
-								</#if>
-								<li class="col-lg-3 col-md-6 col-sm-6 col-xs-12" style="padding-top: 10px">
-									<div class="card" style="display:inline-block">
-										<img src="${service.imageBaseUrl + service.imageKey}" width=180 height=180 class="card-img-top" alt="${service.name}">
-										<div class="card-body">
-											<h5 class="card-title">${service.name}</h5>
-											<a style="font-family: Quicksand-Bold" href="${service.url}">Xem chi tiết →</a>
-										</div>
-									</div>
-								</li>
-								<#if (service?index + 1) % 4 = 0>
-									 </ul>
-								</#if>
-							</#list>	
-					</div>
 
-					<div class="col-lg-12 col-xs-12" style="margin-bottom: 20px; margin-top: 30px">
-						<div class="row center-block">
-							<button class="btn btn-default" id="btn-posts"><@spring.message "menu.posts"/></button>
-						</div> 
+				<div class="row" style="padding-top: 20px;padding-bottom: 20px; background-color:#ffffff">
+					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+						<h1 class="text-center" id="title" style="margin-bottom: 10px">WITH OUR PROFESSION</h1>
 					</div>
-				</div>
-				
-
-				
-				<div class="row" id="outstand-service-ctn" style="padding-top: 50px">
-					<div class="col-lg-12 col-xs-12" id="what-we-bring" style="margin-bottom: 10px;">
-						<h2 class="text-center" id="title" style="margin-bottom: 10px">BẠN CẦN TƯ VẤN</h2>
-						<h5 class="text-center" id="title" style="margin-bottom: 10px">Vui lòng điền thông tin, chúng tôi sẽ liên hệ quý khách trong ngày</h2>
-					</div>
-
-					<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 text-center">
-						<form class="question-form" id="question-form" action="booking/create">
-							<input name="status" type="hidden">
-							<input name="id" type="hidden">
-							<div class="form-group">
-								<label for="name">Họ tên</label>
-								<input required name="name" type="text" class="form-control" id="name">
+					<div style="margin-top: 20px">
+						<div class="col-lg-6 text-justify" style="padding-left: 50px">
+							<p>Step into our oasis of comfort and elegance, where cleanliness and hygiene are our top priorities. Our state-of-the-art facilities and strict sanitation protocols ensure your safety and peace of mind. Whether you're seeking a quick touch-up or a full day of self-indulgence, our nail spa in Holden, MA, is your sanctuary for beauty and relaxation. Come experience the difference in nail care excellence with us.</p>
+						</div>
+						<div class="col-lg-6">
+							<div class="card" style="width: 40%; padding: 0">
+								<img src="<@spring.url '/resources/image/Majestic/inside.jpg'/>" width="95%" alt="brand" />
 							</div>
-							<div class="form-group">
-								<label for="email">Địa chỉ email</label>
-								<input name="email" type="email" class="form-control" id="email" placeholder="name@example.com">
+							<div class="card" style="width: 40%; padding: 0">
+								<img src="<@spring.url '/resources/image/Majestic/inside2.jpg'/>" width="95%" alt="brand" />
 							</div>
-							<div class="form-group">
-								<label for="phone">Số điện thoại</label>
-								<input required name="phone" type="number" class="form-control" id="phone">
-							</div>
-							<div class="form-group">
-								<label for="datepicker">Ngày hẹn</label>
-								<div class='input-group date' id='datepicker'>
-									<input required type="text" id="processdate" class="form-control" placeholder="2022-03-02" name="consultDate" /> <span class="input-group-addon btn"><i class="glyphicon glyphicon-calendar"></i> </span>
-								</div>
-							</div>
-							<div class="form-group">
-								<label for="question">Câu hỏi tư vấn</label>
-								<textarea name="question" class="form-control" id="question" rows="3"></textarea>
-							</div>
-							<button type="submit" class="btn btn-primary">Gửi câu hỏi</button>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>  

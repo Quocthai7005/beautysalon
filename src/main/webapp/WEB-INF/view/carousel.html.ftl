@@ -8,14 +8,15 @@
 
     <#-- Wrapper for slides -->
     <div class="carousel-inner">
-
     			<div class="item active">
-	        		<img src="https://mypetswebsitebucket.s3.ap-southeast-1.amazonaws.com/1.jpg">
+                    <img src="<@spring.url '/resources/image/Majestic/carousel1.jpg'/>" alt="brand">
 	        	</div>
-
 	        	<div class="item">
-	        		<img src="https://mypetswebsitebucket.s3.ap-southeast-1.amazonaws.com/2.jpg">
+                    <img src="<@spring.url '/resources/image/Majestic/carousel2.jpg'/>" alt="brand">
 	        	</div>
+                <div class="item">
+                    <img src="<@spring.url '/resources/image/Majestic/carousel3.jpg'/>" alt="brand">
+                </div>
     </div>
 
     <#-- Left and right controls -->

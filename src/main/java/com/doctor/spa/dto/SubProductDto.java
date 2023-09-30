@@ -20,6 +20,8 @@ public class SubProductDto extends BaseDto{
 	
 	private Boolean isShownHome;
 
+	private Double price;
+
 	public String getName() {
 		return name;
 	}
@@ -90,6 +92,14 @@ public class SubProductDto extends BaseDto{
 
 	public void setImageBaseUrl(String imageBaseUrl) {
 		this.imageBaseUrl = imageBaseUrl;
+	}
+
+	public Double getPrice() {
+		return price;
+	}
+
+	public void setPrice(Double price) {
+		this.price = price;
 	}
 	
 }

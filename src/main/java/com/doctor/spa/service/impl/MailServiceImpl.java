@@ -6,7 +6,6 @@ import java.util.Map;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.task.TaskExecutor;
 import org.springframework.mail.MailParseException;
@@ -47,7 +46,7 @@ public class MailServiceImpl implements MailService {
 			mimeMessageHelper.setSubject(mail.getMailSubject());
 			mimeMessageHelper.setFrom(mail.getMailFrom());
 			mimeMessageHelper.setTo(mail.getMailTo());
-			mail.setMailContent(geContentFromTemplate(mail.getModel()));
+			mail.setMailContent(getContentFromMailTemplate(mail.getModel(), mail));
 			mimeMessageHelper.setText(mail.getMailContent(), true);
 
 			mailSender.send(mimeMessageHelper.getMimeMessage());
@@ -87,16 +86,21 @@ public class MailServiceImpl implements MailService {
 		mailSender.send(message);
 	}
 
-	public String geContentFromTemplate(Map<String, Object> model) {
+	public String getContentFromMailTemplate(Map<String, Object> model, Mail mail) {
 		StringBuffer content = new StringBuffer();
 
 		try {
-			content.append(FreeMarkerTemplateUtils
-					.processTemplateIntoString(fmConfiguration.getTemplate("subscription_email.html.ftl"), model));
+			if ("Booking".equals(mail.getType())) {
+				content.append(FreeMarkerTemplateUtils
+						.processTemplateIntoString(fmConfiguration.getTemplate("booking_noti.html.ftl"), model));
+			} else {
+				content.append(FreeMarkerTemplateUtils
+						.processTemplateIntoString(fmConfiguration.getTemplate("subscription_email.html.ftl"), model));
+
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return content.toString();
 	}
-
 }

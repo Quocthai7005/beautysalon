@@ -11,7 +11,7 @@
         
         <div id="main-child-service">
             <#include "nav.html.ftl"> <#-- Navigation bar -->
-            <#include "carousel.html.ftl">
+<#--            <#include "carousel.html.ftl">-->
             <div class="container">
                 <div class="row">
                 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">

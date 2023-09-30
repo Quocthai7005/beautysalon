@@ -1,5 +1,8 @@
 package com.doctor.spa.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class BookingDto {
 
 	private static final long serialVersionUID = 1L;
@@ -10,6 +13,9 @@ public class BookingDto {
 	private String question;
 	private String status;
 	private String consultDate;
+	private String hour;
+	private String minute;
+	private List<String> services = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -69,5 +75,29 @@ public class BookingDto {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getHour() {
+		return hour;
+	}
+
+	public void setHour(String hour) {
+		this.hour = hour;
+	}
+
+	public String getMinute() {
+		return minute;
+	}
+
+	public void setMinute(String minute) {
+		this.minute = minute;
+	}
+
+	public List<String> getServices() {
+		return services;
+	}
+
+	public void setServices(List<String> services) {
+		this.services = services;
 	}
 }

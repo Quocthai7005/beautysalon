@@ -39,6 +39,9 @@ public class Product extends BaseEntity {
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "product")
 	private List<Post> posts = new ArrayList<Post>();
 
+	@Column(name = "price")
+	private double price;
+
 	public List<Post> getNews() {
 		return posts;
 	}
@@ -101,5 +104,13 @@ public class Product extends BaseEntity {
 
 	public void setDisplayOrder(Integer displayOrder) {
 		this.displayOrder = displayOrder;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 }

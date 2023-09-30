@@ -5,9 +5,15 @@
 	border: none;
 }
 #main #service-ctn {
-    background-color: #f2f2e8;
-    padding-top: 30px;
+    background-color: #ffffff;
+    padding-top: 200px;
 }
+
+#main #pricelist-ctn {
+	background-color: #ffffff;
+	margin-bottom: 20px;
+}
+
 #main #spa-map img {
     border: 2px solid grey;
     border-radius: 20px;
@@ -60,9 +66,20 @@
 	-moz-box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
 	box-shadow: 11px 14px 29px -9px rgba(0,0,0,0.77);
 }
-#contact-ctn {
-	margin-top: 20px;
-	margin-bottom: 20px;
+
+
+@media screen and (min-width: 1000px) {
+	#contact-ctn {
+		margin-top: 200px !important;
+		margin-bottom: 20px;
+	}
+}
+
+@media screen and (min-width: 200px) {
+	#contact-ctn {
+		margin-top: 50px !important;
+		margin-bottom: 20px;
+	}
 }
 #address-text {
 	color: #000000;
@@ -82,7 +99,7 @@
 	text-align: center;
 }
 #map-ctn iframe {
-	display: inline-block
+	display: inline-block;
 	width: 100vh;
 	height: 60vh;
 }
@@ -94,4 +111,12 @@
 	background-color: #fff;
 	padding: 6px 6px;
 	box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.width20ptg {
+	width: 20%;
+}
+
+.width40ptg {
+	width: 40%;
 }

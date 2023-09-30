@@ -1,5 +1,6 @@
 package com.doctor.spa.service;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,4 +35,6 @@ public interface SubProductService {
 	SubProductDto getChildServiceById(long id);
 	
 	List<SubProductDto> getAll();
+
+	LinkedHashMap<String, List<SubProductDto>> getAllAndGroupByParent();
 }

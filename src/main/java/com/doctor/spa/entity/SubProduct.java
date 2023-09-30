@@ -34,6 +34,9 @@ public class SubProduct extends BaseEntity {
 	@Column(name = "url")
 	private String url;
 
+	@Column(name = "price")
+	private double price;
+
 	public Product getParentProduct() {
 		return parentProduct;
 	}
@@ -92,5 +95,13 @@ public class SubProduct extends BaseEntity {
 
 	public void setUrl(String url) {
 		this.url = url;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
 	}
 }

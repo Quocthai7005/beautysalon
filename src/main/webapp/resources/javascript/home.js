@@ -11,9 +11,9 @@ $( document ).ready(function() {
           showOn: "button",
           buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
           buttonImageOnly: true,
-          buttonText: "Select date",
+          buttonText: "Select appointment date time",
           autoclose: true,
-		format: 'yyyy-mm-dd'
+		  format: 'yyyy-mm-dd'
 	});
 	
 	$("#question-form").submit(function(event) {

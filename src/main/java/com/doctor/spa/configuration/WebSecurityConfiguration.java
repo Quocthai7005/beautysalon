@@ -30,7 +30,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         .frameOptions().disable()
         .and()
 		.authorizeRequests()
-		.antMatchers("/resources/css/**", "/resources/javascript/**", "/resources/image/**", "/resources/fonts/**", "/admin/login", "/home", "/", "/service", "/post", "/contact", "/service/**", "/billing", "/billing/**", "/bucket", "/bucket/**", "/post/**", "/messenger/**", "/booking", "/booking/**", "/api/**").permitAll()
+		.antMatchers("/resources/css/**", "/resources/javascript/**", "/resources/image/**", "/resources/fonts/**", "/admin/login", "/home", "/", "/service", "/post", "/contact", "/pricelist", "/service/**", "/billing", "/billing/**", "/bucket", "/bucket/**", "/post/**", "/messenger/**", "/booking", "/booking/**", "/api/**").permitAll()
 		.antMatchers("/admin/**", "/admin").hasAnyAuthority("admin", "Admin", "ADMIN").anyRequest().authenticated()
 		.and()
 		.formLogin()

@@ -56,7 +56,7 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1.5;
     font-family: Quicksand-Regular, sans-serif, "Arial";
-    
+    font-size: 16px;
 }
 ol, ul {
 	list-style: none;
@@ -90,7 +90,18 @@ table {
 .card {
 	display: inline-block;
 }
-.question-form {
-	margin: 0 auto;
-	width: 30%;
+
+
+@media screen and (min-width: 200px) {
+    .question-form {
+        margin: 0 auto;
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 800px) {
+    .question-form {
+        margin: 0 auto;
+        width: 30%;
+    }
 }

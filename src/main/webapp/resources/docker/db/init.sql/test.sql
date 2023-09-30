@@ -13,7 +13,10 @@ CREATE TABLE `booking` (
   `phone` varchar(20) DEFAULT NULL,
   `consult_date` datetime DEFAULT NULL,
   `question` text DEFAULT NULL,
-  `status` varchar(1) DEFAULT NULL,
+  `status` varchar(10) DEFAULT NULL,
+  `services` text DEFAULT NULL,
+  `hour` varchar(2) DEFAULT NULL,
+  `minute` varchar(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
@@ -85,6 +88,7 @@ CREATE TABLE `product` (
   `image` text DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `display_order` int(11) DEFAULT NULL,
+  `price` decimal(1) DEFAULT NULL,
   `content` text DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
   `updated_date` datetime DEFAULT NULL,
@@ -112,6 +116,7 @@ CREATE TABLE `subproduct` (
   `intro` varchar(255) DEFAULT NULL,
   `image` text DEFAULT NULL,
   `is_shown_home` tinyint(1) DEFAULT NULL,
+  `price` decimal(1) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL,
   `content` text DEFAULT NULL,
   `created_date` datetime DEFAULT NULL,
@@ -125,7 +130,7 @@ CREATE TABLE `subproduct` (
 --
 
 LOCK TABLES `subproduct` WRITE;
-INSERT INTO `subproduct` VALUES (1,1,'Demo Sub Service AA','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-01 13:47:20','2022-02-01 13:47:20',0),(2,1,'Demo Sub Service AA2','sdf sdf asdf adfa sdfa asf as fa','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa2','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-03 23:33:02','2022-02-03 23:33:03',0),(3,1,'Demo Sub Service AA3','hjhg','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa3','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-04 11:04:37','2022-02-04 11:04:37',0),(4,1,'Demo Sub Service AA7','dfg dfg dfg sdf sd g','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa4','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-04 22:40:04','2022-02-04 22:40:10',0),(5,3,'Demo Sub Service AA7','lorem ipsum dolor sit amet ','2022-02-03T23:32:23.758337700_a60000_200x200.png',0,'serviceaa5','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-06 15:26:18','2022-02-06 15:26:18',0),(6,3,'Demo Sub Service AA8','fgd dfg dfg d dfg dg','2022-02-03T23:32:23.758337700_a60000_200x200.png',0,'serviceaa6',NULL,'2022-02-06 15:28:41','2022-02-06 15:28:41',0);
+INSERT INTO `subproduct` VALUES (1,1,'Demo Sub Service AA','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-01 13:47:20','2022-02-01 13:47:20',0),(2,1,'Demo Sub Service AA2','sdf sdf asdf adfa sdfa asf as fa','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa2','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-03 23:33:02','2022-02-03 23:33:03',0),(3,1,'Demo Sub Service AA3','hjhg','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa3','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-04 11:04:37','2022-02-04 11:04:37',0),(4,1,'Demo Sub Service AA7','dfg dfg dfg sdf sd g','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa4','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-04 22:40:04','2022-02-04 22:40:10',0),(5,3,'Demo Sub Service AA7','lorem ipsum dolor sit amet ','2022-02-03T23:32:23.758337700_a60000_200x200.png',0,'serviceaa5','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-06 15:26:18','2022-02-06 15:26:18',0),(6,3,'Demo Sub Service AA8','fgd dfg dfg d dfg dg','2022-02-03T23:32:23.758337700_a60000_200x200.png',0,0,'serviceaa6',NULL,'2022-02-06 15:28:41','2022-02-06 15:28:41',0);
 UNLOCK TABLES;
 
 --
@@ -191,3 +196,70 @@ INSERT INTO `user_role` VALUES ('1','thai.nguyenquoc','admin');
 UNLOCK TABLES;
 
 -- Dump completed on 2022-04-09 10:19:47
+INSERT INTO product (id, name) VALUES (1, 'Manicure');
+INSERT INTO product (id, name) VALUES (2, 'Pedicure');
+INSERT INTO product (id, name) VALUES (3, 'Acrylic Polishing');
+INSERT INTO product (id, name) VALUES (4, 'Dipping');
+INSERT INTO product (id, name) VALUES (5, 'Design & 0thers');
+INSERT INTO product (id, name) VALUES (6, 'Kids 10 and under');
+INSERT INTO product (id, name) VALUES (7, 'Waxing');
+
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (1, 'Spa Manicure', 22, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (2, 'Majestic Manicure', 32, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (3, 'Majestic Manicure without Gel', 42, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (4, 'Majestic Manicure with Gel', 45, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (5, 'Gel Color Manicure without Gel', 37, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (6, 'Gel Color Manicure with Gel', 40, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (7, 'Gel Color change Hand without Gel', 22, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (8, 'Gel Color change Hand with Gel', 25, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (9, 'Gel Color change Toe without Gel', 27, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (10, 'Gel Color change Toe with Gel', 30, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (11, 'Nail Polish change Hand', 17, 1);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (12, 'Nail Polish change Toe', 22, 1);
+
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (13, 'Spa Pedicure', 45, 2);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (14, 'Gel Pedicure without Gel', 60, 2);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (15, 'Gel Pedicure with Gel', 63, 2);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (16, 'Paraffin Pedicure', 55, 2);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (17, 'Majestic Pedicure', 65, 2);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (18, 'Gel Majestic Pedicure without Gel', 77, 2);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (19, 'Gel Majestic Pedicure with Gel', 80, 2);
+
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (20, 'Acrylic w/Regular polish (Full Set)', 45, 3);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (21, 'Acrylic w/Regular polish (Fill)', 80, 3);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (22, 'Acrylic w/Gel polish (Full Set)', 55, 3);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (23, 'Acrylic w/Gel polish (Fill)', 100, 3);
+
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (24, 'Dipping Powder without tip', 45, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (25, 'Dipping Powder with tip', 50, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (26, 'Dip French without tip', 55, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (27, 'Dip French with tip', 60, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (28, 'Dip Ombre without tip', 70, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (29, 'Dip Ombre with tip', 75, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (48, 'Dipping power without tip and takeoff dip', 48, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (49, 'Dipping power with tip and takeoff dip', 53, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (50, 'Dip ombre without tip and takeoff dip', 73, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (51, 'Dip ombre with tip and takeoff dip', 78, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (52, 'Dip french without tip and takeoff dip', 58, 4);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (53, 'Dip french with tip and takeoff dip', 63, 4);
+
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (30, 'Design on Nails (*)', 8, 5);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (31, 'Nails soak off without service', 12, 5);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (32, 'Nails soak off add-on service', 5, 5);
+
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (33, 'Kids Manicure', 16, 6);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (34, 'Kids Pedicure', 31, 6);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (35, 'Kids Polish change Hand', 10, 6);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (36, 'Kids Polish change Toes', 15, 6);
+
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (37, 'Eyebrows', 15, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (38, 'Lip', 10, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (39, 'Chin', 10, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (40, 'Bikini Wax (*)', 30, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (41, 'Brazilian Wax (*)', 60, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (42, 'Lower Arm', 25, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (43, 'Under Arm', 25, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (44, 'Full arm', 40, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (45, 'Lower Legs (*)', 30, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (47, 'Upper Legs (*)', 30, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (47, 'Full Legs (*)', 50, 7);

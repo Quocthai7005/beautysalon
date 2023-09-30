@@ -34,10 +34,16 @@
 #menu-navbar li:hover {
 	background-color: #e7e7e7;
 }
-#menu-navbar .active a {
-	background-color: #b9285b;
-	color: #ffffff;
+@media (min-width: 768px){
+    .navbar-nav{
+        float:none;
+        margin: 0 auto;
+        display: inline-flex;
+        table-layout: fixed;
+        align-items: center;
+    }
 }
+
 #page-footer {
 	text-align: left;
 	padding-top: 20px;
