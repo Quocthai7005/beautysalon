@@ -1,44 +1,41 @@
-Create database drduongspa;
-use drduongspa;
+Create database majesticnails;
+use majesticnails;
 
-CREATE USER 'drduongspa'@'%' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON * . * TO 'drduongspa'@'%';
+CREATE USER 'majestic123'@'%' IDENTIFIED BY 'Majestic&1354a';
+GRANT ALL PRIVILEGES ON * . * TO 'majestic@123'@'%';
 FLUSH PRIVILEGES;
 
+LOCK TABLES `booking` WRITE;
 DROP TABLE IF EXISTS `booking`;
 CREATE TABLE `booking` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `phone` varchar(20) DEFAULT NULL,
-  `consult_date` datetime DEFAULT NULL,
-  `question` text DEFAULT NULL,
-  `status` varchar(10) DEFAULT NULL,
-  `services` text DEFAULT NULL,
-  `hour` varchar(2) DEFAULT NULL,
-  `minute` varchar(2) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                         `id` int(11) NOT NULL AUTO_INCREMENT,
+                         `name` varchar(100) DEFAULT NULL,
+                         `email` varchar(100) DEFAULT NULL,
+                         `phone` varchar(20) DEFAULT NULL,
+                         `consult_date` datetime DEFAULT NULL,
+                         `question` text DEFAULT NULL,
+                         `status` varchar(10) DEFAULT NULL,
+                         `services` text DEFAULT NULL,
+                         `hour` varchar(2) DEFAULT NULL,
+                         `minute` varchar(2) DEFAULT NULL,
+                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
-LOCK TABLES `booking` WRITE;
-INSERT INTO `booking` VALUES (1,'sdfsdf','thai.nguyenquoc@gmail.com','0907789789','2022-02-09 10:15:30',NULL,'O'),(2,'sdfsdf','thai.nguyenquoc@gmail.com','0907789789','2022-02-09 10:15:30',NULL,'P'),(3,'sdfsdf','thai.nguyenquoc@gmail.com','0907789789','2022-02-26 10:15:30',NULL,'P'),(4,'sdfsdf','thai.nguyenquoc@gmail.com','0907789789','2022-02-09 10:15:30','sdfsdfsdf','P'),(5,'sdfsdf','thai.nguyenquoc@gmail.com','0907789789','2022-02-03 10:15:30','hj dfg dfghd fgh dfgh dfgh','O'),(6,'sdfsdf','thai.nguyenquoc@gmail.com','0907789789','2022-02-03 10:15:30','sdf','C'),(7,'sdfsdf','thai.nguyenquoc@gmail.com','0907789789','1907-08-31 10:15:30','sdsdf','C'),(8,'sdfsdf','thai.nguyenquoc@gmail.com','0907789789','1907-08-28 10:15:30','sdfs','C'),(9,'sdfsdf','thai.nguyenquoc@gmail.com','0907789789','2022-02-23 10:15:30','gdfg','C');
-UNLOCK TABLES;
-
+LOCK TABLES `micellaneous_text` WRITE;
 DROP TABLE IF EXISTS `micellaneous_text`;
 CREATE TABLE `micellaneous_text` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `page` varchar(255) DEFAULT NULL,
-  `is_shown_home` tinyint(1) DEFAULT NULL,
-  `section` varchar(255) DEFAULT NULL,
-  `title` varchar(255) DEFAULT NULL,
-  `content` text DEFAULT NULL,
-  `display_order` int(11) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
-  `is_deleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                                   `id` int(11) NOT NULL AUTO_INCREMENT,
+                                   `page` varchar(255) DEFAULT NULL,
+                                   `is_shown_home` tinyint(1) DEFAULT NULL,
+                                   `section` varchar(255) DEFAULT NULL,
+                                   `title` varchar(255) DEFAULT NULL,
+                                   `content` text DEFAULT NULL,
+                                   `display_order` int(11) DEFAULT NULL,
+                                   `created_date` datetime DEFAULT NULL,
+                                   `updated_date` datetime DEFAULT NULL,
+                                   `is_deleted` tinyint(1) DEFAULT 0,
+                                   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `micellaneous_text`
@@ -54,19 +51,18 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `post`;
 CREATE TABLE `post` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `intro` varchar(255) DEFAULT NULL,
-  `image` text DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `content` text DEFAULT NULL,
-  `product_id` int(11) DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
-  `is_deleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                      `id` int(11) NOT NULL AUTO_INCREMENT,
+                      `name` varchar(100) DEFAULT NULL,
+                      `intro` varchar(255) DEFAULT NULL,
+                      `image` text DEFAULT NULL,
+                      `url` varchar(255) DEFAULT NULL,
+                      `content` text DEFAULT NULL,
+                      `product_id` int(11) DEFAULT NULL,
+                      `created_date` datetime DEFAULT NULL,
+                      `updated_date` datetime DEFAULT NULL,
+                      `is_deleted` tinyint(1) DEFAULT 0,
+                      PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `posts`
@@ -82,27 +78,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) DEFAULT NULL,
-  `intro` varchar(255) DEFAULT NULL,
-  `image` text DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `display_order` int(11) DEFAULT NULL,
-  `price` decimal(1) DEFAULT NULL,
-  `content` text DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
-  `is_deleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                         `id` int(11) NOT NULL AUTO_INCREMENT,
+                         `name` varchar(100) DEFAULT NULL,
+                         `intro` varchar(255) DEFAULT NULL,
+                         `image` text DEFAULT NULL,
+                         `url` varchar(255) DEFAULT NULL,
+                         `display_order` int(11) DEFAULT NULL,
+                         `price` decimal(4) DEFAULT 0,
+                         `content` text DEFAULT NULL,
+                         `created_date` datetime DEFAULT NULL,
+                         `updated_date` datetime DEFAULT NULL,
+                         `is_deleted` tinyint(1) DEFAULT 0,
+                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
 
 --
 -- Dumping data for table `product`
 --
 
-LOCK TABLES `product` WRITE;
-INSERT INTO `product` VALUES (1,'Demo Service A',NULL,'product/3.jpg','serviceA',NULL,'<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span><br></p>','2022-01-30 20:04:21','2022-01-30 20:09:42',0),(2,'Demo Service B',NULL,'product/3.jpg','serviceB',NULL,'<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span><br></p>','2022-01-30 20:04:46','2022-02-01 14:01:14',0),(3,'Demo Service C',NULL,'product/3.jpg','serviceC',NULL,'<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</span><br></p>','2022-02-01 09:08:42','2022-02-01 09:08:42',0),(4,'Demo Service D',NULL,'product/3.jpg','serviceD',NULL,'<p><span style=\"font-family: &quot;Open Sans&quot;, Arial, sans-serif; text-align: justify;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</span><br></p>','2022-01-30 20:04:46','2022-01-30 20:04:46',0),(5,'Demo Service AA9',NULL,'product/3.jpg','serviceaa9',NULL,NULL,'2022-02-09 19:54:05','2022-02-09 19:54:05',1);
-UNLOCK TABLES;
 
 --
 -- Table structure for table `subproduct`
@@ -110,28 +103,24 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `subproduct`;
 CREATE TABLE `subproduct` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `parent_product_id` int(11) DEFAULT NULL,
-  `name` varchar(100) DEFAULT NULL,
-  `intro` varchar(255) DEFAULT NULL,
-  `image` text DEFAULT NULL,
-  `is_shown_home` tinyint(1) DEFAULT NULL,
-  `price` decimal(1) DEFAULT NULL,
-  `url` varchar(255) DEFAULT NULL,
-  `content` text DEFAULT NULL,
-  `created_date` datetime DEFAULT NULL,
-  `updated_date` datetime DEFAULT NULL,
-  `is_deleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                            `id` int(11) NOT NULL AUTO_INCREMENT,
+                            `parent_product_id` int(11) DEFAULT NULL,
+                            `name` varchar(100) DEFAULT NULL,
+                            `intro` varchar(255) DEFAULT NULL,
+                            `image` text DEFAULT NULL,
+                            `is_shown_home` tinyint(1) DEFAULT 1,
+                            `price` decimal(4) DEFAULT 0,
+                            `url` varchar(255) DEFAULT NULL,
+                            `content` text DEFAULT NULL,
+                            `created_date` datetime DEFAULT NULL,
+                            `updated_date` datetime DEFAULT NULL,
+                            `is_deleted` tinyint(1) DEFAULT 0,
+                            PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `subproduct`
 --
-
-LOCK TABLES `subproduct` WRITE;
-INSERT INTO `subproduct` VALUES (1,1,'Demo Sub Service AA','Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-01 13:47:20','2022-02-01 13:47:20',0),(2,1,'Demo Sub Service AA2','sdf sdf asdf adfa sdfa asf as fa','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa2','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-03 23:33:02','2022-02-03 23:33:03',0),(3,1,'Demo Sub Service AA3','hjhg','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa3','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-04 11:04:37','2022-02-04 11:04:37',0),(4,1,'Demo Sub Service AA7','dfg dfg dfg sdf sd g','2022-02-03T23:32:23.758337700_a60000_200x200.png',1,'serviceaa4','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-04 22:40:04','2022-02-04 22:40:10',0),(5,3,'Demo Sub Service AA7','lorem ipsum dolor sit amet ','2022-02-03T23:32:23.758337700_a60000_200x200.png',0,'serviceaa5','At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.','2022-02-06 15:26:18','2022-02-06 15:26:18',0),(6,3,'Demo Sub Service AA8','fgd dfg dfg d dfg dg','2022-02-03T23:32:23.758337700_a60000_200x200.png',0,0,'serviceaa6',NULL,'2022-02-06 15:28:41','2022-02-06 15:28:41',0);
-UNLOCK TABLES;
 
 --
 -- Table structure for table `subscription`
@@ -139,13 +128,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `subscription`;
 CREATE TABLE `subscription` (
-  `id` varchar(20) NOT NULL,
-  `firstname` varchar(100) DEFAULT NULL,
-  `lastname` varchar(100) DEFAULT NULL,
-  `email` varchar(100) DEFAULT NULL,
-  `updated_time` datetime DEFAULT NULL,
-  `confirm` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+                              `id` varchar(20) NOT NULL,
+                              `firstname` varchar(100) DEFAULT NULL,
+                              `lastname` varchar(100) DEFAULT NULL,
+                              `email` varchar(100) DEFAULT NULL,
+                              `updated_time` datetime DEFAULT NULL,
+                              `confirm` tinyint(1) DEFAULT 0,
+                              PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -161,10 +150,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-  `username` varchar(50) NOT NULL,
-  `password` varchar(200) DEFAULT NULL,
-  `is_deleted` tinyint(1) DEFAULT NULL,
-  PRIMARY KEY (`username`)
+                      `username` varchar(50) NOT NULL,
+                      `password` varchar(200) DEFAULT NULL,
+                      `is_deleted` tinyint(1) DEFAULT 0,
+                      PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -181,10 +170,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user_role`;
 CREATE TABLE `user_role` (
-  `role_id` varchar(50) NOT NULL,
-  `username` varchar(50) DEFAULT NULL,
-  `user_role` varchar(50) DEFAULT NULL,
-  PRIMARY KEY (`role_id`)
+                           `role_id` varchar(50) NOT NULL,
+                           `username` varchar(50) DEFAULT NULL,
+                           `user_role` varchar(50) DEFAULT NULL,
+                           PRIMARY KEY (`role_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -261,5 +250,5 @@ INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (42, 'Lower A
 INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (43, 'Under Arm', 25, 7);
 INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (44, 'Full arm', 40, 7);
 INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (45, 'Lower Legs (*)', 30, 7);
-INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (47, 'Upper Legs (*)', 30, 7);
+INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (46, 'Upper Legs (*)', 30, 7);
 INSERT INTO subproduct (id, name, price, parent_product_id) VALUES (47, 'Full Legs (*)', 50, 7);

@@ -7,10 +7,10 @@ services:
     ports:
       - 3306:3306
     environment:
-      MYSQL_DATABASE: drduongspa
+      MYSQL_DATABASE: majesticnails
       MYSQL_ROOT_PASSWORD: 'admin'
-      MYSQL_USER: 'drduongspa'
-      MYSQL_PASS: 'password'
+      MYSQL_USER: 'majestic123'
+      MYSQL_PASS: 'Majestic&1354a'
     volumes:
       - db:/var/lib/mysql
       - ./db/init.sql:/test.sql

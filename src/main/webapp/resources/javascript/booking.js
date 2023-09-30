@@ -19,7 +19,7 @@ $( document ).ready(function() {
 			"name": $('input[name="name"]').val(),
 			"email": $('input[name="email"]').val(),
 			"phone": $('input[name="phone"]').val(),
-			"consultDate": $('input[name="consultDate"]').val(),
+			"consultDate": $('input[name="consultDate"]').val() + 'T00:00:00',
 			"question": $('textarea[name="question"]').val(),
 			"hour": $('select[name="hour"]').val(),
 			"minute": $('select[name="minute"]').val(),

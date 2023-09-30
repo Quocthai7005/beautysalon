@@ -67,11 +67,11 @@
 								<select id="selectServices" name="services" class="selectpicker form-control" multiple data-live-search="true">
 									<#list menuServices?keys as key>
 										<h3 style="margin-top: 20px">${key}</h3>
-										<table class="table table-striped" style="width:60%;align-self: center;">
+
 											<#list menuServices[key] as service>
 												<option value="${service.name}">${service.name}</option>
 											</#list>
-										</table>
+
 									</#list>
 								</select>
 							</div>
