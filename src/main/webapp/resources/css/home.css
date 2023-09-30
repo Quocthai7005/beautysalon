@@ -38,14 +38,14 @@
 #main #our-service {
 	margin-bottom: 10px;
 }
-#main #service-ctn .service {
-	width: 200px;
-	height: 200px;
-	position: relative;
-	margin-bottom: 20px;
-	margin-top: 20px;
-	display: inline-block;
-}
+/*#main #service-ctn .service {*/
+/*	width: 200px;*/
+/*	height: 200px;*/
+/*	position: relative;*/
+/*	margin-bottom: 20px;*/
+/*	margin-top: 20px;*/
+/*	display: inline-block;*/
+/*}*/
 #main #service-ctn .service .service-text {
 	font-size: 15px;
 	color: #fff;
@@ -68,19 +68,22 @@
 }
 
 
-@media screen and (min-width: 1000px) {
-	#contact-ctn {
+@media screen and (min-width: 700px) {
+	#contact-ctn, #service-ctn, #pricelist-ctn {
 		margin-top: 200px !important;
 		margin-bottom: 20px;
 	}
 }
 
-@media screen and (min-width: 200px) {
-	#contact-ctn {
+@media screen and (max-width: 699px) {
+	#contact-ctn, #service-ctn, #pricelist-ctn {
 		margin-top: 50px !important;
 		margin-bottom: 20px;
 	}
 }
+
+
+
 #address-text {
 	color: #000000;
 }

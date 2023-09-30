@@ -1,0 +1,27 @@
+package com.majestic.nails.interceptor;
+
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
+
+import com.majestic.nails.dto.ImageDto;
+import com.majestic.nails.service.PageTextService;
+
+public class CaptionInterceptor extends HandlerInterceptorAdapter {
+	
+	@Autowired
+	PageTextService pageService;
+	
+	@Override
+	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {		
+	    if (modelAndView != null) {
+	    	List<ImageDto> images = pageService.getShownImage();    
+		    modelAndView.addObject("headerImages", images);
+	    }
+	}
+}
