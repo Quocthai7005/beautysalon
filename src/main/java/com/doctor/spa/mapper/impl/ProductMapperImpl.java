@@ -43,12 +43,10 @@ public class ProductMapperImpl implements ProductMapper {
 			dto = new ProductDto();
 			dto.setId(service.getId());
 			dto.setContent(service.getContent());
-			dto.setCreatedDate(service.getCreatedDate().toString());
 			dto.setImageKey(service.getImage());
 			dto.setImageBaseUrl("https://" + bucketName + ".s3.amazonaws.com/");
 			dto.setIntro(service.getIntro());
 			dto.setName(service.getName());
-			dto.setUpdatedDate(service.getUpdatedDate().toString());
 			dto.setUrl(service.getUrl());
 
 			List<SubProductDto> childServiceDtos = new ArrayList<SubProductDto>();

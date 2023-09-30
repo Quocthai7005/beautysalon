@@ -32,10 +32,10 @@ function Booking() {
 		totalPages: 1,
 		visiblePages: 3,
 		startPage: 1,
-		first: 'Trang đầu',
-		last: 'Trang cuối',
-		prev: 'Trang trước',
-		next: 'Trang sau',
+		first: 'First',
+		last: 'Last',
+		prev: 'Back',
+		next: 'Next',
 		onPageClick : function(event, page) {
 			// get group id
 			self.loadBookings(page - 1, pageSize, 'asc', self.status());
@@ -128,7 +128,10 @@ function Booking() {
 	}
 
     self.formatDate = function(date) {
-    	var result = date.replace('T', ' ');
-    	return result;
+		if (date != null) {
+			var result = date.replace('T', ' ');
+			return result;
+		}
+		return null;
     }
 }

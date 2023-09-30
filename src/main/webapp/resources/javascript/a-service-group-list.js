@@ -24,11 +24,11 @@ function Service() {
     self.deleteService = function(data) {
     	var url = 'service-group-delete/' + data.id;
     	swal({
-    		  	text: "Bạn muốn xoá nhóm dịch vụ này?",
+    		  	text: "Do you really want to remove this service type?",
     		  	type: 'warning',
     		  	showCancelButton: true,
-    		  	confirmButtonText: 'Đồng ý',
-    		  	cancelButtonText: 'Không xoá',
+    		  	confirmButtonText: 'Yes',
+    		  	cancelButtonText: 'No',
 		}).then((result) => {
 			if (result.value) {
 				$.ajax({
@@ -39,7 +39,7 @@ function Service() {
 		    	        	if (msg.data === true) {
 		    	        		swal({
 			        			  type: 'success',
-			        			  text: 'Xoá thành công',
+			        			  text: 'Remove service type successfully',
 			        			  onClose: function() {
 			        				  window.location.href = 'service-group-list';
 			        			  }
@@ -47,8 +47,8 @@ function Service() {
 		    	        	} else {
 		    	        		swal({
 		  	        			  type: 'error',
-		  	        			  text: 'Không thể xoá',
-		  	        			  footer: 'Bạn đã xoá tất cả dịch vụ con chưa?',
+		  	        			  text: 'Cannot remove this type',
+		  	        			  footer: 'Please remove all services that is of this type first',
 		  	        			});
 		    	        	}
 		    	        }
@@ -58,7 +58,7 @@ function Service() {
 		    	    	if (e.status === 901) {
 		    	    		swal({
 			        			  type: 'info',
-			        			  text: 'Hết phiên làm việc, vui lòng đăng nhập lại',
+			        			  text: 'Session ended. Please login again',
 			        			  onClose: function() {
 			        				  window.location.href = 'admin/login';
 			        			  }
@@ -86,10 +86,10 @@ function AServiceGroupList() {
 			totalPages: 1,
 			visiblePages: 3,
 			startPage: 1,
-			first: 'Trang đầu',
-			last: 'Trang cuối',
-			prev: 'Trang trước',
-			next: 'Trang sau',
+			first: 'First',
+			last: 'Last',
+			prev: 'Back',
+			next: 'Next',
 			onPageClick : function(event, page) {
 				self.getServiceGroups(page - 1, self.servicePerPage, 'asc');
 			}

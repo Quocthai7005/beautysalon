@@ -72,7 +72,7 @@ public class BookingServiceImpl implements BookingService {
 		model.put("time", dto.getHour() + ":" + dto.getMinute());
 		model.put("services", dto.getServices());
 		model.put("status", "NEW");
-		model.put("question", "question");
+		model.put("question", dto.getQuestion());
 		bookingNotification.setModel(model);
 
 		mailService.sendEmail(bookingNotification);

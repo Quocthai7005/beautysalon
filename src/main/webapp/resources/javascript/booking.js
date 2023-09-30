@@ -19,7 +19,7 @@ $( document ).ready(function() {
 			"name": $('input[name="name"]').val(),
 			"email": $('input[name="email"]').val(),
 			"phone": $('input[name="phone"]').val(),
-			"consultDate": $('input[name="consultDate"]').val() + 'T10:15:30',
+			"consultDate": $('input[name="consultDate"]').val(),
 			"question": $('textarea[name="question"]').val(),
 			"hour": $('select[name="hour"]').val(),
 			"minute": $('select[name="minute"]').val(),
@@ -32,7 +32,7 @@ $( document ).ready(function() {
 			contentType: 'application/json;charset=UTF-8',
 			data: JSON.stringify(formData),
 			success: function(data) {
-				alert('Đặt lịch hẹn thành công, chân thành cảm ơn quý khách!');
+				alert('You booked your schedule! We will contact you for confirmation soon');
 				$('input[name="name"]').val("");
 				$('input[name="email"]').val("");
 				$('input[name="phone"]').val("");

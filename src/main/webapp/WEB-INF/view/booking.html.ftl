@@ -30,6 +30,10 @@
 								<input required name="phone" type="number" class="form-control" id="phone">
 							</div>
 							<div class="form-group">
+								<label for="email">Your email address</label>
+								<input name="email" type="text" class="form-control" id="email">
+							</div>
+							<div class="form-group">
 								<label for="datepicker">Choose a time for your appointment</label>
 								<div class='input-group form-inline date' id='datepicker'>
 									<input required type="text" id="processdate" class="form-control" placeholder="2023-12-01" name="consultDate" /> <span class="input-group-addon btn"><i class="glyphicon glyphicon-calendar"></i> </span>

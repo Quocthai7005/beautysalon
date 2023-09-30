@@ -22,8 +22,8 @@ public class MailConfiguration {
 	@Bean
 	public JavaMailSender getMailSender() throws GeneralSecurityException {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		String password = "***";
-		String username = "***";
+		String password = "iaey jqwy ulxt sktp";
+		String username = "thai.nguyen.glo";
 		mailSender.setHost("smtp.gmail.com");
 		mailSender.setPort(587);
 		mailSender.setUsername(username);

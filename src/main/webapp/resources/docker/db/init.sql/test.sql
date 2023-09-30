@@ -162,7 +162,7 @@ UNLOCK TABLES;
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) DEFAULT NULL,
+  `password` varchar(200) DEFAULT NULL,
   `is_deleted` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`username`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

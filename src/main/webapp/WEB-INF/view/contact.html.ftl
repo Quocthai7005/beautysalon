@@ -23,7 +23,7 @@
                             <tr><td>Wednesday   </td><td>9:30 - 7:00</td></tr>
                             <tr><td>Thursday</td><td>9:30 - 7:00</td></tr>
                             <tr><td>Friday  </td><td>9:30 - 7:00</td></tr>
-                            <tr><td>Saturday</td><td>9:30 - 7:00</td></tr>
+                            <tr><td>Saturday</td><td>9:30 - 6:00</td></tr>
                             <tr><td>Sunday  </td><td>ClOSED</td></tr>
                         </table>
                         <h3 style="margin-top: 20px"><@spring.message "contact.phone"/></h3>

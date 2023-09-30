@@ -22,13 +22,13 @@ function Service() {
 	var loadServiceGroupUrl = rootContext + '/admin/service/'
 	
 	// Messages
-	var savedSuccess = 'Chỉnh sửa thành công';
-	var savedFail = 'Không thể chỉnh sửa';
-	var entryRemind = 'Vui lòng nhập đúng dữ liệu';
-	var saveConfirm = 'Bạn muốn sửa nhóm dịch vụ này';
-	var returnList = 'Bạn muốn quay lại danh sách nhóm dịch vụ?';
-	var agree = 'Đồng ý';
-	var cancel = 'Không';
+	var savedSuccess = 'Modify service type successfully';
+	var savedFail = 'Cannot modify this service type';
+	var entryRemind = 'Please type correct information';
+	var saveConfirm = 'Do you really want to modify this service type?';
+	var returnList = 'Do you really want to leave this page?';
+	var agree = 'Yes';
+	var cancel = 'No';
 	
 	// Observable
     self.name = ko.observable('');
@@ -175,43 +175,14 @@ function Service() {
             },
             fields: {
                 name: {
-                    message: 'Tên không đúng',
+                    message: 'Name is incorrect',
                     validators: {
                         notEmpty: {
-                            message: 'Vui lòng nhập tên'
+                            message: 'Please type service type name'
                         },
                         stringLength: {
                             max: 45,
-                            message: 'Tối đa 45 ký tự'
-                        }
-                    }
-                },
-                url: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Vui lòng nhập link'
-                        },
-                        remote: {
-                            message: 'link đã tồn tại',
-                            url: validateUrl,
-                            dataType: 'json',
-                            data: function(validator, $field, value) {
-                                return {
-                                    id: self.id(),
-                                    url: validator.getFieldElements('url').val(),
-                                };
-                            },
-                        },
-                        regexp: {
-                            regexp: /^[a-z]+$/i,
-                            message: 'Vui Đừng nhập số, ký tự đặc biệt'
-                        }
-                    }
-                },
-                base64Field: {
-                	validators: {
-                        notEmpty: {
-                            message: 'Vui lòng chọn hình'
+                            message: '45 letters max'
                         }
                     }
                 }

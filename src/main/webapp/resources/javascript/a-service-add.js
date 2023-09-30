@@ -22,13 +22,13 @@ function Service() {
 	var loadServiceGroupsUrl = rootContext + '/admin/service-group-list/all'
 	
 	// Message
-	var savedSuccess = 'Tạo mới thành công';
-	var savedFail = 'Không thể tạo mới';
-	var entryRemind = 'Vui lòng nhập đúng dữ liệu';
-	var saveConfirm = 'Bạn muốn tạo dịch vụ này?';
-	var returnList = 'Bạn muốn quay lại danh sách dịch vụ?';
-	var agree = 'Đồng ý';
-	var cancel = 'Không';
+	var savedSuccess = 'New Service is successfully created';
+	var savedFail = 'Cannot create';
+	var entryRemind = 'Please type correct information';
+	var saveConfirm = 'Do you really want to create this service?';
+	var returnList = 'Do you really want to leave this page';
+	var agree = 'Yes';
+	var cancel = 'No';
 	
 	// Observable
 	self.id = ko.observable();
@@ -36,6 +36,7 @@ function Service() {
 	self.url = ko.observable();
 	self.image = ko.observable();
 	self.groupId = ko.observable();
+	self.price = ko.observable();
 	self.isShownHome = ko.observable();
 	self.intro = ko.observable();
 	self.content = ko.observable();
@@ -60,6 +61,7 @@ function Service() {
 							url: self.url(),
 							name: self.name(),
 							image: null,
+							price: self.price(),
 							parentServiceId: self.groupId(),
 							isShownHome: self.isShownHome() ? false : true,
 							intro: self.intro(),
@@ -109,46 +111,21 @@ function Service() {
 			excluded: ':disabled',
             fields: {
                 name: {
-                    message: 'Tên không đúng',
+                    message: 'Name is incorrect',
                     validators: {
                         notEmpty: {
-                            message: 'Vui lòng nhập tên'
+                            message: 'Please type a name'
                         },
                         stringLength: {
                             max: 45,
-                            message: 'Tối đa 45 ký tự'
-                        }
-                    }
-                },
-                url: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Vui lòng nhập link'
-                        },
-                        remote: {
-                            message: 'link đã tồn tại',
-                            url: validateUrl,
-                            delay: 1000,
-                            dataType:'json',
-                            data: function(validator, $field, value) {
-                                return {
-                                    url: validator.getFieldElements('url').val(),
-                                };
-                            },
+                            message: '45 letters max'
                         }
                     }
                 },
                 groupId: {
                 	validators: {
                 		notEmpty: {
-                            message: 'Vui lòng chọn dịch vụ'
-                        }
-                    }
-                },
-                image: {
-                	validators: {
-                        notEmpty: {
-                            message: 'Vui lòng chọn hình'
+                            message: 'Please select a service type'
                         }
                     }
                 }

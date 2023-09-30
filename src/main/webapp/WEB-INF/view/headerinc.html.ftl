@@ -1,4 +1,4 @@
-<title>Beauty Salon</title>
+<title>Majestic Nails and Spa   </title>
 <#import "/spring.ftl" as spring/>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

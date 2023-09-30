@@ -24,11 +24,11 @@ function Service() {
 	var getPageNoUrl = rootContext + '/admin/service-list/no';
 	
 	// Message
-	var deleteSuccess = 'Xoá thành công';
-	var deleteFail = 'Không thể xoá';
-	var deleteConfirm = 'Bạn muốn xoá tin này?';
-	var agree = 'Đồng ý';
-	var cancel = 'Không';
+	var deleteSuccess = 'Sucessfully removed';
+	var deleteFail = 'Cannot be removed';
+	var deleteConfirm = 'Do you really want to remove this service?';
+	var agree = 'Yes';
+	var cancel = 'No';
 	
 	// Observable
 	self.groupId = ko.observable(0);
@@ -39,10 +39,10 @@ function Service() {
 			totalPages: 1,
 			visiblePages: 3,
 			startPage: 1,
-			first: 'Trang đầu',
-			last: 'Trang cuối',
-			prev: 'Trang trước',
-			next: 'Trang sau',
+			first: 'First',
+			last: 'Last',
+			prev: 'Back',
+			next: 'Next',
 			onPageClick : function(event, page) {
 				// get group id
 				self.loadService(page - 1, pageSize, 'asc', self.groupId());
@@ -68,6 +68,7 @@ function Service() {
 			url : loadServiceGroupsUrl,
 			success : function(res) {
 				if (res.code == 200) {
+					console.log(res);
 					self.serviceGroups(res.data);
 				}
 			}, error: function(e) {
@@ -162,7 +163,7 @@ function Service() {
 		    	    	if (e.status === 901) {
 		    	    		swal({
 			        			  type: 'info',
-			        			  text: 'Hết phiên làm việc, vui lòng đăng nhập lại',
+			        			  text: 'Session ended. Please login again',
 			        			  onClose: function() {
 			        				  window.location.href = 'admin/login';
 			        			  }
@@ -184,7 +185,10 @@ function Service() {
     }
     
     self.formatDate = function(date) {
-    	var result = date.replace('T', ' ');
-    	return result;
+		if (date != null) {
+			var result = date.replace('T', ' ');
+			return result;
+		}
+		return null;
     }
 }

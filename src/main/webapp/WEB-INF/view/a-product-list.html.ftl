@@ -19,7 +19,7 @@
                         <div class="col-lg-12 col-md-12">
                             <div class="card">
                                 <div class="card-header" data-background-color="dark-red">
-                                    <h4 class="title">Danh sách</h4>
+                                    <h4 class="title">SERVICE TYPE LIST</h4>
                                 </div>
                                 <div class="card-content table-responsive">
                                 
@@ -27,18 +27,16 @@
                         				<div class="col-lg-12 col-md-12">
 		                                    <table class="table table-hover">
 		                                        <thead>
-		                                            <th class="text-center">Số thứ tự</th>
-		                                            <th class="text-center">Tên nhóm dịch vụ</th>
-		                                            <th class="text-center">Ngày tạo</th>
-		                                            <th class="text-center">Hình đại diện</th>
-		                                            <th class="text-center">Chỉnh sửa</th>
-		                                            <th class="text-center">Xoá</th>
+		                                            <th class="text-center">NO</th>
+		                                            <th class="text-center">SERVICE TYPE</th>
+		                                            <th class="text-center">IMAGE</th>
+		                                            <th class="text-center">EDIT</th>
+		                                            <th class="text-center">REMOVE</th>
 		                                        </thead>
 		                                        <tbody data-bind="foreach: services">
 		                                            <tr>
 		                                                <td class="text-center" data-bind="text: $index() + 1">1</td>
-		                                                <td class="text-center" data-bind="text: name"></td>
-		                                                <td class="text-center" data-bind="text: createdDate"></td>
+		                                                <td class="text-left" data-bind="text: name"></td>
 		                                                <td class="text-center" data-bind="click: $parent.showImage.bind($data)"><i class="fa fa-image"></i></td>
 		                                                <td class="text-center" data-bind="click: $parent.goToEdit.bind($data)"><i class="fa fa-pencil"></i></td>
 		                                                <td class="text-center" data-bind="click: $parent.deleteService.bind($data)"><i class="fa fa-remove"></i></td>
@@ -49,7 +47,7 @@
                                     </div>
                                     <div class="row">              
                         				<div class="col-lg-4 col-md-12 col-xs-12">
-		                                    <a href="<@spring.url '/admin/service-group-add'/>" class="btn btn-info pull-left"><span><i class="fa fa-plus"></i>&nbsp;&nbsp;</span>Tạo mới</a>   
+		                                    <a href="<@spring.url '/admin/service-group-add'/>" class="btn btn-info pull-left"><span><i class="fa fa-plus"></i>&nbsp;&nbsp;</span>Create New Type</a>
                                     	</div>
                                     	<div class="col-lg-8 col-md-12 col-xs-12">
 											<ul id="pagination-post" class="pagination-sm pull-right"></ul>		                                    

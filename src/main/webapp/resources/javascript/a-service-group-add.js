@@ -19,13 +19,13 @@ function Service() {
 	var validateUrl = rootContext + '/admin/service-group-validate/url/noid';
 	
 	// Message
-	var savedSuccess = 'Tạo mới thành công';
-	var savedFail = 'Không thể tạo mới';
-	var entryRemind = 'Vui lòng nhập đúng dữ liệu';
-	var saveConfirm = 'Bạn muốn tạo nhóm dịch vụ này';
-	var returnList = 'Bạn muốn quay lại danh sách nhóm dịch vụ?';
-	var agree = 'Đồng ý';
-	var cancel = 'Không';
+	var savedSuccess = 'Create new service type successfully';
+	var savedFail = 'Cannot create new service type';
+	var entryRemind = 'Please type correct information';
+	var saveConfirm = 'Do you really want to create this service type?';
+	var returnList = 'Do you really want to leave this page?';
+	var agree = 'Yes';
+	var cancel = 'No';
 	
 	// Observable
     self.name = ko.observable();
@@ -146,39 +146,14 @@ function Service() {
             },
             fields: {
                 name: {
-                    message: 'Tên không đúng',
+                    message: 'Name is incorrect',
                     validators: {
                         notEmpty: {
-                            message: 'Vui lòng nhập tên'
+                            message: 'Please type service type name'
                         },
                         stringLength: {
                             max: 45,
-                            message: 'Tối đa 45 ký tự'
-                        }
-                    }
-                },
-                url: {
-                    validators: {
-                        notEmpty: {
-                            message: 'Vui lòng nhập link'
-                        },
-                        remote: {
-                            message: 'link đã tồn tại',
-                            url: validateUrl,
-                            delay: 1000,
-                            dataType:'json',
-                            data: function(validator, $field, value) {
-                                return {
-                                    url: validator.getFieldElements('url').val(),
-                                };
-                            },
-                        }
-                    }
-                },
-                image: {
-                	validators: {
-                        notEmpty: {
-                            message: 'Vui lòng chọn hình'
+                            message: '45 letters max'
                         }
                     }
                 }
