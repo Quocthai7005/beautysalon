@@ -57,14 +57,17 @@ function Booking() {
 
 	self.getStatuses = function() {
 		self.statuses([{
-			'status': 'P',
-			'name': 'CHỜ TRẢ LỜI'
+			'status': 'NEW',
+			'name': 'NEW',
 		}, {
-			'status': 'O',
-			'name': 'ĐANG XỬ LÝ'
+			'status': 'CONFIRMED',
+			'name': 'CONFIRMED'
 		}, {
-			'status': 'C',
-			'name': 'HOÀN TẤT'
+			'status': 'CANCELLED',
+			'name': 'CANCELLED'
+		}, {
+			'status': 'DONE',
+			'name': 'DONE'
 		}]);
 	}
 

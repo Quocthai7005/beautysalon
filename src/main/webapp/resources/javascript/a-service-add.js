@@ -55,7 +55,11 @@ function Service() {
   			  cancelButtonText: cancel,
   			}).then((result) => {
   				if (result.value) {
-  					var imgfile = document.getElementById("image-inp").files[0];
+  					//var imgfile = document.getElementById("image-inp").files[0];
+					var imgfile = "";
+				    if (!imgfile) {
+					  imgfile = ""
+				    }
   					var data = new Blob([JSON.stringify({
 							id: null,
 							url: self.url(),
@@ -80,7 +84,8 @@ function Service() {
 		                cache: false,
     					contentType: false,
 		        		success : function(msg) {
-		        			if (msg.data === true) {
+							console.log(msg);
+		        			if (msg.data) {
 		    	        		swal({
 		            			  type: 'success',
 		            			  text: savedSuccess,

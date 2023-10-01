@@ -61,7 +61,7 @@ function Service() {
   			  	cancelButtonText: cancel,
   			}).then((result) => {
 				if (result.value) {
-				  var imgfile = document.getElementById("image-inp").files[0];
+				  //var imgfile = document.getElementById("image-inp").files[0];
   				  var data = new Blob([JSON.stringify({
   						  id: self.id(),
   						  name: self.name(),
@@ -73,7 +73,7 @@ function Service() {
 	                });
 					var formData = new FormData();
 					formData.append("data", data);
-					formData.append("imgFile", imgfile);
+					formData.append("imgFile", null);
   				  $.ajax({
   					  type : "POST",
   					  url : saveUrl,

@@ -43,7 +43,6 @@
 													<th class="text-center">PHONE NO</th>
 													<th class="text-center">DATE TIME</th>
 													<th class="text-center">STATUS</th>
-													<th class="text-center">REMARKS</th>
 													<th class="text-center">EDIT</th>
 												</thead>
 												<tbody data-bind="foreach: bookings">
@@ -56,7 +55,6 @@
 														<td class="text-center">
 															<span data-bind="text: status"></span>
 														</td>
-														<td class="text-center" data-bind="text: remarks"></td>
 														<td class="text-center" data-bind="click: $parent.goToDetail.bind($data)"><i class="fa fa-pencil"></i></td>
 													</tr>
 												</tbody>

@@ -29,7 +29,7 @@
 		                                        <thead>
 		                                            <th class="text-center">NO</th>
 		                                            <th class="text-center">SERVICE TYPE</th>
-		                                            <th class="text-center">IMAGE</th>
+<#--		                                            <th class="text-center">IMAGE</th>-->
 		                                            <th class="text-center">EDIT</th>
 		                                            <th class="text-center">REMOVE</th>
 		                                        </thead>
@@ -37,7 +37,7 @@
 		                                            <tr>
 		                                                <td class="text-center" data-bind="text: $index() + 1">1</td>
 		                                                <td class="text-left" data-bind="text: name"></td>
-		                                                <td class="text-center" data-bind="click: $parent.showImage.bind($data)"><i class="fa fa-image"></i></td>
+<#--		                                                <td class="text-center" data-bind="click: $parent.showImage.bind($data)"><i class="fa fa-image"></i></td>-->
 		                                                <td class="text-center" data-bind="click: $parent.goToEdit.bind($data)"><i class="fa fa-pencil"></i></td>
 		                                                <td class="text-center" data-bind="click: $parent.deleteService.bind($data)"><i class="fa fa-remove"></i></td>
 		                                            </tr>

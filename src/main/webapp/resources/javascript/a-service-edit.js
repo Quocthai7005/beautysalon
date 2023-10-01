@@ -60,11 +60,12 @@ function Service() {
 						url: self.url(),
 						name: self.name(),
 						price: self.price(),
-						image: self.image().slice(23),
+						//image: self.image().slice(23),
+						image: "",
 						parentServiceId: self.groupId(),
 						isShownHome: self.isShownHome(),
 						intro: self.intro(),
-						content: $('#service-content-inp').summernote('code')
+						content: ""
 					}
 					$.ajax({
 		        		type : "POST",
@@ -119,9 +120,10 @@ function Service() {
     				self.id(res.data.id);
     			    self.url(res.data.url);
     			    self.content(res.data.content); 
-    			    self.intro(res.data.intro)
-    			    $('#service-content-inp').summernote('code', self.content()),
-    			    self.image('data:image/png; base64,' + res.data.image);
+    			    self.intro(res.data.intro);
+					self.price(res.data.price);
+    			    //$('#service-content-inp').summernote('code', self.content());
+    			    //self.image('data:image/png; base64,' + res.data.image);
     			    self.groupId(res.data.parentServiceId);
     				self.isShownHome(res.data.isShownHome);	    
     			    var validator = $('#edit-service-form').data('bootstrapValidator');

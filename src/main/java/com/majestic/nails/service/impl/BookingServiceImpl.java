@@ -62,8 +62,8 @@ public class BookingServiceImpl implements BookingService {
 
 		bookingNotification.setMailFrom("Thai.nguyen.glo@gmail.com");
 		bookingNotification.setMailTo("nguyenquocthai2779@gmail.com");
-		bookingNotification.setMailSubject("New_Booking_"+dto.getName());
-		bookingNotification.setType("Booking");
+		bookingNotification.setMailSubject("Booking_Notification_" + dto.getName());
+		bookingNotification.setType("Booking_notification");
 		Map<String, Object> model = new HashMap<String, Object>();
 		model.put("name", dto.getName());
 		model.put("email", dto.getEmail());
@@ -79,7 +79,29 @@ public class BookingServiceImpl implements BookingService {
 		// Send to register
 		bookingNotification.setMailTo(dto.getEmail());
 		mailService.sendEmail(bookingNotification);
+	}
 
+	public void sendConfirmationEmail(BookingDto dto) {
+		Mail bookingNotification = new Mail();
+
+		bookingNotification.setMailFrom("Thai.nguyen.glo@gmail.com");
+		bookingNotification.setMailSubject("Majestic: Booking Confirmation");
+		bookingNotification.setType("Booking_confirmation");
+		Map<String, Object> model = new HashMap<String, Object>();
+		model.put("name", dto.getName());
+		model.put("email", dto.getEmail());
+		model.put("phone", dto.getPhone());
+		model.put("date", dto.getConsultDate());
+		model.put("time", dto.getHour() + ":" + dto.getMinute());
+		model.put("services", dto.getServices());
+		model.put("status", "NEW");
+		model.put("question", dto.getQuestion());
+		bookingNotification.setModel(model);
+		// Send to administrator
+		mailService.sendEmail(bookingNotification);
+		// Send to register
+		bookingNotification.setMailTo(dto.getEmail());
+		mailService.sendEmail(bookingNotification);
 	}
 
 	@Override

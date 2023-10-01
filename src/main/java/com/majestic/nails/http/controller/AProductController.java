@@ -64,9 +64,9 @@ public class AProductController {
 	
 	@PostMapping(value = "/service-group-create")
 	public ResponseEntity<ResponseBody<Boolean>> createService(
-			@RequestPart MultipartFile imgFile,
+			//@RequestPart MultipartFile imgFile,
 			@RequestPart ProductDto data) {	
-		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.createService(data, imgFile)));
+		return ResponseEntity.ok(new ResponseBody<>(HttpStatus.OK, serService.createService(data, null)));
 	}
 	
 	@PostMapping(value = "/service-group-update")

@@ -89,12 +89,12 @@ public class MailServiceImpl implements MailService {
 		StringBuffer content = new StringBuffer();
 
 		try {
-			if ("Booking".equals(mail.getType())) {
+			if ("Booking_notification".equals(mail.getType())) {
 				content.append(FreeMarkerTemplateUtils
-						.processTemplateIntoString(fmConfiguration.getTemplate("booking_noti.html.ftl"), model));
+						.processTemplateIntoString(fmConfiguration.getTemplate("operator_booking_noti.html.ftl"), model));
 			} else {
 				content.append(FreeMarkerTemplateUtils
-						.processTemplateIntoString(fmConfiguration.getTemplate("subscription_email.html.ftl"), model));
+						.processTemplateIntoString(fmConfiguration.getTemplate("customer_booking_noti.html.ftl"), model));
 
 			}
 		} catch (Exception e) {

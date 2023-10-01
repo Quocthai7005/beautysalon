@@ -1,7 +1,10 @@
 package com.majestic.nails.mapper.impl;
 
 import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.majestic.nails.dto.BookingDto;
@@ -23,6 +26,7 @@ public class BookingMapperImpl implements BookingMapper {
 			dto.setQuestion(booking.getQuestion());
 			dto.setStatus(booking.getStatus());
 			dto.setConsultDate(booking.getConsultDate().format(DateTimeFormatter.ISO_DATE));
+			dto.setServices(Arrays.stream(booking.getServices().split(";")).map(service -> service.trim()).filter(service -> !StringUtils.isBlank(service)).collect(Collectors.toList()));
 		}
 		return dto;
 	}

@@ -25,6 +25,7 @@ public class SubProductMapperImpl implements SubProductMapper {
 			dto.setIntro(childService.getIntro());
 			dto.setName(childService.getName());
 			dto.setParentServiceId(childService.getParentProduct().getId());
+			dto.setPrice(childService.getPrice());
 			//dto.setUpdatedDate(childService.getUpdatedDate().toString());
 			dto.setUrl(childService.getUrl());
 			dto.setParentServiceName(childService.getParentProduct().getName());

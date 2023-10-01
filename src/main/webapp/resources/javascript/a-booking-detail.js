@@ -17,12 +17,12 @@ function Booking() {
 	var goToDetailUpdateUrl = rootContext + '/admin/bookings/update';
 
 	// Message
-	var savedSuccess = 'Chỉnh sửa thành công';
-	var savedFail = 'Không thể chỉnh sửa';
-	var entryRemind = 'Vui lòng nhập đúng dữ liệu';
-	var saveConfirm = 'Bạn muốn sửa tin này';
-	var agree = 'Đồng ý';
-	var cancel = 'Không';
+	var savedSuccess = 'Modify booking successfully';
+	var savedFail = 'Booking cannot be modified';
+	var entryRemind = 'Please type correct information';
+	var saveConfirm = 'Do you really want to modify this booking?';
+	var agree = 'yes';
+	var cancel = 'No';
 
 	// Observable
 	self.status = ko.observable();
@@ -32,6 +32,7 @@ function Booking() {
 	self.phone = ko.observable();
 	self.consultDate = ko.observable();
 	self.question = ko.observable();
+	self.services = ko.observable();
 	self.name = ko.observable();
 	
 	self.loadbooking = function() {
@@ -52,6 +53,7 @@ function Booking() {
 					self.email(res.data.email);
 					self.consultDate(self.formatDate(res.data.consultDate));
 					self.status(res.data.status);
+					self.services(res.data.services);
 					console.log(self.status()== 'P');
 					self.question(res.data.question);
 				}
@@ -101,14 +103,17 @@ function Booking() {
 
 	self.getStatuses = function() {
 		self.statuses([{
-			'status': 'P',
-			'name': 'CHỜ TRẢ LỜI'
+			'status': 'NEW',
+			'name': 'NEW',
 		}, {
-			'status': 'O',
-			'name': 'ĐANG XỬ LÝ'
+			'status': 'CONFIRMED',
+			'name': 'CONFIRMED'
 		}, {
-			'status': 'C',
-			'name': 'HOÀN TẤT'
+			'status': 'CANCELLED',
+			'name': 'CANCELLED'
+		}, {
+			'status': 'DONE',
+			'name': 'DONE'
 		}]);
 	}
 

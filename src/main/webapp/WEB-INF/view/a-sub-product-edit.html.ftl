@@ -51,17 +51,17 @@
 												</div>
 											  	
 											  	<#-- image -->
-											  	<div class="col-lg-12 col-md-12">
-											    	<div class="form-inline">
-												    	<label for="image-inp" class="custom-label">Image</label>
-												    	<label class="custom-image-upload form-control">
-														    <i class="fa fa-cloud-upload"></i> Upload image
-														</label>
-														<input name="image" type="file" class="form-control" id="image-inp" accept="image/*">
-														<input required type="hidden" name="base64Field" data-bind="value: image"/>							
-											  			<button data-bind="click: showImage" class="btn btn-info" id="preview-image">Preview</button>
-											  		</div>
-											  	</div>
+<#--											  	<div class="col-lg-12 col-md-12">-->
+<#--											    	<div class="form-inline">-->
+<#--												    	<label for="image-inp" class="custom-label">Image</label>-->
+<#--												    	<label class="custom-image-upload form-control">-->
+<#--														    <i class="fa fa-cloud-upload"></i> Upload image-->
+<#--														</label>-->
+<#--														<input name="image" type="file" class="form-control" id="image-inp" accept="image/*">-->
+<#--														<input required type="hidden" name="base64Field" data-bind="value: image"/>							-->
+<#--											  			<button data-bind="click: showImage" class="btn btn-info" id="preview-image">Preview</button>-->
+<#--											  		</div>-->
+<#--											  	</div>-->
 											  	
 											  	<#-- service group -->
 											  	<div class="col-lg-12 col-md-12" id="select-ctn">

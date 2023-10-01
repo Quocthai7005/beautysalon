@@ -31,8 +31,8 @@ CREATE TABLE `micellaneous_text` (
                                    `title` varchar(255) DEFAULT NULL,
                                    `content` text DEFAULT NULL,
                                    `display_order` int(11) DEFAULT NULL,
-                                   `created_date` datetime DEFAULT NULL,
-                                   `updated_date` datetime DEFAULT NULL,
+                                   `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+                                   `updated_date` datetime DEFAULT CURRENT_TIMESTAMP,
                                    `is_deleted` tinyint(1) DEFAULT 0,
                                    PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
@@ -58,8 +58,8 @@ CREATE TABLE `post` (
                       `url` varchar(255) DEFAULT NULL,
                       `content` text DEFAULT NULL,
                       `product_id` int(11) DEFAULT NULL,
-                      `created_date` datetime DEFAULT NULL,
-                      `updated_date` datetime DEFAULT NULL,
+                      `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+                      `updated_date` datetime DEFAULT CURRENT_TIMESTAMP,
                       `is_deleted` tinyint(1) DEFAULT 0,
                       PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
@@ -86,8 +86,8 @@ CREATE TABLE `product` (
                          `display_order` int(11) DEFAULT NULL,
                          `price` decimal(4) DEFAULT 0,
                          `content` text DEFAULT NULL,
-                         `created_date` datetime DEFAULT NULL,
-                         `updated_date` datetime DEFAULT NULL,
+                         `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+                         `updated_date` datetime DEFAULT CURRENT_TIMESTAMP,
                          `is_deleted` tinyint(1) DEFAULT 0,
                          PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 ROW_FORMAT=DYNAMIC;
@@ -112,8 +112,8 @@ CREATE TABLE `subproduct` (
                             `price` decimal(4) DEFAULT 0,
                             `url` varchar(255) DEFAULT NULL,
                             `content` text DEFAULT NULL,
-                            `created_date` datetime DEFAULT NULL,
-                            `updated_date` datetime DEFAULT NULL,
+                            `created_date` datetime DEFAULT CURRENT_TIMESTAMP,
+                            `updated_date` datetime DEFAULT CURRENT_TIMESTAMP,
                             `is_deleted` tinyint(1) DEFAULT 0,
                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
@@ -132,7 +132,7 @@ CREATE TABLE `subscription` (
                               `firstname` varchar(100) DEFAULT NULL,
                               `lastname` varchar(100) DEFAULT NULL,
                               `email` varchar(100) DEFAULT NULL,
-                              `updated_time` datetime DEFAULT NULL,
+                              `updated_time` datetime DEFAULT CURRENT_TIMESTAMP,
                               `confirm` tinyint(1) DEFAULT 0,
                               PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;

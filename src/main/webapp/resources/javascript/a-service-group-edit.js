@@ -64,8 +64,8 @@ function Service() {
     			    self.url(res.data.url);
     			    console.log(self.url());
     			    self.content(res.data.content);    
-    			    $('#service-content-inp').summernote('code', self.content()),
-    			    self.image('data:image/png;base64,' + res.data.image);
+    			    $('#service-content-inp').summernote('code', self.content());
+    			    //self.image('data:image/png;base64,' + res.data.image);
     			    var validator = $('#edit-service-form').data('bootstrapValidator');
     		    	validator.validate();
     			}
@@ -101,7 +101,8 @@ function Service() {
 		        		id: self.id(),
 		        		name: self.name(),
 		        		url: self.url(),
-		        		image: base64Img,
+		        		//image: base64Img,
+						image: null,
 		        		content: $('#service-content-inp').summernote('code')
 		        	}
 		        	$.ajax({
@@ -110,7 +111,7 @@ function Service() {
 		        		data: JSON.stringify(data),
 		                contentType: "application/json; charset=utf-8",
 		        		success : function(msg) {
-		        			if (msg.data === true) {
+		        			if (msg.data) {
 		    	        		swal({
 		            			  type: 'success',
 		            			  text: savedSuccess,

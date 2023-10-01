@@ -46,7 +46,7 @@ public class ABookingController {
 
 	@GetMapping(value="/bookings/detail")
 	public String goToBookingDetail() {
-		return Pages.A_BOOKING_DETAIL;
+		return Pages.A_BOOKING_EDIT;
 	}
 
 	@PostMapping(value="/bookings/update")

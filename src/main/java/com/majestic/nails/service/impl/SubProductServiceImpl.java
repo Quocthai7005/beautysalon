@@ -67,7 +67,7 @@ public class SubProductServiceImpl implements SubProductService{
 		if (id == 0 || id == null) {
 			return subProductRepository.findByDeletedFalse().size();
 		} else {
-			return subProductRepository.findTop4ByParentProductIdAndDeletedFalse(id).size();
+			return subProductRepository.findByParentProductIdAndDeletedFalse(id).size();
 		}
 	}
 
@@ -97,11 +97,14 @@ public class SubProductServiceImpl implements SubProductService{
 	public SubProductDto createService(SubProductDto dto, MultipartFile image) {
 		SubProduct service = new SubProduct();
 		service.setName(dto.getName());
-		service.setImage(imageService.uploadFile(image));
+//		if (image != null) {
+//			service.setImage(imageService.uploadFile(image));
+//		}
 		service.setContent(dto.getContent());
 		service.setIntro(dto.getIntro());
 		service.setParentProduct(productRepository.findById(dto.getParentServiceId()));
 		service.setShownHome(dto.getIsShownHome());
+		service.setPrice(dto.getPrice());
 		subProductRepository.save(service);
 		return dto;
 	}
@@ -119,6 +122,7 @@ public class SubProductServiceImpl implements SubProductService{
 				service.setIntro(dto.getIntro());
 				service.setParentProduct(pService);
 				service.setShownHome(dto.getIsShownHome());
+				service.setPrice(dto.getPrice());
 				subProductRepository.save(service);
 			}
 		} catch(Exception e) {

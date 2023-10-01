@@ -94,8 +94,8 @@ public class ProductServiceImpl implements ProductService {
 	@Transactional
 	public Boolean createService(ProductDto dto, MultipartFile image) {
 		Product service = productMapper.toEntity(dto);
-		String imageName = imageService.uploadFile(image);
-		service.setImage(imageName);
+		//String imageName = imageService.uploadFile(image);
+		//service.setImage(imageName);
 		productRepository.save(service);
 		return true;
 	}
