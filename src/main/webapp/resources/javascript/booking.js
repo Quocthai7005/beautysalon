@@ -1,15 +1,48 @@
 $( document ).ready(function() {
-
+	var rootContext = $('#root-context').val();
+	var dateToday = new Date();
 	$('#datepicker').datepicker({
 		showOn: "button",
 		buttonImage: "https://jqueryui.com/resources/demos/datepicker/images/calendar.gif",
 		buttonImageOnly: true,
 		buttonText: "Select appointment date time",
 		autoclose: true,
-		format: 'yyyy-mm-dd'
+		daysOfWeekDisabled: [0],
+		format: 'yyyy-mm-dd',
+		startDate:'+0d'
+	}).on("changeDate", function (e) {
+		var date = $(this).datepicker('getDate');
+		var day = date.getUTCDay();
+		console.log(day);
+		var hour = $('select[name="hour"]').val();
+		var minute = $('select[name="minute"]').val();
+		if (day == '5') {
+
+			if (hour == 19) {
+				$('select[name="hour"]').val("18");
+				$('select[name="minute"]').val("00");
+			} if (hour == 18) {
+				$('select[name="minute"]').val("00");
+			}
+			$('option[value="19"]').prop("disabled", true);
+		} else {
+			$('option[value="19"]').prop("disabled", false);
+		}
 	});
+	$('select[name="hour"]').on("change", function() {
+		var hour = $('select[name="hour"]').val();
+		if (hour == 9) {
+			$('select[name="minute"]').val(30);
+			$('option[value="00"]').prop("disabled", true);
+		} else {
+			$('option[value="00"]').prop("disabled", false);
+		}
+	})
+
+	$('select[name="hour"]').val()
 	$("#selectServices").selectpicker();
 	$("#question-form").submit(function(event) {
+		$("#submit-btn").prop("disabled",true);
 		event.preventDefault();
 		var actionurl = event.currentTarget.action;
 		console.log( $('input[name="question"]').val());
@@ -38,6 +71,7 @@ $( document ).ready(function() {
 				$('input[name="phone"]').val("");
 				$('input[name="consultDate"]').val("");
 				$('textarea[name="question"]').val("");
+				window.location = rootContext + "/booking/booking-success";
 			}
 		});
 	});

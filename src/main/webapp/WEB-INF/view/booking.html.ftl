@@ -53,11 +53,11 @@
 										<option>16</option>
 										<option>17</option>
 										<option>18</option>
-										<option>19</option>
+										<option value="19">19</option>
 									</select>
 									<select id="minute" name="minute" class="form-control">
-										<option>00</option>
-										<option>30</option>
+										<option value="00" disabled="disabled">00</option>
+										<option value="30" selected="selected">30</option>
 									</select>
 								</div>
 								<small>Office hours are 9:30am to 7pm</small>
@@ -79,7 +79,7 @@
 								<label for="question">Remarks if any</label>
 								<textarea name="question" class="form-control" id="question" rows="3"></textarea>
 							</div>
-							<button type="submit" class="btn btn-primary">Book</button>
+							<button type="submit" id="submit-btn" class="btn btn-primary">Book</button>
 						</form>
 					</div>
 				</div>

@@ -27,4 +27,5 @@ public final class Pages {
 	public static String A_BOOKING_EDIT = "a-booking-edit.html";
 	public static String A_BUCKET_LIST = "a-bucket-list.html";
 	public static String A_FILE_DETAIL = "a-file-detail.html";
+	public static String BOOKING_SUCCESS = "booking-success.html";
 }

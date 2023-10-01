@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import com.majestic.nails.entity.Mail;
 import com.majestic.nails.service.MailService;
@@ -18,6 +19,11 @@ import org.springframework.transaction.annotation.Transactional;
 import com.majestic.nails.dto.BookingDto;
 import com.majestic.nails.entity.Booking;
 import com.majestic.nails.service.BookingService;
+
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+
+import static com.majestic.nails.common.MajesticConstant.STATUS_NEW;
 
 @Service
 @Transactional
@@ -41,7 +47,7 @@ public class BookingServiceImpl implements BookingService {
 		booking.setEmail(dto.getEmail());
 		booking.setPhone(dto.getPhone());
 		booking.setQuestion(dto.getQuestion());
-		booking.setStatus("NEW");
+		booking.setStatus(STATUS_NEW);
 		booking.setHour(dto.getHour());
 		booking.setMinute(dto.getMinute());
 		String services = "";
@@ -52,10 +58,22 @@ public class BookingServiceImpl implements BookingService {
 		LocalDateTime date = LocalDateTime.parse(dto.getConsultDate());
 		booking.setConsultDate(date);
 		bookingRepository.save(booking);
-
 		sendNotificationEmail(dto);
-		sendConfirmationEmail(dto);
+		if (validateEmail(dto.getEmail())) {
+			sendConfirmationEmail(dto);
+		}
 		return dto;
+	}
+
+	private boolean validateEmail(String email) {
+		boolean valid = true;
+		try {
+			InternetAddress emailAddr = new InternetAddress(email);
+			emailAddr.validate();
+		} catch (AddressException e) {
+			valid = false;
+		}
+		return valid;
 	}
 
 	public void sendNotificationEmail(BookingDto dto) {
