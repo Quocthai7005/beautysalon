@@ -17,6 +17,7 @@
                 <div class="row" id="contact-ctn">
                 	<div class="col-lg-12 col-xs-12" id="address-text" style="white-space: pre">
 				        <h3 style="margin-top: 20px"><@spring.message "contact.workingHours"/></h3>
+                        <p>&nbsp;</p>
                         <table style="max-width: 300px; align-self: center;text-align: left">
                             <tr><td>Monday  </td><td>9:30 - 7:00</td></tr>
                             <tr><td>Tuesday </td><td>9:30 - 7:00</td></tr>
@@ -26,9 +27,13 @@
                             <tr><td>Saturday</td><td>9:30 - 6:00</td></tr>
                             <tr><td>Sunday  </td><td>ClOSED</td></tr>
                         </table>
+                        <p>&nbsp;</p>
                         <h3 style="margin-top: 20px"><@spring.message "contact.phone"/></h3>
+                        <p>&nbsp;</p>
                         <p>(508) 267-3006</p>
+                        <p>&nbsp;</p>
                         <h3 style="margin-top: 20px"><@spring.message "contact.address"/></h3>
+                        <p>&nbsp;</p>
                         <p>&nbsp;&nbsp; 1057 Main Street, Holden, Massachusetts 01520</p>
 				    </div>
                     <div class="col-lg-12 col-xs-12" id="map-ctn">

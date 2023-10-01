@@ -1,7 +1,7 @@
 <div class="container-fluid">
 	<div class="fb-customerchat" page_id="377855302704456" minimized="true"></div>
 	<#-- Contact -->
-	<div class="row" id="page-footer">
+	<div class="row" id="page-footer" style="border: 1px solid #c9c99c;  ">
 		<#--<div class="col-lg-1 hidden-xs">
 			<img src="" width="80">
 		</div>-->

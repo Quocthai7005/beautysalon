@@ -6,7 +6,7 @@
 }
 #main #service-ctn {
     background-color: #ffffff;
-    padding-top: 200px;
+    padding-top: 150px;
 }
 
 #main #pricelist-ctn {
@@ -70,7 +70,7 @@
 
 @media screen and (min-width: 700px) {
 	#contact-ctn, #service-ctn, #pricelist-ctn {
-		margin-top: 200px !important;
+		margin-top: 150px !important;
 		margin-bottom: 20px;
 	}
 }
@@ -122,4 +122,11 @@
 
 .width40ptg {
 	width: 40%;
+}
+
+.navbar-fixed-top-custom {
+	position: absolute;
+	right: 0;
+	left: 0;
+	z-index: 1030;
 }

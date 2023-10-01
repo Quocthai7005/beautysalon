@@ -9,7 +9,13 @@
 	<body>
 		<input type="hidden" id="root-context" value="${rootContext.getContextPath()}"></input>
 		<#-- Navigation bar -->
-		<#include "nav.html.ftl">
+		<div id="navbar-home-scroll">
+			<#include "navhome.html.ftl">
+		</div>
+		<div id="navbar-scroll" style="display: none">
+			<#include "nav.html.ftl">
+		</div>
+
 		<#include "carousel.html.ftl">
 		<div id="main">
 			<div class="container">

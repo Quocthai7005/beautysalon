@@ -35,7 +35,7 @@
 <#--</nav>-->
 
 
-<nav class="navbar navbar-default navbar-fixed-top" id="nav-container" role="navigation" style="background-image: -webkit-linear-gradient(bottom, #f2f2e8 0%, #ececd7 100%);">
+<nav class="navbar navbar-default navbar-fixed-top" id="nav-container" role="navigation" style="background-image: -webkit-linear-gradient(bottom, #f2f2e8 0%, #ececd7 100%)">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#menu-navbar">
@@ -49,11 +49,11 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse navbar-ex1-collapse" style="text-align: center;" id="menu-navbar">
+    <div class="collapse navbar-collapse navbar-ex1-collapse" style="text-align: center;border: 1px solid #c9c99c;" id="menu-navbar">
         <ul class="nav navbar-nav">
             <li class="${(menu=='home')?then('active','')}"><a href="<@spring.url '/home'/>"><@spring.message "menu.greetings"/></a></li>
             <li class="${(menu=='pricelist')?then('active','')}"><a href="<@spring.url '/pricelist'/>"><@spring.message "menu.price"/></a></li>
-            <li class="${(menu=='home')?then('active','')}"><a href="<@spring.url '/home'/>"><img src="<@spring.url '/resources/image/Majestic/logo2.png'/>" width="150" alt="brand"></a></li>
+            <li class="${(menu=='home')?then('active','')}"><a href="<@spring.url '/home'/>"><img src="<@spring.url '/resources/image/Majestic/logo2.png'/>" width="100" alt="brand"></a></li>
             <li class="${(menu=='booking')?then('active','')}"><a href="<@spring.url '/booking'/>"><@spring.message "menu.booking"/></a></li>
             <li class="${(menu=='contact')?then('active','')}"><a href="<@spring.url '/contact'/>"><@spring.message "menu.contact"/></a></li>
         </ul>

@@ -9,13 +9,13 @@
     <#-- Wrapper for slides -->
     <div class="carousel-inner">
     			<div class="item active">
-                    <img src="<@spring.url '/resources/image/Majestic/carousel1.jpg'/>" alt="brand">
+                    <img src="<@spring.url '/resources/image/Majestic/9403680.jpg'/>" alt="brand">
 	        	</div>
 	        	<div class="item">
-                    <img src="<@spring.url '/resources/image/Majestic/carousel2.jpg'/>" alt="brand">
+                    <img src="<@spring.url '/resources/image/Majestic/9388388.jpg'/>" alt="brand">
 	        	</div>
                 <div class="item">
-                    <img src="<@spring.url '/resources/image/Majestic/carousel3.jpg'/>" alt="brand">
+                    <img src="<@spring.url '/resources/image/Majestic/carousel5.jpg'/>" alt="brand">
                 </div>
     </div>
 

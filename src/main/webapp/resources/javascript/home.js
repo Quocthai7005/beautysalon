@@ -6,6 +6,15 @@ $( document ).ready(function() {
     home.initService();
     home.initOutstandService();
     home.initNewsBtn();
+	window.onscroll = function() {scrollFunction()};
+	var viewport = $(window).width();
+	console.log(viewport);
+	if (viewport < 550) {
+		$("#navbar-home-scroll").css("display", "none")
+		$("#navbar-scroll").css("display", "")
+	} else {
+		$("#navbar-home-scroll").css("display", "")
+	}
 
 	$('#datepicker').datepicker({
           showOn: "button",
@@ -45,10 +54,23 @@ $( document ).ready(function() {
 			}
 		});
 	});
+
+	function scrollFunction() {
+
+		if (document.documentElement.scrollTop > 200) {
+			$("#navbar-scroll").css("display", "")
+		} else if (viewport < 550) {
+			$("#navbar-scroll").css("display", "");
+		} else {
+			$("#navbar-scroll").css("display", "none");
+		}
+	}
 });
 function Home() {
 	var rootContext = '';
 }
+
+
 
 Home.prototype.initService = function() {
 	var that = this;
