@@ -11,33 +11,14 @@ $( document ).ready(function() {
 		format: 'yyyy-mm-dd',
 		startDate:'+0d'
 	}).on("changeDate", function (e) {
-		var date = $(this).datepicker('getDate');
-		var day = date.getUTCDay();
-		console.log(day);
-		var hour = $('select[name="hour"]').val();
-		var minute = $('select[name="minute"]').val();
-		if (day == '5') {
-
-			if (hour == 19) {
-				$('select[name="hour"]').val("18");
-				$('select[name="minute"]').val("00");
-			} if (hour == 18) {
-				$('select[name="minute"]').val("00");
-			}
-			$('option[value="19"]').prop("disabled", true);
-		} else {
-			$('option[value="19"]').prop("disabled", false);
-		}
+		validateTime();
 	});
 	$('select[name="hour"]').on("change", function() {
-		var hour = $('select[name="hour"]').val();
-		if (hour == 9) {
-			$('select[name="minute"]').val(30);
-			$('option[value="00"]').prop("disabled", true);
-		} else {
-			$('option[value="00"]').prop("disabled", false);
-		}
-	})
+		validateTime();
+	});
+	$('select[name="minute"]').on("change", function() {
+		validateTime();
+	});
 
 	$('select[name="hour"]').val()
 	$("#selectServices").selectpicker();
@@ -75,4 +56,42 @@ $( document ).ready(function() {
 			}
 		});
 	});
+
+	function validateTime() {
+
+		var date = $("#datepicker").datepicker('getDate');
+		var dayOfWeek = date.getUTCDay();
+		var hour = $('select[name="hour"]').val();
+		var minute = $('select[name="minute"]').val();
+		console.log("dayOfWeek " + dayOfWeek);
+		console.log("hour " + hour);
+		console.log("minute " + minute);
+		if (dayOfWeek == 5 && hour == 19) {
+			$('select[name="minute"]').val("00");
+			$('select[name="hour"]').val("18");
+			$('option[value="30"]').prop("disabled", true);
+			$('option[value="19"]').prop("disabled", true);
+		} else if (dayOfWeek == 5 && hour == 18) {
+			$('option[value="30"]').prop("disabled", true);
+			if (minute == 30) {
+				$('select[name="minute"]').val("00");
+			} else {
+				$('option[value="30"]').prop("disabled", false);
+			}
+		} else if (dayOfWeek != 5 && hour == 19) {
+			if (minute == 30) {
+				$('select[name="minute"]').val("00");
+				$('option[value="30"]').prop("disabled", true);
+			} else {
+				$('option[value="30"]').prop("disabled", false);
+			}
+		} else if (hour == 9 && minute == "00") {
+			$('select[name="minute"]').val(30);
+			$('option[value="00"]').prop("disabled", true);
+		} else {
+			$('option[value="00"]').prop("disabled", false);
+			$('option[value="30"]').prop("disabled", false);
+			$('option[value="19"]').prop("disabled", false);
+		}
+	}
 });

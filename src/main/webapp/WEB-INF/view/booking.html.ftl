@@ -60,7 +60,6 @@
 										<option value="30" selected="selected">30</option>
 									</select>
 								</div>
-								<small>Office hours are 9:30am to 7pm</small>
 							</div>
 							<div class="form-group">
 								<label for="selectServices">Choose your service(s)</label>
