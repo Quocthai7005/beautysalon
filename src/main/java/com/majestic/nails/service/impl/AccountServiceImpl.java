@@ -2,6 +2,7 @@ package com.majestic.nails.service.impl;
 
 import com.majestic.nails.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -14,9 +15,6 @@ import com.majestic.nails.service.AccountService;
 public class AccountServiceImpl implements AccountService {
 
 	private final UserRepository userRepo;
-
-	@Autowired
-	private PasswordEncoder passwordEncoder;
 
 	@Autowired
 	public AccountServiceImpl(UserRepository userRepo) {
@@ -38,7 +36,6 @@ public class AccountServiceImpl implements AccountService {
 			return false;
 		}
 		User user = userRepo.findByUsername(userInfo.getUsername());
-		user.setPassword(passwordEncoder.encode(userInfo.getNewPassword()));
 		userRepo.save(user);
 		return true;
 	}

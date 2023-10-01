@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.majestic.nails.dto.PasswordChange;
 import com.majestic.nails.dto.UserDto;
 import com.majestic.nails.entity.User;
 import com.majestic.nails.entity.UserRole;
@@ -56,5 +57,24 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 		userRepository.save(user);
 		roleRepository.save(role);
 		return user;
+	}
+	@Transactional
+	public Boolean updatePassword(PasswordChange userInfo) {
+		if (userInfo == null) {
+			return false;
+		}
+		if (userInfo.getUsername() == null ||
+				userInfo.getOldPassword() == null ||
+				userInfo.getNewPassword() == null ||
+				userInfo.getConfirmPassword() == null) {
+			return false;
+		}
+		if (!userInfo.getNewPassword().equals(userInfo.getConfirmPassword())) {
+			return false;
+		}
+		User user = userRepository.findByUsername(userInfo.getUsername());
+		user.setPassword(passwordEncoder.encode(userInfo.getNewPassword()));
+		userRepository.save(user);
+		return true;
 	}
 }

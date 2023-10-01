@@ -54,6 +54,7 @@ public class BookingServiceImpl implements BookingService {
 		bookingRepository.save(booking);
 
 		sendNotificationEmail(dto);
+		sendConfirmationEmail(dto);
 		return dto;
 	}
 
@@ -74,8 +75,6 @@ public class BookingServiceImpl implements BookingService {
 		model.put("status", "NEW");
 		model.put("question", dto.getQuestion());
 		bookingNotification.setModel(model);
-		// Send to administrator
-		mailService.sendEmail(bookingNotification);
 		// Send to register
 		bookingNotification.setMailTo(dto.getEmail());
 		mailService.sendEmail(bookingNotification);
@@ -97,8 +96,6 @@ public class BookingServiceImpl implements BookingService {
 		model.put("status", "NEW");
 		model.put("question", dto.getQuestion());
 		bookingNotification.setModel(model);
-		// Send to administrator
-		mailService.sendEmail(bookingNotification);
 		// Send to register
 		bookingNotification.setMailTo(dto.getEmail());
 		mailService.sendEmail(bookingNotification);
