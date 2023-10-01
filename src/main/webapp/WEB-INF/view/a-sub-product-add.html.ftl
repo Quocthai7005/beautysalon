@@ -77,14 +77,14 @@
 											  			</select>
 											  		</div>
 											  	</div>
-											  	
-											  	<#-- intro -->
-											  	<div class="col-lg-12 col-md-12">
-												  	<div class="form-group">
-												    	<label for="service-content-inp" class="custom-label">Description</label>
-												    	<textarea data-bind="value: intro" class="form-control" name="content"></textarea>
-												  	</div>
-											  	</div>
+
+												<#-- content -->
+												<div class="col-lg-12 col-md-12">
+													<div class="form-group">
+														<label for="service-content-inp" class="custom-label">Description</label>
+														<textarea data-bind="value: content" id="service-content-inp" name="content"></textarea>
+													</div>
+												</div>
 											  										  	
 											  	<div class="col-lg-12 col-md-12">
 												  	<button data-bind="click: save" class="btn btn-info">Save</button>
